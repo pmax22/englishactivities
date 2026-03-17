@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Used To – Entraînement</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent: #7c6af7;
+    --accent2: #b47cf0;
+    --green: #4ecb7f;
+    --red: #e05c5c;
+    --text: #e8eaf0;
+    --muted: #6b6f82;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(124,106,247,0.08) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(180,124,240,0.06) 0%, transparent 60%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  header .tag {
+    display: inline-block;
+    background: rgba(124,106,247,0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(124,106,247,0.25);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--muted);
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  /* Grammar pill */
+  .grammar-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 16px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .grammar-pill strong { color: var(--accent2); font-weight: 600; }
+  .grammar-pill .sep { color: var(--border); }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 36px 28px;
+    width: 100%;
+    max-width: 660px;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  /* Question */
+  .question-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* Sentence display with blank */
+  .sentence-wrap {
+    font-size: clamp(17px, 2.8vw, 21px);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .blank-display {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(124,106,247,0.08);
+    border: 1.5px dashed rgba(124,106,247,0.35);
+    border-radius: 8px;
+    padding: 2px 16px;
+    min-width: 160px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .verb-hint {
+    display: inline-block;
+    background: rgba(180,124,240,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(180,124,240,0.25);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 2px;
+    font-family: 'DM Sans', sans-serif;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  /* Input */
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .input-wrap input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 13px 18px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-wrap input::placeholder { color: var(--muted); font-style: italic; }
+
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124,106,247,0.12);
+  }
+
+  .input-wrap input.correct {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
+  }
+
+  .input-wrap input.wrong {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-submit:hover { background: #9080f9; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Feedback */
+  .feedback {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .feedback.correct {
+    background: rgba(78,203,127,0.1);
+    border: 1px solid rgba(78,203,127,0.3);
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: rgba(224,92,92,0.1);
+    border: 1px solid rgba(224,92,92,0.3);
+    display: block;
+  }
+
+  .feedback .fb-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .feedback.correct .fb-title { color: var(--green); }
+  .feedback.wrong .fb-title { color: var(--red); }
+
+  .answer-shown {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .explanation {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .explanation strong { color: var(--text); }
+  .explanation em { color: var(--accent2); font-style: normal; }
+
+  /* Structure box inside explanation */
+  .structure-box {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    background: rgba(124,106,247,0.1);
+    border: 1px solid rgba(124,106,247,0.2);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: 'DM Sans', monospace;
+    color: var(--accent2);
+    font-weight: 600;
+    margin: 4px 0 6px;
+  }
+
+  .btn-next {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid rgba(124,106,247,0.4);
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+    display: none;
+  }
+
+  .btn-next:hover {
+    background: rgba(124,106,247,0.08);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* Score screen */
+  .score-screen {
+    text-align: center;
+    padding: 20px 0 10px;
+    display: none;
+  }
+
+  .score-emoji { font-size: 52px; margin-bottom: 12px; }
+
+  .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 10vw, 80px);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .score-label {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+
+  .score-msg {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .score-detail {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  /* Review */
+  .review-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .review-item {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    text-align: left;
+    border-left: 3px solid var(--border);
+  }
+
+  .review-item.ok { border-left-color: var(--green); }
+  .review-item.ko { border-left-color: var(--red); }
+
+  .review-sentence { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .review-answer { font-size: 14px; font-weight: 500; }
+  .review-item.ok .review-answer { color: var(--green); }
+  .review-item.ko .review-answer { color: var(--red); }
+  .review-correct { font-size: 13px; color: var(--text); margin-top: 4px; }
+  .review-correct::before { content: '→ '; color: var(--accent2); }
+
+  .btn-restart {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-restart:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+
+  .shake { animation: shake 0.35s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Anglais · Grammaire</div>
+  <h1>Maîtriser <span>Used To</span></h1>
+  <p class="subtitle">Complète chaque phrase avec la bonne forme de <em>used to</em>.</p>
+  <div class="grammar-pill">
+    <strong>(+) used to + V</strong>
+    <span class="sep">|</span>
+    <strong>(−) didn't use to + V</strong>
+    <span class="sep">|</span>
+    <strong>(?) Did … use to + V ?</strong>
+  </div>
+</header>
+
+<div class="card" id="mainCard">
+
+  <div id="quizView">
+    <div class="progress-label">
+      <span id="progressText">Question 1 / 10</span>
+      <span id="scoreText">Score : 0</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:10%"></div>
+    </div>
+
+    <div class="question-num" id="questionNum">QUESTION 1</div>
+
+    <!-- Sentence with blank -->
+    <div class="sentence-wrap" id="sentenceWrap">
+      <!-- rendered by JS -->
+    </div>
+
+    <div class="hint" id="hint"></div>
+
+    <div class="input-wrap">
+      <input type="text" id="answerInput" placeholder="Écris ta réponse ici…" autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="btn-submit" id="btnSubmit">Vérifier</button>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-title" id="fbTitle"></div>
+      <div class="answer-shown" id="fbAnswer"></div>
+      <div class="explanation" id="fbExplanation"></div>
+    </div>
+
+    <button class="btn-next" id="btnNext">Question suivante →</button>
+  </div>
+
+  <!-- SCORE SCREEN -->
+  <div class="score-screen" id="scoreView">
+    <div class="score-emoji" id="scoreEmoji">🏆</div>
+    <div class="score-big" id="scoreBig">0</div>
+    <div class="score-label">/ 5</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <div class="score-detail" id="scoreDetail"></div>
+
+    <div class="review-title">Récapitulatif</div>
+    <div id="reviewList"></div>
+
+    <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+  </div>
+
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────
+// Each question:
+//   before : text before the blank (can be empty)
+//   verb   : infinitive shown in parentheses (hint)
+//   after  : text after the blank
+//   answers: accepted lowercase answers (without period/question mark)
+//   correct: display string shown on error
+//   explanation: HTML string explaining the rule
+
+const allQuestions = [
+  // ── AFFIRMATIVES ──────────────────────────────────────
+  {
+    before: "", verb: "live", after: "in the north of the USA.",
+    subject: "I",
+    answers: ["used to live"], correct: "I used to live",
+    explanation: `<div class="structure-box">I <em>used to live</em> in the north of the USA.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to live</em> exprime une habitude passée révolue : j'y vivais autrefois, mais plus maintenant.`
+  },
+  {
+    before: "", verb: "play", after: "the piano when she was younger.",
+    subject: "She",
+    answers: ["used to play"], correct: "She used to play",
+    explanation: `<div class="structure-box">She <em>used to play</em> the piano when she was younger.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to play</em> décrit une habitude passée qui n'existe plus aujourd'hui.`
+  },
+  {
+    before: "", verb: "have", after: "a dog when I was a child.",
+    subject: "We",
+    answers: ["used to have"], correct: "We used to have",
+    explanation: `<div class="structure-box">We <em>used to have</em> a dog when I was a child.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to have</em> décrit un état passé révolu. On peut utiliser <em>used to</em> avec des états aussi bien que des actions.`
+  },
+  {
+    before: "", verb: "ride", after: "her bike to school every day.",
+    subject: "She",
+    answers: ["used to ride"], correct: "She used to ride",
+    explanation: `<div class="structure-box">She <em>used to ride</em> her bike to school every day.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Every day</em> confirme qu'il s'agit d'une habitude passée régulière, parfaite pour <em>used to</em>.`
+  },
+  {
+    before: "", verb: "spend", after: "summers at our grandparents' house.",
+    subject: "We",
+    answers: ["used to spend"], correct: "We used to spend",
+    explanation: `<div class="structure-box">We <em>used to spend</em> summers at our grandparents' house.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to spend</em> évoque une habitude passée nostalgique — on le faisait chaque été autrefois.`
+  },
+  {
+    before: "", verb: "walk", after: "to work every morning.",
+    subject: "He",
+    answers: ["used to walk"], correct: "He used to walk",
+    explanation: `<div class="structure-box">He <em>used to walk</em> to work every morning.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to walk</em> décrit une routine passée qui a changé (il prend peut-être la voiture maintenant).`
+  },
+  {
+    before: "", verb: "go", after: "to the cinema every weekend.",
+    subject: "My parents",
+    answers: ["used to go"], correct: "My parents used to go",
+    explanation: `<div class="structure-box">My parents <em>used to go</em> to the cinema every weekend.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Every weekend</em> souligne la régularité de l'habitude. <em>Used to go</em> est la forme correcte.`
+  },
+  {
+    before: "", verb: "be", after: "afraid of spiders when I was little.",
+    subject: "I",
+    answers: ["used to be"], correct: "I used to be",
+    explanation: `<div class="structure-box">I <em>used to be</em> afraid of spiders when I was little.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to be</em> exprime un état passé révolu. <em>Be</em> s'utilise en base verbale après <em>used to</em>.`
+  },
+  {
+    before: "", verb: "live", after: "in a small village in the countryside.",
+    subject: "They",
+    answers: ["used to live"], correct: "They used to live",
+    explanation: `<div class="structure-box">They <em>used to live</em> in a small village in the countryside.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to live</em> indique un état passé permanent qui a changé depuis.`
+  },
+  {
+    before: "", verb: "read", after: "a lot of comics when she was a teenager.",
+    subject: "She",
+    answers: ["used to read"], correct: "She used to read",
+    explanation: `<div class="structure-box">She <em>used to read</em> a lot of comics when she was a teenager.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+La précision temporelle <em>when she was a teenager</em> confirme qu'il s'agit d'une période passée révolue.`
+  },
+  {
+    before: "", verb: "play", after: "football every Saturday.",
+    subject: "He",
+    answers: ["used to play"], correct: "He used to play",
+    explanation: `<div class="structure-box">He <em>used to play</em> football every Saturday.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to play</em> décrit une habitude sportive passée et régulière.`
+  },
+  {
+    before: "", verb: "eat", after: "dinner together as a family every night.",
+    subject: "We",
+    answers: ["used to eat"], correct: "We used to eat",
+    explanation: `<div class="structure-box">We <em>used to eat</em> dinner together as a family every night.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to eat</em> évoque une habitude familiale passée et régulière.`
+  },
+  {
+    before: "", verb: "make", after: "homemade bread every Sunday.",
+    subject: "My grandmother",
+    answers: ["used to make"], correct: "My grandmother used to make",
+    explanation: `<div class="structure-box">My grandmother <em>used to make</em> homemade bread every Sunday.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Every Sunday</em> = chaque dimanche. <em>Used to make</em> décrit une habitude passée et régulière.`
+  },
+  {
+    before: "", verb: "wake up", after: "at 6 a.m. every day.",
+    subject: "I",
+    answers: ["used to wake up"], correct: "I used to wake up",
+    explanation: `<div class="structure-box">I <em>used to wake up</em> at 6 a.m. every day.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Wake up</em> est un verbe à particule (phrasal verb). On le garde intact après <em>used to</em>.`
+  },
+  {
+    before: "", verb: "dream", after: "of becoming a doctor.",
+    subject: "She",
+    answers: ["used to dream"], correct: "She used to dream",
+    explanation: `<div class="structure-box">She <em>used to dream</em> of becoming a doctor.</div>
+Phrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>
+<em>Used to dream</em> décrit un rêve ou une aspiration passée qui a peut-être changé.`
+  },
+  // ── NÉGATIVES ──────────────────────────────────────────
+  {
+    before: "", verb: "not go", after: "skiing.",
+    subject: "He",
+    answers: ["didn't use to go","did not use to go"], correct: "He didn't use to go",
+    explanation: `<div class="structure-box">He <em>didn't use to go</em> skiing.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+⚠️ À la forme négative, on écrit <strong>use to</strong> (sans <em>d</em>) car <em>didn't</em> porte déjà le passé.`
+  },
+  {
+    before: "", verb: "not like", after: "spicy food.",
+    subject: "They",
+    answers: ["didn't use to like","did not use to like"], correct: "They didn't use to like",
+    explanation: `<div class="structure-box">They <em>didn't use to like</em> spicy food.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Didn't use to</em> indique quelque chose qui n'était pas habituel dans le passé.`
+  },
+  {
+    before: "", verb: "not watch", after: "horror movies.",
+    subject: "My brother",
+    answers: ["didn't use to watch","did not use to watch"], correct: "My brother didn't use to watch",
+    explanation: `<div class="structure-box">My brother <em>didn't use to watch</em> horror movies.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+⚠️ Avec <em>didn't</em>, on écrit toujours <strong>use to</strong> sans <em>d</em> final.`
+  },
+  {
+    before: "", verb: "not enjoy", after: "reading books.",
+    subject: "He",
+    answers: ["didn't use to enjoy","did not use to enjoy"], correct: "He didn't use to enjoy",
+    explanation: `<div class="structure-box">He <em>didn't use to enjoy</em> reading books.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Enjoy + -ing</em> : après <em>enjoy</em>, le verbe suivant prend toujours la forme <em>-ing</em> — mais ici <em>enjoy</em> est la base verbale après <em>use to</em>.`
+  },
+  {
+    before: "", verb: "not travel", after: "abroad.",
+    subject: "They",
+    answers: ["didn't use to travel","did not use to travel"], correct: "They didn't use to travel",
+    explanation: `<div class="structure-box">They <em>didn't use to travel</em> abroad.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Abroad</em> = à l'étranger. Rappel clé : avec <em>didn't</em>, jamais de <em>-d</em> sur <em>use</em>.`
+  },
+  {
+    before: "", verb: "not eat", after: "vegetables when she was a child.",
+    subject: "She",
+    answers: ["didn't use to eat","did not use to eat"], correct: "She didn't use to eat",
+    explanation: `<div class="structure-box">She <em>didn't use to eat</em> vegetables when she was a child.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+La précision <em>when she was a child</em> ancre l'habitude dans le passé révolu.`
+  },
+  {
+    before: "", verb: "not like", after: "coffee when I was a teenager.",
+    subject: "I",
+    answers: ["didn't use to like","did not use to like"], correct: "I didn't use to like",
+    explanation: `<div class="structure-box">I <em>didn't use to like</em> coffee when I was a teenager.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+Indique que le goût a changé avec le temps — on peut ne pas aimer quelque chose puis l'apprécier plus tard.`
+  },
+  {
+    before: "", verb: "not talk", after: "much in class.",
+    subject: "He",
+    answers: ["didn't use to talk","did not use to talk"], correct: "He didn't use to talk",
+    explanation: `<div class="structure-box">He <em>didn't use to talk</em> much in class.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Much</em> = beaucoup. <em>Didn't use to talk much</em> décrit un comportement passé habituel (être silencieux).`
+  },
+  {
+    before: "", verb: "not have", after: "a computer at home.",
+    subject: "We",
+    answers: ["didn't use to have","did not use to have"], correct: "We didn't use to have",
+    explanation: `<div class="structure-box">We <em>didn't use to have</em> a computer at home.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Used to</em> s'utilise aussi pour parler d'un état passé (possession). <em>Have</em> = avoir/posséder.`
+  },
+  {
+    before: "", verb: "not own", after: "a car when they were young.",
+    subject: "My parents",
+    answers: ["didn't use to own","did not use to own"], correct: "My parents didn't use to own",
+    explanation: `<div class="structure-box">My parents <em>didn't use to own</em> a car when they were young.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Own</em> = posséder. <em>Used to</em> fonctionne bien avec les verbes d'état comme <em>own</em>, <em>have</em>, <em>be</em>.`
+  },
+  {
+    before: "", verb: "not wear", after: "glasses when she was a child.",
+    subject: "She",
+    answers: ["didn't use to wear","did not use to wear"], correct: "She didn't use to wear",
+    explanation: `<div class="structure-box">She <em>didn't use to wear</em> glasses when she was a child.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Wear</em> = porter (un vêtement, des lunettes…). Verbe irrégulier au prétérit simple (<em>wore</em>), mais on utilise la base verbale après <em>use to</em>.`
+  },
+  {
+    before: "", verb: "not go", after: "to bed so late when they were kids.",
+    subject: "They",
+    answers: ["didn't use to go","did not use to go"], correct: "They didn't use to go",
+    explanation: `<div class="structure-box">They <em>didn't use to go</em> to bed so late when they were kids.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Go to bed</em> = aller au lit. Expression idiomatique très fréquente — la base verbale reste <em>go</em>.`
+  },
+  {
+    before: "", verb: "not know", after: "how to swim.",
+    subject: "I",
+    answers: ["didn't use to know","did not use to know"], correct: "I didn't use to know",
+    explanation: `<div class="structure-box">I <em>didn't use to know</em> how to swim.</div>
+Phrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>
+<em>Know how to</em> = savoir (faire quelque chose). <em>Know</em> est ici la base verbale après <em>use to</em>.`
+  },
+  // ── INTERROGATIVES ─────────────────────────────────────
+  {
+    before: "", verb: "you / live", after: "in this city when you were a child?",
+    answers: ["did you use to live"], correct: "Did you use to live",
+    explanation: `<div class="structure-box"><em>Did you use to live</em> in this city…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+⚠️ À la forme interrogative, on commence par <em>Did</em> et on écrit <strong>use to</strong> (sans <em>d</em>).`
+  },
+  {
+    before: "", verb: "he / walk", after: "to school when he was young?",
+    answers: ["did he use to walk"], correct: "Did he use to walk",
+    explanation: `<div class="structure-box"><em>Did he use to walk</em> to school…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Did</em> porte le passé → le verbe reste à la <strong>base verbale</strong> : <em>walk</em>, pas <em>walked</em>.`
+  },
+  {
+    before: "", verb: "she / enjoy", after: "sports when she was at school?",
+    answers: ["did she use to enjoy"], correct: "Did she use to enjoy",
+    explanation: `<div class="structure-box"><em>Did she use to enjoy</em> sports…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Enjoy</em> reste à la base verbale après <em>use to</em>. On ne dit pas <em>did she used to</em> — c'est une erreur très fréquente !`
+  },
+  {
+    before: "", verb: "they / have", after: "a garden when they were children?",
+    answers: ["did they use to have"], correct: "Did they use to have",
+    explanation: `<div class="structure-box"><em>Did they use to have</em> a garden…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Used to</em> peut porter sur un état (<em>have a garden</em>) aussi bien que sur une action habituelle.`
+  },
+  {
+    before: "", verb: "you / like", after: "vegetables when you were a child?",
+    answers: ["did you use to like"], correct: "Did you use to like",
+    explanation: `<div class="structure-box"><em>Did you use to like</em> vegetables…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+Question classique sur un goût passé. Rappel : <strong>use to</strong> (pas <em>used to</em>) après <em>Did</em>.`
+  },
+  {
+    before: "", verb: "he / play", after: "video games when he was a teenager?",
+    answers: ["did he use to play"], correct: "Did he use to play",
+    explanation: `<div class="structure-box"><em>Did he use to play</em> video games…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>When he was a teenager</em> ancre la question dans une période passée précise.`
+  },
+  {
+    before: "", verb: "your parents / live", after: "abroad when they were young?",
+    answers: ["did your parents use to live"], correct: "Did your parents use to live",
+    explanation: `<div class="structure-box"><em>Did your parents use to live</em> abroad…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Abroad</em> = à l'étranger. Le sujet peut être un groupe nominal comme <em>your parents</em>.`
+  },
+  {
+    before: "", verb: "she / be", after: "shy when she was a child?",
+    answers: ["did she use to be"], correct: "Did she use to be",
+    explanation: `<div class="structure-box"><em>Did she use to be</em> shy…?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Be</em> s'utilise en base verbale, même dans les questions. <em>Shy</em> = timide.`
+  },
+  {
+    before: "", verb: "they / go", after: "on holiday every summer?",
+    answers: ["did they use to go"], correct: "Did they use to go",
+    explanation: `<div class="structure-box"><em>Did they use to go</em> on holiday every summer?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Go on holiday</em> = partir en vacances. <em>Every summer</em> souligne le caractère habituel et répété.`
+  },
+  {
+    before: "", verb: "you / wake up", after: "early on school days?",
+    answers: ["did you use to wake up"], correct: "Did you use to wake up",
+    explanation: `<div class="structure-box"><em>Did you use to wake up</em> early on school days?</div>
+Phrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>
+<em>Wake up</em> est un verbe à particule. On garde les deux mots ensemble après <em>use to</em>.`
+  },
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let questions = [];
+let current = 0;
+let score = 0;
+let history = [];
+let answered = false;
+const TOTAL = 5;
+
+// ─── HELPERS ────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/[?!.,]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function checkAnswer(input, q) {
+  const n = normalize(input);
+  return q.answers.some(a => normalize(a) === n);
+}
+
+// ─── RENDER ─────────────────────────────────────────────
+function renderSentence(q) {
+  const wrap = document.getElementById('sentenceWrap');
+  wrap.innerHTML = '';
+
+  // Subject (shown as normal text before the blank)
+  if (q.subject) {
+    const s = document.createElement('span');
+    s.textContent = q.subject + ' ';
+    wrap.appendChild(s);
+  }
+
+  // Blank
+  const blank = document.createElement('span');
+  blank.className = 'blank-display';
+  blank.textContent = '___________';
+  wrap.appendChild(blank);
+
+  // Verb hint
+  const vhint = document.createElement('span');
+  vhint.className = 'verb-hint';
+  vhint.textContent = '(' + q.verb + ')';
+  wrap.appendChild(vhint);
+
+  // After text
+  if (q.after) {
+    const a = document.createElement('span');
+    a.textContent = ' ' + q.after;
+    wrap.appendChild(a);
+  }
+}
+
+// ─── INIT ────────────────────────────────────────────────
+function startQuiz() {
+  questions = shuffle(allQuestions).slice(0, TOTAL);
+  current = 0; score = 0; history = []; answered = false;
+  document.getElementById('quizView').style.display = 'block';
+  document.getElementById('scoreView').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const n = current + 1;
+
+  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
+  document.getElementById('progressText').textContent = `Question ${n} / ${TOTAL}`;
+  document.getElementById('scoreText').textContent = `Score : ${score}`;
+  document.getElementById('progressBar').style.width = `${(n / TOTAL) * 100}%`;
+  document.getElementById('hint').textContent = '';
+
+  renderSentence(q);
+
+  const input = document.getElementById('answerInput');
+  input.value = '';
+  input.className = '';
+  input.disabled = false;
+  input.placeholder = 'used to… / didn\'t use to… / Did … use to…';
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('btnSubmit').disabled = false;
+
+  input.focus();
+}
+
+function submit() {
+  if (answered) return;
+  const input = document.getElementById('answerInput');
+  const val = input.value.trim();
+  if (!val) return;
+
+  answered = true;
+  input.disabled = true;
+  document.getElementById('btnSubmit').disabled = true;
+
+  const q = questions[current];
+  const ok = checkAnswer(val, q);
+
+  if (ok) score++;
+
+  history.push({ q, userAnswer: val, ok });
+
+  input.className = ok ? 'correct' : 'wrong';
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
+
+  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
+
+  if (!ok) {
+    document.getElementById('fbAnswer').innerHTML =
+      `Réponse attendue : <strong>${q.correct}</strong>`;
+  } else {
+    document.getElementById('fbAnswer').textContent = '';
+  }
+
+  document.getElementById('fbExplanation').innerHTML = q.explanation;
+
+  document.getElementById('btnNext').style.display = 'block';
+
+  if (!ok) {
+    document.getElementById('mainCard').classList.add('shake');
+    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
+  }
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= TOTAL) {
+    showScore();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showScore() {
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('scoreView').style.display = 'block';
+
+  document.getElementById('scoreBig').textContent = `${score}`;
+  document.getElementById('progressBar').style.width = '100%';
+
+  let emoji, msg, detail;
+  if (score === 5)        { emoji = '🏆'; msg = 'Parfait ! 5/5 !';          detail = 'Tu maîtrises parfaitement used to. Impressionnant !'; }
+  else if (score === 4)   { emoji = '🌟'; msg = 'Excellent !';              detail = 'Encore un petit effort et tu seras imbattable.'; }
+  else if (score === 3)   { emoji = '👍'; msg = 'Pas mal !';                detail = 'Relis les erreurs ci-dessous et recommence.'; }
+  else if (score === 2)   { emoji = '📚'; msg = 'Courage !';                detail = 'Revois la structure de used to et réessaie.'; }
+  else                    { emoji = '💪'; msg = 'On s\'entraîne encore !';  detail = 'Rappel : (+) used to | (−) didn\'t use to | (?) Did … use to ?'; }
+
+  document.getElementById('scoreEmoji').textContent = emoji;
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreDetail').textContent = detail;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  history.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
+    const subjectPart = h.q.subject ? h.q.subject + ' ' : '';
+    const fullSentence = subjectPart + '[' + h.q.verb + '] ' + h.q.after;
+    div.innerHTML = `
+      <div class="review-sentence">${i+1}. ${fullSentence}</div>
+      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
+      ${!h.ok ? `<div class="review-correct">${h.q.correct} ${h.q.after}</div>` : ''}
+    `;
+    reviewList.appendChild(div);
+  });
+}
+
+// ─── EVENTS ─────────────────────────────────────────────
+document.getElementById('btnSubmit').addEventListener('click', submit);
+document.getElementById('btnNext').addEventListener('click', nextQuestion);
+document.getElementById('btnRestart').addEventListener('click', startQuiz);
+document.getElementById('answerInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (!answered) submit();
+    else nextQuestion();
+  }
+});
+
+// ─── START ──────────────────────────────────────────────
+startQuiz();
+</script>
+</body>
+</html>

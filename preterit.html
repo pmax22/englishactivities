@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prétérit – Entraînement</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent: #f5c842;
+    --accent2: #e07b3f;
+    --green: #4ecb7f;
+    --red: #e05c5c;
+    --text: #e8eaf0;
+    --muted: #6b6f82;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(245,200,66,0.07) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(224,123,63,0.05) 0%, transparent 60%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  header .tag {
+    display: inline-block;
+    background: rgba(245,200,66,0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(245,200,66,0.25);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--muted);
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  /* --- CARD --- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 36px 28px;
+    width: 100%;
+    max-width: 620px;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  /* Question */
+  .question-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .french-sentence {
+    font-size: clamp(18px, 3vw, 23px);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  /* Input */
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .input-wrap input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 13px 18px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(245,200,66,0.1);
+  }
+
+  .input-wrap input.correct {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
+  }
+
+  .input-wrap input.wrong {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-submit:hover { background: #f7d260; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Feedback */
+  .feedback {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .feedback.correct {
+    background: rgba(78,203,127,0.1);
+    border: 1px solid rgba(78,203,127,0.3);
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: rgba(224,92,92,0.1);
+    border: 1px solid rgba(224,92,92,0.3);
+    display: block;
+  }
+
+  .feedback .fb-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .feedback.correct .fb-title { color: var(--green); }
+  .feedback.wrong .fb-title { color: var(--red); }
+
+  .answer-shown {
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .explanation {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .explanation strong { color: var(--text); }
+
+  .btn-next {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid rgba(245,200,66,0.4);
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+    display: none;
+  }
+
+  .btn-next:hover {
+    background: rgba(245,200,66,0.08);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* Score screen */
+  .score-screen {
+    text-align: center;
+    padding: 10px 0 10px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 80px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 16px 0 8px;
+  }
+
+  .score-label {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .score-emoji { font-size: 36px; margin-bottom: 4px; }
+
+  .score-msg {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .score-detail {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  /* Review list */
+  .review-list {
+    text-align: left;
+    margin-bottom: 28px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .review-list::-webkit-scrollbar { width: 5px; }
+  .review-list::-webkit-scrollbar-track { background: var(--surface2); border-radius: 10px; }
+  .review-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  .review-item {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid transparent;
+    font-size: 13px;
+  }
+
+  .review-item.ok { border-left-color: var(--green); }
+  .review-item.ko { border-left-color: var(--red); }
+
+  .review-french { color: var(--muted); margin-bottom: 3px; }
+  .review-answer { color: var(--text); font-weight: 500; }
+  .review-correct { color: var(--green); font-size: 12px; margin-top: 2px; }
+
+  .btn-restart {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 36px;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-restart:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  /* Verb ref */
+  .verb-ref {
+    max-width: 620px;
+    width: 100%;
+    margin-top: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 24px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .verb-ref-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .verb-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verb-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  @keyframes shake {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(4px); }
+    30%, 50%, 70% { transform: translateX(-5px); }
+    40%, 60% { transform: translateX(5px); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Anglais · Grammaire</div>
+  <h1>Le <span>Prétérit</span><br>Simple</h1>
+  <p class="subtitle">Traduis les phrases en anglais — 5 questions, 1 score</p>
+</header>
+
+<div class="card" id="mainCard">
+  <!-- QUIZ -->
+  <div id="quizView">
+    <div class="progress-label">
+      <span id="progressText">Question 1 / 10</span>
+      <span id="scoreText">Score : 0</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:10%"></div>
+    </div>
+
+    <div class="question-num" id="questionNum">QUESTION 1</div>
+    <div class="french-sentence" id="frenchSentence"></div>
+    <div class="hint" id="hint"></div>
+
+    <div class="input-wrap">
+      <input type="text" id="answerInput" placeholder="Tape ta traduction ici…" autocomplete="off" />
+      <button class="btn-submit" id="btnSubmit">OK</button>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-title" id="fbTitle"></div>
+      <div class="answer-shown" id="fbAnswer"></div>
+      <div class="explanation" id="fbExplanation"></div>
+    </div>
+
+    <button class="btn-next" id="btnNext">Phrase suivante →</button>
+  </div>
+
+  <!-- SCORE -->
+  <div id="scoreView" style="display:none">
+    <div class="score-screen">
+      <div class="score-emoji" id="scoreEmoji">🎉</div>
+      <div class="score-big" id="scoreBig">—</div>
+      <div class="score-label">sur 5</div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-detail" id="scoreDetail"></div>
+
+      <div class="review-list" id="reviewList"></div>
+
+      <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Verb reference -->
+<div class="verb-ref">
+  <div class="verb-ref-title">Verbes au programme</div>
+  <div class="verb-grid">
+    <div class="verb-chip">join <span>joined</span></div>
+    <div class="verb-chip">marry <span>married</span></div>
+    <div class="verb-chip">play <span>played</span></div>
+    <div class="verb-chip">be <span>was / were</span></div>
+    <div class="verb-chip">record <span>recorded</span></div>
+    <div class="verb-chip">settle <span>settled</span></div>
+    <div class="verb-chip">leave <span>left</span></div>
+    <div class="verb-chip">divorce <span>divorced</span></div>
+    <div class="verb-chip">die <span>died</span></div>
+    <div class="verb-chip">travel <span>travelled</span></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const allQuestions = [
+
+  // ════════════ NÉGATIVES ════════════
+  { fr: "Il n'a pas divorcé.", hint: "",
+    answers: ["he did not divorce","he didnt divorce"],
+    correct: "He did not divorce. / He didn't divorce.",
+    explanation: "<strong>Négation au prétérit</strong> : did not / didn't + <strong>base verbale</strong>. On garde divorce, jamais divorced." },
+
+  { fr: "Je n'ai pas voyagé.", hint: "",
+    answers: ["i did not travel","i didnt travel"],
+    correct: "I did not travel. / I didn't travel.",
+    explanation: "<strong>did not / didn't + base verbale</strong>. La règle ne change pas avec « I »." },
+
+  { fr: "Il ne s'est pas marié.", hint: "",
+    answers: ["he did not marry","he didnt marry"],
+    correct: "He did not marry. / He didn't marry.",
+    explanation: "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't." },
+
+  { fr: "Elle n'a pas enregistré.", hint: "",
+    answers: ["she did not record","she didnt record"],
+    correct: "She did not record. / She didn't record.",
+    explanation: "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't." },
+
+  { fr: "Il ne s'est pas installé.", hint: "",
+    answers: ["he did not settle","he didnt settle"],
+    correct: "He did not settle. / He didn't settle.",
+    explanation: "<strong>didn't + settle</strong> (base verbale). Pas de -d en forme négative." },
+
+  { fr: "Ils ne sont pas partis.", hint: "",
+    answers: ["they did not leave","they didnt leave"],
+    correct: "They did not leave. / They didn't leave.",
+    explanation: "<strong>leave</strong> est irrégulier (→ left à l'affirmatif), mais après didn't on revient à la base verbale : <strong>leave</strong>." },
+
+  { fr: "Il n'est pas mort.", hint: "",
+    answers: ["he did not die","he didnt die"],
+    correct: "He did not die. / He didn't die.",
+    explanation: "<strong>didn't + die</strong>. die → died à l'affirmatif, mais base verbale après didn't." },
+
+  { fr: "Nous n'avons pas voyagé.", hint: "",
+    answers: ["we did not travel","we didnt travel"],
+    correct: "We did not travel. / We didn't travel.",
+    explanation: "<strong>did not / didn't + travel</strong>. Avec « we », même règle qu'avec tout autre sujet." },
+
+  { fr: "Tu n'as pas joué.", hint: "",
+    answers: ["you did not play","you didnt play"],
+    correct: "You did not play. / You didn't play.",
+    explanation: "<strong>didn't + play</strong>. Base verbale : jamais played après didn't." },
+
+  { fr: "Elle n'est pas partie.", hint: "",
+    answers: ["she did not leave","she didnt leave"],
+    correct: "She did not leave. / She didn't leave.",
+    explanation: "<strong>didn't + leave</strong> (base verbale). leave est irrégulier mais base verbale après didn't." },
+
+  { fr: "Ils n'ont pas joué.", hint: "",
+    answers: ["they did not play","they didnt play"],
+    correct: "They did not play. / They didn't play.",
+    explanation: "<strong>didn't + play</strong>. Sujet pluriel → même structure." },
+
+  { fr: "Nous ne nous sommes pas installés.", hint: "",
+    answers: ["we did not settle","we didnt settle"],
+    correct: "We did not settle. / We didn't settle.",
+    explanation: "<strong>didn't + settle</strong>. Pas de -d après didn't." },
+
+  { fr: "Elle n'a pas divorcé.", hint: "",
+    answers: ["she did not divorce","she didnt divorce"],
+    correct: "She did not divorce. / She didn't divorce.",
+    explanation: "<strong>didn't + divorce</strong> (base verbale). Jamais divorced après didn't." },
+
+  { fr: "Il ne s'est pas marié une deuxième fois.", hint: "fois = time",
+    answers: ["he did not marry a second time","he didnt marry a second time"],
+    correct: "He did not marry a second time. / He didn't marry a second time.",
+    explanation: "<strong>didn't + marry</strong>. <em>Time</em> traduit « fois »." },
+
+  { fr: "Elle n'a pas rejoint le groupe.", hint: "le groupe = the group",
+    answers: ["she did not join the group","she didnt join the group"],
+    correct: "She did not join the group. / She didn't join the group.",
+    explanation: "<strong>didn't + join</strong> (base verbale). Pas de -ed après didn't." },
+
+  { fr: "Ils n'ont pas enregistré d'album.", hint: "un album = an album",
+    answers: ["they did not record an album","they didnt record an album"],
+    correct: "They did not record an album. / They didn't record an album.",
+    explanation: "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't." },
+
+  { fr: "Tu n'as pas voyagé.", hint: "",
+    answers: ["you did not travel","you didnt travel"],
+    correct: "You did not travel. / You didn't travel.",
+    explanation: "<strong>didn't + travel</strong>. Règle de base : base verbale après didn't." },
+
+  { fr: "Il n'a pas rejoint la bande.", hint: "la bande = the band",
+    answers: ["he did not join the band","he didnt join the band"],
+    correct: "He did not join the band. / He didn't join the band.",
+    explanation: "<strong>didn't + join</strong> (base verbale)." },
+
+  { fr: "Nous ne nous sommes pas mariés.", hint: "",
+    answers: ["we did not marry","we didnt marry"],
+    correct: "We did not marry. / We didn't marry.",
+    explanation: "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't." },
+
+  { fr: "Elle n'est pas morte.", hint: "",
+    answers: ["she did not die","she didnt die"],
+    correct: "She did not die. / She didn't die.",
+    explanation: "<strong>didn't + die</strong>. Base verbale die, même si die → died à l'affirmatif." },
+
+  // ════════════ INTERROGATIVES ════════════
+  { fr: "Sommes-nous partis ?", hint: "",
+    answers: ["did we leave","did we leave?","did we leave ?"],
+    correct: "Did we leave?",
+    explanation: "<strong>Interrogatif prétérit</strong> : Did + sujet + <strong>base verbale ?</strong> leave est irrégulier mais base verbale après Did." },
+
+  { fr: "Se sont-ils installés ?", hint: "",
+    answers: ["did they settle","did they settle?","did they settle ?"],
+    correct: "Did they settle?",
+    explanation: "<strong>Did + they + settle ?</strong> Pas de -d après Did." },
+
+  { fr: "As-tu joué ?", hint: "",
+    answers: ["did you play","did you play?","did you play ?"],
+    correct: "Did you play?",
+    explanation: "<strong>Did + you + play ?</strong> La terminaison -ed disparaît après Did." },
+
+  { fr: "A-t-il enregistré ?", hint: "",
+    answers: ["did he record","did he record?","did he record ?"],
+    correct: "Did he record?",
+    explanation: "<strong>Did + he + record ?</strong> L'auxiliaire Did porte le passé, base verbale après." },
+
+  { fr: "Ont-ils voyagé ?", hint: "",
+    answers: ["did they travel","did they travel?","did they travel ?"],
+    correct: "Did they travel?",
+    explanation: "<strong>Did + they + travel ?</strong> Même structure quel que soit le sujet." },
+
+  { fr: "A-t-il rejoint le groupe ?", hint: "le groupe = the group",
+    answers: ["did he join the group","did he join the group?","did he join the group ?"],
+    correct: "Did he join the group?",
+    explanation: "<strong>Did + he + join ?</strong> L'auxiliaire Did porte le passé." },
+
+  { fr: "Est-elle morte ?", hint: "",
+    answers: ["did she die","did she die?","did she die ?"],
+    correct: "Did she die?",
+    explanation: "<strong>Did + she + die ?</strong> Base verbale (die) après Did, même pour les irréguliers." },
+
+  { fr: "Ont-ils divorcé ?", hint: "",
+    answers: ["did they divorce","did they divorce?","did they divorce ?"],
+    correct: "Did they divorce?",
+    explanation: "<strong>Did + they + divorce ?</strong> Structure interrogative standard." },
+
+  { fr: "A-t-elle voyagé ?", hint: "",
+    answers: ["did she travel","did she travel?","did she travel ?"],
+    correct: "Did she travel?",
+    explanation: "<strong>Did + she + travel ?</strong> Base verbale après Did." },
+
+  { fr: "T'es-tu marié ?", hint: "",
+    answers: ["did you marry","did you marry?","did you marry ?"],
+    correct: "Did you marry?",
+    explanation: "<strong>Did + you + marry ?</strong> Base verbale : pas de -ied après Did." },
+
+  { fr: "Ont-ils enregistré ?", hint: "",
+    answers: ["did they record","did they record?","did they record ?"],
+    correct: "Did they record?",
+    explanation: "<strong>Did + they + record ?</strong> Même structure pour tous les sujets." },
+
+  { fr: "A-t-il rejoint la bande ?", hint: "la bande = the band",
+    answers: ["did he join the band","did he join the band?","did he join the band ?"],
+    correct: "Did he join the band?",
+    explanation: "<strong>Did + he + join ?</strong> Base verbale après Did." },
+
+  { fr: "Es-tu parti ?", hint: "",
+    answers: ["did you leave","did you leave?","did you leave ?"],
+    correct: "Did you leave?",
+    explanation: "<strong>Did + you + leave ?</strong> leave est irrégulier mais base verbale après Did." },
+
+  { fr: "S'est-il installé à Chicago ?", hint: "à Chicago = in Chicago",
+    answers: ["did he settle in chicago","did he settle in chicago?","did he settle in chicago ?"],
+    correct: "Did he settle in Chicago?",
+    explanation: "<strong>Did + he + settle ?</strong> Pas de -d après Did." },
+
+  { fr: "A-t-elle rejoint le groupe ?", hint: "le groupe = the group",
+    answers: ["did she join the group","did she join the group?","did she join the group ?"],
+    correct: "Did she join the group?",
+    explanation: "<strong>Did + she + join ?</strong> Base verbale après Did." },
+
+  { fr: "Ont-ils divorcé une deuxième fois ?", hint: "fois = time",
+    answers: ["did they divorce a second time","did they divorce a second time?","did they divorce a second time ?"],
+    correct: "Did they divorce a second time?",
+    explanation: "<strong>Did + they + divorce ?</strong> Base verbale après Did. <em>Time</em> = fois." },
+
+  // ════════════ AFFIRMATIVES ════════════
+  { fr: "Ils ont enregistré.", hint: "",
+    answers: ["they recorded"],
+    correct: "They recorded.",
+    explanation: "<strong>record → recorded</strong>. Prétérit affirmatif : sujet + verbe -ed." },
+
+  { fr: "Il est mort.", hint: "",
+    answers: ["he died"],
+    correct: "He died.",
+    explanation: "<strong>die → died</strong> (verbe régulier : -e → -ed)." },
+
+  { fr: "Elle a voyagé.", hint: "",
+    answers: ["she travelled","she traveled"],
+    correct: "She travelled. / She traveled.",
+    explanation: "<strong>travel → travelled</strong> (ou traveled en américain). Prétérit affirmatif." },
+
+  { fr: "Ils se sont mariés.", hint: "",
+    answers: ["they married"],
+    correct: "They married.",
+    explanation: "<strong>marry → married</strong> (verbe en -y → -ied)." },
+
+  { fr: "Il a rejoint le groupe.", hint: "le groupe = the group",
+    answers: ["he joined the group"],
+    correct: "He joined the group.",
+    explanation: "<strong>join → joined</strong> (régulier, + -ed)." },
+
+  { fr: "Elle est partie.", hint: "",
+    answers: ["she left"],
+    correct: "She left.",
+    explanation: "<strong>leave → left</strong> (irrégulier). Prétérit affirmatif : sujet + left." },
+
+  { fr: "Il s'est installé.", hint: "",
+    answers: ["he settled"],
+    correct: "He settled.",
+    explanation: "<strong>settle → settled</strong> (régulier, -e + d)." },
+
+  { fr: "Ils ont divorcé.", hint: "",
+    answers: ["they divorced"],
+    correct: "They divorced.",
+    explanation: "<strong>divorce → divorced</strong> (régulier, -e + d)." },
+
+  { fr: "Nous avons voyagé.", hint: "",
+    answers: ["we travelled","we traveled"],
+    correct: "We travelled. / We traveled.",
+    explanation: "<strong>travel → travelled</strong>. Prétérit affirmatif, pas d'auxiliaire." },
+
+  { fr: "Tu as joué.", hint: "",
+    answers: ["you played"],
+    correct: "You played.",
+    explanation: "<strong>play → played</strong> (régulier, + -ed)." },
+
+  { fr: "Elle s'est installée.", hint: "",
+    answers: ["she settled"],
+    correct: "She settled.",
+    explanation: "<strong>settle → settled</strong>. Même forme pour il/elle." },
+
+  { fr: "Il a enregistré.", hint: "",
+    answers: ["he recorded"],
+    correct: "He recorded.",
+    explanation: "<strong>record → recorded</strong> (régulier, + -ed)." },
+
+  { fr: "Elle est morte.", hint: "",
+    answers: ["she died"],
+    correct: "She died.",
+    explanation: "<strong>die → died</strong> (régulier)." },
+
+  { fr: "Ils sont partis.", hint: "",
+    answers: ["they left"],
+    correct: "They left.",
+    explanation: "<strong>leave → left</strong> (irrégulier). Même forme au singulier et au pluriel." },
+
+  { fr: "Il s'est marié une troisième fois.", hint: "fois = time",
+    answers: ["he married a third time"],
+    correct: "He married a third time.",
+    explanation: "<strong>marry → married</strong> (-y → -ied). <em>Time</em> = fois." },
+
+  { fr: "Elle a rejoint la bande.", hint: "la bande = the band",
+    answers: ["she joined the band"],
+    correct: "She joined the band.",
+    explanation: "<strong>join → joined</strong> (+ -ed)." },
+
+  { fr: "Ils ont voyagé en France.", hint: "en France = in France",
+    answers: ["they travelled in france","they traveled in france"],
+    correct: "They travelled in France. / They traveled in France.",
+    explanation: "<strong>travel → travelled</strong>. Prétérit affirmatif." },
+
+  { fr: "Nous nous sommes installés.", hint: "",
+    answers: ["we settled"],
+    correct: "We settled.",
+    explanation: "<strong>settle → settled</strong>." },
+
+  { fr: "Ils ont enregistré un album.", hint: "un album = an album",
+    answers: ["they recorded an album"],
+    correct: "They recorded an album.",
+    explanation: "<strong>record → recorded</strong> (+ -ed)." },
+
+  { fr: "Tu as voyagé.", hint: "",
+    answers: ["you travelled","you traveled"],
+    correct: "You travelled. / You traveled.",
+    explanation: "<strong>travel → travelled</strong>." },
+
+  { fr: "Il a joué.", hint: "",
+    answers: ["he played"],
+    correct: "He played.",
+    explanation: "<strong>play → played</strong> (+ -ed)." },
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let questions = [];
+let current = 0;
+let score = 0;
+let history = [];
+let answered = false;
+
+// ─── HELPERS ────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/[\u2018\u2019\u0060\u00B4']/g, '')
+    .replace(/[?!.,]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function checkAnswer(input, q) {
+  const n = normalize(input);
+  return q.answers.some(a => normalize(a) === n);
+}
+
+// ─── INIT ────────────────────────────────────────────────
+function startQuiz() {
+  questions = shuffle(allQuestions).slice(0, 5);
+  current = 0; score = 0; history = []; answered = false;
+  document.getElementById('quizView').style.display = 'block';
+  document.getElementById('scoreView').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const n = current + 1;
+
+  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
+  document.getElementById('frenchSentence').textContent = q.fr;
+  document.getElementById('hint').textContent = q.hint ? `💡 ${q.hint}` : '';
+  document.getElementById('progressText').textContent = `Question ${n} / 5`;
+  document.getElementById('scoreText').textContent = `Score : ${score}`;
+  document.getElementById('progressBar').style.width = `${n * 20}%`;
+
+  const input = document.getElementById('answerInput');
+  input.value = '';
+  input.className = '';
+  input.disabled = false;
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('btnSubmit').disabled = false;
+
+  input.focus();
+}
+
+function submit() {
+  if (answered) return;
+  const input = document.getElementById('answerInput');
+  const val = input.value.trim();
+  if (!val) return;
+
+  answered = true;
+  input.disabled = true;
+  document.getElementById('btnSubmit').disabled = true;
+
+  const q = questions[current];
+  const ok = checkAnswer(val, q);
+
+  if (ok) score++;
+
+  history.push({ q, userAnswer: val, ok });
+
+  input.className = ok ? 'correct' : 'wrong';
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
+
+  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
+  document.getElementById('fbAnswer').textContent = ok ? '' : `Réponse attendue : ${q.correct}`;
+  document.getElementById('fbExplanation').innerHTML = q.explanation;
+
+  document.getElementById('btnNext').style.display = 'block';
+
+  if (!ok) {
+    document.getElementById('mainCard').classList.add('shake');
+    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
+  }
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= 5) {
+    showScore();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showScore() {
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('scoreView').style.display = 'block';
+
+  document.getElementById('scoreBig').textContent = `${score}`;
+  document.getElementById('progressBar').style.width = '100%';
+
+  let emoji, msg, detail;
+  if (score === 5) { emoji = '🏆'; msg = 'Parfait ! 5/5 !'; detail = 'Tu maîtrises le prétérit. Recommence pour confirmer !'; }
+  else if (score === 4) { emoji = '🌟'; msg = 'Très bien !'; detail = 'Encore un effort et tu seras imbattable.'; }
+  else if (score === 3) { emoji = '👍'; msg = 'Pas mal !'; detail = 'Relis les erreurs ci-dessous et recommence.'; }
+  else if (score === 2) { emoji = '📚'; msg = 'Courage !'; detail = 'Revois les règles et réessaie.'; }
+  else { emoji = '💪'; msg = 'Continue à t\'entraîner !'; detail = 'Le prétérit, ça s\'apprend avec de la pratique.'; }
+
+  document.getElementById('scoreEmoji').textContent = emoji;
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreDetail').textContent = detail;
+
+  // Review list
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  history.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
+    div.innerHTML = `
+      <div class="review-french">${i+1}. ${h.q.fr}</div>
+      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
+      ${!h.ok ? `<div class="review-correct">→ ${h.q.correct}</div>` : ''}
+    `;
+    reviewList.appendChild(div);
+  });
+}
+
+// ─── EVENTS ─────────────────────────────────────────────
+document.getElementById('btnSubmit').addEventListener('click', submit);
+document.getElementById('btnNext').addEventListener('click', nextQuestion);
+document.getElementById('btnRestart').addEventListener('click', startQuiz);
+document.getElementById('answerInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (!answered) submit();
+    else nextQuestion();
+  }
+});
+
+// ─── START ──────────────────────────────────────────────
+startQuiz();
+</script>
+</body>
+</html>

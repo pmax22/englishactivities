@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Activities</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --text: #e8eaf0;
+    --muted: #6b6f82;
+    --radius: 18px;
+
+    /* Activity accent colors */
+    --preterit-a: #f5c842;
+    --preterit-b: #e07b3f;
+    --usedto-a: #7c6af7;
+    --usedto-b: #b47cf0;
+    --locked-a: #3a3d4d;
+    --locked-b: #2a2d3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 72px 24px 56px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 0%, rgba(245,200,66,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(124,106,247,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(180,124,240,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Decorative grid lines */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+    position: relative;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--preterit-a);
+    box-shadow: 0 0 8px var(--preterit-a);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 7vw, 68px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    position: relative;
+    animation: fadeDown 0.7s 0.1s ease both;
+    opacity: 0;
+  }
+
+  h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--preterit-a) 0%, var(--usedto-b) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 300;
+    position: relative;
+    animation: fadeDown 0.7s 0.2s ease both;
+    opacity: 0;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    position: relative;
+    animation: fadeDown 0.7s 0.3s ease both;
+    opacity: 0;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .stats-sep {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  /* ── GRID ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0 32px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.4s ease both;
+    opacity: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s, box-shadow 0.22s;
+    animation: fadeUp 0.6s ease both;
+    opacity: 0;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.45s; }
+  .card:nth-child(2) { animation-delay: 0.55s; }
+  .card:nth-child(3) { animation-delay: 0.65s; }
+  .card:nth-child(4) { animation-delay: 0.75s; }
+  .card:nth-child(5) { animation-delay: 0.85s; }
+  .card:nth-child(6) { animation-delay: 0.95s; }
+
+  .card:not(.locked):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .card:not(.locked):hover .card-arrow {
+    transform: translate(3px, -3px);
+    opacity: 1;
+  }
+
+  /* Top accent bar */
+  .card-bar {
+    height: 3px;
+    width: 100%;
+  }
+
+  /* Card visual area */
+  .card-visual {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .card-visual .big-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    opacity: 0.12;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .card-visual .badge {
+    position: absolute;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid;
+    letter-spacing: 0.3px;
+  }
+
+  /* Card body */
+  .card-body {
+    padding: 22px 24px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-category {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Card footer */
+  .card-footer {
+    padding: 14px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--surface2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .card-arrow {
+    font-size: 16px;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.4;
+  }
+
+  /* ── LOCKED CARD ── */
+  .card.locked {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .locked-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── COLORS per type ── */
+  /* Prétérit */
+  .preterit .card-bar { background: linear-gradient(90deg, var(--preterit-a), var(--preterit-b)); }
+  .preterit .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(245,200,66,0.08) 0%, transparent 70%); }
+  .preterit .big-label { color: var(--preterit-a); }
+  .preterit .badge { color: var(--preterit-a); border-color: rgba(245,200,66,0.3); background: rgba(245,200,66,0.08); }
+  .preterit .card-category { color: var(--preterit-a); }
+  .preterit:not(.locked):hover { border-color: rgba(245,200,66,0.3); }
+
+  /* Used To */
+  .usedto .card-bar { background: linear-gradient(90deg, var(--usedto-a), var(--usedto-b)); }
+  .usedto .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(124,106,247,0.08) 0%, transparent 70%); }
+  .usedto .big-label { color: var(--usedto-a); }
+  .usedto .badge { color: var(--usedto-b); border-color: rgba(180,124,240,0.3); background: rgba(124,106,247,0.08); }
+  .usedto .card-category { color: var(--usedto-a); }
+  .usedto:not(.locked):hover { border-color: rgba(124,106,247,0.35); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    text-align: center;
+    margin-top: 64px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    .grid { padding: 0 16px; gap: 14px; }
+    .section-label { padding: 0 16px; }
+    .stats-bar { gap: 20px; }
+    h1 { letter-spacing: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    Espace Enseignant
+  </div>
+  <h1>
+    English
+    <span class="line2">Activities</span>
+  </h1>
+  <p class="hero-sub">Exercices interactifs pour entraîner tes élèves à la grammaire anglaise.</p>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num" id="countActivities">2</div>
+      <div class="stat-label">Activités</div>
+    </div>
+    <div class="stats-sep"></div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Niveaux</div>
+    </div>
+    <div class="stats-sep"></div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Sessions</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<p class="section-label">Activités disponibles</p>
+
+<div class="grid">
+
+  <!-- Prétérit -->
+  <a class="card preterit" href="preterit.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Past</span>
+      <span class="badge">Prétérit simple</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le Prétérit</div>
+      <div class="card-desc">Phrases affirmatives, négatives et interrogatives au prétérit simple — réguliers et irréguliers.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Affirmatif</span>
+        <span class="pill">Négatif</span>
+        <span class="pill">Interrogatif</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Used To -->
+  <a class="card usedto" href="used_to.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Used</span>
+      <span class="badge">Habitudes passées</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Aspect</div>
+      <div class="card-title">Used To</div>
+      <div class="card-desc">Exprimer des habitudes et états passés révolus — formes affirmative, négative et interrogative.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">used to</span>
+        <span class="pill">didn't use to</span>
+        <span class="pill">Did … use to?</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Locked placeholder 1 -->
+  <div class="card locked">
+    <div class="card-bar" style="background: linear-gradient(90deg, #3a3d4d, #2a2d3a);"></div>
+    <div class="card-visual" style="background: none;">
+      <span class="big-label" style="color:#3a3d4d;">???</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category" style="color:var(--muted);">Grammaire · Bientôt</div>
+      <div class="card-title" style="color:var(--muted);">Prochaine activité</div>
+      <div class="card-desc">Une nouvelle activité sera bientôt disponible ici.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">À venir</span>
+      </div>
+    </div>
+    <div class="locked-badge">🔒 Bientôt</div>
+  </div>
+
+</div>
+
+<p class="page-footer">English Activities &nbsp;·&nbsp; Mis à jour 2026</p>
+
+</body>
+</html>
