@@ -24,6 +24,8 @@
     --locked-b: #2a2d3a;
     --sapver-a: #4ec9f5;
     --sapver-b: #3f7ee0;
+    --comp-a: #3ecfcf;
+    --comp-b: #2fa8d8;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -363,6 +365,14 @@
   .sapver .card-category { color: var(--sapver-a); }
   .sapver:not(.locked):hover { border-color: rgba(78,201,245,0.35); }
 
+  /* Comparatif */
+  .comp .card-bar { background: linear-gradient(90deg, var(--comp-a), var(--comp-b)); }
+  .comp .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(62,207,207,0.08) 0%, transparent 70%); }
+  .comp .big-label { color: var(--comp-a); }
+  .comp .badge { color: var(--comp-a); border-color: rgba(62,207,207,0.3); background: rgba(62,207,207,0.08); }
+  .comp .card-category { color: var(--comp-a); }
+  .comp:not(.locked):hover { border-color: rgba(62,207,207,0.35); }
+
   /* ── FOOTER ── */
   .page-footer {
     text-align: center;
@@ -403,11 +413,11 @@
     English
     <span class="line2">Activities</span>
   </h1>
-  <p class="hero-sub">Exercices interactifs pour entraîner tes élèves à la grammaire anglaise.</p>
+  <p class="hero-sub">Exercices interactifs pour s'entraîner en autonomie.</p>
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">3</div>
+      <div class="stat-num" id="countActivities">4</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
@@ -489,6 +499,28 @@
         <span class="pill">Affirmatif</span>
         <span class="pill">Négatif</span>
         <span class="pill">Interrogatif</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Comparatif -->
+  <a class="card comp" href="comparatif.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Comp</span>
+      <span class="badge">Comparatif</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Comparaison</div>
+      <div class="card-title">Le Comparatif</div>
+      <div class="card-desc">Comparer des personnes, objets ou situations — formes supérieure, inférieure et égale.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-er / more</span>
+        <span class="pill">less</span>
+        <span class="pill">as … as</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>
