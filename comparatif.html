@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparatif – Entraînement</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent: #3ecfcf;
+    --accent2: #2fa8d8;
+    --green: #4ecb7f;
+    --red: #e05c5c;
+    --text: #e8eaf0;
+    --muted: #6b6f82;
+    --radius: 14px;
+    --c-plus: #4ecb7f;
+    --c-eq: #3ecfcf;
+    --c-minus: #e07b3f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(62,207,207,0.07) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(47,168,216,0.05) 0%, transparent 60%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  header .tag {
+    display: inline-block;
+    background: rgba(62,207,207,0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(62,207,207,0.25);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--muted);
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .grammar-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 16px;
+    font-family: 'DM Sans', sans-serif;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .grammar-pill .pill-plus  { color: var(--c-plus);  font-weight: 600; }
+  .grammar-pill .pill-eq    { color: var(--c-eq);    font-weight: 600; }
+  .grammar-pill .pill-minus { color: var(--c-minus); font-weight: 600; }
+  .grammar-pill .sep { color: var(--border); }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 36px 28px;
+    width: 100%;
+    max-width: 660px;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .question-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* Type badge */
+  .type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+  }
+  .type-badge.plus  { background: rgba(78,203,127,0.12); color: var(--c-plus);  border: 1px solid rgba(78,203,127,0.25); }
+  .type-badge.eq    { background: rgba(62,207,207,0.12); color: var(--c-eq);    border: 1px solid rgba(62,207,207,0.25); }
+  .type-badge.minus { background: rgba(224,123,63,0.12); color: var(--c-minus); border: 1px solid rgba(224,123,63,0.25); }
+
+  /* Sentence display */
+  .sentence-wrap {
+    font-size: clamp(17px, 2.8vw, 21px);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .blank-display {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(62,207,207,0.08);
+    border: 1.5px dashed rgba(62,207,207,0.35);
+    border-radius: 8px;
+    padding: 2px 16px;
+    min-width: 160px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .adj-hint {
+    display: inline-block;
+    background: rgba(47,168,216,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(47,168,216,0.25);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 2px;
+    font-family: 'DM Sans', sans-serif;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  /* Input */
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .input-wrap input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 13px 18px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-wrap input::placeholder { color: var(--muted); font-style: italic; }
+
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(62,207,207,0.12);
+  }
+
+  .input-wrap input.correct {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
+  }
+
+  .input-wrap input.wrong {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-submit:hover { background: #5ddddd; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Feedback */
+  .feedback {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .feedback.correct {
+    background: rgba(78,203,127,0.1);
+    border: 1px solid rgba(78,203,127,0.3);
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: rgba(224,92,92,0.1);
+    border: 1px solid rgba(224,92,92,0.3);
+    display: block;
+  }
+
+  .feedback .fb-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .feedback.correct .fb-title { color: var(--green); }
+  .feedback.wrong .fb-title { color: var(--red); }
+
+  .answer-shown {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .explanation { color: var(--muted); font-size: 13px; }
+  .explanation strong { color: var(--text); }
+  .explanation em { color: var(--accent); font-style: normal; }
+
+  .structure-box {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    background: rgba(62,207,207,0.08);
+    border: 1px solid rgba(62,207,207,0.2);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: 'DM Sans', monospace;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 4px 0 6px;
+  }
+
+  .btn-next {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid rgba(62,207,207,0.4);
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+    display: none;
+  }
+
+  .btn-next:hover {
+    background: rgba(62,207,207,0.08);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* Score screen */
+  .score-screen {
+    text-align: center;
+    padding: 20px 0 10px;
+    display: none;
+  }
+
+  .score-emoji { font-size: 52px; margin-bottom: 12px; }
+
+  .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 10vw, 80px);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .score-label { font-size: 14px; color: var(--muted); margin-top: 4px; margin-bottom: 6px; }
+
+  .score-msg {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .score-detail { color: var(--muted); font-size: 14px; margin-bottom: 28px; font-weight: 300; }
+
+  .review-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .review-item {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    text-align: left;
+    border-left: 3px solid var(--border);
+  }
+
+  .review-item.ok { border-left-color: var(--green); }
+  .review-item.ko { border-left-color: var(--red); }
+
+  .review-prompt { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .review-answer { font-size: 14px; font-weight: 500; }
+  .review-item.ok .review-answer { color: var(--green); }
+  .review-item.ko .review-answer { color: var(--red); }
+  .review-correct { font-size: 13px; color: var(--text); margin-top: 4px; }
+  .review-correct::before { content: '→ '; color: var(--accent); }
+
+  .btn-restart {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-restart:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+
+  .shake { animation: shake 0.35s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Anglais · Grammaire</div>
+  <h1>Le <span>Comparatif</span></h1>
+  <p class="subtitle">Construis la bonne phrase comparative à partir des indices.</p>
+  <div class="grammar-pill">
+    <span class="pill-plus">(+) -er than / more … than</span>
+    <span class="sep">|</span>
+    <span class="pill-eq">(=) as … as</span>
+    <span class="sep">|</span>
+    <span class="pill-minus">(−) less … than</span>
+  </div>
+</header>
+
+<div class="card" id="mainCard">
+
+  <div id="quizView">
+    <div class="progress-label">
+      <span id="progressText">Question 1 / 5</span>
+      <span id="scoreText">Score : 0</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:20%"></div>
+    </div>
+
+    <div class="question-num" id="questionNum">QUESTION 1</div>
+
+    <div id="typeBadge" class="type-badge plus">+ Supériorité</div>
+
+    <div class="sentence-wrap" id="sentenceWrap"></div>
+
+    <div class="hint" id="hint"></div>
+
+    <div class="input-wrap">
+      <input type="text" id="answerInput" placeholder="Écris ta phrase complète…" autocomplete="off" autocorrect="off" spellcheck="false" />
+      <button class="btn-submit" id="btnSubmit">Vérifier</button>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-title" id="fbTitle"></div>
+      <div class="answer-shown" id="fbAnswer"></div>
+      <div class="explanation" id="fbExplanation"></div>
+    </div>
+
+    <button class="btn-next" id="btnNext">Question suivante →</button>
+  </div>
+
+  <!-- SCORE SCREEN -->
+  <div class="score-screen" id="scoreView">
+    <div class="score-emoji" id="scoreEmoji">🏆</div>
+    <div class="score-big" id="scoreBig">0</div>
+    <div class="score-label">/ 5</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <div class="score-detail" id="scoreDetail"></div>
+
+    <div class="review-title">Récapitulatif</div>
+    <div id="reviewList"></div>
+
+    <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+  </div>
+
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────
+// type: "plus" | "eq" | "minus"
+// subject1, subject2 : les deux éléments comparés
+// adj : adjectif (base form)
+// answers : réponses acceptées (normalisées lowercase)
+// correct : réponse de référence affichée en cas d'erreur
+// fr : traduction française
+// explanation : HTML
+
+const allQuestions = [
+
+  // ════════════ SUPÉRIORITÉ (+) ════════════
+  {
+    type: "plus",
+    subject1: "Hulk", subject2: "Thor", adj: "strong",
+    answers: ["is stronger than"],
+    correct: "is stronger than",
+    fr: "Hulk est plus fort que Thor.",
+    explanation: `<div class="structure-box">Hulk is <em>stronger</em> than Thor.</div>
+<strong>Strong</strong> (1 syllabe) → <strong>stronger</strong>. Comparatif de supériorité : adjectif court + <em>-er than</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "A cheetah", subject2: "a lion", adj: "fast",
+    answers: ["is faster than"],
+    correct: "is faster than",
+    fr: "Un guépard est plus rapide qu'un lion.",
+    explanation: `<div class="structure-box">A cheetah is <em>faster</em> than a lion.</div>
+<strong>Fast</strong> (1 syllabe) → <strong>faster</strong>. Règle : consonne finale doublée si précédée d'une seule voyelle : fast → fast<em>er</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "Everest", subject2: "Mont Blanc", adj: "tall",
+    answers: ["is taller than"],
+    correct: "is taller than",
+    fr: "L'Everest est plus haut que le Mont Blanc.",
+    explanation: `<div class="structure-box">Everest is <em>taller</em> than Mont Blanc.</div>
+<strong>Tall</strong> (1 syllabe) → <strong>taller</strong>. Comparatif court, règle standard : + <em>-er than</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "Gold", subject2: "silver", adj: "expensive",
+    answers: ["is more expensive than"],
+    correct: "is more expensive than",
+    fr: "L'or est plus cher que l'argent.",
+    explanation: `<div class="structure-box">Gold is <em>more expensive</em> than silver.</div>
+<strong>Expensive</strong> (3 syllabes) → <strong>more expensive</strong>. Adjectifs longs (2+ syllabes) : <em>more + adjectif + than</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "Summer", subject2: "winter", adj: "hot",
+    answers: ["is hotter than"],
+    correct: "is hotter than",
+    fr: "L'été est plus chaud que l'hiver.",
+    explanation: `<div class="structure-box">Summer is <em>hotter</em> than winter.</div>
+<strong>Hot</strong> → consonne finale doublée : <strong>hotter</strong>. Règle CVC (consonne-voyelle-consonne) : on double la consonne finale.`
+  },
+  {
+    type: "plus",
+    subject1: "Ironman", subject2: "Spider-Man", adj: "rich",
+    answers: ["is richer than"],
+    correct: "is richer than",
+    fr: "Ironman est plus riche que Spider-Man.",
+    explanation: `<div class="structure-box">Ironman is <em>richer</em> than Spider-Man.</div>
+<strong>Rich</strong> (1 syllabe) → <strong>richer</strong>. Comparatif court standard + <em>-er than</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "The Amazon", subject2: "the Seine", adj: "long",
+    answers: ["is longer than"],
+    correct: "is longer than",
+    fr: "L'Amazone est plus longue que la Seine.",
+    explanation: `<div class="structure-box">The Amazon is <em>longer</em> than the Seine.</div>
+<strong>Long</strong> → <strong>longer</strong>. Comparatif court, + <em>-er than</em>. Attention à ne pas écrire <em>more long</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "Gandalf", subject2: "Frodo", adj: "old",
+    answers: ["is older than"],
+    correct: "is older than",
+    fr: "Gandalf est plus vieux que Frodo.",
+    explanation: `<div class="structure-box">Gandalf is <em>older</em> than Frodo.</div>
+<strong>Old</strong> → <strong>older</strong>. Comparatif court, + <em>-er than</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "An elephant", subject2: "a dog", adj: "heavy",
+    answers: ["is heavier than"],
+    correct: "is heavier than",
+    fr: "Un éléphant est plus lourd qu'un chien.",
+    explanation: `<div class="structure-box">An elephant is <em>heavier</em> than a dog.</div>
+<strong>Heavy</strong> se termine en <em>-y</em> précédé d'une consonne → <strong>heavier</strong>. Règle : <em>-y → -ier</em>.`
+  },
+  {
+    type: "plus",
+    subject1: "This film", subject2: "the book", adj: "interesting",
+    answers: ["is more interesting than"],
+    correct: "is more interesting than",
+    fr: "Ce film est plus intéressant que le livre.",
+    explanation: `<div class="structure-box">This film is <em>more interesting</em> than the book.</div>
+<strong>Interesting</strong> (4 syllabes) → <strong>more interesting</strong>. Adjectif long : <em>more + adjectif + than</em>.`
+  },
+
+  // ════════════ ÉGALITÉ (=) ════════════
+  {
+    type: "eq",
+    subject1: "Batman", subject2: "Superman", adj: "brave",
+    answers: ["is as brave as"],
+    correct: "is as brave as",
+    fr: "Batman est aussi courageux que Superman.",
+    explanation: `<div class="structure-box">Batman is <em>as brave as</em> Superman.</div>
+Comparatif d'égalité : <strong>as + adjectif + as</strong>. L'adjectif ne change pas de forme.`
+  },
+  {
+    type: "eq",
+    subject1: "Tea", subject2: "coffee", adj: "popular",
+    answers: ["is as popular as"],
+    correct: "is as popular as",
+    fr: "Le thé est aussi populaire que le café.",
+    explanation: `<div class="structure-box">Tea is <em>as popular as</em> coffee.</div>
+<strong>As + popular + as</strong> : l'adjectif reste à sa forme de base, quelle que soit sa longueur.`
+  },
+  {
+    type: "eq",
+    subject1: "Harry", subject2: "Hermione", adj: "brave",
+    answers: ["is as brave as"],
+    correct: "is as brave as",
+    fr: "Harry est aussi courageux qu'Hermione.",
+    explanation: `<div class="structure-box">Harry is <em>as brave as</em> Hermione.</div>
+Comparatif d'égalité : <strong>as + adjectif + as</strong>. Rappel : pas de modification de l'adjectif.`
+  },
+  {
+    type: "eq",
+    subject1: "Paris", subject2: "London", adj: "busy",
+    answers: ["is as busy as"],
+    correct: "is as busy as",
+    fr: "Paris est aussi animé que Londres.",
+    explanation: `<div class="structure-box">Paris is <em>as busy as</em> London.</div>
+<strong>Busy</strong> ne change pas dans la structure <em>as … as</em> (contrairement au comparatif de supériorité où il devient <em>busier</em>).`
+  },
+  {
+    type: "eq",
+    subject1: "Running", subject2: "swimming", adj: "tiring",
+    answers: ["is as tiring as"],
+    correct: "is as tiring as",
+    fr: "Courir est aussi fatigant que nager.",
+    explanation: `<div class="structure-box">Running is <em>as tiring as</em> swimming.</div>
+Les gérondifs (<em>running, swimming</em>) peuvent être sujets d'une comparaison. Structure <strong>as + adjectif + as</strong>.`
+  },
+  {
+    type: "eq",
+    subject1: "Maths", subject2: "science", adj: "interesting",
+    answers: ["is as interesting as","are as interesting as"],
+    correct: "is as interesting as",
+    fr: "Les maths sont aussi intéressantes que les sciences.",
+    explanation: `<div class="structure-box">Maths is <em>as interesting as</em> science.</div>
+<strong>As + interesting + as</strong> : adjectif long, mais il ne change pas dans la structure d'égalité.`
+  },
+  {
+    type: "eq",
+    subject1: "A cat", subject2: "a dog", adj: "intelligent",
+    answers: ["is as intelligent as"],
+    correct: "is as intelligent as",
+    fr: "Un chat est aussi intelligent qu'un chien.",
+    explanation: `<div class="structure-box">A cat is <em>as intelligent as</em> a dog.</div>
+Comparatif d'égalité. Peu importe la longueur de l'adjectif : la structure <strong>as … as</strong> ne change jamais.`
+  },
+  {
+    type: "eq",
+    subject1: "Rock", subject2: "jazz", adj: "creative",
+    answers: ["is as creative as"],
+    correct: "is as creative as",
+    fr: "Le rock est aussi créatif que le jazz.",
+    explanation: `<div class="structure-box">Rock is <em>as creative as</em> jazz.</div>
+<strong>As + creative + as</strong>. Comparatif d'égalité : l'adjectif reste à la forme de base.`
+  },
+  {
+    type: "eq",
+    subject1: "English", subject2: "French", adj: "difficult",
+    answers: ["is as difficult as"],
+    correct: "is as difficult as",
+    fr: "L'anglais est aussi difficile que le français.",
+    explanation: `<div class="structure-box">English is <em>as difficult as</em> French.</div>
+<strong>Difficult</strong> (3 syllabes) — même en égalité, la structure <em>as … as</em> est identique pour tout adjectif.`
+  },
+  {
+    type: "eq",
+    subject1: "The piano", subject2: "the violin", adj: "beautiful",
+    answers: ["is as beautiful as"],
+    correct: "is as beautiful as",
+    fr: "Le piano est aussi beau que le violon.",
+    explanation: `<div class="structure-box">The piano is <em>as beautiful as</em> the violin.</div>
+<strong>As + beautiful + as</strong>. Structure d'égalité invariable.`
+  },
+
+  // ════════════ INFÉRIORITÉ (−) ════════════
+  {
+    type: "minus",
+    subject1: "An ant", subject2: "an elephant", adj: "strong",
+    answers: ["is less strong than"],
+    correct: "is less strong than",
+    fr: "Une fourmi est moins forte qu'un éléphant.",
+    explanation: `<div class="structure-box">An ant is <em>less strong</em> than an elephant.</div>
+Comparatif d'infériorité : <strong>less + adjectif + than</strong>. L'adjectif ne change jamais de forme.`
+  },
+  {
+    type: "minus",
+    subject1: "A scooter", subject2: "an airplane", adj: "fast",
+    answers: ["is less fast than"],
+    correct: "is less fast than",
+    fr: "Un scooter est moins rapide qu'un avion.",
+    explanation: `<div class="structure-box">A scooter is <em>less fast</em> than an airplane.</div>
+<strong>Less + fast + than</strong>. Même structure pour les adjectifs courts ou longs.`
+  },
+  {
+    type: "minus",
+    subject1: "Pikachu", subject2: "Mewtwo", adj: "powerful",
+    answers: ["is less powerful than"],
+    correct: "is less powerful than",
+    fr: "Pikachu est moins puissant que Mewtwo.",
+    explanation: `<div class="structure-box">Pikachu is <em>less powerful</em> than Mewtwo.</div>
+<strong>Less + powerful + than</strong>. Pour les adjectifs longs, on n'utilise jamais <em>less more powerful</em> — juste <em>less powerful</em>.`
+  },
+  {
+    type: "minus",
+    subject1: "Bronze", subject2: "gold", adj: "precious",
+    answers: ["is less precious than"],
+    correct: "is less precious than",
+    fr: "Le bronze est moins précieux que l'or.",
+    explanation: `<div class="structure-box">Bronze is <em>less precious</em> than gold.</div>
+<strong>Less + precious + than</strong>. Structure invariable : <em>less</em> + adjectif de base.`
+  },
+  {
+    type: "minus",
+    subject1: "A pond", subject2: "the ocean", adj: "deep",
+    answers: ["is less deep than"],
+    correct: "is less deep than",
+    fr: "Un étang est moins profond que l'océan.",
+    explanation: `<div class="structure-box">A pond is <em>less deep</em> than the ocean.</div>
+<strong>Less + deep + than</strong>. Rappel : <em>less deep</em> et non <em>shallower</em> dans la structure d'infériorité.`
+  },
+  {
+    type: "minus",
+    subject1: "A candle", subject2: "the sun", adj: "bright",
+    answers: ["is less bright than"],
+    correct: "is less bright than",
+    fr: "Une bougie est moins lumineuse que le soleil.",
+    explanation: `<div class="structure-box">A candle is <em>less bright</em> than the sun.</div>
+<strong>Less + bright + than</strong>. L'adjectif court ne prend pas de <em>-er</em> ici — c'est <em>less</em> qui exprime l'infériorité.`
+  },
+  {
+    type: "minus",
+    subject1: "A notebook", subject2: "a laptop", adj: "expensive",
+    answers: ["is less expensive than"],
+    correct: "is less expensive than",
+    fr: "Un carnet est moins cher qu'un ordinateur portable.",
+    explanation: `<div class="structure-box">A notebook is <em>less expensive</em> than a laptop.</div>
+<strong>Less + expensive + than</strong>. Adjectif long, structure d'infériorité identique.`
+  },
+  {
+    type: "minus",
+    subject1: "A mouse", subject2: "a lion", adj: "dangerous",
+    answers: ["is less dangerous than"],
+    correct: "is less dangerous than",
+    fr: "Une souris est moins dangereuse qu'un lion.",
+    explanation: `<div class="structure-box">A mouse is <em>less dangerous</em> than a lion.</div>
+<strong>Less + dangerous + than</strong>. Adjectif long : même structure, pas de <em>more/most</em> impliqués.`
+  },
+  {
+    type: "minus",
+    subject1: "Tuesday", subject2: "Saturday", adj: "exciting",
+    answers: ["is less exciting than"],
+    correct: "is less exciting than",
+    fr: "Le mardi est moins excitant que le samedi.",
+    explanation: `<div class="structure-box">Tuesday is <em>less exciting</em> than Saturday.</div>
+<strong>Less + exciting + than</strong>. Adjectif en <em>-ing</em> : aucun changement de forme.`
+  },
+  {
+    type: "minus",
+    subject1: "A stormtrooper", subject2: "Darth Vader", adj: "powerful",
+    answers: ["is less powerful than"],
+    correct: "is less powerful than",
+    fr: "Un stormtrooper est moins puissant que Dark Vador.",
+    explanation: `<div class="structure-box">A stormtrooper is <em>less powerful</em> than Darth Vader.</div>
+<strong>Less + powerful + than</strong>. Structure d'infériorité : <em>less</em> + adjectif de base + <em>than</em>, toujours.`
+  },
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let questions = [];
+let current = 0;
+let score = 0;
+let history = [];
+let answered = false;
+const TOTAL = 5;
+
+// ─── HELPERS ────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/[?!.,]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function checkAnswer(input, q) {
+  return q.answers.some(a => normalize(a) === normalize(input));
+}
+
+// ─── RENDER ─────────────────────────────────────────────
+const typeLabels = {
+  plus:  { cls: 'plus',  label: '+ Supériorité' },
+  eq:    { cls: 'eq',    label: '= Égalité' },
+  minus: { cls: 'minus', label: '− Infériorité' },
+};
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const n = current + 1;
+
+  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
+  document.getElementById('progressText').textContent = `Question ${n} / ${TOTAL}`;
+  document.getElementById('scoreText').textContent = `Score : ${score}`;
+  document.getElementById('progressBar').style.width = `${(n / TOTAL) * 100}%`;
+
+  // Type badge
+  const badge = document.getElementById('typeBadge');
+  const t = typeLabels[q.type];
+  badge.className = `type-badge ${t.cls}`;
+  badge.textContent = t.label;
+
+  // Sentence prompt
+  const wrap = document.getElementById('sentenceWrap');
+  wrap.innerHTML = '';
+  const s1 = document.createElement('span');
+  s1.textContent = q.subject1;
+  wrap.appendChild(s1);
+  const blank = document.createElement('span');
+  blank.className = 'blank-display';
+  blank.textContent = '___________';
+  wrap.appendChild(blank);
+  const s2 = document.createElement('span');
+  s2.textContent = q.subject2;
+  wrap.appendChild(s2);
+  const adj = document.createElement('span');
+  adj.className = 'adj-hint';
+  adj.textContent = '(' + q.adj + ')';
+  wrap.appendChild(adj);
+
+  // French hint
+  document.getElementById('hint').textContent = '💡 ' + q.fr;
+
+  const input = document.getElementById('answerInput');
+  input.value = '';
+  input.className = '';
+  input.disabled = false;
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('btnSubmit').disabled = false;
+
+  input.focus();
+}
+
+function startQuiz() {
+  questions = shuffle(allQuestions).slice(0, TOTAL);
+  current = 0; score = 0; history = []; answered = false;
+  document.getElementById('quizView').style.display = 'block';
+  document.getElementById('scoreView').style.display = 'none';
+  renderQuestion();
+}
+
+function submit() {
+  if (answered) return;
+  const input = document.getElementById('answerInput');
+  const val = input.value.trim();
+  if (!val) return;
+
+  answered = true;
+  input.disabled = true;
+  document.getElementById('btnSubmit').disabled = true;
+
+  const q = questions[current];
+  const ok = checkAnswer(val, q);
+  if (ok) score++;
+  history.push({ q, userAnswer: val, ok });
+
+  input.className = ok ? 'correct' : 'wrong';
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
+  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
+  document.getElementById('fbAnswer').innerHTML = ok ? '' : `Réponse attendue : <strong>${q.correct}</strong>`;
+  document.getElementById('fbExplanation').innerHTML = q.explanation;
+
+  document.getElementById('btnNext').style.display = 'block';
+
+  if (!ok) {
+    document.getElementById('mainCard').classList.add('shake');
+    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
+  }
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= TOTAL) showScore();
+  else renderQuestion();
+}
+
+function showScore() {
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('scoreView').style.display = 'block';
+  document.getElementById('scoreBig').textContent = `${score}`;
+  document.getElementById('progressBar').style.width = '100%';
+
+  let emoji, msg, detail;
+  if (score === 5)      { emoji = '🏆'; msg = 'Parfait ! 5/5 !';         detail = 'Tu maîtrises le comparatif. Impressionnant !'; }
+  else if (score === 4) { emoji = '🌟'; msg = 'Excellent !';              detail = 'Encore un petit effort et tu seras imbattable.'; }
+  else if (score === 3) { emoji = '👍'; msg = 'Pas mal !';                detail = 'Relis les erreurs ci-dessous et recommence.'; }
+  else if (score === 2) { emoji = '📚'; msg = 'Courage !';                detail = 'Revois les structures (+) -er than / (=) as…as / (−) less…than.'; }
+  else                  { emoji = '💪'; msg = "On s'entraîne encore !";  detail = 'Rappel : + (‑er than / more…than) | = (as…as) | − (less…than)'; }
+
+  document.getElementById('scoreEmoji').textContent = emoji;
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreDetail').textContent = detail;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  history.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
+    const t = typeLabels[h.q.type];
+    div.innerHTML = `
+      <div class="review-prompt">${i+1}. [${t.label}] ${h.q.subject1} ___ ${h.q.subject2} (${h.q.adj})</div>
+      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
+      ${!h.ok ? `<div class="review-correct">${h.q.correct}</div>` : ''}
+    `;
+    reviewList.appendChild(div);
+  });
+}
+
+// ─── EVENTS ─────────────────────────────────────────────
+document.getElementById('btnSubmit').addEventListener('click', submit);
+document.getElementById('btnNext').addEventListener('click', nextQuestion);
+document.getElementById('btnRestart').addEventListener('click', startQuiz);
+document.getElementById('answerInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (!answered) submit();
+    else nextQuestion();
+  }
+});
+
+// ─── START ──────────────────────────────────────────────
+startQuiz();
+</script>
+</body>
+</html>
