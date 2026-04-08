@@ -22,6 +22,8 @@
     --usedto-b: #b47cf0;
     --locked-a: #3a3d4d;
     --locked-b: #2a2d3a;
+    --sapver-a: #4ec9f5;
+    --sapver-b: #3f7ee0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -353,6 +355,14 @@
   .usedto .card-category { color: var(--usedto-a); }
   .usedto:not(.locked):hover { border-color: rgba(124,106,247,0.35); }
 
+  /* CAP Sapver */
+  .sapver .card-bar { background: linear-gradient(90deg, var(--sapver-a), var(--sapver-b)); }
+  .sapver .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(78,201,245,0.08) 0%, transparent 70%); }
+  .sapver .big-label { color: var(--sapver-a); }
+  .sapver .badge { color: var(--sapver-a); border-color: rgba(78,201,245,0.3); background: rgba(78,201,245,0.08); }
+  .sapver .card-category { color: var(--sapver-a); }
+  .sapver:not(.locked):hover { border-color: rgba(78,201,245,0.35); }
+
   /* ── FOOTER ── */
   .page-footer {
     text-align: center;
@@ -397,12 +407,12 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">2</div>
+      <div class="stat-num" id="countActivities">3</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
     <div class="stat">
-      <div class="stat-num">3</div>
+      <div class="stat-num">4</div>
       <div class="stat-label">Niveaux</div>
     </div>
     <div class="stats-sep"></div>
@@ -457,6 +467,28 @@
         <span class="pill">used to</span>
         <span class="pill">didn't use to</span>
         <span class="pill">Did … use to?</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- CAP Sapver 1ère année -->
+  <a class="card sapver" href="preterit_cap_sapver.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Past</span>
+      <span class="badge">CAP Sapver · 1ère année</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Métiers</div>
+      <div class="card-title">Prétérit — Vente & Aide</div>
+      <div class="card-desc">Prétérit simple orienté vente et aide à la personne — verbes métiers, vocabulaire professionnel.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Affirmatif</span>
+        <span class="pill">Négatif</span>
+        <span class="pill">Interrogatif</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>
