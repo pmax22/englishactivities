@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prétérit – CAP Sapver 1ère année</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent: #4ec9f5;
+    --accent2: #3f7ee0;
+    --green: #4ecb7f;
+    --red: #e05c5c;
+    --text: #e8eaf0;
+    --muted: #6b6f82;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(78,201,245,0.07) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(63,126,224,0.05) 0%, transparent 60%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  header .tag {
+    display: inline-block;
+    background: rgba(78,201,245,0.12);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(78,201,245,0.25);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--muted);
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 36px 28px;
+    width: 100%;
+    max-width: 620px;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 20px 20px 0 0;
+  }
+
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .question-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .french-sentence {
+    font-size: clamp(18px, 3vw, 23px);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .input-wrap input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 13px 18px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(78,201,245,0.1);
+  }
+
+  .input-wrap input.correct {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
+  }
+
+  .input-wrap input.wrong {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, opacity 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-submit:hover { background: #7adcf8; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .feedback {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .feedback.correct {
+    background: rgba(78,203,127,0.1);
+    border: 1px solid rgba(78,203,127,0.3);
+    display: block;
+  }
+
+  .feedback.wrong {
+    background: rgba(224,92,92,0.1);
+    border: 1px solid rgba(224,92,92,0.3);
+    display: block;
+  }
+
+  .feedback .fb-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .feedback.correct .fb-title { color: var(--green); }
+  .feedback.wrong .fb-title { color: var(--red); }
+
+  .answer-shown {
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .explanation {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .explanation strong { color: var(--text); }
+
+  .btn-next {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid rgba(78,201,245,0.4);
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+    display: none;
+  }
+
+  .btn-next:hover {
+    background: rgba(78,201,245,0.08);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .score-screen {
+    text-align: center;
+    padding: 10px 0 10px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 80px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 16px 0 8px;
+  }
+
+  .score-label {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .score-emoji { font-size: 36px; margin-bottom: 4px; }
+
+  .score-msg {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .score-detail {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .review-list {
+    text-align: left;
+    margin-bottom: 28px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .review-list::-webkit-scrollbar { width: 5px; }
+  .review-list::-webkit-scrollbar-track { background: var(--surface2); border-radius: 10px; }
+  .review-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  .review-item {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid transparent;
+    font-size: 13px;
+  }
+
+  .review-item.ok { border-left-color: var(--green); }
+  .review-item.ko { border-left-color: var(--red); }
+
+  .review-french { color: var(--muted); margin-bottom: 3px; }
+  .review-answer { color: var(--text); font-weight: 500; }
+  .review-correct { color: var(--green); font-size: 12px; margin-top: 2px; }
+
+  .btn-restart {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0e0f14;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 36px;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-restart:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  .verb-ref {
+    max-width: 620px;
+    width: 100%;
+    margin-top: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 24px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .verb-ref-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .verb-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verb-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  @keyframes shake {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(4px); }
+    30%, 50%, 70% { transform: translateX(-5px); }
+    40%, 60% { transform: translateX(5px); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Anglais · CAP Sapver · 1ère année</div>
+  <h1>Le <span>Prétérit</span><br>Simple</h1>
+  <p class="subtitle">Traduis les phrases en anglais — 5 questions, 1 score</p>
+</header>
+
+<div class="card" id="mainCard">
+  <div id="quizView">
+    <div class="progress-label">
+      <span id="progressText">Question 1 / 5</span>
+      <span id="scoreText">Score : 0</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:20%"></div>
+    </div>
+
+    <div class="question-num" id="questionNum">QUESTION 1</div>
+    <div class="french-sentence" id="frenchSentence"></div>
+    <div class="hint" id="hint"></div>
+
+    <div class="input-wrap">
+      <input type="text" id="answerInput" placeholder="Tape ta traduction ici…" autocomplete="off" />
+      <button class="btn-submit" id="btnSubmit">OK</button>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-title" id="fbTitle"></div>
+      <div class="answer-shown" id="fbAnswer"></div>
+      <div class="explanation" id="fbExplanation"></div>
+    </div>
+
+    <button class="btn-next" id="btnNext">Phrase suivante →</button>
+  </div>
+
+  <div id="scoreView" style="display:none">
+    <div class="score-screen">
+      <div class="score-emoji" id="scoreEmoji">🎉</div>
+      <div class="score-big" id="scoreBig">—</div>
+      <div class="score-label">sur 5</div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-detail" id="scoreDetail"></div>
+      <div class="review-list" id="reviewList"></div>
+      <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+    </div>
+  </div>
+</div>
+
+<div class="verb-ref">
+  <div class="verb-ref-title">Verbes au programme</div>
+  <div class="verb-grid">
+    <div class="verb-chip">help <span>helped</span></div>
+    <div class="verb-chip">go <span>went</span></div>
+    <div class="verb-chip">work <span>worked</span></div>
+    <div class="verb-chip">teach <span>taught</span></div>
+    <div class="verb-chip">start <span>started</span></div>
+    <div class="verb-chip">give <span>gave</span></div>
+    <div class="verb-chip">talk <span>talked</span></div>
+    <div class="verb-chip">be <span>was / were</span></div>
+    <div class="verb-chip">organise <span>organised</span></div>
+    <div class="verb-chip">sell <span>sold</span></div>
+    <div class="verb-chip">handle <span>handled</span></div>
+    <div class="verb-chip">spend <span>spent</span></div>
+    <div class="verb-chip">improve <span>improved</span></div>
+    <div class="verb-chip">build <span>built</span></div>
+    <div class="verb-chip">join <span>joined</span></div>
+    <div class="verb-chip">learn <span>learnt / learned</span></div>
+    <div class="verb-chip">prepare <span>prepared</span></div>
+    <div class="verb-chip">have <span>had</span></div>
+  </div>
+</div>
+
+<script>
+const allQuestions = [
+
+  // ══════════════════════════════════════════════════
+  //  NÉGATIVES
+  // ══════════════════════════════════════════════════
+
+  // help
+  { fr: "Je n'ai pas aidé le client.", hint: "le client = the customer",
+    answers: ["i did not help the customer","i didnt help the customer"],
+    correct: "I did not help the customer. / I didn't help the customer.",
+    explanation: "<strong>Négation au prétérit</strong> : did not / didn't + <strong>base verbale</strong>. On garde help, jamais helped." },
+
+  { fr: "Elle n'a pas aidé la vendeuse.", hint: "la vendeuse = the saleswoman",
+    answers: ["she did not help the saleswoman","she didnt help the saleswoman"],
+    correct: "She did not help the saleswoman. / She didn't help the saleswoman.",
+    explanation: "<strong>did not / didn't + base verbale</strong>. Même règle pour she." },
+
+  { fr: "Nous n'avons pas aidé les personnes âgées.", hint: "les personnes âgées = the elderly people",
+    answers: ["we did not help the elderly people","we didnt help the elderly people"],
+    correct: "We did not help the elderly people. / We didn't help the elderly people.",
+    explanation: "<strong>did not / didn't + base verbale</strong>. La négation ne change pas selon le sujet." },
+
+  // go
+  { fr: "Je ne suis pas allé(e) en magasin.", hint: "en magasin = to the shop",
+    answers: ["i did not go to the shop","i didnt go to the shop"],
+    correct: "I did not go to the shop. / I didn't go to the shop.",
+    explanation: "<strong>go → went</strong> au prétérit affirmatif, mais à la <strong>négation</strong> : did not + base verbale → <em>go</em>." },
+
+  { fr: "Il n'est pas allé au rayon vêtements.", hint: "au rayon vêtements = to the clothing section",
+    answers: ["he did not go to the clothing section","he didnt go to the clothing section"],
+    correct: "He did not go to the clothing section. / He didn't go to the clothing section.",
+    explanation: "<strong>did not / didn't + go</strong> (base verbale, pas went)." },
+
+  { fr: "Ils ne sont pas allés au travail.", hint: "au travail = to work",
+    answers: ["they did not go to work","they didnt go to work"],
+    correct: "They did not go to work. / They didn't go to work.",
+    explanation: "<strong>did not / didn't + go</strong> (base verbale)." },
+
+  // work
+  { fr: "Il n'a pas travaillé le week-end.", hint: "le week-end = at the weekend",
+    answers: ["he did not work at the weekend","he didnt work at the weekend"],
+    correct: "He did not work at the weekend. / He didn't work at the weekend.",
+    explanation: "<strong>work → worked</strong> au prétérit affirmatif, mais <strong>did not + work</strong> à la négation." },
+
+  { fr: "Nous n'avons pas travaillé en équipe.", hint: "en équipe = as a team",
+    answers: ["we did not work as a team","we didnt work as a team"],
+    correct: "We did not work as a team. / We didn't work as a team.",
+    explanation: "<strong>did not / didn't + work</strong> (base verbale)." },
+
+  { fr: "Elle n'a pas travaillé à la caisse.", hint: "à la caisse = at the till",
+    answers: ["she did not work at the till","she didnt work at the till"],
+    correct: "She did not work at the till. / She didn't work at the till.",
+    explanation: "<strong>did not / didn't + work</strong>. <em>Till</em> = caisse enregistreuse." },
+
+  // teach
+  { fr: "Il n'a pas enseigné le bon geste.", hint: "le bon geste = the right technique",
+    answers: ["he did not teach the right technique","he didnt teach the right technique"],
+    correct: "He did not teach the right technique. / He didn't teach the right technique.",
+    explanation: "<strong>teach → taught</strong> (irrégulier), mais <strong>did not + teach</strong> à la négation." },
+
+  { fr: "Le tuteur n'a pas enseigné les règles.", hint: "le tuteur = the trainer / les règles = the rules",
+    answers: ["the trainer did not teach the rules","the trainer didnt teach the rules"],
+    correct: "The trainer did not teach the rules. / The trainer didn't teach the rules.",
+    explanation: "<strong>did not / didn't + teach</strong> (base verbale)." },
+
+  // start
+  { fr: "Je n'ai pas commencé à temps.", hint: "à temps = on time",
+    answers: ["i did not start on time","i didnt start on time"],
+    correct: "I did not start on time. / I didn't start on time.",
+    explanation: "<strong>did not / didn't + start</strong> (base verbale)." },
+
+  { fr: "Elle n'a pas commencé la formation.", hint: "la formation = the training",
+    answers: ["she did not start the training","she didnt start the training"],
+    correct: "She did not start the training. / She didn't start the training.",
+    explanation: "<strong>did not / didn't + start</strong>. <em>Training</em> = formation." },
+
+  { fr: "Nous n'avons pas commencé le rangement.", hint: "le rangement = the tidying",
+    answers: ["we did not start the tidying","we didnt start the tidying"],
+    correct: "We did not start the tidying. / We didn't start the tidying.",
+    explanation: "<strong>did not / didn't + start</strong>." },
+
+  // give
+  { fr: "Il n'a pas donné le reçu.", hint: "le reçu = the receipt",
+    answers: ["he did not give the receipt","he didnt give the receipt"],
+    correct: "He did not give the receipt. / He didn't give the receipt.",
+    explanation: "<strong>give → gave</strong> (irrégulier), mais <strong>did not + give</strong> à la négation." },
+
+  { fr: "Je n'ai pas donné les bons conseils.", hint: "les conseils = the advice",
+    answers: ["i did not give the right advice","i didnt give the right advice"],
+    correct: "I did not give the right advice. / I didn't give the right advice.",
+    explanation: "<strong>did not / didn't + give</strong>. <em>Advice</em> est indénombrable en anglais." },
+
+  // talk
+  { fr: "Je n'ai pas parlé au directeur.", hint: "au directeur = to the manager",
+    answers: ["i did not talk to the manager","i didnt talk to the manager"],
+    correct: "I did not talk to the manager. / I didn't talk to the manager.",
+    explanation: "<strong>did not / didn't + talk</strong>. On dit <em>talk to</em> quelqu'un." },
+
+  { fr: "Elle n'a pas parlé aux clients.", hint: "aux clients = to the customers",
+    answers: ["she did not talk to the customers","she didnt talk to the customers"],
+    correct: "She did not talk to the customers. / She didn't talk to the customers.",
+    explanation: "<strong>did not / didn't + talk</strong> (base verbale)." },
+
+  // be
+  { fr: "Je n'étais pas disponible.", hint: "disponible = available",
+    answers: ["i was not available","i wasnt available"],
+    correct: "I was not available. / I wasn't available.",
+    explanation: "<strong>be → was / were</strong>. La négation de <em>was</em> : <strong>was not / wasn't</strong>. Pas de did." },
+
+  { fr: "Il n'était pas en uniforme.", hint: "en uniforme = in uniform",
+    answers: ["he was not in uniform","he wasnt in uniform"],
+    correct: "He was not in uniform. / He wasn't in uniform.",
+    explanation: "<strong>was not / wasn't</strong> (négation de be au prétérit, sans did)." },
+
+  { fr: "Nous n'étions pas en retard.", hint: "en retard = late",
+    answers: ["we were not late","we werent late"],
+    correct: "We were not late. / We weren't late.",
+    explanation: "<strong>were not / weren't</strong> pour we/they/you au prétérit négatif de be." },
+
+  // organise
+  { fr: "Il n'a pas organisé la vitrine.", hint: "la vitrine = the window display",
+    answers: ["he did not organise the window display","he didnt organise the window display","he did not organize the window display","he didnt organize the window display"],
+    correct: "He did not organise the window display. / He didn't organise it.",
+    explanation: "<strong>did not / didn't + organise</strong> (base verbale)." },
+
+  { fr: "Nous n'avons pas organisé le stock.", hint: "le stock = the stock",
+    answers: ["we did not organise the stock","we didnt organise the stock","we did not organize the stock","we didnt organize the stock"],
+    correct: "We did not organise the stock. / We didn't organise the stock.",
+    explanation: "<strong>did not / didn't + organise</strong>." },
+
+  // sell
+  { fr: "Il n'a pas vendu les pantalons.", hint: "les pantalons = the trousers",
+    answers: ["he did not sell the trousers","he didnt sell the trousers"],
+    correct: "He did not sell the trousers. / He didn't sell the trousers.",
+    explanation: "<strong>sell → sold</strong> (irrégulier), mais <strong>did not + sell</strong> à la négation." },
+
+  { fr: "Je n'ai pas vendu de vêtements.", hint: "de vêtements = any clothes",
+    answers: ["i did not sell any clothes","i didnt sell any clothes"],
+    correct: "I did not sell any clothes. / I didn't sell any clothes.",
+    explanation: "<strong>did not / didn't + sell</strong>. On utilise <em>any</em> à la négation." },
+
+  // handle
+  { fr: "Il n'a pas géré la réclamation.", hint: "la réclamation = the complaint",
+    answers: ["he did not handle the complaint","he didnt handle the complaint"],
+    correct: "He did not handle the complaint. / He didn't handle the complaint.",
+    explanation: "<strong>did not / didn't + handle</strong> (base verbale). <em>Handle</em> = gérer." },
+
+  { fr: "Elle n'a pas géré la caisse.", hint: "la caisse = the till",
+    answers: ["she did not handle the till","she didnt handle the till"],
+    correct: "She did not handle the till. / She didn't handle the till.",
+    explanation: "<strong>did not / didn't + handle</strong>." },
+
+  // spend
+  { fr: "Je n'ai pas passé la journée au magasin.", hint: "la journée = the day / au magasin = at the shop",
+    answers: ["i did not spend the day at the shop","i didnt spend the day at the shop"],
+    correct: "I did not spend the day at the shop. / I didn't spend the day at the shop.",
+    explanation: "<strong>spend → spent</strong> (irrégulier), mais <strong>did not + spend</strong> à la négation." },
+
+  { fr: "Ils n'ont pas passé beaucoup de temps en rayon.", hint: "en rayon = on the shop floor",
+    answers: ["they did not spend much time on the shop floor","they didnt spend much time on the shop floor"],
+    correct: "They did not spend much time on the shop floor. / They didn't spend much time on the shop floor.",
+    explanation: "<strong>did not / didn't + spend</strong>. <em>Much time</em> = beaucoup de temps." },
+
+  // improve
+  { fr: "Elle n'a pas amélioré son accueil.", hint: "son accueil = her customer service",
+    answers: ["she did not improve her customer service","she didnt improve her customer service"],
+    correct: "She did not improve her customer service. / She didn't improve her customer service.",
+    explanation: "<strong>did not / didn't + improve</strong> (base verbale)." },
+
+  { fr: "Nous n'avons pas amélioré nos ventes.", hint: "nos ventes = our sales",
+    answers: ["we did not improve our sales","we didnt improve our sales"],
+    correct: "We did not improve our sales. / We didn't improve our sales.",
+    explanation: "<strong>did not / didn't + improve</strong>." },
+
+  // build
+  { fr: "Il n'a pas construit une bonne relation avec les clients.", hint: "une bonne relation = a good relationship",
+    answers: ["he did not build a good relationship with the customers","he didnt build a good relationship with the customers"],
+    correct: "He did not build a good relationship with the customers.",
+    explanation: "<strong>build → built</strong> (irrégulier), mais <strong>did not + build</strong> à la négation." },
+
+  // join
+  { fr: "Je n'ai pas rejoint l'équipe.", hint: "l'équipe = the team",
+    answers: ["i did not join the team","i didnt join the team"],
+    correct: "I did not join the team. / I didn't join the team.",
+    explanation: "<strong>did not / didn't + join</strong> (base verbale). <em>Join</em> = rejoindre." },
+
+  { fr: "Il n'a pas rejoint le magasin l'année dernière.", hint: "l'année dernière = last year",
+    answers: ["he did not join the shop last year","he didnt join the shop last year"],
+    correct: "He did not join the shop last year. / He didn't join the shop last year.",
+    explanation: "<strong>did not / didn't + join</strong>." },
+
+  // learn
+  { fr: "Je n'ai pas appris les tailles.", hint: "les tailles = the sizes",
+    answers: ["i did not learn the sizes","i didnt learn the sizes"],
+    correct: "I did not learn the sizes. / I didn't learn the sizes.",
+    explanation: "<strong>did not / didn't + learn</strong> (base verbale)." },
+
+  { fr: "Ils n'ont pas appris les gestes professionnels.", hint: "les gestes professionnels = the professional techniques",
+    answers: ["they did not learn the professional techniques","they didnt learn the professional techniques"],
+    correct: "They did not learn the professional techniques. / They didn't learn the professional techniques.",
+    explanation: "<strong>did not / didn't + learn</strong>." },
+
+  // prepare
+  { fr: "Elle n'a pas préparé la commande.", hint: "la commande = the order",
+    answers: ["she did not prepare the order","she didnt prepare the order"],
+    correct: "She did not prepare the order. / She didn't prepare the order.",
+    explanation: "<strong>did not / didn't + prepare</strong> (base verbale)." },
+
+  { fr: "Nous n'avons pas préparé les cabines.", hint: "les cabines = the fitting rooms",
+    answers: ["we did not prepare the fitting rooms","we didnt prepare the fitting rooms"],
+    correct: "We did not prepare the fitting rooms. / We didn't prepare the fitting rooms.",
+    explanation: "<strong>did not / didn't + prepare</strong>." },
+
+  // have
+  { fr: "Je n'ai pas eu de pause.", hint: "de pause = a break",
+    answers: ["i did not have a break","i didnt have a break"],
+    correct: "I did not have a break. / I didn't have a break.",
+    explanation: "<strong>have → had</strong> (irrégulier), mais <strong>did not + have</strong> à la négation." },
+
+  { fr: "Il n'avait pas d'expérience.", hint: "d'expérience = any experience",
+    answers: ["he did not have any experience","he didnt have any experience"],
+    correct: "He did not have any experience. / He didn't have any experience.",
+    explanation: "<strong>did not / didn't + have</strong>. On utilise <em>any</em> à la négation." },
+
+  // ══════════════════════════════════════════════════
+  //  INTERROGATIVES
+  // ══════════════════════════════════════════════════
+
+  // help
+  { fr: "As-tu aidé la cliente ?", hint: "la cliente = the customer",
+    answers: ["did you help the customer","did you help the customer?","did you help the customer ?"],
+    correct: "Did you help the customer?",
+    explanation: "<strong>Did + sujet + base verbale ?</strong> On garde help, pas helped." },
+
+  { fr: "A-t-elle aidé les personnes âgées ?", hint: "les personnes âgées = the elderly people",
+    answers: ["did she help the elderly people","did she help the elderly people?","did she help the elderly people ?"],
+    correct: "Did she help the elderly people?",
+    explanation: "<strong>Did + she + help ?</strong> Base verbale après Did." },
+
+  { fr: "T'ont-ils aidé au rayon ?", hint: "au rayon = on the shop floor",
+    answers: ["did they help you on the shop floor","did they help you on the shop floor?","did they help you on the shop floor ?"],
+    correct: "Did they help you on the shop floor?",
+    explanation: "<strong>Did + they + help ?</strong> Base verbale après Did." },
+
+  // go
+  { fr: "Est-il allé en réserve ?", hint: "en réserve = to the stockroom",
+    answers: ["did he go to the stockroom","did he go to the stockroom?","did he go to the stockroom ?"],
+    correct: "Did he go to the stockroom?",
+    explanation: "<strong>Did + he + go ?</strong> On garde <em>go</em> (base verbale), pas went." },
+
+  { fr: "Êtes-vous allés en formation ?", hint: "en formation = to the training",
+    answers: ["did you go to the training","did you go to the training?","did you go to the training ?"],
+    correct: "Did you go to the training?",
+    explanation: "<strong>Did + you + go ?</strong> Base verbale après Did." },
+
+  // work
+  { fr: "A-t-il travaillé en boutique ?", hint: "en boutique = in the shop",
+    answers: ["did he work in the shop","did he work in the shop?","did he work in the shop ?"],
+    correct: "Did he work in the shop?",
+    explanation: "<strong>Did + he + work ?</strong> Base verbale après Did, pas worked." },
+
+  { fr: "Avez-vous travaillé le samedi ?", hint: "le samedi = on Saturdays",
+    answers: ["did you work on saturdays","did you work on saturdays?","did you work on saturdays ?"],
+    correct: "Did you work on Saturdays?",
+    explanation: "<strong>Did + you + work ?</strong> Base verbale." },
+
+  // teach
+  { fr: "Vous a-t-on enseigné les techniques de vente ?", hint: "les techniques de vente = the sales techniques",
+    answers: ["did they teach you the sales techniques","did they teach you the sales techniques?","did they teach you the sales techniques ?"],
+    correct: "Did they teach you the sales techniques?",
+    explanation: "<strong>Did + they + teach ?</strong> Base verbale (irrégulier mais base verbale à l'interrogatif)." },
+
+  { fr: "Le formateur a-t-il enseigné les gestes ?", hint: "le formateur = the trainer / les gestes = the techniques",
+    answers: ["did the trainer teach the techniques","did the trainer teach the techniques?","did the trainer teach the techniques ?"],
+    correct: "Did the trainer teach the techniques?",
+    explanation: "<strong>Did + sujet + teach ?</strong> Base verbale après Did." },
+
+  // start
+  { fr: "As-tu commencé le stage l'année dernière ?", hint: "le stage = the internship / l'année dernière = last year",
+    answers: ["did you start the internship last year","did you start the internship last year?","did you start the internship last year ?"],
+    correct: "Did you start the internship last year?",
+    explanation: "<strong>Did + you + start ?</strong> Base verbale après Did." },
+
+  { fr: "Ont-ils commencé le rangement ?", hint: "le rangement = the tidying",
+    answers: ["did they start the tidying","did they start the tidying?","did they start the tidying ?"],
+    correct: "Did they start the tidying?",
+    explanation: "<strong>Did + they + start ?</strong> Base verbale." },
+
+  // give
+  { fr: "A-t-il donné le bon de réduction ?", hint: "le bon de réduction = the voucher",
+    answers: ["did he give the voucher","did he give the voucher?","did he give the voucher ?"],
+    correct: "Did he give the voucher?",
+    explanation: "<strong>Did + he + give ?</strong> Base verbale (give, pas gave)." },
+
+  { fr: "Leur avez-vous donné les consignes ?", hint: "les consignes = the instructions",
+    answers: ["did you give them the instructions","did you give them the instructions?","did you give them the instructions ?"],
+    correct: "Did you give them the instructions?",
+    explanation: "<strong>Did + you + give ?</strong> Base verbale après Did." },
+
+  // talk
+  { fr: "As-tu parlé au responsable ?", hint: "au responsable = to the supervisor",
+    answers: ["did you talk to the supervisor","did you talk to the supervisor?","did you talk to the supervisor ?"],
+    correct: "Did you talk to the supervisor?",
+    explanation: "<strong>Did + you + talk ?</strong> On dit <em>talk to</em>." },
+
+  { fr: "A-t-elle parlé aux fournisseurs ?", hint: "aux fournisseurs = to the suppliers",
+    answers: ["did she talk to the suppliers","did she talk to the suppliers?","did she talk to the suppliers ?"],
+    correct: "Did she talk to the suppliers?",
+    explanation: "<strong>Did + she + talk ?</strong> Base verbale après Did." },
+
+  // be
+  { fr: "Était-il en uniforme ?", hint: "en uniforme = in uniform",
+    answers: ["was he in uniform","was he in uniform?","was he in uniform ?"],
+    correct: "Was he in uniform?",
+    explanation: "<strong>Was / Were + sujet ?</strong> On inverse be et le sujet. Pas de Did avec be." },
+
+  { fr: "Étais-tu satisfait(e) du travail ?", hint: "satisfait(e) = happy / du travail = with the job",
+    answers: ["were you happy with the job","were you happy with the job?","were you happy with the job ?"],
+    correct: "Were you happy with the job?",
+    explanation: "<strong>Were + you ?</strong> Inversion de be (were) et du sujet." },
+
+  { fr: "Étiez-vous disponibles ce matin ?", hint: "ce matin = this morning",
+    answers: ["were you available this morning","were you available this morning?","were you available this morning ?"],
+    correct: "Were you available this morning?",
+    explanation: "<strong>Were + you ?</strong> Inversion pour l'interrogatif avec be." },
+
+  // organise
+  { fr: "A-t-il organisé la vitrine ?", hint: "la vitrine = the window display",
+    answers: ["did he organise the window display","did he organise the window display?","did he organise the window display ?","did he organize the window display","did he organize the window display?","did he organize the window display ?"],
+    correct: "Did he organise the window display?",
+    explanation: "<strong>Did + he + organise ?</strong> Base verbale après Did." },
+
+  { fr: "Ont-ils organisé le rayon vêtements ?", hint: "le rayon vêtements = the clothing section",
+    answers: ["did they organise the clothing section","did they organise the clothing section?","did they organise the clothing section ?","did they organize the clothing section","did they organize the clothing section?","did they organize the clothing section ?"],
+    correct: "Did they organise the clothing section?",
+    explanation: "<strong>Did + they + organise ?</strong> Base verbale." },
+
+  // sell
+  { fr: "As-tu vendu des chaussures ?", hint: "des chaussures = any shoes",
+    answers: ["did you sell any shoes","did you sell any shoes?","did you sell any shoes ?","did you sell shoes","did you sell shoes?","did you sell shoes ?"],
+    correct: "Did you sell any shoes?",
+    explanation: "<strong>Did + you + sell ?</strong> On peut utiliser <em>any</em> à l'interrogatif." },
+
+  { fr: "A-t-elle vendu les manteaux ?", hint: "les manteaux = the coats",
+    answers: ["did she sell the coats","did she sell the coats?","did she sell the coats ?"],
+    correct: "Did she sell the coats?",
+    explanation: "<strong>Did + she + sell ?</strong> Base verbale (sell, pas sold)." },
+
+  // handle
+  { fr: "A-t-il géré la réclamation ?", hint: "la réclamation = the complaint",
+    answers: ["did he handle the complaint","did he handle the complaint?","did he handle the complaint ?"],
+    correct: "Did he handle the complaint?",
+    explanation: "<strong>Did + he + handle ?</strong> Base verbale après Did." },
+
+  { fr: "Avez-vous géré les retours ?", hint: "les retours = the returns",
+    answers: ["did you handle the returns","did you handle the returns?","did you handle the returns ?"],
+    correct: "Did you handle the returns?",
+    explanation: "<strong>Did + you + handle ?</strong> <em>Returns</em> = retours produits." },
+
+  // spend
+  { fr: "As-tu passé la journée en rayon ?", hint: "en rayon = on the shop floor",
+    answers: ["did you spend the day on the shop floor","did you spend the day on the shop floor?","did you spend the day on the shop floor ?"],
+    correct: "Did you spend the day on the shop floor?",
+    explanation: "<strong>Did + you + spend ?</strong> Base verbale (spend, pas spent)." },
+
+  // improve
+  { fr: "A-t-elle amélioré ses compétences ?", hint: "ses compétences = her skills",
+    answers: ["did she improve her skills","did she improve her skills?","did she improve her skills ?"],
+    correct: "Did she improve her skills?",
+    explanation: "<strong>Did + she + improve ?</strong> Base verbale après Did." },
+
+  { fr: "Avez-vous amélioré le service client ?", hint: "le service client = the customer service",
+    answers: ["did you improve the customer service","did you improve the customer service?","did you improve the customer service ?"],
+    correct: "Did you improve the customer service?",
+    explanation: "<strong>Did + you + improve ?</strong> Base verbale." },
+
+  // build
+  { fr: "A-t-il construit une bonne relation avec l'équipe ?", hint: "l'équipe = the team",
+    answers: ["did he build a good relationship with the team","did he build a good relationship with the team?","did he build a good relationship with the team ?"],
+    correct: "Did he build a good relationship with the team?",
+    explanation: "<strong>Did + he + build ?</strong> Base verbale (build, pas built)." },
+
+  // join
+  { fr: "As-tu rejoint l'équipe ?", hint: "l'équipe = the team",
+    answers: ["did you join the team","did you join the team?","did you join the team ?"],
+    correct: "Did you join the team?",
+    explanation: "<strong>Did + you + join ?</strong> Base verbale après Did." },
+
+  { fr: "Ont-ils rejoint le groupe ?", hint: "le groupe = the group",
+    answers: ["did they join the group","did they join the group?","did they join the group ?"],
+    correct: "Did they join the group?",
+    explanation: "<strong>Did + they + join ?</strong> Base verbale." },
+
+  // learn
+  { fr: "Avez-vous appris les tailles ?", hint: "les tailles = the sizes",
+    answers: ["did you learn the sizes","did you learn the sizes?","did you learn the sizes ?"],
+    correct: "Did you learn the sizes?",
+    explanation: "<strong>Did + you + learn ?</strong> Base verbale après Did." },
+
+  { fr: "A-t-elle appris les gestes professionnels ?", hint: "les gestes professionnels = the professional techniques",
+    answers: ["did she learn the professional techniques","did she learn the professional techniques?","did she learn the professional techniques ?"],
+    correct: "Did she learn the professional techniques?",
+    explanation: "<strong>Did + she + learn ?</strong> Base verbale." },
+
+  // prepare
+  { fr: "As-tu préparé la commande ?", hint: "la commande = the order",
+    answers: ["did you prepare the order","did you prepare the order?","did you prepare the order ?"],
+    correct: "Did you prepare the order?",
+    explanation: "<strong>Did + you + prepare ?</strong> Base verbale après Did." },
+
+  { fr: "Ont-ils préparé les cabines d'essayage ?", hint: "les cabines d'essayage = the fitting rooms",
+    answers: ["did they prepare the fitting rooms","did they prepare the fitting rooms?","did they prepare the fitting rooms ?"],
+    correct: "Did they prepare the fitting rooms?",
+    explanation: "<strong>Did + they + prepare ?</strong> Base verbale." },
+
+  // have
+  { fr: "As-tu eu une formation ?", hint: "une formation = a training session",
+    answers: ["did you have a training session","did you have a training session?","did you have a training session ?"],
+    correct: "Did you have a training session?",
+    explanation: "<strong>Did + you + have ?</strong> Base verbale (have, pas had)." },
+
+  { fr: "A-t-il eu une pause à midi ?", hint: "à midi = at lunchtime",
+    answers: ["did he have a break at lunchtime","did he have a break at lunchtime?","did he have a break at lunchtime ?"],
+    correct: "Did he have a break at lunchtime?",
+    explanation: "<strong>Did + he + have ?</strong> Base verbale après Did." },
+
+  // ══════════════════════════════════════════════════
+  //  AFFIRMATIVES
+  // ══════════════════════════════════════════════════
+
+  // help
+  { fr: "Tu as aidé ta collègue.", hint: "ta collègue = your colleague",
+    answers: ["you helped your colleague"],
+    correct: "You helped your colleague.",
+    explanation: "<strong>help → helped</strong> (régulier, + -ed). Prétérit affirmatif : sujet + verbe en -ed." },
+
+  { fr: "Il a aidé le client.", hint: "le client = the customer",
+    answers: ["he helped the customer"],
+    correct: "He helped the customer.",
+    explanation: "<strong>help → helped</strong> (régulier). Prétérit affirmatif." },
+
+  { fr: "Nous avons aidé les personnes âgées.", hint: "les personnes âgées = the elderly people",
+    answers: ["we helped the elderly people"],
+    correct: "We helped the elderly people.",
+    explanation: "<strong>help → helped</strong>. Même forme pour tous les sujets." },
+
+  // go
+  { fr: "Je suis allé(e) en réserve.", hint: "en réserve = to the stockroom",
+    answers: ["i went to the stockroom"],
+    correct: "I went to the stockroom.",
+    explanation: "<strong>go → went</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Elle est allée au rayon vêtements.", hint: "au rayon vêtements = to the clothing section",
+    answers: ["she went to the clothing section"],
+    correct: "She went to the clothing section.",
+    explanation: "<strong>go → went</strong>. Même forme pour he/she." },
+
+  { fr: "Nous sommes allés en formation.", hint: "en formation = to the training",
+    answers: ["we went to the training"],
+    correct: "We went to the training.",
+    explanation: "<strong>go → went</strong> (irrégulier, même forme au pluriel)." },
+
+  // work
+  { fr: "J'ai travaillé à la caisse.", hint: "à la caisse = at the till",
+    answers: ["i worked at the till"],
+    correct: "I worked at the till.",
+    explanation: "<strong>work → worked</strong> (régulier, + -ed)." },
+
+  { fr: "Il a travaillé en boutique.", hint: "en boutique = in the shop",
+    answers: ["he worked in the shop"],
+    correct: "He worked in the shop.",
+    explanation: "<strong>work → worked</strong> (régulier)." },
+
+  { fr: "Nous avons travaillé en équipe.", hint: "en équipe = as a team",
+    answers: ["we worked as a team"],
+    correct: "We worked as a team.",
+    explanation: "<strong>work → worked</strong> (+ -ed). Même forme pour tous les sujets." },
+
+  // teach
+  { fr: "Le formateur a enseigné les gestes.", hint: "le formateur = the trainer / les gestes = the techniques",
+    answers: ["the trainer taught the techniques"],
+    correct: "The trainer taught the techniques.",
+    explanation: "<strong>teach → taught</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Elle a enseigné les règles de sécurité.", hint: "les règles de sécurité = the safety rules",
+    answers: ["she taught the safety rules"],
+    correct: "She taught the safety rules.",
+    explanation: "<strong>teach → taught</strong> (irrégulier)." },
+
+  // start
+  { fr: "J'ai commencé l'année dernière.", hint: "l'année dernière = last year",
+    answers: ["i started last year"],
+    correct: "I started last year.",
+    explanation: "<strong>start → started</strong> (régulier, + -ed)." },
+
+  { fr: "Elle a commencé la formation.", hint: "la formation = the training",
+    answers: ["she started the training"],
+    correct: "She started the training.",
+    explanation: "<strong>start → started</strong> (régulier)." },
+
+  { fr: "Nous avons commencé le rangement.", hint: "le rangement = the tidying",
+    answers: ["we started the tidying"],
+    correct: "We started the tidying.",
+    explanation: "<strong>start → started</strong> (+ -ed). Même forme pour tous les sujets." },
+
+  // give
+  { fr: "Il a donné le reçu.", hint: "le reçu = the receipt",
+    answers: ["he gave the receipt"],
+    correct: "He gave the receipt.",
+    explanation: "<strong>give → gave</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "J'ai donné les bons conseils.", hint: "les conseils = the advice",
+    answers: ["i gave the right advice"],
+    correct: "I gave the right advice.",
+    explanation: "<strong>give → gave</strong> (irrégulier)." },
+
+  { fr: "Nous avons donné les consignes.", hint: "les consignes = the instructions",
+    answers: ["we gave the instructions"],
+    correct: "We gave the instructions.",
+    explanation: "<strong>give → gave</strong>. Même forme pour tous les sujets." },
+
+  // talk
+  { fr: "J'ai parlé au responsable.", hint: "au responsable = to the supervisor",
+    answers: ["i talked to the supervisor"],
+    correct: "I talked to the supervisor.",
+    explanation: "<strong>talk → talked</strong> (régulier, + -ed). On dit <em>talk to</em>." },
+
+  { fr: "Elle a parlé aux clients.", hint: "aux clients = to the customers",
+    answers: ["she talked to the customers"],
+    correct: "She talked to the customers.",
+    explanation: "<strong>talk → talked</strong> (+ -ed)." },
+
+  { fr: "Ils ont parlé aux fournisseurs.", hint: "aux fournisseurs = to the suppliers",
+    answers: ["they talked to the suppliers"],
+    correct: "They talked to the suppliers.",
+    explanation: "<strong>talk → talked</strong> (régulier, même forme pour they)." },
+
+  // be
+  { fr: "J'étais disponible.", hint: "disponible = available",
+    answers: ["i was available"],
+    correct: "I was available.",
+    explanation: "<strong>be → was</strong> pour I/he/she. Prétérit affirmatif, pas d'auxiliaire did." },
+
+  { fr: "Il était en uniforme.", hint: "en uniforme = in uniform",
+    answers: ["he was in uniform"],
+    correct: "He was in uniform.",
+    explanation: "<strong>be → was</strong> pour he/she/it." },
+
+  { fr: "Nous étions en retard.", hint: "en retard = late",
+    answers: ["we were late"],
+    correct: "We were late.",
+    explanation: "<strong>be → were</strong> pour we/they/you au prétérit." },
+
+  { fr: "J'étais content(e).", hint: "",
+    answers: ["i was happy","i was pleased","i was content"],
+    correct: "I was happy. / I was pleased.",
+    explanation: "<strong>be → was</strong> pour I. <em>Happy</em> ou <em>pleased</em> = content(e)." },
+
+  // organise
+  { fr: "Ils ont organisé mon anniversaire.", hint: "mon anniversaire = my birthday",
+    answers: ["they organised my birthday","they organized my birthday"],
+    correct: "They organised my birthday. / They organized my birthday.",
+    explanation: "<strong>organise → organised</strong> (régulier, + -d car finit en -e)." },
+
+  { fr: "Il a organisé la vitrine.", hint: "la vitrine = the window display",
+    answers: ["he organised the window display","he organized the window display"],
+    correct: "He organised the window display. / He organized the window display.",
+    explanation: "<strong>organise → organised</strong> (+ -d)." },
+
+  { fr: "Nous avons organisé le stock.", hint: "le stock = the stock",
+    answers: ["we organised the stock","we organized the stock"],
+    correct: "We organised the stock. / We organized the stock.",
+    explanation: "<strong>organise → organised</strong>. Même forme pour tous les sujets." },
+
+  // sell
+  { fr: "J'ai vendu des chaussures.", hint: "des chaussures = some shoes",
+    answers: ["i sold some shoes","i sold shoes"],
+    correct: "I sold some shoes. / I sold shoes.",
+    explanation: "<strong>sell → sold</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Elle a vendu les manteaux.", hint: "les manteaux = the coats",
+    answers: ["she sold the coats"],
+    correct: "She sold the coats.",
+    explanation: "<strong>sell → sold</strong> (irrégulier)." },
+
+  { fr: "Ils ont vendu beaucoup de vêtements.", hint: "beaucoup de vêtements = a lot of clothes",
+    answers: ["they sold a lot of clothes"],
+    correct: "They sold a lot of clothes.",
+    explanation: "<strong>sell → sold</strong>. Même forme pour they." },
+
+  // handle
+  { fr: "Il a géré la réclamation.", hint: "la réclamation = the complaint",
+    answers: ["he handled the complaint"],
+    correct: "He handled the complaint.",
+    explanation: "<strong>handle → handled</strong> (régulier, + -d). <em>Handle</em> = gérer." },
+
+  { fr: "J'ai géré les retours.", hint: "les retours = the returns",
+    answers: ["i handled the returns"],
+    correct: "I handled the returns.",
+    explanation: "<strong>handle → handled</strong> (+ -d car finit en -e)." },
+
+  { fr: "Elle a géré la caisse.", hint: "la caisse = the till",
+    answers: ["she handled the till"],
+    correct: "She handled the till.",
+    explanation: "<strong>handle → handled</strong> (régulier)." },
+
+  // spend
+  { fr: "J'ai passé la journée en magasin.", hint: "la journée = the day / en magasin = at the shop",
+    answers: ["i spent the day at the shop"],
+    correct: "I spent the day at the shop.",
+    explanation: "<strong>spend → spent</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Nous avons passé la journée au rayon.", hint: "au rayon = on the shop floor",
+    answers: ["we spent the day on the shop floor"],
+    correct: "We spent the day on the shop floor.",
+    explanation: "<strong>spend → spent</strong> (irrégulier, même forme pour we)." },
+
+  // improve
+  { fr: "Elle a amélioré son accueil.", hint: "son accueil = her customer service",
+    answers: ["she improved her customer service"],
+    correct: "She improved her customer service.",
+    explanation: "<strong>improve → improved</strong> (régulier, + -d)." },
+
+  { fr: "Nous avons amélioré nos ventes.", hint: "nos ventes = our sales",
+    answers: ["we improved our sales"],
+    correct: "We improved our sales.",
+    explanation: "<strong>improve → improved</strong> (+ -d)." },
+
+  { fr: "J'ai amélioré mes compétences.", hint: "mes compétences = my skills",
+    answers: ["i improved my skills"],
+    correct: "I improved my skills.",
+    explanation: "<strong>improve → improved</strong> (+ -d). Prétérit affirmatif." },
+
+  // build
+  { fr: "Il a construit une bonne relation avec les clients.", hint: "une bonne relation = a good relationship",
+    answers: ["he built a good relationship with the customers"],
+    correct: "He built a good relationship with the customers.",
+    explanation: "<strong>build → built</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Nous avons construit une bonne équipe.", hint: "une bonne équipe = a good team",
+    answers: ["we built a good team"],
+    correct: "We built a good team.",
+    explanation: "<strong>build → built</strong> (irrégulier, même forme pour we)." },
+
+  // join
+  { fr: "J'ai rejoint l'équipe.", hint: "l'équipe = the team",
+    answers: ["i joined the team"],
+    correct: "I joined the team.",
+    explanation: "<strong>join → joined</strong> (régulier, + -ed)." },
+
+  { fr: "Il a rejoint le groupe.", hint: "le groupe = the group",
+    answers: ["he joined the group"],
+    correct: "He joined the group.",
+    explanation: "<strong>join → joined</strong> (+ -ed)." },
+
+  { fr: "Ils ont rejoint le magasin l'année dernière.", hint: "l'année dernière = last year",
+    answers: ["they joined the shop last year"],
+    correct: "They joined the shop last year.",
+    explanation: "<strong>join → joined</strong> (+ -ed). Même forme pour they." },
+
+  // learn
+  { fr: "J'ai appris les tailles.", hint: "les tailles = the sizes",
+    answers: ["i learnt the sizes","i learned the sizes"],
+    correct: "I learnt the sizes. / I learned the sizes.",
+    explanation: "<strong>learn → learnt / learned</strong> (les deux formes sont correctes)." },
+
+  { fr: "Il a appris les techniques de vente.", hint: "les techniques de vente = the sales techniques",
+    answers: ["he learnt the sales techniques","he learned the sales techniques"],
+    correct: "He learnt the sales techniques. / He learned the sales techniques.",
+    explanation: "<strong>learn → learnt / learned</strong>." },
+
+  { fr: "Nous avons appris nos leçons.", hint: "nos leçons = our lessons",
+    answers: ["we learnt our lessons","we learned our lessons"],
+    correct: "We learnt our lessons. / We learned our lessons.",
+    explanation: "<strong>learn → learnt / learned</strong>. Même forme pour we." },
+
+  // prepare
+  { fr: "Nous avons préparé nos bagages.", hint: "nos bagages = our luggage",
+    answers: ["we prepared our luggage"],
+    correct: "We prepared our luggage.",
+    explanation: "<strong>prepare → prepared</strong> (régulier, + -d). <em>Luggage</em> est indénombrable." },
+
+  { fr: "Elle a préparé la commande.", hint: "la commande = the order",
+    answers: ["she prepared the order"],
+    correct: "She prepared the order.",
+    explanation: "<strong>prepare → prepared</strong> (+ -d)." },
+
+  { fr: "J'ai préparé les cabines d'essayage.", hint: "les cabines d'essayage = the fitting rooms",
+    answers: ["i prepared the fitting rooms"],
+    correct: "I prepared the fitting rooms.",
+    explanation: "<strong>prepare → prepared</strong> (régulier, + -d)." },
+
+  // have
+  { fr: "J'ai eu une pause.", hint: "une pause = a break",
+    answers: ["i had a break"],
+    correct: "I had a break.",
+    explanation: "<strong>have → had</strong> (irrégulier). Prétérit affirmatif." },
+
+  { fr: "Il avait de l'expérience.", hint: "de l'expérience = experience",
+    answers: ["he had experience"],
+    correct: "He had experience.",
+    explanation: "<strong>have → had</strong> (irrégulier)." },
+
+  { fr: "Nous avons eu une réunion.", hint: "une réunion = a meeting",
+    answers: ["we had a meeting"],
+    correct: "We had a meeting.",
+    explanation: "<strong>have → had</strong>. Même forme pour tous les sujets." },
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let questions = [];
+let current = 0;
+let score = 0;
+let history = [];
+let answered = false;
+
+// ─── HELPERS ────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/[\u2018\u2019\u0060\u00B4']/g, '')
+    .replace(/[?!.,]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function checkAnswer(input, q) {
+  const n = normalize(input);
+  return q.answers.some(a => normalize(a) === n);
+}
+
+// ─── INIT ────────────────────────────────────────────────
+function startQuiz() {
+  questions = shuffle(allQuestions).slice(0, 5);
+  current = 0; score = 0; history = []; answered = false;
+  document.getElementById('quizView').style.display = 'block';
+  document.getElementById('scoreView').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const n = current + 1;
+
+  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
+  document.getElementById('frenchSentence').textContent = q.fr;
+  document.getElementById('hint').textContent = q.hint ? `💡 ${q.hint}` : '';
+  document.getElementById('progressText').textContent = `Question ${n} / 5`;
+  document.getElementById('scoreText').textContent = `Score : ${score}`;
+  document.getElementById('progressBar').style.width = `${n * 20}%`;
+
+  const input = document.getElementById('answerInput');
+  input.value = '';
+  input.className = '';
+  input.disabled = false;
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+
+  document.getElementById('btnNext').style.display = 'none';
+  document.getElementById('btnSubmit').disabled = false;
+
+  input.focus();
+}
+
+function submit() {
+  if (answered) return;
+  const input = document.getElementById('answerInput');
+  const val = input.value.trim();
+  if (!val) return;
+
+  answered = true;
+  input.disabled = true;
+  document.getElementById('btnSubmit').disabled = true;
+
+  const q = questions[current];
+  const ok = checkAnswer(val, q);
+
+  if (ok) score++;
+
+  history.push({ q, userAnswer: val, ok });
+
+  input.className = ok ? 'correct' : 'wrong';
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
+
+  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
+  document.getElementById('fbAnswer').textContent = ok ? '' : `Réponse attendue : ${q.correct}`;
+  document.getElementById('fbExplanation').innerHTML = q.explanation;
+
+  document.getElementById('btnNext').style.display = 'block';
+
+  if (!ok) {
+    document.getElementById('mainCard').classList.add('shake');
+    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
+  }
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= 5) {
+    showScore();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showScore() {
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('scoreView').style.display = 'block';
+
+  document.getElementById('scoreBig').textContent = `${score}`;
+  document.getElementById('progressBar').style.width = '100%';
+
+  let emoji, msg, detail;
+  if (score === 5) { emoji = '🏆'; msg = 'Parfait ! 5/5 !'; detail = 'Tu maîtrises le prétérit. Recommence pour confirmer !'; }
+  else if (score === 4) { emoji = '🌟'; msg = 'Très bien !'; detail = 'Encore un effort et tu seras imbattable.'; }
+  else if (score === 3) { emoji = '👍'; msg = 'Pas mal !'; detail = 'Relis les erreurs ci-dessous et recommence.'; }
+  else if (score === 2) { emoji = '📚'; msg = 'Courage !'; detail = 'Revois les règles et réessaie.'; }
+  else { emoji = '💪'; msg = 'Continue à t\'entraîner !'; detail = 'Le prétérit, ça s\'apprend avec de la pratique.'; }
+
+  document.getElementById('scoreEmoji').textContent = emoji;
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreDetail').textContent = detail;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  history.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
+    div.innerHTML = `
+      <div class="review-french">${i+1}. ${h.q.fr}</div>
+      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
+      ${!h.ok ? `<div class="review-correct">→ ${h.q.correct}</div>` : ''}
+    `;
+    reviewList.appendChild(div);
+  });
+}
+
+// ─── EVENTS ─────────────────────────────────────────────
+document.getElementById('btnSubmit').addEventListener('click', submit);
+document.getElementById('btnNext').addEventListener('click', nextQuestion);
+document.getElementById('btnRestart').addEventListener('click', startQuiz);
+document.getElementById('answerInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (!answered) submit();
+    else nextQuestion();
+  }
+});
+
+// ─── START ──────────────────────────────────────────────
+startQuiz();
+</script>
+</body>
+</html>
