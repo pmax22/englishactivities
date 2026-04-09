@@ -26,6 +26,8 @@
     --sapver-b: #3f7ee0;
     --comp-a: #3ecfcf;
     --comp-b: #2fa8d8;
+    --regirr-a: #4ecb7f;
+    --regirr-b: #2da866;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -373,6 +375,14 @@
   .comp .card-category { color: var(--comp-a); }
   .comp:not(.locked):hover { border-color: rgba(62,207,207,0.35); }
 
+  /* Régulier / Irrégulier */
+  .regirr .card-bar { background: linear-gradient(90deg, var(--regirr-a), var(--regirr-b)); }
+  .regirr .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(78,203,127,0.08) 0%, transparent 70%); }
+  .regirr .big-label { color: var(--regirr-a); }
+  .regirr .badge { color: var(--regirr-a); border-color: rgba(78,203,127,0.3); background: rgba(78,203,127,0.08); }
+  .regirr .card-category { color: var(--regirr-a); }
+  .regirr:not(.locked):hover { border-color: rgba(78,203,127,0.35); }
+
   /* ── FOOTER ── */
   .page-footer {
     text-align: center;
@@ -417,7 +427,7 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">4</div>
+      <div class="stat-num" id="countActivities">5</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
@@ -521,6 +531,28 @@
         <span class="pill">-er / more</span>
         <span class="pill">less</span>
         <span class="pill">as … as</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Régulier ou Irrégulier -->
+  <a class="card regirr" href="regulier-irregulier.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Reg?</span>
+      <span class="badge">Identification</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Verbes</div>
+      <div class="card-title">Régulier ou Irrégulier ?</div>
+      <div class="card-desc">Identifie si un verbe au passé est régulier ou irrégulier — 10 questions tirées aléatoirement.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-ed / -d / -ied</span>
+        <span class="pill">Forme spéciale</span>
+        <span class="pill">10 pts</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>
