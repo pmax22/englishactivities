@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prétérit – Entraînement</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0e0f14;
@@ -12,16 +12,15 @@
     --surface2: #1e2029;
     --border: #2a2d3a;
     --accent: #f5c842;
+    --accent-rgb: 245,200,66;
     --accent2: #e07b3f;
     --green: #4ecb7f;
     --red: #e05c5c;
     --text: #e8eaf0;
-    --muted: #6b6f82;
+    --muted: #8a8ea3;
     --radius: 14px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -30,906 +29,1365 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 16px 64px;
-    background-image: radial-gradient(ellipse at 20% 10%, rgba(245,200,66,0.07) 0%, transparent 60%),
-                      radial-gradient(ellipse at 80% 80%, rgba(224,123,63,0.05) 0%, transparent 60%);
+    padding: 24px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(245,200,66,0.08) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(224,123,63,0.06) 0%, transparent 60%);
   }
-
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: fadeDown 0.6s ease both;
+  a { color: inherit; }
+  .topnav { width: 100%; max-width: 760px; margin-bottom: 18px; }
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+    transition: color .2s, border-color .2s;
   }
+  .back:hover { color: var(--accent); border-color: rgba(245,200,66,0.4); }
 
+  header { text-align: center; margin-bottom: 32px; animation: fadeDown .6s ease both; }
   header .tag {
-    display: inline-block;
-    background: rgba(245,200,66,0.12);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(245,200,66,0.25);
-    margin-bottom: 14px;
+    display: inline-block; background: rgba(245,200,66,0.12); color: var(--accent);
+    font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(245,200,66,0.25); margin-bottom: 14px;
   }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 46px);
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.1;
-  }
-
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 46px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
   h1 span { color: var(--accent); }
+  .subtitle { color: var(--muted); margin-top: 10px; font-size: 15px; font-weight: 300; }
 
-  .subtitle {
-    color: var(--muted);
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 300;
+  .wrap { width: 100%; max-width: 760px; }
+  .hidden { display: none !important; }
+
+  /* ── MENU ── */
+  .seance-title {
+    font-family: 'Syne', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin: 28px 0 12px; display: flex; align-items: center; gap: 10px;
   }
+  .seance-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .seance-title:first-child { margin-top: 0; }
 
-  /* --- CARD --- */
+  details.lesson {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 14px; overflow: hidden;
+  }
+  details.lesson summary {
+    cursor: pointer; padding: 14px 18px; font-weight: 500; font-size: 14px; list-style: none;
+    display: flex; align-items: center; gap: 10px; color: var(--accent);
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  details.lesson summary::after { content: '▾'; margin-left: auto; transition: transform .2s; color: var(--muted); }
+  details.lesson[open] summary::after { transform: rotate(180deg); }
+  .lesson-body { padding: 0 18px 18px; font-size: 14px; line-height: 1.7; color: #cfd2de; }
+  .lesson-body p { margin-bottom: 8px; }
+  .formula {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 10px 14px; margin: 8px 0 12px; font-size: 14px;
+  }
+  .ex { color: var(--muted); font-style: italic; }
+  .hl { color: var(--accent); font-weight: 700; }
+  .bv { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0 5px; margin-left: 2px; }
+
+  .missions { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .mission {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; cursor: pointer; text-align: left; color: inherit; font: inherit;
+    display: flex; flex-direction: column; gap: 6px; position: relative;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .mission:hover { transform: translateY(-3px); border-color: rgba(245,200,66,0.4); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  .mission .m-icon { font-size: 26px; line-height: 1; }
+  .mission .m-num { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .mission .m-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .mission .m-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .mission .m-best {
+    position: absolute; top: 14px; right: 14px; font-size: 11px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; background: var(--surface2);
+  }
+  .mission .m-best.done { color: var(--green); border-color: rgba(78,203,127,.4); }
+
+  /* ── QUIZ CARD ── */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 36px 36px 28px;
-    width: 100%;
-    max-width: 620px;
-    animation: fadeUp 0.5s ease both;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px 32px 26px; position: relative; overflow: hidden; animation: fadeUp .45s ease both;
   }
-
   .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 20px 20px 0 0;
   }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+  .progress-bar-wrap { background: var(--border); border-radius: 999px; height: 6px; margin-bottom: 26px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .5s cubic-bezier(.4,0,.2,1); }
 
-  /* Progress */
-  .progress-bar-wrap {
-    background: var(--border);
-    border-radius: 999px;
-    height: 6px;
-    margin-bottom: 28px;
-    overflow: hidden;
+  .q-instr { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; font-family: 'Syne', sans-serif; }
+  .q-prompt { font-size: clamp(20px, 3.6vw, 28px); font-weight: 500; line-height: 1.35; margin-bottom: 8px; }
+  .q-prompt .big { font-size: clamp(48px, 10vw, 72px); display: block; text-align: center; margin: 6px 0; }
+  .q-prompt u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .q-sub { font-size: 14px; color: var(--muted); margin-bottom: 22px; font-style: italic; }
+
+  input.answer {
+    width: 100%; padding: 15px 18px; font-size: 18px; font-family: 'DM Sans', sans-serif;
+    background: var(--surface2); color: var(--text); border: 1.5px solid var(--border);
+    border-radius: var(--radius); outline: none; transition: border-color .2s, box-shadow .2s;
   }
+  input.answer:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(245,200,66,.15); }
+  input.answer.ok { border-color: var(--green); background: rgba(78,203,127,.08); }
+  input.answer.ko { border-color: var(--red); background: rgba(224,92,92,.08); }
 
-  .progress-bar-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  .choices { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .choices.grid3 { grid-template-columns: repeat(3, 1fr); }
+  .btn-choice {
+    padding: 14px 16px; border-radius: var(--radius); border: 1.5px solid var(--border);
+    background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px;
+    cursor: pointer; text-align: left; transition: border-color .2s, background .2s, transform .15s;
   }
+  .choices.grid3 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; }
+  .btn-choice:hover:not(:disabled) { border-color: var(--accent); background: rgba(245,200,66,.06); transform: translateY(-1px); }
+  .btn-choice:disabled { cursor: default; }
+  .btn-choice.correct { border-color: var(--green); background: rgba(78,203,127,.12); }
+  .btn-choice.wrong { border-color: var(--red); background: rgba(224,92,92,.1); }
+  .btn-choice.dim { opacity: .45; }
 
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
+  /* Word order */
+  .order-zone {
+    min-height: 62px; border: 1.5px dashed var(--border); border-radius: var(--radius);
+    padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;
+    background: rgba(255,255,255,.015);
   }
-
-  /* Question */
-  .question-num {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 12px;
-    font-family: 'Syne', sans-serif;
+  .order-zone.empty::before { content: 'Clique sur les mots dans le bon ordre…'; color: var(--muted); font-size: 13px; font-style: italic; padding-left: 6px; }
+  .order-zone.ok { border-color: var(--green); border-style: solid; background: rgba(78,203,127,.06); }
+  .order-zone.ko { border-color: var(--red); border-style: solid; background: rgba(224,92,92,.06); }
+  .tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tile {
+    padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface2);
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer;
+    transition: transform .12s, border-color .2s;
   }
+  .tile:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
+  .tile.used { visibility: hidden; }
+  .order-zone .tile { border-color: rgba(245,200,66,.45); background: rgba(245,200,66,.08); }
 
-  .french-sentence {
-    font-size: clamp(18px, 3vw, 23px);
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.4;
-    margin-bottom: 8px;
-  }
-
-  .hint {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 24px;
-  }
-
-  /* Input */
-  .input-wrap {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  .input-wrap input {
-    flex: 1;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    padding: 13px 18px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  .input-wrap input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(245,200,66,0.1);
-  }
-
-  .input-wrap input.correct {
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
-  }
-
-  .input-wrap input.wrong {
-    border-color: var(--red);
-    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
-  }
-
-  .btn-submit {
-    background: var(--accent);
-    color: #0e0f14;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 13px 22px;
-    cursor: pointer;
-    transition: transform 0.15s, background 0.15s, opacity 0.15s;
-    white-space: nowrap;
-  }
-
-  .btn-submit:hover { background: #f7d260; transform: translateY(-1px); }
-  .btn-submit:active { transform: translateY(0); }
-  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  /* Feedback */
   .feedback {
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    display: none;
-    animation: fadeUp 0.3s ease both;
+    margin-top: 18px; padding: 14px 16px; border-radius: var(--radius); font-size: 14.5px; line-height: 1.6;
+    animation: fadeUp .3s ease both;
   }
+  .feedback.ok { background: rgba(78,203,127,.1); border: 1px solid rgba(78,203,127,.35); }
+  .feedback.ko { background: rgba(224,92,92,.08); border: 1px solid rgba(224,92,92,.35); }
+  .feedback b { color: var(--text); }
+  .feedback .tip { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
 
-  .feedback.correct {
-    background: rgba(78,203,127,0.1);
-    border: 1px solid rgba(78,203,127,0.3);
-    display: block;
+  .actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: .3px; transition: transform .15s, opacity .2s, box-shadow .2s;
   }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #1a0f08; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,200,66,.25); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
 
-  .feedback.wrong {
-    background: rgba(224,92,92,0.1);
-    border: 1px solid rgba(224,92,92,0.3);
-    display: block;
+  /* Score */
+  .score-big { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; text-align: center; line-height: 1; margin: 10px 0; }
+  .score-big span { color: var(--accent); }
+  .stars { text-align: center; font-size: 34px; letter-spacing: 6px; margin-bottom: 8px; }
+  .score-msg { text-align: center; color: var(--muted); margin-bottom: 18px; }
+  .recap { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .recap-item { font-size: 13.5px; padding: 6px 0; border-bottom: 1px dashed var(--border); display: flex; gap: 10px; }
+  .recap-item .r-ic { flex-shrink: 0; }
+  .recap-item .r-txt { color: var(--muted); }
+  .recap-item .r-txt b { color: var(--text); font-weight: 500; }
+
+  /* Builder (mission 8) */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .field label .qq { color: var(--accent); font-weight: 700; font-family: 'Syne', sans-serif; font-size: 14px; margin-right: 6px; }
+  .field .row { display: flex; align-items: center; gap: 8px; }
+  .field .pre { color: var(--muted); font-size: 15px; white-space: nowrap; }
+  .field input { font-size: 16px; padding: 11px 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+  .chip {
+    font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--surface2); color: var(--muted);
+    border: 1px solid var(--border); cursor: pointer; font-family: 'DM Sans', sans-serif;
   }
-
-  .feedback .fb-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
+  .chip:hover { color: var(--accent); border-color: rgba(245,200,66,.4); }
+  .preview {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 12px; padding: 16px 18px; font-size: 18px; line-height: 1.6; margin-top: 8px; min-height: 60px;
   }
+  .preview .blank { color: var(--muted); }
+  .warn { font-size: 13px; color: #f5c842; margin-top: 8px; }
 
-  .feedback.correct .fb-title { color: var(--green); }
-  .feedback.wrong .fb-title { color: var(--red); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-  .answer-shown {
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
+  @media (max-width: 560px) {
+    .card { padding: 24px 18px 20px; }
+    .choices.grid3 { grid-template-columns: repeat(2, 1fr); }
+    .field .row { flex-wrap: wrap; }
   }
-
-  .explanation {
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  .explanation strong { color: var(--text); }
-
-  .btn-next {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    background: transparent;
-    color: var(--accent);
-    border: 1.5px solid rgba(245,200,66,0.4);
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 13px;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.15s;
-    letter-spacing: 0.5px;
-    display: none;
-  }
-
-  .btn-next:hover {
-    background: rgba(245,200,66,0.08);
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  /* Score screen */
-  .score-screen {
-    text-align: center;
-    padding: 10px 0 10px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .score-big {
-    font-family: 'Syne', sans-serif;
-    font-size: 80px;
-    font-weight: 800;
-    line-height: 1;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 16px 0 8px;
-  }
-
-  .score-label {
-    color: var(--muted);
-    font-size: 15px;
-    margin-bottom: 28px;
-  }
-
-  .score-emoji { font-size: 36px; margin-bottom: 4px; }
-
-  .score-msg {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-
-  .score-detail {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 32px;
-  }
-
-  /* Review list */
-  .review-list {
-    text-align: left;
-    margin-bottom: 28px;
-    max-height: 320px;
-    overflow-y: auto;
-    padding-right: 4px;
-  }
-
-  .review-list::-webkit-scrollbar { width: 5px; }
-  .review-list::-webkit-scrollbar-track { background: var(--surface2); border-radius: 10px; }
-  .review-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-  .review-item {
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    border-left: 3px solid transparent;
-    font-size: 13px;
-  }
-
-  .review-item.ok { border-left-color: var(--green); }
-  .review-item.ko { border-left-color: var(--red); }
-
-  .review-french { color: var(--muted); margin-bottom: 3px; }
-  .review-answer { color: var(--text); font-weight: 500; }
-  .review-correct { color: var(--green); font-size: 12px; margin-top: 2px; }
-
-  .btn-restart {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #0e0f14;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 15px 36px;
-    cursor: pointer;
-    transition: transform 0.15s, opacity 0.15s;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-restart:hover { transform: translateY(-2px); opacity: 0.9; }
-
-  /* Verb ref */
+  /* ── Liste des verbes (même style que les autres pages) ── */
   .verb-ref {
-    max-width: 620px;
-    width: 100%;
-    margin-top: 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 24px;
-    animation: fadeUp 0.7s ease both;
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
   }
-
-  .verb-ref-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-
-  .verb-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .verb-chip {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-  }
-
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
   .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(245,200,66,.35); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .en-line { font-size: clamp(19px, 3.2vw, 24px); color: var(--muted); margin-bottom: 18px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* Phrases à trous */
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer {
+    display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px;
   }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .gap-q { font-size: clamp(18px, 3vw, 22px); color: var(--text); margin-bottom: 10px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
+  }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
+  /* ── Liste des verbes (même style que les autres pages) ── */
+  .verb-ref {
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
+  }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  details.verb-ref summary { cursor: pointer; list-style: none; margin-bottom: 0; }
+  details.verb-ref summary::-webkit-details-marker { display: none; }
+  details.verb-ref summary::after { content: ' ▾'; }
+  details.verb-ref[open] summary { margin-bottom: 14px; }
+  .verb-sub { font-size: 12px; color: var(--muted); margin: 12px 0 8px; font-weight: 500; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(var(--accent-rgb),.45); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
-  .shake {
-    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-  }
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .big-word { font-family: 'Syne', sans-serif; font-size: clamp(40px, 9vw, 64px); font-weight: 800; text-align: center; margin: 4px 0 6px; color: var(--text); }
+  .big-sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
 
-  @keyframes shake {
-    10%, 90% { transform: translateX(-2px); }
-    20%, 80% { transform: translateX(4px); }
-    30%, 50%, 70% { transform: translateX(-5px); }
-    40%, 60% { transform: translateX(5px); }
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer { display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px; max-width: 100%; }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
   }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  .sign.eq, .sign.q { background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .choices.grid2 { grid-template-columns: 1fr 1fr; }
+  .choices.grid2 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 18px; }
+  .choices.grid2 .btn-choice small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .lesson-body table { border-collapse: collapse; margin: 6px 0 12px; font-size: 13.5px; }
+  .lesson-body td, .lesson-body th { border: 1px solid var(--border); padding: 5px 10px; text-align: left; }
+  .lesson-body th { color: var(--accent); font-weight: 500; }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
 </style>
 </head>
 <body>
 
+<nav class="topnav"><a class="back" href="index.html">← Toutes les activités</a></nav>
+
 <header>
   <div class="tag">Anglais · Grammaire</div>
-  <h1>Le <span>Prétérit</span><br>Simple</h1>
-  <p class="subtitle">Traduis les phrases en anglais — 5 questions, 1 score</p>
+  <h1>Le Prétérit <span>Simple</span></h1>
+  <p class="subtitle">Affirmatif · Négatif · Interrogatif</p>
 </header>
 
-<div class="card" id="mainCard">
-  <!-- QUIZ -->
-  <div id="quizView">
-    <div class="progress-label">
-      <span id="progressText">Question 1 / 10</span>
-      <span id="scoreText">Score : 0</span>
+<!-- ═════ MENU ═════ -->
+<main class="wrap" id="menu">
+  <details class="lesson" open>
+    <summary>Rappel de la leçon</summary>
+    <div class="lesson-body">
+      <p>Le <span class="hl">prétérit</span> sert à parler d'une action <b>terminée</b> dans le passé.</p>
+      <p><b>+ Affirmatif</b> : sujet + verbe au prétérit.</p>
+      <div class="formula">Verbes <b>réguliers</b> : BV + <span class="hl">-ED</span> (play → played, settle → settled, marry → married)<br>Verbes <b>irréguliers</b> : forme à apprendre (leave → <span class="hl">left</span>, go → <span class="hl">went</span>)</div>
+      <p class="ex">He travelled. · She left.</p>
+      <p><b>− Négatif</b> : sujet + <span class="hl">didn't</span> (did not) + BV.</p>
+      <p class="ex">He didn't travel. · She didn't leave. <s>She didn't left.</s></p>
+      <p><b>? Interrogatif</b> : <span class="hl">Did</span> + sujet + BV + ?</p>
+      <p class="ex">Did he travel? · Did she leave?</p>
+      <p><b>DID</b> porte déjà la marque du passé : après did / didn't, le verbe reste <b>toujours</b> en base verbale.</p>
+      <p>Attention au verbe <b>be</b> : I/he/she/it <span class="hl">was</span> · you/we/they <span class="hl">were</span> → négatif <b>wasn't / weren't</b>, question <b>Was he…? / Were they…?</b> (pas de did).</p>
     </div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressBar" style="width:10%"></div>
-    </div>
+  </details>
+  <div class="missions" id="missions"></div>
+</main>
 
-    <div class="question-num" id="questionNum">QUESTION 1</div>
-    <div class="french-sentence" id="frenchSentence"></div>
-    <div class="hint" id="hint"></div>
-
-    <div class="input-wrap">
-      <input type="text" id="answerInput" placeholder="Tape ta traduction ici…" autocomplete="off" />
-      <button class="btn-submit" id="btnSubmit">OK</button>
-    </div>
-
-    <div class="feedback" id="feedback">
-      <div class="fb-title" id="fbTitle"></div>
-      <div class="answer-shown" id="fbAnswer"></div>
-      <div class="explanation" id="fbExplanation"></div>
-    </div>
-
-    <button class="btn-next" id="btnNext">Phrase suivante →</button>
-  </div>
-
-  <!-- SCORE -->
-  <div id="scoreView" style="display:none">
-    <div class="score-screen">
-      <div class="score-emoji" id="scoreEmoji">🎉</div>
-      <div class="score-big" id="scoreBig">—</div>
-      <div class="score-label">sur 5</div>
-      <div class="score-msg" id="scoreMsg"></div>
-      <div class="score-detail" id="scoreDetail"></div>
-
-      <div class="review-list" id="reviewList"></div>
-
-      <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+<!-- ═════ QUIZ ═════ -->
+<main class="wrap hidden" id="quiz">
+  <div class="card">
+    <div class="progress-label"><span id="qTitle"></span><span id="qCount"></span></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="qBar"></div></div>
+    <div class="q-instr" id="qInstr"></div>
+    <div id="qArea"></div>
+    <div id="qFeedback"></div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
+      <button class="btn btn-ghost hidden" id="btnReset" onclick="resetOrder()">Effacer</button>
+      <button class="btn btn-primary" id="btnMain" onclick="mainAction()">Valider</button>
     </div>
   </div>
-</div>
+</main>
 
-<!-- Verb reference -->
-<div class="verb-ref">
-  <div class="verb-ref-title">Verbes au programme</div>
-  <div class="verb-grid">
-    <div class="verb-chip">join <span>joined</span></div>
-    <div class="verb-chip">marry <span>married</span></div>
-    <div class="verb-chip">play <span>played</span></div>
-    <div class="verb-chip">be <span>was / were</span></div>
-    <div class="verb-chip">record <span>recorded</span></div>
-    <div class="verb-chip">settle <span>settled</span></div>
-    <div class="verb-chip">leave <span>left</span></div>
-    <div class="verb-chip">divorce <span>divorced</span></div>
-    <div class="verb-chip">die <span>died</span></div>
-    <div class="verb-chip">travel <span>travelled</span></div>
+<!-- ═════ SCORE ═════ -->
+<main class="wrap hidden" id="score">
+  <div class="card">
+    <div class="q-instr" id="sTitle"></div>
+    <div class="stars" id="sStars"></div>
+    <div class="score-big" id="sScore"></div>
+    <p class="score-msg" id="sMsg"></p>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="showMenu()">Retour aux missions</button>
+      <button class="btn btn-primary" onclick="startMission(current.id)">Recommencer</button>
+    </div>
+    <div class="recap" id="sRecap"></div>
   </div>
-</div>
+</main>
+<section class="wrap"><div class="verb-ref"><div class="verb-ref-title">Verbes au programme · BV → prétérit</div><div class="verb-grid"><div class="verb-chip">join <span>joined</span><em>rejoindre</em></div><div class="verb-chip">marry <span>married</span><em>se marier</em></div><div class="verb-chip">play <span>played</span><em>jouer</em></div><div class="verb-chip irr">be <span>was / were</span><em>être</em></div><div class="verb-chip">record <span>recorded</span><em>enregistrer</em></div><div class="verb-chip">settle <span>settled</span><em>s'installer</em></div><div class="verb-chip irr">leave <span>left</span><em>partir, quitter</em></div><div class="verb-chip">divorce <span>divorced</span><em>divorcer</em></div><div class="verb-chip">die <span>died</span><em>mourir</em></div><div class="verb-chip">travel <span>travelled</span><em>voyager</em></div></div><p class="verb-legend">Bordure colorée = verbe irrégulier. Après <b>did</b> / <b>didn't</b>, on utilise toujours la BV.</p></div></section>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────
-const allQuestions = [
+const STORE_KEY = "ea_preterit_v2";
+const VERBS = [["join", "joined", 0, "rejoindre", ["joined"]], ["marry", "married", 0, "se marier", ["married"]], ["play", "played", 0, "jouer", ["played"]], ["be", "was / were", 1, "être", ["was", "were"]], ["record", "recorded", 0, "enregistrer", ["recorded"]], ["settle", "settled", 0, "s'installer", ["settled"]], ["leave", "left", 1, "partir, quitter", ["left"]], ["divorce", "divorced", 0, "divorcer", ["divorced"]], ["die", "died", 0, "mourir", ["died"]], ["travel", "travelled", 0, "voyager", ["travelled", "traveled"]]];
+const PHRASES = [
+{
+"fr": "Il n'a pas divorcé.",
+"type": "neg",
+"begin": [
+"he did not divorce",
+"he didnt divorce"
+],
+"beginDisplay": "He didn't divorce",
+"end": "",
+"hint": "",
+"expl": "<strong>Négation au prétérit</strong> : did not / didn't + <strong>base verbale</strong>. On garde divorce, jamais divorced.",
+"verb": "divorce",
+"subj": "He"
+},
+{
+"fr": "Je n'ai pas voyagé.",
+"type": "neg",
+"begin": [
+"i did not travel",
+"i didnt travel"
+],
+"beginDisplay": "I didn't travel",
+"end": "",
+"hint": "",
+"expl": "<strong>did not / didn't + base verbale</strong>. La règle ne change pas avec « I ».",
+"verb": "travel",
+"subj": "I"
+},
+{
+"fr": "Il ne s'est pas marié.",
+"type": "neg",
+"begin": [
+"he did not marry",
+"he didnt marry"
+],
+"beginDisplay": "He didn't marry",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't.",
+"verb": "marry",
+"subj": "He"
+},
+{
+"fr": "Elle n'a pas enregistré.",
+"type": "neg",
+"begin": [
+"she did not record",
+"she didnt record"
+],
+"beginDisplay": "She didn't record",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't.",
+"verb": "record",
+"subj": "She"
+},
+{
+"fr": "Il ne s'est pas installé.",
+"type": "neg",
+"begin": [
+"he did not settle",
+"he didnt settle"
+],
+"beginDisplay": "He didn't settle",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + settle</strong> (base verbale). Pas de -d en forme négative.",
+"verb": "settle",
+"subj": "He"
+},
+{
+"fr": "Ils ne sont pas partis.",
+"type": "neg",
+"begin": [
+"they did not leave",
+"they didnt leave"
+],
+"beginDisplay": "They didn't leave",
+"end": "",
+"hint": "",
+"expl": "<strong>leave</strong> est irrégulier (→ left à l'affirmatif), mais après didn't on revient à la base verbale : <strong>leave</strong>.",
+"verb": "leave",
+"subj": "They"
+},
+{
+"fr": "Il n'est pas mort.",
+"type": "neg",
+"begin": [
+"he did not die",
+"he didnt die"
+],
+"beginDisplay": "He didn't die",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + die</strong>. die → died à l'affirmatif, mais base verbale après didn't.",
+"verb": "die",
+"subj": "He"
+},
+{
+"fr": "Nous n'avons pas voyagé.",
+"type": "neg",
+"begin": [
+"we did not travel",
+"we didnt travel"
+],
+"beginDisplay": "We didn't travel",
+"end": "",
+"hint": "",
+"expl": "<strong>did not / didn't + travel</strong>. Avec « we », même règle qu'avec tout autre sujet.",
+"verb": "travel",
+"subj": "We"
+},
+{
+"fr": "Tu n'as pas joué.",
+"type": "neg",
+"begin": [
+"you did not play",
+"you didnt play"
+],
+"beginDisplay": "You didn't play",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + play</strong>. Base verbale : jamais played après didn't.",
+"verb": "play",
+"subj": "You"
+},
+{
+"fr": "Elle n'est pas partie.",
+"type": "neg",
+"begin": [
+"she did not leave",
+"she didnt leave"
+],
+"beginDisplay": "She didn't leave",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + leave</strong> (base verbale). leave est irrégulier mais base verbale après didn't.",
+"verb": "leave",
+"subj": "She"
+},
+{
+"fr": "Ils n'ont pas joué.",
+"type": "neg",
+"begin": [
+"they did not play",
+"they didnt play"
+],
+"beginDisplay": "They didn't play",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + play</strong>. Sujet pluriel → même structure.",
+"verb": "play",
+"subj": "They"
+},
+{
+"fr": "Nous ne nous sommes pas installés.",
+"type": "neg",
+"begin": [
+"we did not settle",
+"we didnt settle"
+],
+"beginDisplay": "We didn't settle",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + settle</strong>. Pas de -d après didn't.",
+"verb": "settle",
+"subj": "We"
+},
+{
+"fr": "Elle n'a pas divorcé.",
+"type": "neg",
+"begin": [
+"she did not divorce",
+"she didnt divorce"
+],
+"beginDisplay": "She didn't divorce",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + divorce</strong> (base verbale). Jamais divorced après didn't.",
+"verb": "divorce",
+"subj": "She"
+},
+{
+"fr": "Il ne s'est pas marié une deuxième fois.",
+"type": "neg",
+"begin": [
+"he did not marry",
+"he didnt marry"
+],
+"beginDisplay": "He didn't marry",
+"end": "a second time.",
+"hint": "fois = time",
+"expl": "<strong>didn't + marry</strong>. <em>Time</em> traduit « fois ».",
+"verb": "marry",
+"subj": "He"
+},
+{
+"fr": "Elle n'a pas rejoint le groupe.",
+"type": "neg",
+"begin": [
+"she did not join",
+"she didnt join"
+],
+"beginDisplay": "She didn't join",
+"end": "the group.",
+"hint": "le groupe = the group",
+"expl": "<strong>didn't + join</strong> (base verbale). Pas de -ed après didn't.",
+"verb": "join",
+"subj": "She"
+},
+{
+"fr": "Ils n'ont pas enregistré d'album.",
+"type": "neg",
+"begin": [
+"they did not record",
+"they didnt record"
+],
+"beginDisplay": "They didn't record",
+"end": "an album.",
+"hint": "un album = an album",
+"expl": "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't.",
+"verb": "record",
+"subj": "They"
+},
+{
+"fr": "Tu n'as pas voyagé.",
+"type": "neg",
+"begin": [
+"you did not travel",
+"you didnt travel"
+],
+"beginDisplay": "You didn't travel",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + travel</strong>. Règle de base : base verbale après didn't.",
+"verb": "travel",
+"subj": "You"
+},
+{
+"fr": "Il n'a pas rejoint la bande.",
+"type": "neg",
+"begin": [
+"he did not join",
+"he didnt join"
+],
+"beginDisplay": "He didn't join",
+"end": "the band.",
+"hint": "la bande = the band",
+"expl": "<strong>didn't + join</strong> (base verbale).",
+"verb": "join",
+"subj": "He"
+},
+{
+"fr": "Nous ne nous sommes pas mariés.",
+"type": "neg",
+"begin": [
+"we did not marry",
+"we didnt marry"
+],
+"beginDisplay": "We didn't marry",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't.",
+"verb": "marry",
+"subj": "We"
+},
+{
+"fr": "Elle n'est pas morte.",
+"type": "neg",
+"begin": [
+"she did not die",
+"she didnt die"
+],
+"beginDisplay": "She didn't die",
+"end": "",
+"hint": "",
+"expl": "<strong>didn't + die</strong>. Base verbale die, même si die → died à l'affirmatif.",
+"verb": "die",
+"subj": "She"
+},
+{
+"fr": "Sommes-nous partis ?",
+"type": "inter",
+"begin": [
+"did we leave"
+],
+"beginDisplay": "Did we leave",
+"end": "",
+"hint": "",
+"expl": "<strong>Interrogatif prétérit</strong> : Did + sujet + <strong>base verbale ?</strong> leave est irrégulier mais base verbale après Did.",
+"verb": "leave",
+"subj": "We"
+},
+{
+"fr": "Se sont-ils installés ?",
+"type": "inter",
+"begin": [
+"did they settle"
+],
+"beginDisplay": "Did they settle",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + they + settle ?</strong> Pas de -d après Did.",
+"verb": "settle",
+"subj": "They"
+},
+{
+"fr": "As-tu joué ?",
+"type": "inter",
+"begin": [
+"did you play"
+],
+"beginDisplay": "Did you play",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + you + play ?</strong> La terminaison -ed disparaît après Did.",
+"verb": "play",
+"subj": "You"
+},
+{
+"fr": "A-t-il enregistré ?",
+"type": "inter",
+"begin": [
+"did he record"
+],
+"beginDisplay": "Did he record",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + he + record ?</strong> L'auxiliaire Did porte le passé, base verbale après.",
+"verb": "record",
+"subj": "He"
+},
+{
+"fr": "Ont-ils voyagé ?",
+"type": "inter",
+"begin": [
+"did they travel"
+],
+"beginDisplay": "Did they travel",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + they + travel ?</strong> Même structure quel que soit le sujet.",
+"verb": "travel",
+"subj": "They"
+},
+{
+"fr": "A-t-il rejoint le groupe ?",
+"type": "inter",
+"begin": [
+"did he join"
+],
+"beginDisplay": "Did he join",
+"end": "the group?",
+"hint": "le groupe = the group",
+"expl": "<strong>Did + he + join ?</strong> L'auxiliaire Did porte le passé.",
+"verb": "join",
+"subj": "He"
+},
+{
+"fr": "Est-elle morte ?",
+"type": "inter",
+"begin": [
+"did she die"
+],
+"beginDisplay": "Did she die",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + she + die ?</strong> Base verbale (die) après Did, même pour les irréguliers.",
+"verb": "die",
+"subj": "She"
+},
+{
+"fr": "Ont-ils divorcé ?",
+"type": "inter",
+"begin": [
+"did they divorce"
+],
+"beginDisplay": "Did they divorce",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + they + divorce ?</strong> Structure interrogative standard.",
+"verb": "divorce",
+"subj": "They"
+},
+{
+"fr": "A-t-elle voyagé ?",
+"type": "inter",
+"begin": [
+"did she travel"
+],
+"beginDisplay": "Did she travel",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + she + travel ?</strong> Base verbale après Did.",
+"verb": "travel",
+"subj": "She"
+},
+{
+"fr": "T'es-tu marié ?",
+"type": "inter",
+"begin": [
+"did you marry"
+],
+"beginDisplay": "Did you marry",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + you + marry ?</strong> Base verbale : pas de -ied après Did.",
+"verb": "marry",
+"subj": "You"
+},
+{
+"fr": "Ont-ils enregistré ?",
+"type": "inter",
+"begin": [
+"did they record"
+],
+"beginDisplay": "Did they record",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + they + record ?</strong> Même structure pour tous les sujets.",
+"verb": "record",
+"subj": "They"
+},
+{
+"fr": "A-t-il rejoint la bande ?",
+"type": "inter",
+"begin": [
+"did he join"
+],
+"beginDisplay": "Did he join",
+"end": "the band?",
+"hint": "la bande = the band",
+"expl": "<strong>Did + he + join ?</strong> Base verbale après Did.",
+"verb": "join",
+"subj": "He"
+},
+{
+"fr": "Es-tu parti ?",
+"type": "inter",
+"begin": [
+"did you leave"
+],
+"beginDisplay": "Did you leave",
+"end": "",
+"hint": "",
+"expl": "<strong>Did + you + leave ?</strong> leave est irrégulier mais base verbale après Did.",
+"verb": "leave",
+"subj": "You"
+},
+{
+"fr": "S'est-il installé à Chicago ?",
+"type": "inter",
+"begin": [
+"did he settle"
+],
+"beginDisplay": "Did he settle",
+"end": "in Chicago?",
+"hint": "à Chicago = in Chicago",
+"expl": "<strong>Did + he + settle ?</strong> Pas de -d après Did.",
+"verb": "settle",
+"subj": "He"
+},
+{
+"fr": "A-t-elle rejoint le groupe ?",
+"type": "inter",
+"begin": [
+"did she join"
+],
+"beginDisplay": "Did she join",
+"end": "the group?",
+"hint": "le groupe = the group",
+"expl": "<strong>Did + she + join ?</strong> Base verbale après Did.",
+"verb": "join",
+"subj": "She"
+},
+{
+"fr": "Ont-ils divorcé une deuxième fois ?",
+"type": "inter",
+"begin": [
+"did they divorce"
+],
+"beginDisplay": "Did they divorce",
+"end": "a second time?",
+"hint": "fois = time",
+"expl": "<strong>Did + they + divorce ?</strong> Base verbale après Did. <em>Time</em> = fois.",
+"verb": "divorce",
+"subj": "They"
+},
+{
+"fr": "Ils ont enregistré.",
+"type": "aff",
+"begin": [
+"they recorded"
+],
+"beginDisplay": "They recorded",
+"end": "",
+"hint": "",
+"expl": "<strong>record → recorded</strong>. Prétérit affirmatif : sujet + verbe -ed.",
+"verb": "record",
+"subj": "They"
+},
+{
+"fr": "Il est mort.",
+"type": "aff",
+"begin": [
+"he died"
+],
+"beginDisplay": "He died",
+"end": "",
+"hint": "",
+"expl": "<strong>die → died</strong> (verbe régulier : -e → -ed).",
+"verb": "die",
+"subj": "He"
+},
+{
+"fr": "Elle a voyagé.",
+"type": "aff",
+"begin": [
+"she travelled",
+"she traveled"
+],
+"beginDisplay": "She travelled",
+"end": "",
+"hint": "",
+"expl": "<strong>travel → travelled</strong> (ou traveled en américain). Prétérit affirmatif.",
+"verb": "travel",
+"subj": "She"
+},
+{
+"fr": "Ils se sont mariés.",
+"type": "aff",
+"begin": [
+"they married"
+],
+"beginDisplay": "They married",
+"end": "",
+"hint": "",
+"expl": "<strong>marry → married</strong> (verbe en -y → -ied).",
+"verb": "marry",
+"subj": "They"
+},
+{
+"fr": "Il a rejoint le groupe.",
+"type": "aff",
+"begin": [
+"he joined"
+],
+"beginDisplay": "He joined",
+"end": "the group.",
+"hint": "le groupe = the group",
+"expl": "<strong>join → joined</strong> (régulier, + -ed).",
+"verb": "join",
+"subj": "He"
+},
+{
+"fr": "Elle est partie.",
+"type": "aff",
+"begin": [
+"she left"
+],
+"beginDisplay": "She left",
+"end": "",
+"hint": "",
+"expl": "<strong>leave → left</strong> (irrégulier). Prétérit affirmatif : sujet + left.",
+"verb": "leave",
+"subj": "She"
+},
+{
+"fr": "Il s'est installé.",
+"type": "aff",
+"begin": [
+"he settled"
+],
+"beginDisplay": "He settled",
+"end": "",
+"hint": "",
+"expl": "<strong>settle → settled</strong> (régulier, -e + d).",
+"verb": "settle",
+"subj": "He"
+},
+{
+"fr": "Ils ont divorcé.",
+"type": "aff",
+"begin": [
+"they divorced"
+],
+"beginDisplay": "They divorced",
+"end": "",
+"hint": "",
+"expl": "<strong>divorce → divorced</strong> (régulier, -e + d).",
+"verb": "divorce",
+"subj": "They"
+},
+{
+"fr": "Nous avons voyagé.",
+"type": "aff",
+"begin": [
+"we travelled",
+"we traveled"
+],
+"beginDisplay": "We travelled",
+"end": "",
+"hint": "",
+"expl": "<strong>travel → travelled</strong>. Prétérit affirmatif, pas d'auxiliaire.",
+"verb": "travel",
+"subj": "We"
+},
+{
+"fr": "Tu as joué.",
+"type": "aff",
+"begin": [
+"you played"
+],
+"beginDisplay": "You played",
+"end": "",
+"hint": "",
+"expl": "<strong>play → played</strong> (régulier, + -ed).",
+"verb": "play",
+"subj": "You"
+},
+{
+"fr": "Elle s'est installée.",
+"type": "aff",
+"begin": [
+"she settled"
+],
+"beginDisplay": "She settled",
+"end": "",
+"hint": "",
+"expl": "<strong>settle → settled</strong>. Même forme pour il/elle.",
+"verb": "settle",
+"subj": "She"
+},
+{
+"fr": "Il a enregistré.",
+"type": "aff",
+"begin": [
+"he recorded"
+],
+"beginDisplay": "He recorded",
+"end": "",
+"hint": "",
+"expl": "<strong>record → recorded</strong> (régulier, + -ed).",
+"verb": "record",
+"subj": "He"
+},
+{
+"fr": "Elle est morte.",
+"type": "aff",
+"begin": [
+"she died"
+],
+"beginDisplay": "She died",
+"end": "",
+"hint": "",
+"expl": "<strong>die → died</strong> (régulier).",
+"verb": "die",
+"subj": "She"
+},
+{
+"fr": "Ils sont partis.",
+"type": "aff",
+"begin": [
+"they left"
+],
+"beginDisplay": "They left",
+"end": "",
+"hint": "",
+"expl": "<strong>leave → left</strong> (irrégulier). Même forme au singulier et au pluriel.",
+"verb": "leave",
+"subj": "They"
+},
+{
+"fr": "Il s'est marié une troisième fois.",
+"type": "aff",
+"begin": [
+"he married"
+],
+"beginDisplay": "He married",
+"end": "a third time.",
+"hint": "fois = time",
+"expl": "<strong>marry → married</strong> (-y → -ied). <em>Time</em> = fois.",
+"verb": "marry",
+"subj": "He"
+},
+{
+"fr": "Elle a rejoint la bande.",
+"type": "aff",
+"begin": [
+"she joined"
+],
+"beginDisplay": "She joined",
+"end": "the band.",
+"hint": "la bande = the band",
+"expl": "<strong>join → joined</strong> (+ -ed).",
+"verb": "join",
+"subj": "She"
+},
+{
+"fr": "Ils ont voyagé en France.",
+"type": "aff",
+"begin": [
+"they travelled",
+"they traveled"
+],
+"beginDisplay": "They travelled",
+"end": "in France.",
+"hint": "en France = in France",
+"expl": "<strong>travel → travelled</strong>. Prétérit affirmatif.",
+"verb": "travel",
+"subj": "They"
+},
+{
+"fr": "Nous nous sommes installés.",
+"type": "aff",
+"begin": [
+"we settled"
+],
+"beginDisplay": "We settled",
+"end": "",
+"hint": "",
+"expl": "<strong>settle → settled</strong>.",
+"verb": "settle",
+"subj": "We"
+},
+{
+"fr": "Ils ont enregistré un album.",
+"type": "aff",
+"begin": [
+"they recorded"
+],
+"beginDisplay": "They recorded",
+"end": "an album.",
+"hint": "un album = an album",
+"expl": "<strong>record → recorded</strong> (+ -ed).",
+"verb": "record",
+"subj": "They"
+},
+{
+"fr": "Tu as voyagé.",
+"type": "aff",
+"begin": [
+"you travelled",
+"you traveled"
+],
+"beginDisplay": "You travelled",
+"end": "",
+"hint": "",
+"expl": "<strong>travel → travelled</strong>.",
+"verb": "travel",
+"subj": "You"
+},
+{
+"fr": "Il a joué.",
+"type": "aff",
+"begin": [
+"he played"
+],
+"beginDisplay": "He played",
+"end": "",
+"hint": "",
+"expl": "<strong>play → played</strong> (+ -ed).",
+"verb": "play",
+"subj": "He"
+}
+];
+/* PHRASES : [{fr, type: aff|neg|inter, begin: [réponses acceptées], beginDisplay, end, hint, expl, verb, subj}]
+   VERBS : [[BV, prétérit affiché, irrégulier, français, [formes du prétérit]]] */
+const BV_OF = {};
+VERBS.forEach(v => { BV_OF[v[0]] = v[0]; v[4].forEach(p => BV_OF[p] = v[0]); });
+const PAST_OF = Object.fromEntries(VERBS.map(v => [v[0], v[4][0]]));
+const IRR_OF = Object.fromEntries(VERBS.map(v => [v[0], !!v[2]]));
+const TYPE_LABEL = { aff: "Affirmatif", neg: "Négatif", inter: "Interrogatif" };
+const SIGN = { aff: "plus", neg: "minus", inter: "q" };
 
-  // ════════════ NÉGATIVES ════════════
-  { fr: "Il n'a pas divorcé.", hint: "",
-    answers: ["he did not divorce","he didnt divorce"],
-    correct: "He did not divorce. / He didn't divorce.",
-    explanation: "<strong>Négation au prétérit</strong> : did not / didn't + <strong>base verbale</strong>. On garde divorce, jamais divorced." },
+function fullSentence(p) { return (p.beginDisplay + (p.end ? " " + p.end : "")).trim() + (/[.?!]$/.test(p.end) ? "" : (p.type === "inter" ? "?" : ".")); }
+function plural(subj) { if (/^(i|you|we|they)$/i.test(subj)) return true; if (/^(he|she|it)$/i.test(subj)) return false; return / and /i.test(subj) || /s$/i.test(subj); }
+function subjMid(s) { return /^(He|She|It|We|You|They|The|My|Our|Your|His|Her|Their|A|An)\b/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s; }
+function endNoPunct(e) { return (e || "").replace(/\s*[.?!]$/, ""); }
 
-  { fr: "Je n'ai pas voyagé.", hint: "",
-    answers: ["i did not travel","i didnt travel"],
-    correct: "I did not travel. / I didn't travel.",
-    explanation: "<strong>did not / didn't + base verbale</strong>. La règle ne change pas avec « I »." },
+function gapQuestion(p) {
+  const v = p.verb, past = PAST_OF[v];
+  return {
+    kind: "gap", instr: `${TYPE_LABEL[p.type]} · traduis en anglais`, label: p.fr, sign: SIGN[p.type],
+    head: `<div class="fr-line">${esc(p.fr)}</div>`,
+    parts: [{ answers: p.begin, width: 240, ph: p.type === "inter" ? "Did … ?" : "…" }, p.end ? " " + p.end : (p.type === "inter" ? " ?" : ".")],
+    foot: p.hint ? `<p class="small-hint">Aide : <b>${esc(p.hint)}</b></p>` : "",
+    correct: fullSentence(p), tip: p.expl,
+    diagnose(vals) {
+      const t = " " + norm(vals[0]) + " ";
+      if (v === "be") return p.expl;
+      if (p.type === "aff") {
+        if (/ did /.test(t)) return `À l'affirmatif, pas de <b>did</b> : le verbe se met directement au prétérit (<b>${past}</b>).`;
+        if (past !== v && t.includes(" " + v + " ")) return `Il faut le prétérit : ${v} → <b>${past}</b>${IRR_OF[v] ? " (irrégulier)" : ""}.`;
+      }
+      if (p.type === "neg") {
+        if (!/ didn't /.test(t)) return "Négatif : <b>didn't</b> (did not) + base verbale.";
+        if (past !== v && t.includes(" " + past + " ")) return `Après didn't, le verbe reste en BV : <b>${v}</b>, pas <s>${past}</s>.`;
+      }
+      if (p.type === "inter") {
+        if (!/^ did /.test(t)) return "Interrogatif : la question commence par <b>Did</b> + sujet + BV.";
+        if (past !== v && t.includes(" " + past + " ")) return `Après Did, le verbe reste en BV : <b>${v}</b>, pas <s>${past}</s>.`;
+      }
+      return p.expl;
+    }
+  };
+}
 
-  { fr: "Il ne s'est pas marié.", hint: "",
-    answers: ["he did not marry","he didnt marry"],
-    correct: "He did not marry. / He didn't marry.",
-    explanation: "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't." },
+function orderQuestion(p) {
+  const v = p.verb, past = PAST_OF[v];
+  const tiles = p.beginDisplay.split(" ");
+  if (p.end) tiles.push(endNoPunct(p.end));
+  const trap = p.type === "aff" ? v : past;
+  return {
+    kind: "order", instr: `Remets les mots dans l'ordre · ${TYPE_LABEL[p.type]}`, label: p.fr,
+    head: `<div class="fr-line">${esc(p.fr)}</div>`,
+    tiles, distractors: [trap], answer: fullSentence(p),
+    tip: `Le mot <b>${esc(trap)}</b> était un piège : ${p.type === "aff" ? "à l'affirmatif, on utilise le prétérit." : "après did / didn't, on utilise la base verbale."}`
+  };
+}
 
-  { fr: "Elle n'a pas enregistré.", hint: "",
-    answers: ["she did not record","she didnt record"],
-    correct: "She did not record. / She didn't record.",
-    explanation: "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't." },
+function choiceQuestion(p) {
+  const v = p.verb, past = PAST_OF[v], S = p.subj, Sm = subjMid(S), E = p.end ? " " + endNoPunct(p.end) : "";
+  const doo = plural(S) ? "don't" : "doesn't", Do = plural(S) ? "Do" : "Does";
+  let opts;
+  if (p.type === "aff") opts = [`${S} ${past}${E}.`, `${S} ${v}${E}.`, `${S} did ${past}${E}.`];
+  else if (p.type === "neg") opts = [`${S} didn't ${v}${E}.`, `${S} didn't ${past}${E}.`, `${S} not ${past}${E}.`, `${S} ${doo} ${v}${E}.`];
+  else opts = [`Did ${Sm} ${v}${E}?`, `Did ${Sm} ${past}${E}?`, `${S} ${past}${E}?`, `${Do} ${Sm} ${v}${E}?`];
+  return {
+    kind: "mcq", instr: "Quelle phrase est correcte ?", label: p.fr,
+    head: `<div class="fr-line">${esc(p.fr)}</div>`, options: opts, correct: 0, tip: p.expl
+  };
+}
 
-  { fr: "Il ne s'est pas installé.", hint: "",
-    answers: ["he did not settle","he didnt settle"],
-    correct: "He did not settle. / He didn't settle.",
-    explanation: "<strong>didn't + settle</strong> (base verbale). Pas de -d en forme négative." },
+const notBe = p => p.verb !== "be" && PAST_OF[p.verb] !== p.verb;
+const ofType = t => PHRASES.filter(p => p.type === t);
 
-  { fr: "Ils ne sont pas partis.", hint: "",
-    answers: ["they did not leave","they didnt leave"],
-    correct: "They did not leave. / They didn't leave.",
-    explanation: "<strong>leave</strong> est irrégulier (→ left à l'affirmatif), mais après didn't on revient à la base verbale : <strong>leave</strong>." },
-
-  { fr: "Il n'est pas mort.", hint: "",
-    answers: ["he did not die","he didnt die"],
-    correct: "He did not die. / He didn't die.",
-    explanation: "<strong>didn't + die</strong>. die → died à l'affirmatif, mais base verbale après didn't." },
-
-  { fr: "Nous n'avons pas voyagé.", hint: "",
-    answers: ["we did not travel","we didnt travel"],
-    correct: "We did not travel. / We didn't travel.",
-    explanation: "<strong>did not / didn't + travel</strong>. Avec « we », même règle qu'avec tout autre sujet." },
-
-  { fr: "Tu n'as pas joué.", hint: "",
-    answers: ["you did not play","you didnt play"],
-    correct: "You did not play. / You didn't play.",
-    explanation: "<strong>didn't + play</strong>. Base verbale : jamais played après didn't." },
-
-  { fr: "Elle n'est pas partie.", hint: "",
-    answers: ["she did not leave","she didnt leave"],
-    correct: "She did not leave. / She didn't leave.",
-    explanation: "<strong>didn't + leave</strong> (base verbale). leave est irrégulier mais base verbale après didn't." },
-
-  { fr: "Ils n'ont pas joué.", hint: "",
-    answers: ["they did not play","they didnt play"],
-    correct: "They did not play. / They didn't play.",
-    explanation: "<strong>didn't + play</strong>. Sujet pluriel → même structure." },
-
-  { fr: "Nous ne nous sommes pas installés.", hint: "",
-    answers: ["we did not settle","we didnt settle"],
-    correct: "We did not settle. / We didn't settle.",
-    explanation: "<strong>didn't + settle</strong>. Pas de -d après didn't." },
-
-  { fr: "Elle n'a pas divorcé.", hint: "",
-    answers: ["she did not divorce","she didnt divorce"],
-    correct: "She did not divorce. / She didn't divorce.",
-    explanation: "<strong>didn't + divorce</strong> (base verbale). Jamais divorced après didn't." },
-
-  { fr: "Il ne s'est pas marié une deuxième fois.", hint: "fois = time",
-    answers: ["he did not marry a second time","he didnt marry a second time"],
-    correct: "He did not marry a second time. / He didn't marry a second time.",
-    explanation: "<strong>didn't + marry</strong>. <em>Time</em> traduit « fois »." },
-
-  { fr: "Elle n'a pas rejoint le groupe.", hint: "le groupe = the group",
-    answers: ["she did not join the group","she didnt join the group"],
-    correct: "She did not join the group. / She didn't join the group.",
-    explanation: "<strong>didn't + join</strong> (base verbale). Pas de -ed après didn't." },
-
-  { fr: "Ils n'ont pas enregistré d'album.", hint: "un album = an album",
-    answers: ["they did not record an album","they didnt record an album"],
-    correct: "They did not record an album. / They didn't record an album.",
-    explanation: "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't." },
-
-  { fr: "Tu n'as pas voyagé.", hint: "",
-    answers: ["you did not travel","you didnt travel"],
-    correct: "You did not travel. / You didn't travel.",
-    explanation: "<strong>didn't + travel</strong>. Règle de base : base verbale après didn't." },
-
-  { fr: "Il n'a pas rejoint la bande.", hint: "la bande = the band",
-    answers: ["he did not join the band","he didnt join the band"],
-    correct: "He did not join the band. / He didn't join the band.",
-    explanation: "<strong>didn't + join</strong> (base verbale)." },
-
-  { fr: "Nous ne nous sommes pas mariés.", hint: "",
-    answers: ["we did not marry","we didnt marry"],
-    correct: "We did not marry. / We didn't marry.",
-    explanation: "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't." },
-
-  { fr: "Elle n'est pas morte.", hint: "",
-    answers: ["she did not die","she didnt die"],
-    correct: "She did not die. / She didn't die.",
-    explanation: "<strong>didn't + die</strong>. Base verbale die, même si die → died à l'affirmatif." },
-
-  // ════════════ INTERROGATIVES ════════════
-  { fr: "Sommes-nous partis ?", hint: "",
-    answers: ["did we leave","did we leave?","did we leave ?"],
-    correct: "Did we leave?",
-    explanation: "<strong>Interrogatif prétérit</strong> : Did + sujet + <strong>base verbale ?</strong> leave est irrégulier mais base verbale après Did." },
-
-  { fr: "Se sont-ils installés ?", hint: "",
-    answers: ["did they settle","did they settle?","did they settle ?"],
-    correct: "Did they settle?",
-    explanation: "<strong>Did + they + settle ?</strong> Pas de -d après Did." },
-
-  { fr: "As-tu joué ?", hint: "",
-    answers: ["did you play","did you play?","did you play ?"],
-    correct: "Did you play?",
-    explanation: "<strong>Did + you + play ?</strong> La terminaison -ed disparaît après Did." },
-
-  { fr: "A-t-il enregistré ?", hint: "",
-    answers: ["did he record","did he record?","did he record ?"],
-    correct: "Did he record?",
-    explanation: "<strong>Did + he + record ?</strong> L'auxiliaire Did porte le passé, base verbale après." },
-
-  { fr: "Ont-ils voyagé ?", hint: "",
-    answers: ["did they travel","did they travel?","did they travel ?"],
-    correct: "Did they travel?",
-    explanation: "<strong>Did + they + travel ?</strong> Même structure quel que soit le sujet." },
-
-  { fr: "A-t-il rejoint le groupe ?", hint: "le groupe = the group",
-    answers: ["did he join the group","did he join the group?","did he join the group ?"],
-    correct: "Did he join the group?",
-    explanation: "<strong>Did + he + join ?</strong> L'auxiliaire Did porte le passé." },
-
-  { fr: "Est-elle morte ?", hint: "",
-    answers: ["did she die","did she die?","did she die ?"],
-    correct: "Did she die?",
-    explanation: "<strong>Did + she + die ?</strong> Base verbale (die) après Did, même pour les irréguliers." },
-
-  { fr: "Ont-ils divorcé ?", hint: "",
-    answers: ["did they divorce","did they divorce?","did they divorce ?"],
-    correct: "Did they divorce?",
-    explanation: "<strong>Did + they + divorce ?</strong> Structure interrogative standard." },
-
-  { fr: "A-t-elle voyagé ?", hint: "",
-    answers: ["did she travel","did she travel?","did she travel ?"],
-    correct: "Did she travel?",
-    explanation: "<strong>Did + she + travel ?</strong> Base verbale après Did." },
-
-  { fr: "T'es-tu marié ?", hint: "",
-    answers: ["did you marry","did you marry?","did you marry ?"],
-    correct: "Did you marry?",
-    explanation: "<strong>Did + you + marry ?</strong> Base verbale : pas de -ied après Did." },
-
-  { fr: "Ont-ils enregistré ?", hint: "",
-    answers: ["did they record","did they record?","did they record ?"],
-    correct: "Did they record?",
-    explanation: "<strong>Did + they + record ?</strong> Même structure pour tous les sujets." },
-
-  { fr: "A-t-il rejoint la bande ?", hint: "la bande = the band",
-    answers: ["did he join the band","did he join the band?","did he join the band ?"],
-    correct: "Did he join the band?",
-    explanation: "<strong>Did + he + join ?</strong> Base verbale après Did." },
-
-  { fr: "Es-tu parti ?", hint: "",
-    answers: ["did you leave","did you leave?","did you leave ?"],
-    correct: "Did you leave?",
-    explanation: "<strong>Did + you + leave ?</strong> leave est irrégulier mais base verbale après Did." },
-
-  { fr: "S'est-il installé à Chicago ?", hint: "à Chicago = in Chicago",
-    answers: ["did he settle in chicago","did he settle in chicago?","did he settle in chicago ?"],
-    correct: "Did he settle in Chicago?",
-    explanation: "<strong>Did + he + settle ?</strong> Pas de -d après Did." },
-
-  { fr: "A-t-elle rejoint le groupe ?", hint: "le groupe = the group",
-    answers: ["did she join the group","did she join the group?","did she join the group ?"],
-    correct: "Did she join the group?",
-    explanation: "<strong>Did + she + join ?</strong> Base verbale après Did." },
-
-  { fr: "Ont-ils divorcé une deuxième fois ?", hint: "fois = time",
-    answers: ["did they divorce a second time","did they divorce a second time?","did they divorce a second time ?"],
-    correct: "Did they divorce a second time?",
-    explanation: "<strong>Did + they + divorce ?</strong> Base verbale après Did. <em>Time</em> = fois." },
-
-  // ════════════ AFFIRMATIVES ════════════
-  { fr: "Ils ont enregistré.", hint: "",
-    answers: ["they recorded"],
-    correct: "They recorded.",
-    explanation: "<strong>record → recorded</strong>. Prétérit affirmatif : sujet + verbe -ed." },
-
-  { fr: "Il est mort.", hint: "",
-    answers: ["he died"],
-    correct: "He died.",
-    explanation: "<strong>die → died</strong> (verbe régulier : -e → -ed)." },
-
-  { fr: "Elle a voyagé.", hint: "",
-    answers: ["she travelled","she traveled"],
-    correct: "She travelled. / She traveled.",
-    explanation: "<strong>travel → travelled</strong> (ou traveled en américain). Prétérit affirmatif." },
-
-  { fr: "Ils se sont mariés.", hint: "",
-    answers: ["they married"],
-    correct: "They married.",
-    explanation: "<strong>marry → married</strong> (verbe en -y → -ied)." },
-
-  { fr: "Il a rejoint le groupe.", hint: "le groupe = the group",
-    answers: ["he joined the group"],
-    correct: "He joined the group.",
-    explanation: "<strong>join → joined</strong> (régulier, + -ed)." },
-
-  { fr: "Elle est partie.", hint: "",
-    answers: ["she left"],
-    correct: "She left.",
-    explanation: "<strong>leave → left</strong> (irrégulier). Prétérit affirmatif : sujet + left." },
-
-  { fr: "Il s'est installé.", hint: "",
-    answers: ["he settled"],
-    correct: "He settled.",
-    explanation: "<strong>settle → settled</strong> (régulier, -e + d)." },
-
-  { fr: "Ils ont divorcé.", hint: "",
-    answers: ["they divorced"],
-    correct: "They divorced.",
-    explanation: "<strong>divorce → divorced</strong> (régulier, -e + d)." },
-
-  { fr: "Nous avons voyagé.", hint: "",
-    answers: ["we travelled","we traveled"],
-    correct: "We travelled. / We traveled.",
-    explanation: "<strong>travel → travelled</strong>. Prétérit affirmatif, pas d'auxiliaire." },
-
-  { fr: "Tu as joué.", hint: "",
-    answers: ["you played"],
-    correct: "You played.",
-    explanation: "<strong>play → played</strong> (régulier, + -ed)." },
-
-  { fr: "Elle s'est installée.", hint: "",
-    answers: ["she settled"],
-    correct: "She settled.",
-    explanation: "<strong>settle → settled</strong>. Même forme pour il/elle." },
-
-  { fr: "Il a enregistré.", hint: "",
-    answers: ["he recorded"],
-    correct: "He recorded.",
-    explanation: "<strong>record → recorded</strong> (régulier, + -ed)." },
-
-  { fr: "Elle est morte.", hint: "",
-    answers: ["she died"],
-    correct: "She died.",
-    explanation: "<strong>die → died</strong> (régulier)." },
-
-  { fr: "Ils sont partis.", hint: "",
-    answers: ["they left"],
-    correct: "They left.",
-    explanation: "<strong>leave → left</strong> (irrégulier). Même forme au singulier et au pluriel." },
-
-  { fr: "Il s'est marié une troisième fois.", hint: "fois = time",
-    answers: ["he married a third time"],
-    correct: "He married a third time.",
-    explanation: "<strong>marry → married</strong> (-y → -ied). <em>Time</em> = fois." },
-
-  { fr: "Elle a rejoint la bande.", hint: "la bande = the band",
-    answers: ["she joined the band"],
-    correct: "She joined the band.",
-    explanation: "<strong>join → joined</strong> (+ -ed)." },
-
-  { fr: "Ils ont voyagé en France.", hint: "en France = in France",
-    answers: ["they travelled in france","they traveled in france"],
-    correct: "They travelled in France. / They traveled in France.",
-    explanation: "<strong>travel → travelled</strong>. Prétérit affirmatif." },
-
-  { fr: "Nous nous sommes installés.", hint: "",
-    answers: ["we settled"],
-    correct: "We settled.",
-    explanation: "<strong>settle → settled</strong>." },
-
-  { fr: "Ils ont enregistré un album.", hint: "un album = an album",
-    answers: ["they recorded an album"],
-    correct: "They recorded an album.",
-    explanation: "<strong>record → recorded</strong> (+ -ed)." },
-
-  { fr: "Tu as voyagé.", hint: "",
-    answers: ["you travelled","you traveled"],
-    correct: "You travelled. / You traveled.",
-    explanation: "<strong>travel → travelled</strong>." },
-
-  { fr: "Il a joué.", hint: "",
-    answers: ["he played"],
-    correct: "He played.",
-    explanation: "<strong>play → played</strong> (+ -ed)." },
+const MISSIONS = [
+  { id: "aff", icon: "➕", title: "Affirmatif", desc: "Traduis : sujet + verbe au prétérit (-ED ou forme irrégulière).", build: () => shuffle(ofType("aff")).slice(0, 8).map(gapQuestion) },
+  { id: "neg", icon: "➖", title: "Négatif", desc: "Traduis : sujet + didn't + base verbale.", build: () => shuffle(ofType("neg")).slice(0, 8).map(gapQuestion) },
+  { id: "inter", icon: "❓", title: "Interrogatif", desc: "Traduis : Did + sujet + base verbale ?", build: () => shuffle(ofType("inter")).slice(0, 8).map(gapQuestion) },
+  { id: "order", icon: "🧩", title: "Remets dans l'ordre", desc: "Construis la phrase avec les étiquettes. Attention, un mot est un piège !", build: () => shuffle(PHRASES.filter(notBe)).slice(0, 8).map(orderQuestion) },
+  { id: "choice", icon: "🔎", title: "Quelle phrase est correcte ?", desc: "Une seule phrase est juste : repère les erreurs de forme.", build: () => shuffle(PHRASES.filter(notBe)).slice(0, 8).map(choiceQuestion) },
+  { id: "mix", icon: "🎲", title: "Tout mélangé", desc: "Affirmatif, négatif et interrogatif mélangés : le grand test !", build: () => shuffle(PHRASES).slice(0, 10).map(gapQuestion) }
 ];
 
-// ─── STATE ──────────────────────────────────────────────
-let questions = [];
-let current = 0;
-let score = 0;
-let history = [];
-let answered = false;
-
-// ─── HELPERS ────────────────────────────────────────────
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+/* ═══════════ OUTILS ═══════════ */
+function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function norm(s) {
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[’‘`´]/g, "'")
+    .replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
+    .replace(/\bwas not\b/g, "wasn't").replace(/\bwasnt\b/g, "wasn't")
+    .replace(/\bwere not\b/g, "weren't").replace(/\bwerent\b/g, "weren't")
+    .replace(/[.?!,;:]/g, " ").replace(/\s+/g, " ").trim();
 }
+function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function capF(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-function normalize(s) {
-  return s.toLowerCase()
-    .replace(/[\u2018\u2019\u0060\u00B4']/g, '')
-    .replace(/[?!.,]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+/* ═══════════ STOCKAGE ═══════════ */
+let best = {};
+try { best = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { best = {}; }
+function saveBest() { try { localStorage.setItem(STORE_KEY, JSON.stringify(best)); } catch (e) {} }
+
+/* ═══════════ MENU ═══════════ */
+function renderMenu() {
+  const box = document.getElementById("missions"); box.innerHTML = "";
+  MISSIONS.forEach((m, i) => {
+    const b = document.createElement("button"); b.className = "mission";
+    const bs = best[m.id];
+    b.innerHTML = `${bs ? `<span class="m-best ${bs.s === bs.t ? "done" : ""}">★ ${bs.s}/${bs.t}</span>` : ""}
+      <span class="m-icon">${m.icon}</span><span class="m-num">Mission ${i + 1}</span>
+      <span class="m-title">${m.title}</span><span class="m-desc">${m.desc}</span>`;
+    b.onclick = () => startMission(m.id);
+    box.appendChild(b);
+  });
 }
-
-function checkAnswer(input, q) {
-  const n = normalize(input);
-  return q.answers.some(a => normalize(a) === n);
+function showOnly(id) {
+  ["menu", "quiz", "score"].forEach(x => document.getElementById(x).classList.toggle("hidden", x !== id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
+function showMenu() { renderMenu(); showOnly("menu"); }
 
-// ─── INIT ────────────────────────────────────────────────
-function startQuiz() {
-  questions = shuffle(allQuestions).slice(0, 5);
-  current = 0; score = 0; history = []; answered = false;
-  document.getElementById('quizView').style.display = 'block';
-  document.getElementById('scoreView').style.display = 'none';
-  renderQuestion();
+/* ═══════════ MOTEUR ═══════════ */
+let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [], orderChosen = [];
+
+function startMission(id) {
+  current = MISSIONS.find(m => m.id === id);
+  questions = current.build(); qi = 0; score = 0; recap = [];
+  showOnly("quiz"); renderQuestion();
 }
 
 function renderQuestion() {
-  answered = false;
-  const q = questions[current];
-  const n = current + 1;
+  const q = questions[qi]; answered = false;
+  document.getElementById("qTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("qBar").style.width = (qi / questions.length * 100) + "%";
+  document.getElementById("qInstr").textContent = q.instr;
+  document.getElementById("qFeedback").innerHTML = "";
+  const area = document.getElementById("qArea"), btn = document.getElementById("btnMain");
+  btn.textContent = "Valider"; btn.classList.remove("hidden");
+  document.getElementById("btnReset").classList.add("hidden");
+  const head = q.head || "";
 
-  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
-  document.getElementById('frenchSentence').textContent = q.fr;
-  document.getElementById('hint').textContent = q.hint ? `💡 ${q.hint}` : '';
-  document.getElementById('progressText').textContent = `Question ${n} / 5`;
-  document.getElementById('scoreText').textContent = `Score : ${score}`;
-  document.getElementById('progressBar').style.width = `${n * 20}%`;
-
-  const input = document.getElementById('answerInput');
-  input.value = '';
-  input.className = '';
-  input.disabled = false;
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback';
-
-  document.getElementById('btnNext').style.display = 'none';
-  document.getElementById('btnSubmit').disabled = false;
-
-  input.focus();
-}
-
-function submit() {
-  if (answered) return;
-  const input = document.getElementById('answerInput');
-  const val = input.value.trim();
-  if (!val) return;
-
-  answered = true;
-  input.disabled = true;
-  document.getElementById('btnSubmit').disabled = true;
-
-  const q = questions[current];
-  const ok = checkAnswer(val, q);
-
-  if (ok) score++;
-
-  history.push({ q, userAnswer: val, ok });
-
-  input.className = ok ? 'correct' : 'wrong';
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
-
-  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
-  document.getElementById('fbAnswer').textContent = ok ? '' : `Réponse attendue : ${q.correct}`;
-  document.getElementById('fbExplanation').innerHTML = q.explanation;
-
-  document.getElementById('btnNext').style.display = 'block';
-
-  if (!ok) {
-    document.getElementById('mainCard').classList.add('shake');
-    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
+  if (q.kind === "gap") {
+    let bi = 0;
+    const line = q.parts.map(p => {
+      if (typeof p === "string") return esc(p);
+      const i = bi++;
+      return `<input class="answer gapin" data-b="${i}" style="width:${p.width || 200}px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${p.ph || ""}">` +
+        (p.hint ? `<span class="bvhint">(${esc(p.hint)})</span>` : "");
+    }).join("");
+    area.innerHTML = head + `<div class="gap-line">${q.sign ? `<span class="sign ${q.sign}">${q.sign === "plus" ? "+" : q.sign === "minus" ? "−" : q.sign === "eq" ? "=" : "?"}</span>` : ""}${line}</div>` + (q.foot || "");
+    setTimeout(() => { const f = area.querySelector(".gapin"); if (f) f.focus(); }, 50);
+  } else if (q.kind === "mcq") {
+    const order = q.keepOrder ? q.options.map((_, i) => i) : shuffle(q.options.map((_, i) => i));
+    area.innerHTML = head + `<div class="choices ${q.grid ? "grid" + q.grid : ""}">${order.map(i => `<button class="btn-choice" data-i="${i}">${q.html ? q.options[i] : esc(q.options[i])}</button>`).join("")}</div>`;
+    area.querySelectorAll(".btn-choice").forEach(b => b.onclick = () => submitMcq(+b.dataset.i));
+    btn.classList.add("hidden");
+  } else if (q.kind === "order") {
+    orderChosen = [];
+    const all = shuffle(q.tiles.concat(q.distractors || []));
+    area.innerHTML = head + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+      all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
+    area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
+    document.getElementById("btnReset").classList.remove("hidden");
   }
 }
 
-function nextQuestion() {
-  current++;
-  if (current >= 5) {
-    showScore();
-  } else {
-    renderQuestion();
-  }
-}
-
-function showScore() {
-  document.getElementById('quizView').style.display = 'none';
-  document.getElementById('scoreView').style.display = 'block';
-
-  document.getElementById('scoreBig').textContent = `${score}`;
-  document.getElementById('progressBar').style.width = '100%';
-
-  let emoji, msg, detail;
-  if (score === 5) { emoji = '🏆'; msg = 'Parfait ! 5/5 !'; detail = 'Tu maîtrises le prétérit. Recommence pour confirmer !'; }
-  else if (score === 4) { emoji = '🌟'; msg = 'Très bien !'; detail = 'Encore un effort et tu seras imbattable.'; }
-  else if (score === 3) { emoji = '👍'; msg = 'Pas mal !'; detail = 'Relis les erreurs ci-dessous et recommence.'; }
-  else if (score === 2) { emoji = '📚'; msg = 'Courage !'; detail = 'Revois les règles et réessaie.'; }
-  else { emoji = '💪'; msg = 'Continue à t\'entraîner !'; detail = 'Le prétérit, ça s\'apprend avec de la pratique.'; }
-
-  document.getElementById('scoreEmoji').textContent = emoji;
-  document.getElementById('scoreMsg').textContent = msg;
-  document.getElementById('scoreDetail').textContent = detail;
-
-  // Review list
-  const reviewList = document.getElementById('reviewList');
-  reviewList.innerHTML = '';
-  history.forEach((h, i) => {
-    const div = document.createElement('div');
-    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
-    div.innerHTML = `
-      <div class="review-french">${i+1}. ${h.q.fr}</div>
-      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
-      ${!h.ok ? `<div class="review-correct">→ ${h.q.correct}</div>` : ''}
-    `;
-    reviewList.appendChild(div);
+function addTile(b) { if (answered) return; b.classList.add("used"); orderChosen.push(b); drawZone(); }
+function drawZone() {
+  const zone = document.getElementById("zone"); zone.innerHTML = "";
+  zone.classList.toggle("empty", orderChosen.length === 0);
+  orderChosen.forEach((src, k) => {
+    const t = document.createElement("button"); t.className = "tile"; t.textContent = src.textContent;
+    t.onclick = () => { if (answered) return; src.classList.remove("used"); orderChosen.splice(k, 1); drawZone(); };
+    zone.appendChild(t);
   });
 }
+function resetOrder() { if (answered) return; orderChosen.forEach(s => s.classList.remove("used")); orderChosen = []; drawZone(); }
 
-// ─── EVENTS ─────────────────────────────────────────────
-document.getElementById('btnSubmit').addEventListener('click', submit);
-document.getElementById('btnNext').addEventListener('click', nextQuestion);
-document.getElementById('btnRestart').addEventListener('click', startQuiz);
-document.getElementById('answerInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    if (!answered) submit();
-    else nextQuestion();
+function mainAction() {
+  if (answered) { nextQuestion(); return; }
+  const q = questions[qi];
+  if (q.kind === "gap") {
+    const inputs = [...document.querySelectorAll(".gapin")];
+    const empty = inputs.find(i => !i.value.trim());
+    if (empty) { empty.focus(); return; }
+    const blanks = q.parts.filter(p => typeof p !== "string");
+    const vals = inputs.map(i => i.value);
+    let allOk = true;
+    inputs.forEach((inp, k) => {
+      const ok = blanks[k].answers.some(a => norm(a) === norm(inp.value));
+      inp.classList.add(ok ? "ok" : "ko"); inp.disabled = true; if (!ok) allOk = false;
+    });
+    finish(allOk, vals.join(" … "), q.correct, allOk || !q.diagnose ? "" : q.diagnose(vals));
+  } else if (q.kind === "order") {
+    if (!orderChosen.length) return;
+    const val = orderChosen.map(t => t.textContent).join(" ");
+    const ok = norm(val) === norm(q.answer);
+    document.getElementById("zone").classList.add(ok ? "ok" : "ko");
+    document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
+    finish(ok, val, q.answer, "");
+  }
+}
+
+function submitMcq(i) {
+  if (answered) return;
+  const q = questions[qi], ok = i === q.correct;
+  document.querySelectorAll(".btn-choice").forEach(b => {
+    const bi = +b.dataset.i; b.disabled = true;
+    b.classList.add(bi === q.correct ? "correct" : bi === i ? "wrong" : "dim");
+  });
+  const strip = s => String(s).replace(/<[^>]+>/g, "");
+  finish(ok, strip(q.options[i]), q.correctText || strip(q.options[q.correct]), "");
+}
+
+function finish(ok, given, correct, why) {
+  answered = true; if (ok) score++;
+  const q = questions[qi];
+  recap.push({ ok, label: q.label, given, correct });
+  document.getElementById("qFeedback").innerHTML = ok
+    ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip || ""}</span></div>`
+    : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip || ""}</span></div>`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("btnReset").classList.add("hidden");
+  const btn = document.getElementById("btnMain");
+  btn.textContent = qi + 1 < questions.length ? "Suivant →" : "Voir mon score";
+  btn.classList.remove("hidden"); btn.focus();
+}
+
+function nextQuestion() { qi++; if (qi < questions.length) renderQuestion(); else showScore(); }
+
+function showScore() {
+  const t = questions.length, pct = score / t, prev = best[current.id];
+  if (!prev || pct > prev.s / prev.t) { best[current.id] = { s: score, t }; saveBest(); }
+  document.getElementById("sTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("sScore").innerHTML = `${score}<span>/${t}</span>`;
+  const stars = pct === 1 ? 3 : pct >= .7 ? 2 : pct >= .4 ? 1 : 0;
+  document.getElementById("sStars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
+  document.getElementById("sMsg").textContent =
+    pct === 1 ? "Perfect! Excellent travail !" : pct >= .7 ? "Very good! Encore un petit effort pour le sans-faute." :
+    pct >= .4 ? "Not bad! Relis la leçon et recommence." : "Keep going! Relis le rappel de la leçon puis réessaie.";
+  document.getElementById("sRecap").innerHTML = recap.map(r =>
+    `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
+  showOnly("score");
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter" || document.getElementById("quiz").classList.contains("hidden")) return;
+  const q = questions[qi];
+  if (!q) return;
+  if (answered || q.kind !== "mcq") {
+    if (!answered && q.kind === "gap") {
+      const inputs = [...document.querySelectorAll(".gapin")];
+      const idx = inputs.indexOf(document.activeElement);
+      if (idx > -1 && idx < inputs.length - 1 && !inputs[idx + 1].value.trim()) { e.preventDefault(); inputs[idx + 1].focus(); return; }
+    }
+    e.preventDefault(); mainAction();
   }
 });
 
-// ─── START ──────────────────────────────────────────────
-startQuiz();
+renderMenu();
+
 </script>
 </body>
 </html>

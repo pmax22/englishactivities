@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comparatif – Entraînement</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0e0f14;
@@ -12,19 +12,15 @@
     --surface2: #1e2029;
     --border: #2a2d3a;
     --accent: #3ecfcf;
+    --accent-rgb: 62,207,207;
     --accent2: #2fa8d8;
     --green: #4ecb7f;
     --red: #e05c5c;
     --text: #e8eaf0;
-    --muted: #6b6f82;
+    --muted: #8a8ea3;
     --radius: 14px;
-    --c-plus: #4ecb7f;
-    --c-eq: #3ecfcf;
-    --c-minus: #e07b3f;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -33,961 +29,970 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 16px 64px;
-    background-image: radial-gradient(ellipse at 20% 10%, rgba(62,207,207,0.07) 0%, transparent 60%),
-                      radial-gradient(ellipse at 80% 80%, rgba(47,168,216,0.05) 0%, transparent 60%);
+    padding: 24px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(62,207,207,0.08) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(47,168,216,0.06) 0%, transparent 60%);
   }
-
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: fadeDown 0.6s ease both;
+  a { color: inherit; }
+  .topnav { width: 100%; max-width: 760px; margin-bottom: 18px; }
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+    transition: color .2s, border-color .2s;
   }
+  .back:hover { color: var(--accent); border-color: rgba(62,207,207,0.4); }
 
+  header { text-align: center; margin-bottom: 32px; animation: fadeDown .6s ease both; }
   header .tag {
-    display: inline-block;
-    background: rgba(62,207,207,0.12);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(62,207,207,0.25);
-    margin-bottom: 14px;
+    display: inline-block; background: rgba(62,207,207,0.12); color: var(--accent);
+    font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(62,207,207,0.25); margin-bottom: 14px;
   }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 46px);
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.1;
-  }
-
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 46px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
   h1 span { color: var(--accent); }
+  .subtitle { color: var(--muted); margin-top: 10px; font-size: 15px; font-weight: 300; }
 
-  .subtitle {
-    color: var(--muted);
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 300;
+  .wrap { width: 100%; max-width: 760px; }
+  .hidden { display: none !important; }
+
+  /* ── MENU ── */
+  .seance-title {
+    font-family: 'Syne', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin: 28px 0 12px; display: flex; align-items: center; gap: 10px;
   }
+  .seance-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .seance-title:first-child { margin-top: 0; }
 
-  .grammar-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 16px;
-    font-family: 'DM Sans', sans-serif;
-    flex-wrap: wrap;
-    justify-content: center;
+  details.lesson {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 14px; overflow: hidden;
   }
-  .grammar-pill .pill-plus  { color: var(--c-plus);  font-weight: 600; }
-  .grammar-pill .pill-eq    { color: var(--c-eq);    font-weight: 600; }
-  .grammar-pill .pill-minus { color: var(--c-minus); font-weight: 600; }
-  .grammar-pill .sep { color: var(--border); }
+  details.lesson summary {
+    cursor: pointer; padding: 14px 18px; font-weight: 500; font-size: 14px; list-style: none;
+    display: flex; align-items: center; gap: 10px; color: var(--accent);
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  details.lesson summary::after { content: '▾'; margin-left: auto; transition: transform .2s; color: var(--muted); }
+  details.lesson[open] summary::after { transform: rotate(180deg); }
+  .lesson-body { padding: 0 18px 18px; font-size: 14px; line-height: 1.7; color: #cfd2de; }
+  .lesson-body p { margin-bottom: 8px; }
+  .formula {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 10px 14px; margin: 8px 0 12px; font-size: 14px;
+  }
+  .ex { color: var(--muted); font-style: italic; }
+  .hl { color: var(--accent); font-weight: 700; }
+  .bv { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0 5px; margin-left: 2px; }
 
-  /* CARD */
+  .missions { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .mission {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; cursor: pointer; text-align: left; color: inherit; font: inherit;
+    display: flex; flex-direction: column; gap: 6px; position: relative;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .mission:hover { transform: translateY(-3px); border-color: rgba(62,207,207,0.4); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  .mission .m-icon { font-size: 26px; line-height: 1; }
+  .mission .m-num { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .mission .m-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .mission .m-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .mission .m-best {
+    position: absolute; top: 14px; right: 14px; font-size: 11px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; background: var(--surface2);
+  }
+  .mission .m-best.done { color: var(--green); border-color: rgba(78,203,127,.4); }
+
+  /* ── QUIZ CARD ── */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 36px 36px 28px;
-    width: 100%;
-    max-width: 660px;
-    animation: fadeUp 0.5s ease both;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px 32px 26px; position: relative; overflow: hidden; animation: fadeUp .45s ease both;
   }
-
   .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 20px 20px 0 0;
   }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+  .progress-bar-wrap { background: var(--border); border-radius: 999px; height: 6px; margin-bottom: 26px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .5s cubic-bezier(.4,0,.2,1); }
 
-  /* Progress */
-  .progress-bar-wrap {
-    background: var(--border);
-    border-radius: 999px;
-    height: 6px;
-    margin-bottom: 28px;
-    overflow: hidden;
+  .q-instr { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; font-family: 'Syne', sans-serif; }
+  .q-prompt { font-size: clamp(20px, 3.6vw, 28px); font-weight: 500; line-height: 1.35; margin-bottom: 8px; }
+  .q-prompt .big { font-size: clamp(48px, 10vw, 72px); display: block; text-align: center; margin: 6px 0; }
+  .q-prompt u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .q-sub { font-size: 14px; color: var(--muted); margin-bottom: 22px; font-style: italic; }
+
+  input.answer {
+    width: 100%; padding: 15px 18px; font-size: 18px; font-family: 'DM Sans', sans-serif;
+    background: var(--surface2); color: var(--text); border: 1.5px solid var(--border);
+    border-radius: var(--radius); outline: none; transition: border-color .2s, box-shadow .2s;
   }
+  input.answer:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(62,207,207,.15); }
+  input.answer.ok { border-color: var(--green); background: rgba(78,203,127,.08); }
+  input.answer.ko { border-color: var(--red); background: rgba(224,92,92,.08); }
 
-  .progress-bar-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  .choices { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .choices.grid3 { grid-template-columns: repeat(3, 1fr); }
+  .btn-choice {
+    padding: 14px 16px; border-radius: var(--radius); border: 1.5px solid var(--border);
+    background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px;
+    cursor: pointer; text-align: left; transition: border-color .2s, background .2s, transform .15s;
   }
+  .choices.grid3 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; }
+  .btn-choice:hover:not(:disabled) { border-color: var(--accent); background: rgba(62,207,207,.06); transform: translateY(-1px); }
+  .btn-choice:disabled { cursor: default; }
+  .btn-choice.correct { border-color: var(--green); background: rgba(78,203,127,.12); }
+  .btn-choice.wrong { border-color: var(--red); background: rgba(224,92,92,.1); }
+  .btn-choice.dim { opacity: .45; }
 
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
+  /* Word order */
+  .order-zone {
+    min-height: 62px; border: 1.5px dashed var(--border); border-radius: var(--radius);
+    padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;
+    background: rgba(255,255,255,.015);
   }
-
-  .question-num {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 14px;
-    font-family: 'Syne', sans-serif;
+  .order-zone.empty::before { content: 'Clique sur les mots dans le bon ordre…'; color: var(--muted); font-size: 13px; font-style: italic; padding-left: 6px; }
+  .order-zone.ok { border-color: var(--green); border-style: solid; background: rgba(78,203,127,.06); }
+  .order-zone.ko { border-color: var(--red); border-style: solid; background: rgba(224,92,92,.06); }
+  .tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tile {
+    padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface2);
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer;
+    transition: transform .12s, border-color .2s;
   }
+  .tile:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
+  .tile.used { visibility: hidden; }
+  .order-zone .tile { border-color: rgba(62,207,207,.45); background: rgba(62,207,207,.08); }
 
-  /* Type badge */
-  .type-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: 'Syne', sans-serif;
-    letter-spacing: 0.5px;
-    margin-bottom: 18px;
-  }
-  .type-badge.plus  { background: rgba(78,203,127,0.12); color: var(--c-plus);  border: 1px solid rgba(78,203,127,0.25); }
-  .type-badge.eq    { background: rgba(62,207,207,0.12); color: var(--c-eq);    border: 1px solid rgba(62,207,207,0.25); }
-  .type-badge.minus { background: rgba(224,123,63,0.12); color: var(--c-minus); border: 1px solid rgba(224,123,63,0.25); }
-
-  /* Sentence display */
-  .sentence-wrap {
-    font-size: clamp(17px, 2.8vw, 21px);
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.8;
-    margin-bottom: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .blank-display {
-    display: inline-flex;
-    align-items: center;
-    background: rgba(62,207,207,0.08);
-    border: 1.5px dashed rgba(62,207,207,0.35);
-    border-radius: 8px;
-    padding: 2px 16px;
-    min-width: 160px;
-    color: var(--muted);
-    font-style: italic;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-  }
-
-  .adj-hint {
-    display: inline-block;
-    background: rgba(47,168,216,0.1);
-    color: var(--accent2);
-    border: 1px solid rgba(47,168,216,0.25);
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-left: 2px;
-    font-family: 'DM Sans', sans-serif;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  .hint {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 24px;
-  }
-
-  /* Input */
-  .input-wrap {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-
-  .input-wrap input {
-    flex: 1;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    padding: 13px 18px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  .input-wrap input::placeholder { color: var(--muted); font-style: italic; }
-
-  .input-wrap input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(62,207,207,0.12);
-  }
-
-  .input-wrap input.correct {
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(78,203,127,0.1);
-  }
-
-  .input-wrap input.wrong {
-    border-color: var(--red);
-    box-shadow: 0 0 0 3px rgba(224,92,92,0.1);
-  }
-
-  .btn-submit {
-    background: var(--accent);
-    color: #0e0f14;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 13px 22px;
-    cursor: pointer;
-    transition: transform 0.15s, background 0.15s, opacity 0.15s;
-    white-space: nowrap;
-  }
-
-  .btn-submit:hover { background: #5ddddd; transform: translateY(-1px); }
-  .btn-submit:active { transform: translateY(0); }
-  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  /* Feedback */
   .feedback {
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    font-size: 14px;
-    line-height: 1.7;
-    display: none;
-    animation: fadeUp 0.3s ease both;
+    margin-top: 18px; padding: 14px 16px; border-radius: var(--radius); font-size: 14.5px; line-height: 1.6;
+    animation: fadeUp .3s ease both;
   }
+  .feedback.ok { background: rgba(78,203,127,.1); border: 1px solid rgba(78,203,127,.35); }
+  .feedback.ko { background: rgba(224,92,92,.08); border: 1px solid rgba(224,92,92,.35); }
+  .feedback b { color: var(--text); }
+  .feedback .tip { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
 
-  .feedback.correct {
-    background: rgba(78,203,127,0.1);
-    border: 1px solid rgba(78,203,127,0.3);
-    display: block;
+  .actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: .3px; transition: transform .15s, opacity .2s, box-shadow .2s;
   }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #1a0f08; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(62,207,207,.25); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
 
-  .feedback.wrong {
-    background: rgba(224,92,92,0.1);
-    border: 1px solid rgba(224,92,92,0.3);
-    display: block;
+  /* Score */
+  .score-big { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; text-align: center; line-height: 1; margin: 10px 0; }
+  .score-big span { color: var(--accent); }
+  .stars { text-align: center; font-size: 34px; letter-spacing: 6px; margin-bottom: 8px; }
+  .score-msg { text-align: center; color: var(--muted); margin-bottom: 18px; }
+  .recap { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .recap-item { font-size: 13.5px; padding: 6px 0; border-bottom: 1px dashed var(--border); display: flex; gap: 10px; }
+  .recap-item .r-ic { flex-shrink: 0; }
+  .recap-item .r-txt { color: var(--muted); }
+  .recap-item .r-txt b { color: var(--text); font-weight: 500; }
+
+  /* Builder (mission 8) */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .field label .qq { color: var(--accent); font-weight: 700; font-family: 'Syne', sans-serif; font-size: 14px; margin-right: 6px; }
+  .field .row { display: flex; align-items: center; gap: 8px; }
+  .field .pre { color: var(--muted); font-size: 15px; white-space: nowrap; }
+  .field input { font-size: 16px; padding: 11px 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+  .chip {
+    font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--surface2); color: var(--muted);
+    border: 1px solid var(--border); cursor: pointer; font-family: 'DM Sans', sans-serif;
   }
-
-  .feedback .fb-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
+  .chip:hover { color: var(--accent); border-color: rgba(62,207,207,.4); }
+  .preview {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 12px; padding: 16px 18px; font-size: 18px; line-height: 1.6; margin-top: 8px; min-height: 60px;
   }
+  .preview .blank { color: var(--muted); }
+  .warn { font-size: 13px; color: #f5c842; margin-top: 8px; }
 
-  .feedback.correct .fb-title { color: var(--green); }
-  .feedback.wrong .fb-title { color: var(--red); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-  .answer-shown {
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 8px;
-    font-size: 15px;
+  @media (max-width: 560px) {
+    .card { padding: 24px 18px 20px; }
+    .choices.grid3 { grid-template-columns: repeat(2, 1fr); }
+    .field .row { flex-wrap: wrap; }
   }
-
-  .explanation { color: var(--muted); font-size: 13px; }
-  .explanation strong { color: var(--text); }
-  .explanation em { color: var(--accent); font-style: normal; }
-
-  .structure-box {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-    background: rgba(62,207,207,0.08);
-    border: 1px solid rgba(62,207,207,0.2);
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: 13px;
-    font-family: 'DM Sans', monospace;
-    color: var(--accent);
-    font-weight: 600;
-    margin: 4px 0 6px;
+  /* ── Liste des verbes (même style que les autres pages) ── */
+  .verb-ref {
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
   }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(62,207,207,.35); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
-  .btn-next {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    background: transparent;
-    color: var(--accent);
-    border: 1.5px solid rgba(62,207,207,0.4);
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 13px;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.15s;
-    letter-spacing: 0.5px;
-    display: none;
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .en-line { font-size: clamp(19px, 3.2vw, 24px); color: var(--muted); margin-bottom: 18px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
+
+  /* Phrases à trous */
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer {
+    display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px;
   }
-
-  .btn-next:hover {
-    background: rgba(62,207,207,0.08);
-    border-color: var(--accent);
-    transform: translateY(-1px);
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .gap-q { font-size: clamp(18px, 3vw, 22px); color: var(--text); margin-bottom: 10px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
   }
-
-  /* Score screen */
-  .score-screen {
-    text-align: center;
-    padding: 20px 0 10px;
-    display: none;
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
+  /* ── Liste des verbes (même style que les autres pages) ── */
+  .verb-ref {
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
   }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  details.verb-ref summary { cursor: pointer; list-style: none; margin-bottom: 0; }
+  details.verb-ref summary::-webkit-details-marker { display: none; }
+  details.verb-ref summary::after { content: ' ▾'; }
+  details.verb-ref[open] summary { margin-bottom: 14px; }
+  .verb-sub { font-size: 12px; color: var(--muted); margin: 12px 0 8px; font-weight: 500; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(var(--accent-rgb),.45); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
-  .score-emoji { font-size: 52px; margin-bottom: 12px; }
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .big-word { font-family: 'Syne', sans-serif; font-size: clamp(40px, 9vw, 64px); font-weight: 800; text-align: center; margin: 4px 0 6px; color: var(--text); }
+  .big-sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
 
-  .score-big {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 10vw, 80px);
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer { display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px; max-width: 100%; }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
   }
-
-  .score-label { font-size: 14px; color: var(--muted); margin-top: 4px; margin-bottom: 6px; }
-
-  .score-msg {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .score-detail { color: var(--muted); font-size: 14px; margin-bottom: 28px; font-weight: 300; }
-
-  .review-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-    text-align: left;
-  }
-
-  .review-item {
-    background: var(--surface2);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    text-align: left;
-    border-left: 3px solid var(--border);
-  }
-
-  .review-item.ok { border-left-color: var(--green); }
-  .review-item.ko { border-left-color: var(--red); }
-
-  .review-prompt { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
-  .review-answer { font-size: 14px; font-weight: 500; }
-  .review-item.ok .review-answer { color: var(--green); }
-  .review-item.ko .review-answer { color: var(--red); }
-  .review-correct { font-size: 13px; color: var(--text); margin-top: 4px; }
-  .review-correct::before { content: '→ '; color: var(--accent); }
-
-  .btn-restart {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #0e0f14;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 15px;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-restart:hover { opacity: 0.9; transform: translateY(-1px); }
-
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    20%      { transform: translateX(-6px); }
-    40%      { transform: translateX(6px); }
-    60%      { transform: translateX(-4px); }
-    80%      { transform: translateX(4px); }
-  }
-
-  .shake { animation: shake 0.35s ease both; }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  .sign.eq, .sign.q { background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .choices.grid2 { grid-template-columns: 1fr 1fr; }
+  .choices.grid2 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 18px; }
+  .choices.grid2 .btn-choice small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .lesson-body table { border-collapse: collapse; margin: 6px 0 12px; font-size: 13.5px; }
+  .lesson-body td, .lesson-body th { border: 1px solid var(--border); padding: 5px 10px; text-align: left; }
+  .lesson-body th { color: var(--accent); font-weight: 500; }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
 </style>
 </head>
 <body>
 
+<nav class="topnav"><a class="back" href="index.html">← Toutes les activités</a></nav>
+
 <header>
   <div class="tag">Anglais · Grammaire</div>
   <h1>Le <span>Comparatif</span></h1>
-  <p class="subtitle">Construis la bonne phrase comparative à partir des indices.</p>
-  <div class="grammar-pill">
-    <span class="pill-plus">(+) -er than / more … than</span>
-    <span class="sep">|</span>
-    <span class="pill-eq">(=) as … as</span>
-    <span class="sep">|</span>
-    <span class="pill-minus">(−) less … than</span>
-  </div>
+  <p class="subtitle">(+) -er than / more … than · (=) as … as · (−) less … than</p>
 </header>
 
-<div class="card" id="mainCard">
-
-  <div id="quizView">
-    <div class="progress-label">
-      <span id="progressText">Question 1 / 5</span>
-      <span id="scoreText">Score : 0</span>
+<!-- ═════ MENU ═════ -->
+<main class="wrap" id="menu">
+  <details class="lesson" open>
+    <summary>Rappel de la leçon</summary>
+    <div class="lesson-body">
+      <p>Le <span class="hl">comparatif</span> sert à comparer deux éléments. <b>Than</b> = que.</p>
+      <table>
+        <tr><th></th><th>Structure</th><th>Exemple</th></tr>
+        <tr><td><b>+</b> plus … que</td><td>adjectif court + <span class="hl">-er than</span><br>adjectif long : <span class="hl">more</span> + adj + <span class="hl">than</span></td><td>Hulk is stronger than Thor.<br>Gold is more expensive than silver.</td></tr>
+        <tr><td><b>=</b> aussi … que</td><td><span class="hl">as</span> + adjectif + <span class="hl">as</span></td><td>Batman is as brave as Superman.</td></tr>
+        <tr><td><b>−</b> moins … que</td><td><span class="hl">less</span> + adjectif + <span class="hl">than</span></td><td>An ant is less strong than an elephant.</td></tr>
+      </table>
+      <p><b>Adjectifs courts</b> (1 syllabe, ou 2 syllabes en -y) — attention à l'orthographe :</p>
+      <div class="formula">tall → taller · nice → nicer (-e : + r) · hot → hotter (consonne doublée) · heavy → heavier (-y → -ier)</div>
+      <p><b>Adjectifs longs</b> (2 syllabes ou plus) : more interesting, more expensive, more popular…</p>
+      <p><b>Irréguliers</b> : good → <span class="hl">better</span> · bad → <span class="hl">worse</span></p>
     </div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressBar" style="width:20%"></div>
+  </details>
+  <div class="missions" id="missions"></div>
+</main>
+
+<!-- ═════ QUIZ ═════ -->
+<main class="wrap hidden" id="quiz">
+  <div class="card">
+    <div class="progress-label"><span id="qTitle"></span><span id="qCount"></span></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="qBar"></div></div>
+    <div class="q-instr" id="qInstr"></div>
+    <div id="qArea"></div>
+    <div id="qFeedback"></div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
+      <button class="btn btn-ghost hidden" id="btnReset" onclick="resetOrder()">Effacer</button>
+      <button class="btn btn-primary" id="btnMain" onclick="mainAction()">Valider</button>
     </div>
-
-    <div class="question-num" id="questionNum">QUESTION 1</div>
-
-    <div id="typeBadge" class="type-badge plus">+ Supériorité</div>
-
-    <div class="sentence-wrap" id="sentenceWrap"></div>
-
-    <div class="hint" id="hint"></div>
-
-    <div class="input-wrap">
-      <input type="text" id="answerInput" placeholder="Écris ta phrase complète…" autocomplete="off" autocorrect="off" spellcheck="false" />
-      <button class="btn-submit" id="btnSubmit">Vérifier</button>
-    </div>
-
-    <div class="feedback" id="feedback">
-      <div class="fb-title" id="fbTitle"></div>
-      <div class="answer-shown" id="fbAnswer"></div>
-      <div class="explanation" id="fbExplanation"></div>
-    </div>
-
-    <button class="btn-next" id="btnNext">Question suivante →</button>
   </div>
+</main>
 
-  <!-- SCORE SCREEN -->
-  <div class="score-screen" id="scoreView">
-    <div class="score-emoji" id="scoreEmoji">🏆</div>
-    <div class="score-big" id="scoreBig">0</div>
-    <div class="score-label">/ 5</div>
-    <div class="score-msg" id="scoreMsg"></div>
-    <div class="score-detail" id="scoreDetail"></div>
-
-    <div class="review-title">Récapitulatif</div>
-    <div id="reviewList"></div>
-
-    <button class="btn-restart" id="btnRestart">🔄 Recommencer</button>
+<!-- ═════ SCORE ═════ -->
+<main class="wrap hidden" id="score">
+  <div class="card">
+    <div class="q-instr" id="sTitle"></div>
+    <div class="stars" id="sStars"></div>
+    <div class="score-big" id="sScore"></div>
+    <p class="score-msg" id="sMsg"></p>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="showMenu()">Retour aux missions</button>
+      <button class="btn btn-primary" onclick="startMission(current.id)">Recommencer</button>
+    </div>
+    <div class="recap" id="sRecap"></div>
   </div>
+</main>
 
-</div>
 
 <script>
-// ─── DATA ────────────────────────────────────────────────
-// type: "plus" | "eq" | "minus"
-// subject1, subject2 : les deux éléments comparés
-// adj : adjectif (base form)
-// answers : réponses acceptées (normalisées lowercase)
-// correct : réponse de référence affichée en cas d'erreur
-// fr : traduction française
-// explanation : HTML
+const STORE_KEY = "ea_comparatif_v2";
+const ADJ = [["strong", "stronger", "er"], ["fast", "faster", "er"], ["tall", "taller", "er"], ["expensive", "more expensive", "more"], ["hot", "hotter", "double"], ["rich", "richer", "er"], ["long", "longer", "er"], ["old", "older", "er"], ["heavy", "heavier", "ier"], ["interesting", "more interesting", "more"], ["brave", "braver", "r"], ["popular", "more popular", "more"], ["busy", "busier", "ier"], ["tiring", "more tiring", "more"], ["intelligent", "more intelligent", "more"], ["creative", "more creative", "more"], ["difficult", "more difficult", "more"], ["beautiful", "more beautiful", "more"], ["powerful", "more powerful", "more"], ["precious", "more precious", "more"], ["deep", "deeper", "er"], ["bright", "brighter", "er"], ["dangerous", "more dangerous", "more"], ["exciting", "more exciting", "more"], ["big", "bigger", "double"], ["small", "smaller", "er"], ["happy", "happier", "ier"], ["young", "younger", "er"], ["nice", "nicer", "r"], ["thin", "thinner", "double"], ["funny", "funnier", "ier"], ["famous", "more famous", "more"], ["good", "better", "irr"], ["bad", "worse", "irr"], ["easy", "easier", "ier"], ["large", "larger", "r"]];
+const COMP = [
+{
+"type": "plus",
+"subject1": "Hulk",
+"subject2": "Thor",
+"adj": "strong",
+"answers": [
+"is stronger than"
+],
+"correct": "is stronger than",
+"fr": "Hulk est plus fort que Thor.",
+"explanation": "<div class=\"structure-box\">Hulk is <em>stronger</em> than Thor.</div>\n<strong>Strong</strong> (1 syllabe) → <strong>stronger</strong>. Comparatif de supériorité : adjectif court + <em>-er than</em>."
+},
+{
+"type": "plus",
+"subject1": "A cheetah",
+"subject2": "a lion",
+"adj": "fast",
+"answers": [
+"is faster than"
+],
+"correct": "is faster than",
+"fr": "Un guépard est plus rapide qu'un lion.",
+"explanation": "<div class=\"structure-box\">A cheetah is <em>faster</em> than a lion.</div>\n<strong>Fast</strong> (1 syllabe) → <strong>faster</strong>. Règle : consonne finale doublée si précédée d'une seule voyelle : fast → fast<em>er</em>."
+},
+{
+"type": "plus",
+"subject1": "Everest",
+"subject2": "Mont Blanc",
+"adj": "tall",
+"answers": [
+"is taller than"
+],
+"correct": "is taller than",
+"fr": "L'Everest est plus haut que le Mont Blanc.",
+"explanation": "<div class=\"structure-box\">Everest is <em>taller</em> than Mont Blanc.</div>\n<strong>Tall</strong> (1 syllabe) → <strong>taller</strong>. Comparatif court, règle standard : + <em>-er than</em>."
+},
+{
+"type": "plus",
+"subject1": "Gold",
+"subject2": "silver",
+"adj": "expensive",
+"answers": [
+"is more expensive than"
+],
+"correct": "is more expensive than",
+"fr": "L'or est plus cher que l'argent.",
+"explanation": "<div class=\"structure-box\">Gold is <em>more expensive</em> than silver.</div>\n<strong>Expensive</strong> (3 syllabes) → <strong>more expensive</strong>. Adjectifs longs (2+ syllabes) : <em>more + adjectif + than</em>."
+},
+{
+"type": "plus",
+"subject1": "Summer",
+"subject2": "winter",
+"adj": "hot",
+"answers": [
+"is hotter than"
+],
+"correct": "is hotter than",
+"fr": "L'été est plus chaud que l'hiver.",
+"explanation": "<div class=\"structure-box\">Summer is <em>hotter</em> than winter.</div>\n<strong>Hot</strong> → consonne finale doublée : <strong>hotter</strong>. Règle CVC (consonne-voyelle-consonne) : on double la consonne finale."
+},
+{
+"type": "plus",
+"subject1": "Ironman",
+"subject2": "Spider-Man",
+"adj": "rich",
+"answers": [
+"is richer than"
+],
+"correct": "is richer than",
+"fr": "Ironman est plus riche que Spider-Man.",
+"explanation": "<div class=\"structure-box\">Ironman is <em>richer</em> than Spider-Man.</div>\n<strong>Rich</strong> (1 syllabe) → <strong>richer</strong>. Comparatif court standard + <em>-er than</em>."
+},
+{
+"type": "plus",
+"subject1": "The Amazon",
+"subject2": "the Seine",
+"adj": "long",
+"answers": [
+"is longer than"
+],
+"correct": "is longer than",
+"fr": "L'Amazone est plus longue que la Seine.",
+"explanation": "<div class=\"structure-box\">The Amazon is <em>longer</em> than the Seine.</div>\n<strong>Long</strong> → <strong>longer</strong>. Comparatif court, + <em>-er than</em>. Attention à ne pas écrire <em>more long</em>."
+},
+{
+"type": "plus",
+"subject1": "Gandalf",
+"subject2": "Frodo",
+"adj": "old",
+"answers": [
+"is older than"
+],
+"correct": "is older than",
+"fr": "Gandalf est plus vieux que Frodo.",
+"explanation": "<div class=\"structure-box\">Gandalf is <em>older</em> than Frodo.</div>\n<strong>Old</strong> → <strong>older</strong>. Comparatif court, + <em>-er than</em>."
+},
+{
+"type": "plus",
+"subject1": "An elephant",
+"subject2": "a dog",
+"adj": "heavy",
+"answers": [
+"is heavier than"
+],
+"correct": "is heavier than",
+"fr": "Un éléphant est plus lourd qu'un chien.",
+"explanation": "<div class=\"structure-box\">An elephant is <em>heavier</em> than a dog.</div>\n<strong>Heavy</strong> se termine en <em>-y</em> précédé d'une consonne → <strong>heavier</strong>. Règle : <em>-y → -ier</em>."
+},
+{
+"type": "plus",
+"subject1": "This film",
+"subject2": "the book",
+"adj": "interesting",
+"answers": [
+"is more interesting than"
+],
+"correct": "is more interesting than",
+"fr": "Ce film est plus intéressant que le livre.",
+"explanation": "<div class=\"structure-box\">This film is <em>more interesting</em> than the book.</div>\n<strong>Interesting</strong> (4 syllabes) → <strong>more interesting</strong>. Adjectif long : <em>more + adjectif + than</em>."
+},
+{
+"type": "eq",
+"subject1": "Batman",
+"subject2": "Superman",
+"adj": "brave",
+"answers": [
+"is as brave as"
+],
+"correct": "is as brave as",
+"fr": "Batman est aussi courageux que Superman.",
+"explanation": "<div class=\"structure-box\">Batman is <em>as brave as</em> Superman.</div>\nComparatif d'égalité : <strong>as + adjectif + as</strong>. L'adjectif ne change pas de forme."
+},
+{
+"type": "eq",
+"subject1": "Tea",
+"subject2": "coffee",
+"adj": "popular",
+"answers": [
+"is as popular as"
+],
+"correct": "is as popular as",
+"fr": "Le thé est aussi populaire que le café.",
+"explanation": "<div class=\"structure-box\">Tea is <em>as popular as</em> coffee.</div>\n<strong>As + popular + as</strong> : l'adjectif reste à sa forme de base, quelle que soit sa longueur."
+},
+{
+"type": "eq",
+"subject1": "Harry",
+"subject2": "Hermione",
+"adj": "brave",
+"answers": [
+"is as brave as"
+],
+"correct": "is as brave as",
+"fr": "Harry est aussi courageux qu'Hermione.",
+"explanation": "<div class=\"structure-box\">Harry is <em>as brave as</em> Hermione.</div>\nComparatif d'égalité : <strong>as + adjectif + as</strong>. Rappel : pas de modification de l'adjectif."
+},
+{
+"type": "eq",
+"subject1": "Paris",
+"subject2": "London",
+"adj": "busy",
+"answers": [
+"is as busy as"
+],
+"correct": "is as busy as",
+"fr": "Paris est aussi animé que Londres.",
+"explanation": "<div class=\"structure-box\">Paris is <em>as busy as</em> London.</div>\n<strong>Busy</strong> ne change pas dans la structure <em>as … as</em> (contrairement au comparatif de supériorité où il devient <em>busier</em>)."
+},
+{
+"type": "eq",
+"subject1": "Running",
+"subject2": "swimming",
+"adj": "tiring",
+"answers": [
+"is as tiring as"
+],
+"correct": "is as tiring as",
+"fr": "Courir est aussi fatigant que nager.",
+"explanation": "<div class=\"structure-box\">Running is <em>as tiring as</em> swimming.</div>\nLes gérondifs (<em>running, swimming</em>) peuvent être sujets d'une comparaison. Structure <strong>as + adjectif + as</strong>."
+},
+{
+"type": "eq",
+"subject1": "Maths",
+"subject2": "science",
+"adj": "interesting",
+"answers": [
+"is as interesting as",
+"are as interesting as"
+],
+"correct": "is as interesting as",
+"fr": "Les maths sont aussi intéressantes que les sciences.",
+"explanation": "<div class=\"structure-box\">Maths is <em>as interesting as</em> science.</div>\n<strong>As + interesting + as</strong> : adjectif long, mais il ne change pas dans la structure d'égalité."
+},
+{
+"type": "eq",
+"subject1": "A cat",
+"subject2": "a dog",
+"adj": "intelligent",
+"answers": [
+"is as intelligent as"
+],
+"correct": "is as intelligent as",
+"fr": "Un chat est aussi intelligent qu'un chien.",
+"explanation": "<div class=\"structure-box\">A cat is <em>as intelligent as</em> a dog.</div>\nComparatif d'égalité. Peu importe la longueur de l'adjectif : la structure <strong>as … as</strong> ne change jamais."
+},
+{
+"type": "eq",
+"subject1": "Rock",
+"subject2": "jazz",
+"adj": "creative",
+"answers": [
+"is as creative as"
+],
+"correct": "is as creative as",
+"fr": "Le rock est aussi créatif que le jazz.",
+"explanation": "<div class=\"structure-box\">Rock is <em>as creative as</em> jazz.</div>\n<strong>As + creative + as</strong>. Comparatif d'égalité : l'adjectif reste à la forme de base."
+},
+{
+"type": "eq",
+"subject1": "English",
+"subject2": "French",
+"adj": "difficult",
+"answers": [
+"is as difficult as"
+],
+"correct": "is as difficult as",
+"fr": "L'anglais est aussi difficile que le français.",
+"explanation": "<div class=\"structure-box\">English is <em>as difficult as</em> French.</div>\n<strong>Difficult</strong> (3 syllabes) — même en égalité, la structure <em>as … as</em> est identique pour tout adjectif."
+},
+{
+"type": "eq",
+"subject1": "The piano",
+"subject2": "the violin",
+"adj": "beautiful",
+"answers": [
+"is as beautiful as"
+],
+"correct": "is as beautiful as",
+"fr": "Le piano est aussi beau que le violon.",
+"explanation": "<div class=\"structure-box\">The piano is <em>as beautiful as</em> the violin.</div>\n<strong>As + beautiful + as</strong>. Structure d'égalité invariable."
+},
+{
+"type": "minus",
+"subject1": "An ant",
+"subject2": "an elephant",
+"adj": "strong",
+"answers": [
+"is less strong than"
+],
+"correct": "is less strong than",
+"fr": "Une fourmi est moins forte qu'un éléphant.",
+"explanation": "<div class=\"structure-box\">An ant is <em>less strong</em> than an elephant.</div>\nComparatif d'infériorité : <strong>less + adjectif + than</strong>. L'adjectif ne change jamais de forme."
+},
+{
+"type": "minus",
+"subject1": "A scooter",
+"subject2": "an airplane",
+"adj": "fast",
+"answers": [
+"is less fast than"
+],
+"correct": "is less fast than",
+"fr": "Un scooter est moins rapide qu'un avion.",
+"explanation": "<div class=\"structure-box\">A scooter is <em>less fast</em> than an airplane.</div>\n<strong>Less + fast + than</strong>. Même structure pour les adjectifs courts ou longs."
+},
+{
+"type": "minus",
+"subject1": "Pikachu",
+"subject2": "Mewtwo",
+"adj": "powerful",
+"answers": [
+"is less powerful than"
+],
+"correct": "is less powerful than",
+"fr": "Pikachu est moins puissant que Mewtwo.",
+"explanation": "<div class=\"structure-box\">Pikachu is <em>less powerful</em> than Mewtwo.</div>\n<strong>Less + powerful + than</strong>. Pour les adjectifs longs, on n'utilise jamais <em>less more powerful</em> — juste <em>less powerful</em>."
+},
+{
+"type": "minus",
+"subject1": "Bronze",
+"subject2": "gold",
+"adj": "precious",
+"answers": [
+"is less precious than"
+],
+"correct": "is less precious than",
+"fr": "Le bronze est moins précieux que l'or.",
+"explanation": "<div class=\"structure-box\">Bronze is <em>less precious</em> than gold.</div>\n<strong>Less + precious + than</strong>. Structure invariable : <em>less</em> + adjectif de base."
+},
+{
+"type": "minus",
+"subject1": "A pond",
+"subject2": "the ocean",
+"adj": "deep",
+"answers": [
+"is less deep than"
+],
+"correct": "is less deep than",
+"fr": "Un étang est moins profond que l'océan.",
+"explanation": "<div class=\"structure-box\">A pond is <em>less deep</em> than the ocean.</div>\n<strong>Less + deep + than</strong>. Rappel : <em>less deep</em> et non <em>shallower</em> dans la structure d'infériorité."
+},
+{
+"type": "minus",
+"subject1": "A candle",
+"subject2": "the sun",
+"adj": "bright",
+"answers": [
+"is less bright than"
+],
+"correct": "is less bright than",
+"fr": "Une bougie est moins lumineuse que le soleil.",
+"explanation": "<div class=\"structure-box\">A candle is <em>less bright</em> than the sun.</div>\n<strong>Less + bright + than</strong>. L'adjectif court ne prend pas de <em>-er</em> ici — c'est <em>less</em> qui exprime l'infériorité."
+},
+{
+"type": "minus",
+"subject1": "A notebook",
+"subject2": "a laptop",
+"adj": "expensive",
+"answers": [
+"is less expensive than"
+],
+"correct": "is less expensive than",
+"fr": "Un carnet est moins cher qu'un ordinateur portable.",
+"explanation": "<div class=\"structure-box\">A notebook is <em>less expensive</em> than a laptop.</div>\n<strong>Less + expensive + than</strong>. Adjectif long, structure d'infériorité identique."
+},
+{
+"type": "minus",
+"subject1": "A mouse",
+"subject2": "a lion",
+"adj": "dangerous",
+"answers": [
+"is less dangerous than"
+],
+"correct": "is less dangerous than",
+"fr": "Une souris est moins dangereuse qu'un lion.",
+"explanation": "<div class=\"structure-box\">A mouse is <em>less dangerous</em> than a lion.</div>\n<strong>Less + dangerous + than</strong>. Adjectif long : même structure, pas de <em>more/most</em> impliqués."
+},
+{
+"type": "minus",
+"subject1": "Tuesday",
+"subject2": "Saturday",
+"adj": "exciting",
+"answers": [
+"is less exciting than"
+],
+"correct": "is less exciting than",
+"fr": "Le mardi est moins excitant que le samedi.",
+"explanation": "<div class=\"structure-box\">Tuesday is <em>less exciting</em> than Saturday.</div>\n<strong>Less + exciting + than</strong>. Adjectif en <em>-ing</em> : aucun changement de forme."
+},
+{
+"type": "minus",
+"subject1": "A stormtrooper",
+"subject2": "Darth Vader",
+"adj": "powerful",
+"answers": [
+"is less powerful than"
+],
+"correct": "is less powerful than",
+"fr": "Un stormtrooper est moins puissant que Dark Vador.",
+"explanation": "<div class=\"structure-box\">A stormtrooper is <em>less powerful</em> than Darth Vader.</div>\n<strong>Less + powerful + than</strong>. Structure d'infériorité : <em>less</em> + adjectif de base + <em>than</em>, toujours."
+}
+];
+/* COMP : [{type: plus|eq|minus, subject1, subject2, adj, answers, correct, fr, explanation}]
+   ADJ : [adjectif, comparatif, règle] */
+const COMPARATIVE = Object.fromEntries(ADJ.map(a => [a[0], a[1]]));
+const RULES = {
+  er: a => `${a} est court → on ajoute <b>-er</b>.`,
+  r: a => `${a} se termine par -e → on ajoute seulement <b>-r</b>.`,
+  double: a => `${a} se termine par consonne-voyelle-consonne → on <b>double</b> la consonne + -er.`,
+  ier: a => `${a} se termine par -y → <b>-ier</b>.`,
+  more: a => `${a} est long (2 syllabes ou plus) → <b>more</b> + adjectif.`,
+  irr: a => `${a} est irrégulier : à apprendre par cœur !`
+};
+const RULE_OF = Object.fromEntries(ADJ.map(a => [a[0], a[2]]));
+const LABEL = { plus: "Supériorité (+)", eq: "Égalité (=)", minus: "Infériorité (−)" };
+const SIGN = { plus: "plus", eq: "eq", minus: "minus" };
+const SYM = { plus: "+", eq: "=", minus: "−" };
+function plusForm(adj) { return (COMPARATIVE[adj] || "more " + adj) + " than"; }
+function formOf(type, adj) { return type === "plus" ? plusForm(adj) : type === "eq" ? `as ${adj} as` : `less ${adj} than`; }
+function sentence(q, form) { return `${q.subject1} is ${form} ${q.subject2}.`; }
+function badShort(adj) { const r = RULE_OF[adj]; return r === "more" ? (adj.replace(/e$/, "") + "er than") : `more ${adj} than`; }
 
-const allQuestions = [
+COMP.forEach(q => { q.full = sentence(q, q.correct.replace(/^is /, "")); });
 
-  // ════════════ SUPÉRIORITÉ (+) ════════════
-  {
-    type: "plus",
-    subject1: "Hulk", subject2: "Thor", adj: "strong",
-    answers: ["is stronger than"],
-    correct: "is stronger than",
-    fr: "Hulk est plus fort que Thor.",
-    explanation: `<div class="structure-box">Hulk is <em>stronger</em> than Thor.</div>
-<strong>Strong</strong> (1 syllabe) → <strong>stronger</strong>. Comparatif de supériorité : adjectif court + <em>-er than</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "A cheetah", subject2: "a lion", adj: "fast",
-    answers: ["is faster than"],
-    correct: "is faster than",
-    fr: "Un guépard est plus rapide qu'un lion.",
-    explanation: `<div class="structure-box">A cheetah is <em>faster</em> than a lion.</div>
-<strong>Fast</strong> (1 syllabe) → <strong>faster</strong>. Règle : consonne finale doublée si précédée d'une seule voyelle : fast → fast<em>er</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "Everest", subject2: "Mont Blanc", adj: "tall",
-    answers: ["is taller than"],
-    correct: "is taller than",
-    fr: "L'Everest est plus haut que le Mont Blanc.",
-    explanation: `<div class="structure-box">Everest is <em>taller</em> than Mont Blanc.</div>
-<strong>Tall</strong> (1 syllabe) → <strong>taller</strong>. Comparatif court, règle standard : + <em>-er than</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "Gold", subject2: "silver", adj: "expensive",
-    answers: ["is more expensive than"],
-    correct: "is more expensive than",
-    fr: "L'or est plus cher que l'argent.",
-    explanation: `<div class="structure-box">Gold is <em>more expensive</em> than silver.</div>
-<strong>Expensive</strong> (3 syllabes) → <strong>more expensive</strong>. Adjectifs longs (2+ syllabes) : <em>more + adjectif + than</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "Summer", subject2: "winter", adj: "hot",
-    answers: ["is hotter than"],
-    correct: "is hotter than",
-    fr: "L'été est plus chaud que l'hiver.",
-    explanation: `<div class="structure-box">Summer is <em>hotter</em> than winter.</div>
-<strong>Hot</strong> → consonne finale doublée : <strong>hotter</strong>. Règle CVC (consonne-voyelle-consonne) : on double la consonne finale.`
-  },
-  {
-    type: "plus",
-    subject1: "Ironman", subject2: "Spider-Man", adj: "rich",
-    answers: ["is richer than"],
-    correct: "is richer than",
-    fr: "Ironman est plus riche que Spider-Man.",
-    explanation: `<div class="structure-box">Ironman is <em>richer</em> than Spider-Man.</div>
-<strong>Rich</strong> (1 syllabe) → <strong>richer</strong>. Comparatif court standard + <em>-er than</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "The Amazon", subject2: "the Seine", adj: "long",
-    answers: ["is longer than"],
-    correct: "is longer than",
-    fr: "L'Amazone est plus longue que la Seine.",
-    explanation: `<div class="structure-box">The Amazon is <em>longer</em> than the Seine.</div>
-<strong>Long</strong> → <strong>longer</strong>. Comparatif court, + <em>-er than</em>. Attention à ne pas écrire <em>more long</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "Gandalf", subject2: "Frodo", adj: "old",
-    answers: ["is older than"],
-    correct: "is older than",
-    fr: "Gandalf est plus vieux que Frodo.",
-    explanation: `<div class="structure-box">Gandalf is <em>older</em> than Frodo.</div>
-<strong>Old</strong> → <strong>older</strong>. Comparatif court, + <em>-er than</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "An elephant", subject2: "a dog", adj: "heavy",
-    answers: ["is heavier than"],
-    correct: "is heavier than",
-    fr: "Un éléphant est plus lourd qu'un chien.",
-    explanation: `<div class="structure-box">An elephant is <em>heavier</em> than a dog.</div>
-<strong>Heavy</strong> se termine en <em>-y</em> précédé d'une consonne → <strong>heavier</strong>. Règle : <em>-y → -ier</em>.`
-  },
-  {
-    type: "plus",
-    subject1: "This film", subject2: "the book", adj: "interesting",
-    answers: ["is more interesting than"],
-    correct: "is more interesting than",
-    fr: "Ce film est plus intéressant que le livre.",
-    explanation: `<div class="structure-box">This film is <em>more interesting</em> than the book.</div>
-<strong>Interesting</strong> (4 syllabes) → <strong>more interesting</strong>. Adjectif long : <em>more + adjectif + than</em>.`
-  },
+function gapQuestion(q) {
+  return {
+    kind: "gap", instr: `${LABEL[q.type]} · complète la phrase`, label: q.fr, sign: SIGN[q.type],
+    head: `<div class="fr-line">${esc(q.fr)}</div>`,
+    parts: [q.subject1 + " ", { answers: q.answers, width: 260, hint: `${q.adj} ${SYM[q.type]}` }, " " + q.subject2 + "."],
+    correct: q.full, tip: q.explanation,
+    diagnose(vals) {
+      const t = " " + norm(vals[0]) + " ";
+      if (!/^ is | are /.test(t)) return "N'oublie pas le verbe <b>is</b> : Hulk <b>is</b> stronger than Thor.";
+      if (q.type === "eq" && / than /.test(t)) return "Égalité : <b>as</b> + adjectif + <b>as</b> (pas than).";
+      if (q.type !== "eq" && / as /.test(t)) return "Supériorité et infériorité : on utilise <b>than</b> (que).";
+      if (q.type === "plus" && RULE_OF[q.adj] && !t.includes(" " + plusForm(q.adj) + " ")) return RULES[RULE_OF[q.adj]](q.adj) + ` → ${plusForm(q.adj)}.`;
+      return q.explanation;
+    }
+  };
+}
 
-  // ════════════ ÉGALITÉ (=) ════════════
-  {
-    type: "eq",
-    subject1: "Batman", subject2: "Superman", adj: "brave",
-    answers: ["is as brave as"],
-    correct: "is as brave as",
-    fr: "Batman est aussi courageux que Superman.",
-    explanation: `<div class="structure-box">Batman is <em>as brave as</em> Superman.</div>
-Comparatif d'égalité : <strong>as + adjectif + as</strong>. L'adjectif ne change pas de forme.`
-  },
-  {
-    type: "eq",
-    subject1: "Tea", subject2: "coffee", adj: "popular",
-    answers: ["is as popular as"],
-    correct: "is as popular as",
-    fr: "Le thé est aussi populaire que le café.",
-    explanation: `<div class="structure-box">Tea is <em>as popular as</em> coffee.</div>
-<strong>As + popular + as</strong> : l'adjectif reste à sa forme de base, quelle que soit sa longueur.`
-  },
-  {
-    type: "eq",
-    subject1: "Harry", subject2: "Hermione", adj: "brave",
-    answers: ["is as brave as"],
-    correct: "is as brave as",
-    fr: "Harry est aussi courageux qu'Hermione.",
-    explanation: `<div class="structure-box">Harry is <em>as brave as</em> Hermione.</div>
-Comparatif d'égalité : <strong>as + adjectif + as</strong>. Rappel : pas de modification de l'adjectif.`
-  },
-  {
-    type: "eq",
-    subject1: "Paris", subject2: "London", adj: "busy",
-    answers: ["is as busy as"],
-    correct: "is as busy as",
-    fr: "Paris est aussi animé que Londres.",
-    explanation: `<div class="structure-box">Paris is <em>as busy as</em> London.</div>
-<strong>Busy</strong> ne change pas dans la structure <em>as … as</em> (contrairement au comparatif de supériorité où il devient <em>busier</em>).`
-  },
-  {
-    type: "eq",
-    subject1: "Running", subject2: "swimming", adj: "tiring",
-    answers: ["is as tiring as"],
-    correct: "is as tiring as",
-    fr: "Courir est aussi fatigant que nager.",
-    explanation: `<div class="structure-box">Running is <em>as tiring as</em> swimming.</div>
-Les gérondifs (<em>running, swimming</em>) peuvent être sujets d'une comparaison. Structure <strong>as + adjectif + as</strong>.`
-  },
-  {
-    type: "eq",
-    subject1: "Maths", subject2: "science", adj: "interesting",
-    answers: ["is as interesting as","are as interesting as"],
-    correct: "is as interesting as",
-    fr: "Les maths sont aussi intéressantes que les sciences.",
-    explanation: `<div class="structure-box">Maths is <em>as interesting as</em> science.</div>
-<strong>As + interesting + as</strong> : adjectif long, mais il ne change pas dans la structure d'égalité.`
-  },
-  {
-    type: "eq",
-    subject1: "A cat", subject2: "a dog", adj: "intelligent",
-    answers: ["is as intelligent as"],
-    correct: "is as intelligent as",
-    fr: "Un chat est aussi intelligent qu'un chien.",
-    explanation: `<div class="structure-box">A cat is <em>as intelligent as</em> a dog.</div>
-Comparatif d'égalité. Peu importe la longueur de l'adjectif : la structure <strong>as … as</strong> ne change jamais.`
-  },
-  {
-    type: "eq",
-    subject1: "Rock", subject2: "jazz", adj: "creative",
-    answers: ["is as creative as"],
-    correct: "is as creative as",
-    fr: "Le rock est aussi créatif que le jazz.",
-    explanation: `<div class="structure-box">Rock is <em>as creative as</em> jazz.</div>
-<strong>As + creative + as</strong>. Comparatif d'égalité : l'adjectif reste à la forme de base.`
-  },
-  {
-    type: "eq",
-    subject1: "English", subject2: "French", adj: "difficult",
-    answers: ["is as difficult as"],
-    correct: "is as difficult as",
-    fr: "L'anglais est aussi difficile que le français.",
-    explanation: `<div class="structure-box">English is <em>as difficult as</em> French.</div>
-<strong>Difficult</strong> (3 syllabes) — même en égalité, la structure <em>as … as</em> est identique pour tout adjectif.`
-  },
-  {
-    type: "eq",
-    subject1: "The piano", subject2: "the violin", adj: "beautiful",
-    answers: ["is as beautiful as"],
-    correct: "is as beautiful as",
-    fr: "Le piano est aussi beau que le violon.",
-    explanation: `<div class="structure-box">The piano is <em>as beautiful as</em> the violin.</div>
-<strong>As + beautiful + as</strong>. Structure d'égalité invariable.`
-  },
+function formQuestion(a) {
+  const [adj, comp, rule] = a;
+  const ok = comp + " than";
+  let opts;
+  if (rule === "irr") opts = [ok, adj + "er than", "more " + adj + " than"];
+  else if (rule === "more") opts = [ok, adj.replace(/e$/, "") + "er than", "more " + adj.replace(/e$/, "") + "er than"];
+  else opts = [ok, "more " + adj + " than", "more " + comp + " than"];
+  return {
+    kind: "mcq", instr: "Choisis le bon comparatif de supériorité", label: adj,
+    head: `<div class="big-word">${esc(adj)}</div><div class="big-sub">plus … que</div>`,
+    options: opts, correct: 0, tip: RULES[rule](adj) + ` → <b>${ok}</b>.`
+  };
+}
 
-  // ════════════ INFÉRIORITÉ (−) ════════════
-  {
-    type: "minus",
-    subject1: "An ant", subject2: "an elephant", adj: "strong",
-    answers: ["is less strong than"],
-    correct: "is less strong than",
-    fr: "Une fourmi est moins forte qu'un éléphant.",
-    explanation: `<div class="structure-box">An ant is <em>less strong</em> than an elephant.</div>
-Comparatif d'infériorité : <strong>less + adjectif + than</strong>. L'adjectif ne change jamais de forme.`
-  },
-  {
-    type: "minus",
-    subject1: "A scooter", subject2: "an airplane", adj: "fast",
-    answers: ["is less fast than"],
-    correct: "is less fast than",
-    fr: "Un scooter est moins rapide qu'un avion.",
-    explanation: `<div class="structure-box">A scooter is <em>less fast</em> than an airplane.</div>
-<strong>Less + fast + than</strong>. Même structure pour les adjectifs courts ou longs.`
-  },
-  {
-    type: "minus",
-    subject1: "Pikachu", subject2: "Mewtwo", adj: "powerful",
-    answers: ["is less powerful than"],
-    correct: "is less powerful than",
-    fr: "Pikachu est moins puissant que Mewtwo.",
-    explanation: `<div class="structure-box">Pikachu is <em>less powerful</em> than Mewtwo.</div>
-<strong>Less + powerful + than</strong>. Pour les adjectifs longs, on n'utilise jamais <em>less more powerful</em> — juste <em>less powerful</em>.`
-  },
-  {
-    type: "minus",
-    subject1: "Bronze", subject2: "gold", adj: "precious",
-    answers: ["is less precious than"],
-    correct: "is less precious than",
-    fr: "Le bronze est moins précieux que l'or.",
-    explanation: `<div class="structure-box">Bronze is <em>less precious</em> than gold.</div>
-<strong>Less + precious + than</strong>. Structure invariable : <em>less</em> + adjectif de base.`
-  },
-  {
-    type: "minus",
-    subject1: "A pond", subject2: "the ocean", adj: "deep",
-    answers: ["is less deep than"],
-    correct: "is less deep than",
-    fr: "Un étang est moins profond que l'océan.",
-    explanation: `<div class="structure-box">A pond is <em>less deep</em> than the ocean.</div>
-<strong>Less + deep + than</strong>. Rappel : <em>less deep</em> et non <em>shallower</em> dans la structure d'infériorité.`
-  },
-  {
-    type: "minus",
-    subject1: "A candle", subject2: "the sun", adj: "bright",
-    answers: ["is less bright than"],
-    correct: "is less bright than",
-    fr: "Une bougie est moins lumineuse que le soleil.",
-    explanation: `<div class="structure-box">A candle is <em>less bright</em> than the sun.</div>
-<strong>Less + bright + than</strong>. L'adjectif court ne prend pas de <em>-er</em> ici — c'est <em>less</em> qui exprime l'infériorité.`
-  },
-  {
-    type: "minus",
-    subject1: "A notebook", subject2: "a laptop", adj: "expensive",
-    answers: ["is less expensive than"],
-    correct: "is less expensive than",
-    fr: "Un carnet est moins cher qu'un ordinateur portable.",
-    explanation: `<div class="structure-box">A notebook is <em>less expensive</em> than a laptop.</div>
-<strong>Less + expensive + than</strong>. Adjectif long, structure d'infériorité identique.`
-  },
-  {
-    type: "minus",
-    subject1: "A mouse", subject2: "a lion", adj: "dangerous",
-    answers: ["is less dangerous than"],
-    correct: "is less dangerous than",
-    fr: "Une souris est moins dangereuse qu'un lion.",
-    explanation: `<div class="structure-box">A mouse is <em>less dangerous</em> than a lion.</div>
-<strong>Less + dangerous + than</strong>. Adjectif long : même structure, pas de <em>more/most</em> impliqués.`
-  },
-  {
-    type: "minus",
-    subject1: "Tuesday", subject2: "Saturday", adj: "exciting",
-    answers: ["is less exciting than"],
-    correct: "is less exciting than",
-    fr: "Le mardi est moins excitant que le samedi.",
-    explanation: `<div class="structure-box">Tuesday is <em>less exciting</em> than Saturday.</div>
-<strong>Less + exciting + than</strong>. Adjectif en <em>-ing</em> : aucun changement de forme.`
-  },
-  {
-    type: "minus",
-    subject1: "A stormtrooper", subject2: "Darth Vader", adj: "powerful",
-    answers: ["is less powerful than"],
-    correct: "is less powerful than",
-    fr: "Un stormtrooper est moins puissant que Dark Vador.",
-    explanation: `<div class="structure-box">A stormtrooper is <em>less powerful</em> than Darth Vader.</div>
-<strong>Less + powerful + than</strong>. Structure d'infériorité : <em>less</em> + adjectif de base + <em>than</em>, toujours.`
-  },
+function translateQuestion(q) {
+  const right = sentence(q, formOf(q.type, q.adj));
+  const otherType = q.type === "eq" ? "plus" : q.type === "plus" ? "eq" : "plus";
+  const wrong1 = sentence(q, formOf(otherType, q.adj));
+  const wrong2 = q.type === "plus" ? sentence(q, badShort(q.adj)) : q.type === "eq" ? sentence(q, `as ${q.adj} than`) : sentence(q, `less ${plusForm(q.adj).replace(/ than$/, "")} than`);
+  return {
+    kind: "mcq", instr: "Quelle est la bonne traduction ?", label: q.fr,
+    head: `<div class="fr-line">${esc(q.fr)}</div>`,
+    options: [q.full, wrong1, wrong2], correct: 0, tip: q.explanation
+  };
+}
+
+function orderQuestion(q) {
+  const form = q.correct.replace(/^is /, "");
+  const tiles = [q.subject1, "is", ...form.split(" "), q.subject2];
+  const trap = q.type === "eq" ? "than" : q.type === "minus" ? "more" : (RULE_OF[q.adj] === "more" ? "as" : "more");
+  return {
+    kind: "order", instr: `Remets les mots dans l'ordre · ${LABEL[q.type]}`, label: q.fr,
+    head: `<div class="fr-line">${esc(q.fr)}</div>`,
+    tiles, distractors: [trap], answer: q.full,
+    tip: `Le mot <b>${trap}</b> était un piège.`
+  };
+}
+
+const ofType = t => COMP.filter(q => q.type === t);
+const MISSIONS = [
+  { id: "plus", icon: "➕", title: "Supériorité", desc: "plus … que : adjectif + -er than / more + adjectif + than.", build: () => shuffle(ofType("plus")).slice(0, 8).map(gapQuestion) },
+  { id: "eq", icon: "🟰", title: "Égalité", desc: "aussi … que : as + adjectif + as.", build: () => shuffle(ofType("eq")).slice(0, 8).map(gapQuestion) },
+  { id: "minus", icon: "➖", title: "Infériorité", desc: "moins … que : less + adjectif + than.", build: () => shuffle(ofType("minus")).slice(0, 8).map(gapQuestion) },
+  { id: "form", icon: "📏", title: "Court ou long ?", desc: "-er ou more ? Choisis le bon comparatif de supériorité.", build: () => shuffle(ADJ).slice(0, 10).map(formQuestion) },
+  { id: "trad", icon: "🔎", title: "Quelle est la bonne traduction ?", desc: "Lis la phrase en français et choisis la bonne phrase anglaise.", build: () => shuffle(COMP).slice(0, 8).map(translateQuestion) },
+  { id: "order", icon: "🧩", title: "Remets dans l'ordre", desc: "Construis la phrase avec les étiquettes. Attention au piège !", build: () => shuffle(COMP).slice(0, 8).map(orderQuestion) },
+  { id: "mix", icon: "🎲", title: "Tout mélangé", desc: "Supériorité, égalité et infériorité : le grand test !", build: () => shuffle(COMP).slice(0, 10).map(gapQuestion) }
 ];
 
-// ─── STATE ──────────────────────────────────────────────
-let questions = [];
-let current = 0;
-let score = 0;
-let history = [];
-let answered = false;
-const TOTAL = 5;
-
-// ─── HELPERS ────────────────────────────────────────────
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+/* ═══════════ OUTILS ═══════════ */
+function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function norm(s) {
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[’‘`´]/g, "'")
+    .replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
+    .replace(/\bwas not\b/g, "wasn't").replace(/\bwasnt\b/g, "wasn't")
+    .replace(/\bwere not\b/g, "weren't").replace(/\bwerent\b/g, "weren't")
+    .replace(/[.?!,;:]/g, " ").replace(/\s+/g, " ").trim();
 }
+function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function capF(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-function normalize(s) {
-  return s.toLowerCase()
-    .replace(/[?!.,]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+/* ═══════════ STOCKAGE ═══════════ */
+let best = {};
+try { best = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { best = {}; }
+function saveBest() { try { localStorage.setItem(STORE_KEY, JSON.stringify(best)); } catch (e) {} }
 
-function checkAnswer(input, q) {
-  return q.answers.some(a => normalize(a) === normalize(input));
-}
-
-// ─── RENDER ─────────────────────────────────────────────
-const typeLabels = {
-  plus:  { cls: 'plus',  label: '+ Supériorité' },
-  eq:    { cls: 'eq',    label: '= Égalité' },
-  minus: { cls: 'minus', label: '− Infériorité' },
-};
-
-function renderQuestion() {
-  answered = false;
-  const q = questions[current];
-  const n = current + 1;
-
-  document.getElementById('questionNum').textContent = `QUESTION ${n}`;
-  document.getElementById('progressText').textContent = `Question ${n} / ${TOTAL}`;
-  document.getElementById('scoreText').textContent = `Score : ${score}`;
-  document.getElementById('progressBar').style.width = `${(n / TOTAL) * 100}%`;
-
-  // Type badge
-  const badge = document.getElementById('typeBadge');
-  const t = typeLabels[q.type];
-  badge.className = `type-badge ${t.cls}`;
-  badge.textContent = t.label;
-
-  // Sentence prompt
-  const wrap = document.getElementById('sentenceWrap');
-  wrap.innerHTML = '';
-  const s1 = document.createElement('span');
-  s1.textContent = q.subject1;
-  wrap.appendChild(s1);
-  const blank = document.createElement('span');
-  blank.className = 'blank-display';
-  blank.textContent = '___________';
-  wrap.appendChild(blank);
-  const s2 = document.createElement('span');
-  s2.textContent = q.subject2;
-  wrap.appendChild(s2);
-  const adj = document.createElement('span');
-  adj.className = 'adj-hint';
-  adj.textContent = '(' + q.adj + ')';
-  wrap.appendChild(adj);
-
-  // French hint
-  document.getElementById('hint').textContent = '💡 ' + q.fr;
-
-  const input = document.getElementById('answerInput');
-  input.value = '';
-  input.className = '';
-  input.disabled = false;
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback';
-
-  document.getElementById('btnNext').style.display = 'none';
-  document.getElementById('btnSubmit').disabled = false;
-
-  input.focus();
-}
-
-function startQuiz() {
-  questions = shuffle(allQuestions).slice(0, TOTAL);
-  current = 0; score = 0; history = []; answered = false;
-  document.getElementById('quizView').style.display = 'block';
-  document.getElementById('scoreView').style.display = 'none';
-  renderQuestion();
-}
-
-function submit() {
-  if (answered) return;
-  const input = document.getElementById('answerInput');
-  const val = input.value.trim();
-  if (!val) return;
-
-  answered = true;
-  input.disabled = true;
-  document.getElementById('btnSubmit').disabled = true;
-
-  const q = questions[current];
-  const ok = checkAnswer(val, q);
-  if (ok) score++;
-  history.push({ q, userAnswer: val, ok });
-
-  input.className = ok ? 'correct' : 'wrong';
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
-  document.getElementById('fbTitle').textContent = ok ? '✓ Correct !' : '✗ Pas tout à fait…';
-  document.getElementById('fbAnswer').innerHTML = ok ? '' : `Réponse attendue : <strong>${q.correct}</strong>`;
-  document.getElementById('fbExplanation').innerHTML = q.explanation;
-
-  document.getElementById('btnNext').style.display = 'block';
-
-  if (!ok) {
-    document.getElementById('mainCard').classList.add('shake');
-    setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 400);
-  }
-}
-
-function nextQuestion() {
-  current++;
-  if (current >= TOTAL) showScore();
-  else renderQuestion();
-}
-
-function showScore() {
-  document.getElementById('quizView').style.display = 'none';
-  document.getElementById('scoreView').style.display = 'block';
-  document.getElementById('scoreBig').textContent = `${score}`;
-  document.getElementById('progressBar').style.width = '100%';
-
-  let emoji, msg, detail;
-  if (score === 5)      { emoji = '🏆'; msg = 'Parfait ! 5/5 !';         detail = 'Tu maîtrises le comparatif. Impressionnant !'; }
-  else if (score === 4) { emoji = '🌟'; msg = 'Excellent !';              detail = 'Encore un petit effort et tu seras imbattable.'; }
-  else if (score === 3) { emoji = '👍'; msg = 'Pas mal !';                detail = 'Relis les erreurs ci-dessous et recommence.'; }
-  else if (score === 2) { emoji = '📚'; msg = 'Courage !';                detail = 'Revois les structures (+) -er than / (=) as…as / (−) less…than.'; }
-  else                  { emoji = '💪'; msg = "On s'entraîne encore !";  detail = 'Rappel : + (‑er than / more…than) | = (as…as) | − (less…than)'; }
-
-  document.getElementById('scoreEmoji').textContent = emoji;
-  document.getElementById('scoreMsg').textContent = msg;
-  document.getElementById('scoreDetail').textContent = detail;
-
-  const reviewList = document.getElementById('reviewList');
-  reviewList.innerHTML = '';
-  history.forEach((h, i) => {
-    const div = document.createElement('div');
-    div.className = 'review-item ' + (h.ok ? 'ok' : 'ko');
-    const t = typeLabels[h.q.type];
-    div.innerHTML = `
-      <div class="review-prompt">${i+1}. [${t.label}] ${h.q.subject1} ___ ${h.q.subject2} (${h.q.adj})</div>
-      <div class="review-answer">${h.ok ? '✓' : '✗'} ${h.userAnswer}</div>
-      ${!h.ok ? `<div class="review-correct">${h.q.correct}</div>` : ''}
-    `;
-    reviewList.appendChild(div);
+/* ═══════════ MENU ═══════════ */
+function renderMenu() {
+  const box = document.getElementById("missions"); box.innerHTML = "";
+  MISSIONS.forEach((m, i) => {
+    const b = document.createElement("button"); b.className = "mission";
+    const bs = best[m.id];
+    b.innerHTML = `${bs ? `<span class="m-best ${bs.s === bs.t ? "done" : ""}">★ ${bs.s}/${bs.t}</span>` : ""}
+      <span class="m-icon">${m.icon}</span><span class="m-num">Mission ${i + 1}</span>
+      <span class="m-title">${m.title}</span><span class="m-desc">${m.desc}</span>`;
+    b.onclick = () => startMission(m.id);
+    box.appendChild(b);
   });
 }
+function showOnly(id) {
+  ["menu", "quiz", "score"].forEach(x => document.getElementById(x).classList.toggle("hidden", x !== id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function showMenu() { renderMenu(); showOnly("menu"); }
 
-// ─── EVENTS ─────────────────────────────────────────────
-document.getElementById('btnSubmit').addEventListener('click', submit);
-document.getElementById('btnNext').addEventListener('click', nextQuestion);
-document.getElementById('btnRestart').addEventListener('click', startQuiz);
-document.getElementById('answerInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    if (!answered) submit();
-    else nextQuestion();
+/* ═══════════ MOTEUR ═══════════ */
+let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [], orderChosen = [];
+
+function startMission(id) {
+  current = MISSIONS.find(m => m.id === id);
+  questions = current.build(); qi = 0; score = 0; recap = [];
+  showOnly("quiz"); renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[qi]; answered = false;
+  document.getElementById("qTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("qBar").style.width = (qi / questions.length * 100) + "%";
+  document.getElementById("qInstr").textContent = q.instr;
+  document.getElementById("qFeedback").innerHTML = "";
+  const area = document.getElementById("qArea"), btn = document.getElementById("btnMain");
+  btn.textContent = "Valider"; btn.classList.remove("hidden");
+  document.getElementById("btnReset").classList.add("hidden");
+  const head = q.head || "";
+
+  if (q.kind === "gap") {
+    let bi = 0;
+    const line = q.parts.map(p => {
+      if (typeof p === "string") return esc(p);
+      const i = bi++;
+      return `<input class="answer gapin" data-b="${i}" style="width:${p.width || 200}px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${p.ph || ""}">` +
+        (p.hint ? `<span class="bvhint">(${esc(p.hint)})</span>` : "");
+    }).join("");
+    area.innerHTML = head + `<div class="gap-line">${q.sign ? `<span class="sign ${q.sign}">${q.sign === "plus" ? "+" : q.sign === "minus" ? "−" : q.sign === "eq" ? "=" : "?"}</span>` : ""}${line}</div>` + (q.foot || "");
+    setTimeout(() => { const f = area.querySelector(".gapin"); if (f) f.focus(); }, 50);
+  } else if (q.kind === "mcq") {
+    const order = q.keepOrder ? q.options.map((_, i) => i) : shuffle(q.options.map((_, i) => i));
+    area.innerHTML = head + `<div class="choices ${q.grid ? "grid" + q.grid : ""}">${order.map(i => `<button class="btn-choice" data-i="${i}">${q.html ? q.options[i] : esc(q.options[i])}</button>`).join("")}</div>`;
+    area.querySelectorAll(".btn-choice").forEach(b => b.onclick = () => submitMcq(+b.dataset.i));
+    btn.classList.add("hidden");
+  } else if (q.kind === "order") {
+    orderChosen = [];
+    const all = shuffle(q.tiles.concat(q.distractors || []));
+    area.innerHTML = head + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+      all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
+    area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
+    document.getElementById("btnReset").classList.remove("hidden");
+  }
+}
+
+function addTile(b) { if (answered) return; b.classList.add("used"); orderChosen.push(b); drawZone(); }
+function drawZone() {
+  const zone = document.getElementById("zone"); zone.innerHTML = "";
+  zone.classList.toggle("empty", orderChosen.length === 0);
+  orderChosen.forEach((src, k) => {
+    const t = document.createElement("button"); t.className = "tile"; t.textContent = src.textContent;
+    t.onclick = () => { if (answered) return; src.classList.remove("used"); orderChosen.splice(k, 1); drawZone(); };
+    zone.appendChild(t);
+  });
+}
+function resetOrder() { if (answered) return; orderChosen.forEach(s => s.classList.remove("used")); orderChosen = []; drawZone(); }
+
+function mainAction() {
+  if (answered) { nextQuestion(); return; }
+  const q = questions[qi];
+  if (q.kind === "gap") {
+    const inputs = [...document.querySelectorAll(".gapin")];
+    const empty = inputs.find(i => !i.value.trim());
+    if (empty) { empty.focus(); return; }
+    const blanks = q.parts.filter(p => typeof p !== "string");
+    const vals = inputs.map(i => i.value);
+    let allOk = true;
+    inputs.forEach((inp, k) => {
+      const ok = blanks[k].answers.some(a => norm(a) === norm(inp.value));
+      inp.classList.add(ok ? "ok" : "ko"); inp.disabled = true; if (!ok) allOk = false;
+    });
+    finish(allOk, vals.join(" … "), q.correct, allOk || !q.diagnose ? "" : q.diagnose(vals));
+  } else if (q.kind === "order") {
+    if (!orderChosen.length) return;
+    const val = orderChosen.map(t => t.textContent).join(" ");
+    const ok = norm(val) === norm(q.answer);
+    document.getElementById("zone").classList.add(ok ? "ok" : "ko");
+    document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
+    finish(ok, val, q.answer, "");
+  }
+}
+
+function submitMcq(i) {
+  if (answered) return;
+  const q = questions[qi], ok = i === q.correct;
+  document.querySelectorAll(".btn-choice").forEach(b => {
+    const bi = +b.dataset.i; b.disabled = true;
+    b.classList.add(bi === q.correct ? "correct" : bi === i ? "wrong" : "dim");
+  });
+  const strip = s => String(s).replace(/<[^>]+>/g, "");
+  finish(ok, strip(q.options[i]), q.correctText || strip(q.options[q.correct]), "");
+}
+
+function finish(ok, given, correct, why) {
+  answered = true; if (ok) score++;
+  const q = questions[qi];
+  recap.push({ ok, label: q.label, given, correct });
+  document.getElementById("qFeedback").innerHTML = ok
+    ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip || ""}</span></div>`
+    : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip || ""}</span></div>`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("btnReset").classList.add("hidden");
+  const btn = document.getElementById("btnMain");
+  btn.textContent = qi + 1 < questions.length ? "Suivant →" : "Voir mon score";
+  btn.classList.remove("hidden"); btn.focus();
+}
+
+function nextQuestion() { qi++; if (qi < questions.length) renderQuestion(); else showScore(); }
+
+function showScore() {
+  const t = questions.length, pct = score / t, prev = best[current.id];
+  if (!prev || pct > prev.s / prev.t) { best[current.id] = { s: score, t }; saveBest(); }
+  document.getElementById("sTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("sScore").innerHTML = `${score}<span>/${t}</span>`;
+  const stars = pct === 1 ? 3 : pct >= .7 ? 2 : pct >= .4 ? 1 : 0;
+  document.getElementById("sStars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
+  document.getElementById("sMsg").textContent =
+    pct === 1 ? "Perfect! Excellent travail !" : pct >= .7 ? "Very good! Encore un petit effort pour le sans-faute." :
+    pct >= .4 ? "Not bad! Relis la leçon et recommence." : "Keep going! Relis le rappel de la leçon puis réessaie.";
+  document.getElementById("sRecap").innerHTML = recap.map(r =>
+    `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
+  showOnly("score");
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter" || document.getElementById("quiz").classList.contains("hidden")) return;
+  const q = questions[qi];
+  if (!q) return;
+  if (answered || q.kind !== "mcq") {
+    if (!answered && q.kind === "gap") {
+      const inputs = [...document.querySelectorAll(".gapin")];
+      const idx = inputs.indexOf(document.activeElement);
+      if (idx > -1 && idx < inputs.length - 1 && !inputs[idx + 1].value.trim()) { e.preventDefault(); inputs[idx + 1].focus(); return; }
+    }
+    e.preventDefault(); mainAction();
   }
 });
 
-// ─── START ──────────────────────────────────────────────
-startQuiz();
+renderMenu();
+
 </script>
 </body>
 </html>
