@@ -453,6 +453,9 @@
 
 
 
+
+
+
   /* ── Sections, recherche, filtres ── */
   .card.t .card-bar { background: linear-gradient(90deg, var(--ca), var(--cb)); }
   .card.t .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(var(--crgb),0.08) 0%, transparent 70%); }
@@ -489,6 +492,18 @@
   .sec-head { max-width: 1100px; margin: 0 auto 16px; padding: 0 32px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .sec-head h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.5px; }
   .sec-head p { color: var(--muted); font-size: 14px; }
+  .lvl { position: absolute; top: 12px; left: 14px; font-size: 10.5px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid; }
+  .lvl-0 { color: #4ecb7f; border-color: rgba(78,203,127,.4); background: rgba(78,203,127,.08); }
+  .lvl-1 { color: #60a5fa; border-color: rgba(96,165,250,.4); background: rgba(96,165,250,.08); }
+  .lvl-2 { color: #fb923c; border-color: rgba(251,146,60,.4); background: rgba(251,146,60,.08); }
+  .lvl-3 { color: #f472b6; border-color: rgba(244,114,182,.45); background: rgba(244,114,182,.1); }
+  .levels { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+  .levels .lab { font-size: 12px; color: var(--muted); margin-right: 4px; }
+  .lv { font-family: inherit; font-size: 12.5px; padding: 6px 13px; border-radius: 999px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--muted); transition: all .2s; }
+  .lv:hover { color: var(--text); }
+  .lv.active.lvl-0, .lv.active.lvl-1, .lv.active.lvl-2, .lv.active.lvl-3 { font-weight: 600; }
+  .lv:not(.active) { color: var(--muted); border-color: var(--border); background: transparent; }
+  .lv.all.active { background: rgba(255,255,255,.12); color: var(--text); border-color: var(--text); }
   .empty { text-align: center; color: var(--muted); padding: 40px 0; font-size: 15px; }
   @media (max-width: 600px) { .toolbar, .sec-head { padding: 0 16px; } }
 
@@ -536,12 +551,12 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">60</div>
+      <div class="stat-num" id="countActivities">94</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
     <div class="stat">
-      <div class="stat-num">4</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">Sections</div>
     </div>
     <div class="stats-sep"></div>
@@ -558,15 +573,17 @@
 <div class="toolbar">
   <input class="search" id="search" type="search" placeholder="Rechercher une notion : prétérit, did, adjectifs, météo…" autocomplete="off">
   <div class="tabs" id="tabs"></div>
+  <div class="levels" id="levels"></div>
   <div class="chips" id="chips"></div>
 </div>
 
 <section class="sec" data-sec="Grammaire">
   <div class="sec-head"><h2>Grammaire</h2><p>Les formes : temps, verbes, noms, pronoms, adjectifs…</p></div>
   <div class="grid">
-  <a class="card t" href="be_have_play.html" data-section="Grammaire" data-tags="Présent" data-search="be, have &amp; play conjuguer be, have et play au present : formes affirmative, negative et interrogative. grammaire · conjugaison is · has · plays am / is / are doesn&#x27;t does? present grammaire etre avoir jouer" style="--ca:#f87171;--cb:#dc2626;--crgb:248,113,113;animation-delay:0.35s">
+  <a class="card t" href="be_have_play.html" data-level="Novice" data-section="Grammaire" data-tags="Présent" data-search="be, have &amp; play conjuguer be, have et play au present : formes affirmative, negative et interrogative. grammaire · conjugaison is · has · plays am / is / are doesn&#x27;t does? present grammaire etre avoir jouer novice" style="--ca:#f87171;--cb:#dc2626;--crgb:248,113,113;animation-delay:0.35s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Be</span>
       <span class="badge">is · has · plays</span>
     </div>
@@ -584,9 +601,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="present_simple.html" data-section="Grammaire" data-tags="Présent" data-search="le present simple habitudes et verites generales : le -s de la 3e personne, don&#x27;t / doesn&#x27;t, do / does. grammaire · temps he works -s / -es doesn&#x27;t does? present grammaire present simple habitude" style="--ca:#38bdf8;--cb:#0284c7;--crgb:56,189,248;animation-delay:0.38s">
+  <a class="card t" href="present_simple.html" data-level="Novice" data-section="Grammaire" data-tags="Présent" data-search="le present simple habitudes et verites generales : le -s de la 3e personne, don&#x27;t / doesn&#x27;t, do / does. grammaire · temps he works -s / -es doesn&#x27;t does? present grammaire present simple habitude novice" style="--ca:#38bdf8;--cb:#0284c7;--crgb:56,189,248;animation-delay:0.38s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label" style="font-size:42px">Every day</span>
       <span class="badge">he works</span>
     </div>
@@ -604,9 +622,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="present_continu.html" data-section="Grammaire" data-tags="Présent" data-search="le present be + -ing ce qui se passe en ce moment : am / is / are + verbe-ing, et la difference avec le present simple. grammaire · temps i am reading be + -ing now simple / -ing present grammaire present continu progressif ing" style="--ca:#22d3ee;--cb:#0891b2;--crgb:34,211,238;animation-delay:0.41s">
+  <a class="card t" href="present_continu.html" data-level="Novice" data-section="Grammaire" data-tags="Présent" data-search="le present be + -ing ce qui se passe en ce moment : am / is / are + verbe-ing, et la difference avec le present simple. grammaire · temps i am reading be + -ing now simple / -ing present grammaire present continu progressif ing novice" style="--ca:#22d3ee;--cb:#0891b2;--crgb:34,211,238;animation-delay:0.41s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Now</span>
       <span class="badge">I am reading</span>
     </div>
@@ -624,9 +643,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="adverbes_frequence.html" data-section="Grammaire" data-tags="Présent|Adjectifs &amp; adverbes" data-search="adverbes de frequence always, usually, often, sometimes, rarely, never : sens, place dans la phrase et how often? grammaire · adverbes always → never always sometimes never present adjectifs &amp; adverbes grammaire frequence how often" style="--ca:#fb923c;--cb:#ea580c;--crgb:251,146,60;animation-delay:0.44s">
+  <a class="card t" href="adverbes_frequence.html" data-level="Novice" data-section="Grammaire" data-tags="Présent|Adjectifs &amp; adverbes" data-search="adverbes de frequence always, usually, often, sometimes, rarely, never : sens, place dans la phrase et how often? grammaire · adverbes always → never always sometimes never present adjectifs &amp; adverbes grammaire frequence how often novice" style="--ca:#fb923c;--cb:#ea580c;--crgb:251,146,60;animation-delay:0.44s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Often</span>
       <span class="badge">always → never</span>
     </div>
@@ -644,209 +664,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="preterit.html" data-section="Grammaire" data-tags="Passé" data-search="le preterit phrases affirmatives, negatives et interrogatives au preterit simple — reguliers et irreguliers. grammaire · temps preterit simple affirmatif negatif interrogatif passe grammaire preterit passe did" style="--ca:#f5c842;--cb:#e07b3f;--crgb:245,200,66;animation-delay:0.47s">
+  <a class="card t" href="imperatif.html" data-level="Novice" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="l&#x27;imperatif donner un ordre ou un conseil : base verbale, don&#x27;t + bv, let&#x27;s + bv. grammaire · verbes don&#x27;t · let&#x27;s bv don&#x27;t let&#x27;s verbes &amp; modaux grammaire imperatif ordre consigne novice" style="--ca:#4ade80;--cb:#16a34a;--crgb:74,222,128;animation-delay:0.47s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label">Past</span>
-      <span class="badge">Prétérit simple</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Le Prétérit</div>
-      <div class="card-desc">Phrases affirmatives, négatives et interrogatives au prétérit simple — réguliers et irréguliers.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">Affirmatif</span>
-        <span class="pill">Négatif</span>
-        <span class="pill">Interrogatif</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="verbe_regulier_irregulier.html" data-section="Grammaire" data-tags="Passé" data-search="regulier ou irregulier ? regulier ou irregulier ? base verbale, orthographe du -ed, formes irregulieres et intrus. grammaire · verbes identification -ed / -ied irreguliers intrus passe grammaire verbes irreguliers preterit" style="--ca:#4ecb7f;--cb:#2da866;--crgb:78,203,127;animation-delay:0.50s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Reg?</span>
-      <span class="badge">Identification</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Verbes</div>
-      <div class="card-title">Régulier ou Irrégulier ?</div>
-      <div class="card-desc">Régulier ou irrégulier ? Base verbale, orthographe du -ED, formes irrégulières et intrus.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">-ed / -ied</span>
-        <span class="pill">Irréguliers</span>
-        <span class="pill">Intrus</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="preterit_continu.html" data-section="Grammaire" data-tags="Passé" data-search="le preterit be + -ing ce qui etait en train de se passer : was / were + verbe-ing, avec when et while. grammaire · temps i was sleeping was / were when while passe grammaire preterit continu progressif" style="--ca:#facc15;--cb:#ca8a04;--crgb:250,204,21;animation-delay:0.53s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Was -ing</span>
-      <span class="badge">I was sleeping</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Le prétérit be + -ing</div>
-      <div class="card-desc">Ce qui était en train de se passer : was / were + verbe-ing, avec when et while.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">was / were</span>
-        <span class="pill">when</span>
-        <span class="pill">while</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="used_to.html" data-section="Grammaire" data-tags="Passé" data-search="used to exprimer des habitudes et etats passes revolus — formes affirmative, negative et interrogative. grammaire · aspect habitudes passees used to didn&#x27;t use to did … use to? passe grammaire habitude passee" style="--ca:#7c6af7;--cb:#b47cf0;--crgb:124,106,247;animation-delay:0.56s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Used</span>
-      <span class="badge">Habitudes passées</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Aspect</div>
-      <div class="card-title">Used To</div>
-      <div class="card-desc">Exprimer des habitudes et états passés révolus — formes affirmative, négative et interrogative.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">used to</span>
-        <span class="pill">didn&#x27;t use to</span>
-        <span class="pill">Did … use to?</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="present_perfect.html" data-section="Grammaire" data-tags="Passé" data-search="le present perfect have / has + participe passe, for / since, ever / never, et la difference avec le preterit. grammaire · temps for · since have done for / since ever passe grammaire present perfect participe" style="--ca:#f472b6;--cb:#db2777;--crgb:244,114,182;animation-delay:0.59s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Have done</span>
-      <span class="badge">for · since</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Le present perfect</div>
-      <div class="card-desc">have / has + participe passé, for / since, ever / never, et la différence avec le prétérit.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">have done</span>
-        <span class="pill">for / since</span>
-        <span class="pill">ever</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="present_perfect_continu.html" data-section="Grammaire" data-tags="Passé" data-search="present perfect be + -ing have / has been + verbe-ing : insister sur la duree, et la difference avec le present perfect simple. grammaire · temps i&#x27;ve been waiting been + -ing for / since duree passe grammaire present perfect continu progressif" style="--ca:#f0abfc;--cb:#d946ef;--crgb:240,171,252;animation-delay:0.62s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Been -ing</span>
-      <span class="badge">I&#x27;ve been waiting</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Present perfect be + -ing</div>
-      <div class="card-desc">have / has been + verbe-ing : insister sur la durée, et la différence avec le present perfect simple.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">been + -ing</span>
-        <span class="pill">for / since</span>
-        <span class="pill">durée</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="past_perfect.html" data-section="Grammaire" data-tags="Passé" data-search="le past perfect had + participe passe : l&#x27;action anterieure a une autre action passee. grammaire · temps l&#x27;action d&#x27;avant had + pp already before passe grammaire plus que parfait past perfect" style="--ca:#fda4af;--cb:#f43f5e;--crgb:253,164,175;animation-delay:0.65s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Had done</span>
-      <span class="badge">l&#x27;action d&#x27;avant</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Le past perfect</div>
-      <div class="card-desc">had + participe passé : l&#x27;action antérieure à une autre action passée.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">had + PP</span>
-        <span class="pill">already</span>
-        <span class="pill">before</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="futur.html" data-section="Grammaire" data-tags="Futur" data-search="le futur will ou be going to ? predictions, promesses, decisions et projets. grammaire · temps going to will won&#x27;t going to futur grammaire futur will going to" style="--ca:#a78bfa;--cb:#7c3aed;--crgb:167,139,250;animation-delay:0.68s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Will</span>
-      <span class="badge">going to</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Temps</div>
-      <div class="card-title">Le futur</div>
-      <div class="card-desc">will ou be going to ? Prédictions, promesses, décisions et projets.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">will</span>
-        <span class="pill">won&#x27;t</span>
-        <span class="pill">going to</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="modaux.html" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="les modaux can, must, mustn&#x27;t, should, have to, don&#x27;t have to : capacite, obligation, interdiction, conseil. grammaire · modaux must · should can must should verbes &amp; modaux grammaire modaux obligation conseil" style="--ca:#818cf8;--cb:#4f46e5;--crgb:129,140,248;animation-delay:0.71s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Can</span>
-      <span class="badge">must · should</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Modaux</div>
-      <div class="card-title">Les modaux</div>
-      <div class="card-desc">can, must, mustn&#x27;t, should, have to, don&#x27;t have to : capacité, obligation, interdiction, conseil.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">can</span>
-        <span class="pill">must</span>
-        <span class="pill">should</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="probabilite.html" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="may, might, must, can&#x27;t exprimer la probabilite, et les modaux au passe : should have, must have, could have. grammaire · modaux must · can&#x27;t may / might must should have verbes &amp; modaux grammaire probabilite modaux passe" style="--ca:#a5f3fc;--cb:#22d3ee;--crgb:165,243,252;animation-delay:0.74s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Might</span>
-      <span class="badge">must · can&#x27;t</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Modaux</div>
-      <div class="card-title">may, might, must, can&#x27;t</div>
-      <div class="card-desc">Exprimer la probabilité, et les modaux au passé : should have, must have, could have.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">may / might</span>
-        <span class="pill">must</span>
-        <span class="pill">should have</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="imperatif.html" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="l&#x27;imperatif donner un ordre ou un conseil : base verbale, don&#x27;t + bv, let&#x27;s + bv. grammaire · verbes don&#x27;t · let&#x27;s bv don&#x27;t let&#x27;s verbes &amp; modaux grammaire imperatif ordre consigne" style="--ca:#4ade80;--cb:#16a34a;--crgb:74,222,128;animation-delay:0.77s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Go!</span>
       <span class="badge">Don&#x27;t · Let&#x27;s</span>
     </div>
@@ -864,9 +685,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="like_ing.html" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="exprimer ses gouts love, like, enjoy, don&#x27;t mind, hate + verbe-ing. grammaire · verbes i love playing love / like hate + -ing verbes &amp; modaux grammaire gouts aimer detester ing" style="--ca:#f9a8d4;--cb:#ec4899;--crgb:249,168,212;animation-delay:0.80s">
+  <a class="card t" href="like_ing.html" data-level="Novice" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="exprimer ses gouts love, like, enjoy, don&#x27;t mind, hate + verbe-ing. grammaire · verbes i love playing love / like hate + -ing verbes &amp; modaux grammaire gouts aimer detester ing novice" style="--ca:#f9a8d4;--cb:#ec4899;--crgb:249,168,212;animation-delay:0.50s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Like</span>
       <span class="badge">I love playing</span>
     </div>
@@ -884,29 +706,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="verbes_to_ing.html" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="verbe + to ou -ing want to go, enjoy swimming : quel verbe est suivi de to + bv, lequel de -ing ? grammaire · verbes want to · enjoy -ing want to enjoy -ing after -ing verbes &amp; modaux grammaire infinitif gerondif" style="--ca:#fdba74;--cb:#fb923c;--crgb:253,186,116;animation-delay:0.83s">
+  <a class="card t" href="pronoms_personnels.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="pronoms personnels pronoms sujets et complements : i / me, he / him, they / them… grammaire · pronoms he → him sujet complement traduction noms &amp; pronoms grammaire pronoms sujet complement novice" style="--ca:#60a5fa;--cb:#2563eb;--crgb:96,165,250;animation-delay:0.53s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label" style="font-size:42px">To / -ing</span>
-      <span class="badge">want to · enjoy -ing</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Verbes</div>
-      <div class="card-title">Verbe + to ou -ing</div>
-      <div class="card-desc">want to go, enjoy swimming : quel verbe est suivi de to + BV, lequel de -ing ?</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">want to</span>
-        <span class="pill">enjoy -ing</span>
-        <span class="pill">after -ing</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="pronoms_personnels.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="pronoms personnels pronoms sujets et complements : i / me, he / him, they / them… grammaire · pronoms he → him sujet complement traduction noms &amp; pronoms grammaire pronoms sujet complement" style="--ca:#60a5fa;--cb:#2563eb;--crgb:96,165,250;animation-delay:0.86s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">I · me</span>
       <span class="badge">he → him</span>
     </div>
@@ -924,29 +727,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="pronoms_reflechis.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les pronoms reflechis myself, yourself, themselves… et each other. grammaire · pronoms each other myself themselves each other noms &amp; pronoms grammaire reflechis" style="--ca:#7dd3fc;--cb:#0ea5e9;--crgb:125,211,252;animation-delay:0.89s">
+  <a class="card t" href="possessifs.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les possessifs my, your, his, her… · le cas possessif &#x27;s · mine, yours, hers… grammaire · possession my · his · mine my / his &#x27;s mine noms &amp; pronoms grammaire possessifs genitif novice" style="--ca:#fb7185;--cb:#e11d48;--crgb:251,113,133;animation-delay:0.56s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label">Myself</span>
-      <span class="badge">each other</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Pronoms</div>
-      <div class="card-title">Les pronoms réfléchis</div>
-      <div class="card-desc">myself, yourself, themselves… et each other.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">myself</span>
-        <span class="pill">themselves</span>
-        <span class="pill">each other</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="possessifs.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les possessifs my, your, his, her… · le cas possessif &#x27;s · mine, yours, hers… grammaire · possession my · his · mine my / his &#x27;s mine noms &amp; pronoms grammaire possessifs genitif" style="--ca:#fb7185;--cb:#e11d48;--crgb:251,113,133;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Tom&#x27;s</span>
       <span class="badge">my · his · mine</span>
     </div>
@@ -964,9 +748,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="demonstratifs.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les demonstratifs this, that, these, those : proche ou loin, singulier ou pluriel. grammaire · determinants these · those this / that these those noms &amp; pronoms grammaire demonstratifs ce cette ces" style="--ca:#fca5a5;--cb:#ef4444;--crgb:252,165,165;animation-delay:0.90s">
+  <a class="card t" href="demonstratifs.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les demonstratifs this, that, these, those : proche ou loin, singulier ou pluriel. grammaire · determinants these · those this / that these those noms &amp; pronoms grammaire demonstratifs ce cette ces novice" style="--ca:#fca5a5;--cb:#ef4444;--crgb:252,165,165;animation-delay:0.59s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">This</span>
       <span class="badge">these · those</span>
     </div>
@@ -984,9 +769,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="articles.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les articles a, an, the ou pas d&#x27;article ? son voyelle, chose precise, generalites, sports, langues… grammaire · articles the · ø a / an the ø noms &amp; pronoms grammaire articles a an the" style="--ca:#a3e635;--cb:#65a30d;--crgb:163,230,53;animation-delay:0.90s">
+  <a class="card t" href="articles.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les articles a, an, the ou pas d&#x27;article ? son voyelle, chose precise, generalites, sports, langues… grammaire · articles the · ø a / an the ø noms &amp; pronoms grammaire articles a an the novice" style="--ca:#a3e635;--cb:#65a30d;--crgb:163,230,53;animation-delay:0.62s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">a / an</span>
       <span class="badge">the · Ø</span>
     </div>
@@ -1004,9 +790,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="pluriels.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="le pluriel des noms -s, -es, -ies, -ves et les pluriels irreguliers : children, feet, mice… grammaire · noms -es · -ies · -ves -es / -ies -ves irreguliers noms &amp; pronoms grammaire pluriel noms irreguliers" style="--ca:#fde68a;--cb:#f59e0b;--crgb:253,230,138;animation-delay:0.90s">
+  <a class="card t" href="pluriels.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="le pluriel des noms -s, -es, -ies, -ves et les pluriels irreguliers : children, feet, mice… grammaire · noms -es · -ies · -ves -es / -ies -ves irreguliers noms &amp; pronoms grammaire pluriel noms irreguliers novice" style="--ca:#fde68a;--cb:#f59e0b;--crgb:253,230,138;animation-delay:0.65s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label" style="font-size:42px">Children</span>
       <span class="badge">-es · -ies · -ves</span>
     </div>
@@ -1024,9 +811,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="there_is.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="there is / there are il y a… : is ou are, some ou any, questions et negations. grammaire · groupe nominal is · are is / are some / any is there? noms &amp; pronoms grammaire il y a some any" style="--ca:#fbbf24;--cb:#d97706;--crgb:251,191,36;animation-delay:0.90s">
+  <a class="card t" href="there_is.html" data-level="Novice" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="there is / there are il y a… : is ou are, some ou any, questions et negations. grammaire · groupe nominal is · are is / are some / any is there? noms &amp; pronoms grammaire il y a some any novice" style="--ca:#fbbf24;--cb:#d97706;--crgb:251,191,36;animation-delay:0.68s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">There</span>
       <span class="badge">is · are</span>
     </div>
@@ -1044,49 +832,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="denombrables.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="much, many, a lot of denombrables et indenombrables : much / many, how much / how many, a few / a little. grammaire · quantites many · a lot of much / many how much? a few noms &amp; pronoms grammaire denombrable quantite" style="--ca:#c4b5fd;--cb:#8b5cf6;--crgb:196,181,253;animation-delay:0.90s">
+  <a class="card t" href="adjectifs.html" data-level="Novice" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="les adjectifs niveau 1 : la place de l&#x27;adjectif · niveau 2 : l&#x27;ordre des adjectifs (opinion, taille, age…). grammaire · adjectifs a nice sister place invariable ordre adjectifs &amp; adverbes grammaire adjectifs ordre novice" style="--ca:#e879f9;--cb:#c026d3;--crgb:232,121,249;animation-delay:0.71s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label">Much?</span>
-      <span class="badge">many · a lot of</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Quantités</div>
-      <div class="card-title">much, many, a lot of</div>
-      <div class="card-desc">Dénombrables et indénombrables : much / many, How much / How many, a few / a little.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">much / many</span>
-        <span class="pill">How much?</span>
-        <span class="pill">a few</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="someone_anything.html" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="someone, anything, nobody… les composes de some, any, no et every : quelqu&#x27;un, rien, partout… grammaire · pronoms anything · nobody some- any- no- / every- noms &amp; pronoms grammaire quelqu un rien personne" style="--ca:#fcd34d;--cb:#eab308;--crgb:252,211,77;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Someone</span>
-      <span class="badge">anything · nobody</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Pronoms</div>
-      <div class="card-title">someone, anything, nobody…</div>
-      <div class="card-desc">Les composés de some, any, no et every : quelqu&#x27;un, rien, partout…</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">some-</span>
-        <span class="pill">any-</span>
-        <span class="pill">no- / every-</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="adjectifs.html" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="les adjectifs niveau 1 : la place de l&#x27;adjectif · niveau 2 : l&#x27;ordre des adjectifs (opinion, taille, age…). grammaire · adjectifs a nice sister place invariable ordre adjectifs &amp; adverbes grammaire adjectifs ordre" style="--ca:#e879f9;--cb:#c026d3;--crgb:232,121,249;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Adj.</span>
       <span class="badge">a nice sister</span>
     </div>
@@ -1104,89 +853,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="adverbes_maniere.html" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="les adverbes de maniere quick → quickly, good → well : former l&#x27;adverbe et le distinguer de l&#x27;adjectif. grammaire · adverbes good → well -ly well adj / adv adjectifs &amp; adverbes grammaire adverbes maniere ly" style="--ca:#86efac;--cb:#22c55e;--crgb:134,239,172;animation-delay:0.90s">
+  <a class="card t" href="prepositions.html" data-level="Novice" data-section="Grammaire" data-tags="Prépositions" data-search="in, on, at les prepositions de temps (at 7, on monday, in july) et de lieu (at school, on the table, in paris). grammaire · prepositions temps et lieu temps lieu in / on / at prepositions grammaire prepositions novice" style="--ca:#34d399;--cb:#059669;--crgb:52,211,153;animation-delay:0.74s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label" style="font-size:42px">Quickly</span>
-      <span class="badge">good → well</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Adverbes</div>
-      <div class="card-title">Les adverbes de manière</div>
-      <div class="card-desc">quick → quickly, good → well : former l&#x27;adverbe et le distinguer de l&#x27;adjectif.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">-ly</span>
-        <span class="pill">well</span>
-        <span class="pill">adj / adv</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="too_enough.html" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="too, enough, so, such trop, assez, si, tellement : leur sens et leur place dans la phrase. grammaire · degre enough · so · such too enough so / such adjectifs &amp; adverbes grammaire trop assez tellement" style="--ca:#bef264;--cb:#84cc16;--crgb:190,242,100;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Too</span>
-      <span class="badge">enough · so · such</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Degré</div>
-      <div class="card-title">too, enough, so, such</div>
-      <div class="card-desc">Trop, assez, si, tellement : leur sens et leur place dans la phrase.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">too</span>
-        <span class="pill">enough</span>
-        <span class="pill">so / such</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="comparatif.html" data-section="Grammaire" data-tags="Comparer" data-search="le comparatif comparer des personnes, objets ou situations — formes superieure, inferieure et egale. grammaire · comparaison comparatif -er / more less as … as comparer grammaire comparatif than" style="--ca:#3ecfcf;--cb:#2fa8d8;--crgb:62,207,207;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Comp</span>
-      <span class="badge">Comparatif</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Comparaison</div>
-      <div class="card-title">Le Comparatif</div>
-      <div class="card-desc">Comparer des personnes, objets ou situations — formes supérieure, inférieure et égale.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">-er / more</span>
-        <span class="pill">less</span>
-        <span class="pill">as … as</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="superlatif.html" data-section="Grammaire" data-tags="Comparer" data-search="le superlatif the -est, the most…, the best / the worst — et la difference avec le comparatif. grammaire · comparaison the tallest the -est the most best comparer grammaire superlatif most est" style="--ca:#2dd4bf;--cb:#0d9488;--crgb:45,212,191;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="big-label">Best</span>
-      <span class="badge">the tallest</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Grammaire · Comparaison</div>
-      <div class="card-title">Le superlatif</div>
-      <div class="card-desc">the -est, the most…, the best / the worst — et la différence avec le comparatif.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">the -est</span>
-        <span class="pill">the most</span>
-        <span class="pill">best</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="prepositions.html" data-section="Grammaire" data-tags="Prépositions" data-search="in, on, at les prepositions de temps (at 7, on monday, in july) et de lieu (at school, on the table, in paris). grammaire · prepositions temps et lieu temps lieu in / on / at prepositions grammaire prepositions" style="--ca:#34d399;--cb:#059669;--crgb:52,211,153;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label" style="font-size:34px">in · on · at</span>
       <span class="badge">temps et lieu</span>
     </div>
@@ -1204,9 +874,283 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="preterit_cap_sapver.html" data-section="Grammaire" data-tags="Passé|CAP Sapver" data-search="preterit — vente &amp; aide preterit simple oriente vente et aide a la personne — verbes metiers, vocabulaire professionnel. cap sapver · temps preterit simple affirmatif negatif interrogatif passe cap sapver grammaire cap sapver vente preterit" style="--ca:#4ec9f5;--cb:#3f7ee0;--crgb:78,201,245;animation-delay:0.90s">
+  <a class="card t" href="preterit.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé" data-search="le preterit phrases affirmatives, negatives et interrogatives au preterit simple — reguliers et irreguliers. grammaire · temps preterit simple affirmatif negatif interrogatif passe grammaire preterit passe did intermediaire" style="--ca:#f5c842;--cb:#e07b3f;--crgb:245,200,66;animation-delay:0.77s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Past</span>
+      <span class="badge">Prétérit simple</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le Prétérit</div>
+      <div class="card-desc">Phrases affirmatives, négatives et interrogatives au prétérit simple — réguliers et irréguliers.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Affirmatif</span>
+        <span class="pill">Négatif</span>
+        <span class="pill">Interrogatif</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="verbe_regulier_irregulier.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé" data-search="regulier ou irregulier ? regulier ou irregulier ? base verbale, orthographe du -ed, formes irregulieres et intrus. grammaire · verbes identification -ed / -ied irreguliers intrus passe grammaire verbes irreguliers preterit intermediaire" style="--ca:#4ecb7f;--cb:#2da866;--crgb:78,203,127;animation-delay:0.80s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Reg?</span>
+      <span class="badge">Identification</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Verbes</div>
+      <div class="card-title">Régulier ou Irrégulier ?</div>
+      <div class="card-desc">Régulier ou irrégulier ? Base verbale, orthographe du -ED, formes irrégulières et intrus.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-ed / -ied</span>
+        <span class="pill">Irréguliers</span>
+        <span class="pill">Intrus</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="preterit_continu.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé" data-search="le preterit be + -ing ce qui etait en train de se passer : was / were + verbe-ing, avec when et while. grammaire · temps i was sleeping was / were when while passe grammaire preterit continu progressif intermediaire" style="--ca:#facc15;--cb:#ca8a04;--crgb:250,204,21;animation-delay:0.83s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Was -ing</span>
+      <span class="badge">I was sleeping</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le prétérit be + -ing</div>
+      <div class="card-desc">Ce qui était en train de se passer : was / were + verbe-ing, avec when et while.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">was / were</span>
+        <span class="pill">when</span>
+        <span class="pill">while</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="used_to.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé" data-search="used to exprimer des habitudes et etats passes revolus — formes affirmative, negative et interrogative. grammaire · aspect habitudes passees used to didn&#x27;t use to did … use to? passe grammaire habitude passee intermediaire" style="--ca:#7c6af7;--cb:#b47cf0;--crgb:124,106,247;animation-delay:0.86s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Used</span>
+      <span class="badge">Habitudes passées</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Aspect</div>
+      <div class="card-title">Used To</div>
+      <div class="card-desc">Exprimer des habitudes et états passés révolus — formes affirmative, négative et interrogative.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">used to</span>
+        <span class="pill">didn&#x27;t use to</span>
+        <span class="pill">Did … use to?</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="futur.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Futur" data-search="le futur will ou be going to ? predictions, promesses, decisions et projets. grammaire · temps going to will won&#x27;t going to futur grammaire futur will going to intermediaire" style="--ca:#a78bfa;--cb:#7c3aed;--crgb:167,139,250;animation-delay:0.89s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Will</span>
+      <span class="badge">going to</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le futur</div>
+      <div class="card-desc">will ou be going to ? Prédictions, promesses, décisions et projets.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">will</span>
+        <span class="pill">won&#x27;t</span>
+        <span class="pill">going to</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="modaux.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="les modaux can, must, mustn&#x27;t, should, have to, don&#x27;t have to : capacite, obligation, interdiction, conseil. grammaire · modaux must · should can must should verbes &amp; modaux grammaire modaux obligation conseil intermediaire" style="--ca:#818cf8;--cb:#4f46e5;--crgb:129,140,248;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Can</span>
+      <span class="badge">must · should</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Modaux</div>
+      <div class="card-title">Les modaux</div>
+      <div class="card-desc">can, must, mustn&#x27;t, should, have to, don&#x27;t have to : capacité, obligation, interdiction, conseil.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">can</span>
+        <span class="pill">must</span>
+        <span class="pill">should</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="pronoms_reflechis.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="les pronoms reflechis myself, yourself, themselves… et each other. grammaire · pronoms each other myself themselves each other noms &amp; pronoms grammaire reflechis intermediaire" style="--ca:#7dd3fc;--cb:#0ea5e9;--crgb:125,211,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Myself</span>
+      <span class="badge">each other</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Pronoms</div>
+      <div class="card-title">Les pronoms réfléchis</div>
+      <div class="card-desc">myself, yourself, themselves… et each other.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">myself</span>
+        <span class="pill">themselves</span>
+        <span class="pill">each other</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="denombrables.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="much, many, a lot of denombrables et indenombrables : much / many, how much / how many, a few / a little. grammaire · quantites many · a lot of much / many how much? a few noms &amp; pronoms grammaire denombrable quantite intermediaire" style="--ca:#c4b5fd;--cb:#8b5cf6;--crgb:196,181,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Much?</span>
+      <span class="badge">many · a lot of</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Quantités</div>
+      <div class="card-title">much, many, a lot of</div>
+      <div class="card-desc">Dénombrables et indénombrables : much / many, How much / How many, a few / a little.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">much / many</span>
+        <span class="pill">How much?</span>
+        <span class="pill">a few</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="someone_anything.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="someone, anything, nobody… les composes de some, any, no et every : quelqu&#x27;un, rien, partout… grammaire · pronoms anything · nobody some- any- no- / every- noms &amp; pronoms grammaire quelqu un rien personne intermediaire" style="--ca:#fcd34d;--cb:#eab308;--crgb:252,211,77;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Someone</span>
+      <span class="badge">anything · nobody</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Pronoms</div>
+      <div class="card-title">someone, anything, nobody…</div>
+      <div class="card-desc">Les composés de some, any, no et every : quelqu&#x27;un, rien, partout…</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">some-</span>
+        <span class="pill">any-</span>
+        <span class="pill">no- / every-</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="adverbes_maniere.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="les adverbes de maniere quick → quickly, good → well : former l&#x27;adverbe et le distinguer de l&#x27;adjectif. grammaire · adverbes good → well -ly well adj / adv adjectifs &amp; adverbes grammaire adverbes maniere ly intermediaire" style="--ca:#86efac;--cb:#22c55e;--crgb:134,239,172;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Quickly</span>
+      <span class="badge">good → well</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Adverbes</div>
+      <div class="card-title">Les adverbes de manière</div>
+      <div class="card-desc">quick → quickly, good → well : former l&#x27;adverbe et le distinguer de l&#x27;adjectif.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-ly</span>
+        <span class="pill">well</span>
+        <span class="pill">adj / adv</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="too_enough.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Adjectifs &amp; adverbes" data-search="too, enough, so, such trop, assez, si, tellement : leur sens et leur place dans la phrase. grammaire · degre enough · so · such too enough so / such adjectifs &amp; adverbes grammaire trop assez tellement intermediaire" style="--ca:#bef264;--cb:#84cc16;--crgb:190,242,100;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Too</span>
+      <span class="badge">enough · so · such</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Degré</div>
+      <div class="card-title">too, enough, so, such</div>
+      <div class="card-desc">Trop, assez, si, tellement : leur sens et leur place dans la phrase.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">too</span>
+        <span class="pill">enough</span>
+        <span class="pill">so / such</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="comparatif.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Comparer" data-search="le comparatif comparer des personnes, objets ou situations — formes superieure, inferieure et egale. grammaire · comparaison comparatif -er / more less as … as comparer grammaire comparatif than intermediaire" style="--ca:#3ecfcf;--cb:#2fa8d8;--crgb:62,207,207;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Comp</span>
+      <span class="badge">Comparatif</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Comparaison</div>
+      <div class="card-title">Le Comparatif</div>
+      <div class="card-desc">Comparer des personnes, objets ou situations — formes supérieure, inférieure et égale.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-er / more</span>
+        <span class="pill">less</span>
+        <span class="pill">as … as</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="superlatif.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Comparer" data-search="le superlatif the -est, the most…, the best / the worst — et la difference avec le comparatif. grammaire · comparaison the tallest the -est the most best comparer grammaire superlatif most est intermediaire" style="--ca:#2dd4bf;--cb:#0d9488;--crgb:45,212,191;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Best</span>
+      <span class="badge">the tallest</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Comparaison</div>
+      <div class="card-title">Le superlatif</div>
+      <div class="card-desc">the -est, the most…, the best / the worst — et la différence avec le comparatif.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">the -est</span>
+        <span class="pill">the most</span>
+        <span class="pill">best</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="preterit_cap_sapver.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé|CAP Sapver" data-search="preterit — vente &amp; aide preterit simple oriente vente et aide a la personne — verbes metiers, vocabulaire professionnel. cap sapver · temps preterit simple affirmatif negatif interrogatif passe cap sapver grammaire cap sapver vente preterit intermediaire" style="--ca:#4ec9f5;--cb:#3f7ee0;--crgb:78,201,245;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Past</span>
       <span class="badge">Prétérit simple</span>
     </div>
@@ -1224,15 +1168,288 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
+  <a class="card t" href="both_either.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Noms &amp; pronoms" data-search="both, either, neither les deux, l&#x27;un ou l&#x27;autre, aucun des deux : both… and, either… or, neither… nor. grammaire · quantifieurs either · neither both either neither noms &amp; pronoms grammaire les deux aucun intermediaire" style="--ca:#a7f3d0;--cb:#34d399;--crgb:167,243,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Both</span>
+      <span class="badge">either · neither</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Quantifieurs</div>
+      <div class="card-title">both, either, neither</div>
+      <div class="card-desc">Les deux, l&#x27;un ou l&#x27;autre, aucun des deux : both… and, either… or, neither… nor.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">both</span>
+        <span class="pill">either</span>
+        <span class="pill">neither</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="ago_for_since.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Passé" data-search="ago, for, since il y a, pendant, depuis : ne plus confondre ago, for et since. grammaire · temps for · since ago for since passe grammaire il y a depuis pendant intermediaire" style="--ca:#fde68a;--cb:#fbbf24;--crgb:253,230,138;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Ago</span>
+      <span class="badge">for · since</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">ago, for, since</div>
+      <div class="card-desc">Il y a, pendant, depuis : ne plus confondre ago, for et since.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">ago</span>
+        <span class="pill">for</span>
+        <span class="pill">since</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="futur_ing.html" data-level="Intermédiaire" data-section="Grammaire" data-tags="Futur" data-search="le present be + -ing pour le futur i&#x27;m meeting tom tomorrow : les rendez-vous et projets organises. grammaire · temps tomorrow be + -ing going to will futur grammaire futur proche rendez vous intermediaire" style="--ca:#c4b5fd;--cb:#8b5cf6;--crgb:196,181,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Meeting</span>
+      <span class="badge">tomorrow</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le présent be + -ing pour le futur</div>
+      <div class="card-desc">I&#x27;m meeting Tom tomorrow : les rendez-vous et projets organisés.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">be + -ing</span>
+        <span class="pill">going to</span>
+        <span class="pill">will</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="present_perfect.html" data-level="Avancé" data-section="Grammaire" data-tags="Passé" data-search="le present perfect have / has + participe passe, for / since, ever / never, et la difference avec le preterit. grammaire · temps for · since have done for / since ever passe grammaire present perfect participe avance" style="--ca:#f472b6;--cb:#db2777;--crgb:244,114,182;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Have done</span>
+      <span class="badge">for · since</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le present perfect</div>
+      <div class="card-desc">have / has + participe passé, for / since, ever / never, et la différence avec le prétérit.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">have done</span>
+        <span class="pill">for / since</span>
+        <span class="pill">ever</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="present_perfect_continu.html" data-level="Avancé" data-section="Grammaire" data-tags="Passé" data-search="present perfect be + -ing have / has been + verbe-ing : insister sur la duree, et la difference avec le present perfect simple. grammaire · temps i&#x27;ve been waiting been + -ing for / since duree passe grammaire present perfect continu progressif avance" style="--ca:#f0abfc;--cb:#d946ef;--crgb:240,171,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Been -ing</span>
+      <span class="badge">I&#x27;ve been waiting</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Present perfect be + -ing</div>
+      <div class="card-desc">have / has been + verbe-ing : insister sur la durée, et la différence avec le present perfect simple.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">been + -ing</span>
+        <span class="pill">for / since</span>
+        <span class="pill">durée</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="past_perfect.html" data-level="Avancé" data-section="Grammaire" data-tags="Passé" data-search="le past perfect had + participe passe : l&#x27;action anterieure a une autre action passee. grammaire · temps l&#x27;action d&#x27;avant had + pp already before passe grammaire plus que parfait past perfect avance" style="--ca:#fda4af;--cb:#f43f5e;--crgb:253,164,175;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Had done</span>
+      <span class="badge">l&#x27;action d&#x27;avant</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Temps</div>
+      <div class="card-title">Le past perfect</div>
+      <div class="card-desc">had + participe passé : l&#x27;action antérieure à une autre action passée.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">had + PP</span>
+        <span class="pill">already</span>
+        <span class="pill">before</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="probabilite.html" data-level="Avancé" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="may, might, must, can&#x27;t exprimer la probabilite, et les modaux au passe : should have, must have, could have. grammaire · modaux must · can&#x27;t may / might must should have verbes &amp; modaux grammaire probabilite modaux passe avance" style="--ca:#a5f3fc;--cb:#22d3ee;--crgb:165,243,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Might</span>
+      <span class="badge">must · can&#x27;t</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Modaux</div>
+      <div class="card-title">may, might, must, can&#x27;t</div>
+      <div class="card-desc">Exprimer la probabilité, et les modaux au passé : should have, must have, could have.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">may / might</span>
+        <span class="pill">must</span>
+        <span class="pill">should have</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="verbes_to_ing.html" data-level="Avancé" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="verbe + to ou -ing want to go, enjoy swimming : quel verbe est suivi de to + bv, lequel de -ing ? grammaire · verbes want to · enjoy -ing want to enjoy -ing after -ing verbes &amp; modaux grammaire infinitif gerondif avance" style="--ca:#fdba74;--cb:#fb923c;--crgb:253,186,116;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">To / -ing</span>
+      <span class="badge">want to · enjoy -ing</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Verbes</div>
+      <div class="card-title">Verbe + to ou -ing</div>
+      <div class="card-desc">want to go, enjoy swimming : quel verbe est suivi de to + BV, lequel de -ing ?</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">want to</span>
+        <span class="pill">enjoy -ing</span>
+        <span class="pill">after -ing</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="be_used_to.html" data-level="Avancé" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="used to / be used to habitude passee (used to + bv) ou etre habitue a (be used to + -ing) ? grammaire · verbes be used to -ing used to be used to get used to verbes &amp; modaux grammaire habitue avance" style="--ca:#ddd6fe;--cb:#a78bfa;--crgb:221,214,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Used to</span>
+      <span class="badge">be used to -ing</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Verbes</div>
+      <div class="card-title">used to / be used to</div>
+      <div class="card-desc">Habitude passée (used to + BV) ou être habitué à (be used to + -ing) ?</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">used to</span>
+        <span class="pill">be used to</span>
+        <span class="pill">get used to</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="wish.html" data-level="Avancé" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="wish / if only exprimer un souhait ou un regret : wish + preterit, wish + past perfect. grammaire · verbes if only… wish if only were verbes &amp; modaux grammaire souhait regret avance" style="--ca:#fbcfe8;--cb:#f472b6;--crgb:251,207,232;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">I wish</span>
+      <span class="badge">If only…</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Verbes</div>
+      <div class="card-title">wish / if only</div>
+      <div class="card-desc">Exprimer un souhait ou un regret : wish + prétérit, wish + past perfect.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">wish</span>
+        <span class="pill">if only</span>
+        <span class="pill">were</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="conditionnels_mixtes.html" data-level="Expert" data-section="Grammaire" data-tags="Futur" data-search="les conditionnels mixtes if i had studied, i would be… : croiser passe et present dans l&#x27;hypothese. expert · grammaire passe ↔ present passe → present present → passe futur grammaire conditionnel mixte expert" style="--ca:#fdba74;--cb:#c2410c;--crgb:253,186,116;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:42px">Mixed if</span>
+      <span class="badge">passé ↔ présent</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Grammaire</div>
+      <div class="card-title">Les conditionnels mixtes</div>
+      <div class="card-desc">If I had studied, I would be… : croiser passé et présent dans l&#x27;hypothèse.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">passé → présent</span>
+        <span class="pill">présent → passé</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="subjonctif.html" data-level="Expert" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="le subjonctif anglais i suggest that he be…, it&#x27;s time we left, if i were… : le subjonctif en anglais. expert · grammaire suggest that he be suggest that it&#x27;s time were verbes &amp; modaux grammaire subjonctif expert" style="--ca:#ddd6fe;--cb:#7c3aed;--crgb:221,214,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:42px">Be it so</span>
+      <span class="badge">suggest that he be</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Grammaire</div>
+      <div class="card-title">Le subjonctif anglais</div>
+      <div class="card-desc">I suggest that he be…, It&#x27;s time we left, If I were… : le subjonctif en anglais.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">suggest that</span>
+        <span class="pill">It&#x27;s time</span>
+        <span class="pill">were</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="remember_to_ing.html" data-level="Expert" data-section="Grammaire" data-tags="Verbes &amp; modaux" data-search="remember to / remember -ing remember, forget, stop, try, regret, mean : quand to et -ing changent le sens. expert · grammaire to = -ing remember stop try verbes &amp; modaux grammaire infinitif gerondif sens expert" style="--ca:#fde68a;--cb:#b45309;--crgb:253,230,138;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:42px">Remember</span>
+      <span class="badge">to ≠ -ing</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Grammaire</div>
+      <div class="card-title">remember to / remember -ing</div>
+      <div class="card-desc">remember, forget, stop, try, regret, mean : quand to et -ing changent le sens.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">remember</span>
+        <span class="pill">stop</span>
+        <span class="pill">try</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
   </div>
 </section>
 
 <section class="sec" data-sec="Syntaxe">
   <div class="sec-head"><h2>Syntaxe</h2><p>Construire des phrases : questions, liens logiques, phrase complexe.</p></div>
   <div class="grid">
-  <a class="card t" href="questions_fermees.html" data-section="Syntaxe" data-tags="Questions" data-search="questions fermees traduire des questions en did + sujet + bv, puis completer les reponses affirmatives et negatives. syntaxe · questions yes, i did / no, i didn&#x27;t did + bv didn&#x27;t + bv preterit questions syntaxe did you questions fermees" style="--ca:#ff9f43;--cb:#e8603c;--crgb:255,159,67;animation-delay:0.90s">
+  <a class="card t" href="questions_fermees.html" data-level="Novice" data-section="Syntaxe" data-tags="Questions" data-search="questions fermees traduire des questions en did + sujet + bv, puis completer les reponses affirmatives et negatives. syntaxe · questions yes, i did / no, i didn&#x27;t did + bv didn&#x27;t + bv preterit questions syntaxe did you questions fermees novice" style="--ca:#ff9f43;--cb:#e8603c;--crgb:255,159,67;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Did?</span>
       <span class="badge">Yes, I did / No, I didn&#x27;t</span>
     </div>
@@ -1250,9 +1467,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="questions_ouvertes.html" data-section="Syntaxe" data-tags="Questions" data-search="questions ouvertes pronoms interrogatifs, ordre des mots, traduction — et raconter ses dernieres vacances. syntaxe · questions when · where · who · how wh- + did how long sum up questions syntaxe when where who what how vacances" style="--ca:#f06fa4;--cb:#c44d8a;--crgb:240,111,164;animation-delay:0.90s">
+  <a class="card t" href="questions_ouvertes.html" data-level="Intermédiaire" data-section="Syntaxe" data-tags="Questions" data-search="questions ouvertes pronoms interrogatifs, ordre des mots, traduction — et raconter ses dernieres vacances. syntaxe · questions when · where · who · how wh- + did how long sum up questions syntaxe when where who what how vacances intermediaire" style="--ca:#f06fa4;--cb:#c44d8a;--crgb:240,111,164;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Wh-?</span>
       <span class="badge">When · Where · Who · How</span>
     </div>
@@ -1270,9 +1488,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="questions_sujet.html" data-section="Syntaxe" data-tags="Questions" data-search="questions sur le sujet who called you? ou who did you call? avec ou sans did selon la fonction du mot interrogatif. syntaxe · questions called / did you call who + verbe who did…? what? questions syntaxe question sujet objet" style="--ca:#f9a8d4;--cb:#f472b6;--crgb:249,168,212;animation-delay:0.90s">
+  <a class="card t" href="questions_sujet.html" data-level="Intermédiaire" data-section="Syntaxe" data-tags="Questions" data-search="questions sur le sujet who called you? ou who did you call? avec ou sans did selon la fonction du mot interrogatif. syntaxe · questions called / did you call who + verbe who did…? what? questions syntaxe question sujet objet intermediaire" style="--ca:#f9a8d4;--cb:#f472b6;--crgb:249,168,212;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Who?</span>
       <span class="badge">called / did you call</span>
     </div>
@@ -1290,29 +1509,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="question_tags.html" data-section="Syntaxe" data-tags="Questions" data-search="les question tags it&#x27;s cold, isn&#x27;t it? · you like pizza, don&#x27;t you? : la petite question de fin de phrase. syntaxe · questions tags isn&#x27;t it don&#x27;t you can&#x27;t she questions syntaxe question tags n est ce pas" style="--ca:#c4b5fd;--cb:#a78bfa;--crgb:196,181,253;animation-delay:0.90s">
+  <a class="card t" href="exclamatives.html" data-level="Intermédiaire" data-section="Syntaxe" data-tags="Phrase complexe" data-search="les exclamatives what a beautiful day! how nice! so / such : construire une exclamation. syntaxe · exclamatives how nice! what a how so / such phrase complexe syntaxe exclamation intermediaire" style="--ca:#fcd34d;--cb:#f59e0b;--crgb:252,211,77;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
-      <span class="big-label" style="font-size:34px">…isn&#x27;t it?</span>
-      <span class="badge">tags</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Syntaxe · Questions</div>
-      <div class="card-title">Les question tags</div>
-      <div class="card-desc">It&#x27;s cold, isn&#x27;t it? · You like pizza, don&#x27;t you? : la petite question de fin de phrase.</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">isn&#x27;t it</span>
-        <span class="pill">don&#x27;t you</span>
-        <span class="pill">can&#x27;t she</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="exclamatives.html" data-section="Syntaxe" data-tags="Phrase complexe" data-search="les exclamatives what a beautiful day! how nice! so / such : construire une exclamation. syntaxe · exclamatives how nice! what a how so / such phrase complexe syntaxe exclamation" style="--ca:#fcd34d;--cb:#f59e0b;--crgb:252,211,77;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label" style="font-size:42px">What a…!</span>
       <span class="badge">How nice!</span>
     </div>
@@ -1330,9 +1530,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="connecteurs.html" data-section="Syntaxe" data-tags="Liens logiques" data-search="les connecteurs and, but, because, so, although, however, first, then… : relier ses idees. syntaxe · liens logiques because · so because so although liens logiques syntaxe connecteurs mots de liaison" style="--ca:#93c5fd;--cb:#60a5fa;--crgb:147,197,253;animation-delay:0.90s">
+  <a class="card t" href="connecteurs.html" data-level="Intermédiaire" data-section="Syntaxe" data-tags="Liens logiques" data-search="les connecteurs and, but, because, so, although, however, first, then… : relier ses idees. syntaxe · liens logiques because · so because so although liens logiques syntaxe connecteurs mots de liaison intermediaire" style="--ca:#93c5fd;--cb:#60a5fa;--crgb:147,197,253;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">But</span>
       <span class="badge">because · so</span>
     </div>
@@ -1350,9 +1551,52 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="relatifs.html" data-section="Syntaxe" data-tags="Phrase complexe" data-search="les pronoms relatifs who, which, that, where, whose : relier deux phrases. syntaxe · phrase complexe which · where who which where phrase complexe syntaxe relatifs qui que ou" style="--ca:#67e8f9;--cb:#06b6d4;--crgb:103,232,249;animation-delay:0.90s">
+  <a class="card t" href="so_neither.html" data-level="Intermédiaire" data-section="Syntaxe" data-tags="Questions" data-search="so do i / neither do i dire « moi aussi » et « moi non plus » en reprenant le bon auxiliaire. syntaxe · reponses neither do i so do i neither am i so can i questions syntaxe moi aussi moi non plus intermediaire" style="--ca:#f9a8d4;--cb:#ec4899;--crgb:249,168,212;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">So do I</span>
+      <span class="badge">Neither do I</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Syntaxe · Réponses</div>
+      <div class="card-title">So do I / Neither do I</div>
+      <div class="card-desc">Dire « moi aussi » et « moi non plus » en reprenant le bon auxiliaire.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">So do I</span>
+        <span class="pill">Neither am I</span>
+        <span class="pill">So can I</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="question_tags.html" data-level="Avancé" data-section="Syntaxe" data-tags="Questions" data-search="les question tags it&#x27;s cold, isn&#x27;t it? · you like pizza, don&#x27;t you? : la petite question de fin de phrase. syntaxe · questions tags isn&#x27;t it don&#x27;t you can&#x27;t she questions syntaxe question tags n est ce pas avance" style="--ca:#c4b5fd;--cb:#a78bfa;--crgb:196,181,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:34px">…isn&#x27;t it?</span>
+      <span class="badge">tags</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Syntaxe · Questions</div>
+      <div class="card-title">Les question tags</div>
+      <div class="card-desc">It&#x27;s cold, isn&#x27;t it? · You like pizza, don&#x27;t you? : la petite question de fin de phrase.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">isn&#x27;t it</span>
+        <span class="pill">don&#x27;t you</span>
+        <span class="pill">can&#x27;t she</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="relatifs.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe" data-search="les pronoms relatifs who, which, that, where, whose : relier deux phrases. syntaxe · phrase complexe which · where who which where phrase complexe syntaxe relatifs qui que ou avance" style="--ca:#67e8f9;--cb:#06b6d4;--crgb:103,232,249;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label">Who?</span>
       <span class="badge">which · where</span>
     </div>
@@ -1370,9 +1614,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="subordonnees_temps.html" data-section="Syntaxe" data-tags="Phrase complexe|Liens logiques" data-search="when + present when i arrive, i&#x27;ll call you : when, as soon as, until + present pour parler du futur. syntaxe · phrase complexe + present when as soon as until phrase complexe liens logiques syntaxe subordonnee temps futur" style="--ca:#99f6e4;--cb:#2dd4bf;--crgb:153,246,228;animation-delay:0.90s">
+  <a class="card t" href="subordonnees_temps.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe|Liens logiques" data-search="when + present when i arrive, i&#x27;ll call you : when, as soon as, until + present pour parler du futur. syntaxe · phrase complexe + present when as soon as until phrase complexe liens logiques syntaxe subordonnee temps futur avance" style="--ca:#99f6e4;--cb:#2dd4bf;--crgb:153,246,228;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label" style="font-size:42px">When I…</span>
       <span class="badge">+ présent</span>
     </div>
@@ -1390,9 +1635,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="conditionnel.html" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le conditionnel type 1 : if + present, will · type 2 : if + preterit, would · type 3 : if + had, would have. syntaxe · phrase complexe will · would type 1 type 2 type 3 phrase complexe syntaxe if conditionnel would" style="--ca:#fdba74;--cb:#f97316;--crgb:253,186,116;animation-delay:0.90s">
+  <a class="card t" href="conditionnel.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le conditionnel type 1 : if + present, will · type 2 : if + preterit, would · type 3 : if + had, would have. syntaxe · phrase complexe will · would type 1 type 2 type 3 phrase complexe syntaxe if conditionnel would avance" style="--ca:#fdba74;--cb:#f97316;--crgb:253,186,116;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label">If…</span>
       <span class="badge">will · would</span>
     </div>
@@ -1410,9 +1656,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="passif.html" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le passif be + participe passe, au present et au preterit, avec by. syntaxe · phrase complexe is made · was built be + pp by actif / passif phrase complexe syntaxe passif participe" style="--ca:#a5b4fc;--cb:#6366f1;--crgb:165,180,252;animation-delay:0.90s">
+  <a class="card t" href="passif.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le passif be + participe passe, au present et au preterit, avec by. syntaxe · phrase complexe is made · was built be + pp by actif / passif phrase complexe syntaxe passif participe avance" style="--ca:#a5b4fc;--cb:#6366f1;--crgb:165,180,252;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label">Made</span>
       <span class="badge">is made · was built</span>
     </div>
@@ -1430,9 +1677,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="discours_indirect.html" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le discours indirect rapporter des paroles : say ou tell, et la concordance des temps. syntaxe · phrase complexe said · told say / tell was / would pronoms phrase complexe syntaxe discours indirect rapporte" style="--ca:#d8b4fe;--cb:#a855f7;--crgb:216,180,254;animation-delay:0.90s">
+  <a class="card t" href="discours_indirect.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le discours indirect rapporter des paroles : say ou tell, et la concordance des temps. syntaxe · phrase complexe said · told say / tell was / would pronoms phrase complexe syntaxe discours indirect rapporte avance" style="--ca:#d8b4fe;--cb:#a855f7;--crgb:216,180,254;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label" style="font-size:42px">He said</span>
       <span class="badge">said · told</span>
     </div>
@@ -1450,15 +1698,121 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
+  <a class="card t" href="questions_indirectes.html" data-level="Avancé" data-section="Syntaxe" data-tags="Questions" data-search="les questions indirectes can you tell me where the station is? : poser une question polie sans inversion. syntaxe · questions tell me where… can you tell me do you know if questions syntaxe question indirecte polie avance" style="--ca:#bfdbfe;--cb:#93c5fd;--crgb:191,219,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Can you…</span>
+      <span class="badge">tell me where…</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Syntaxe · Questions</div>
+      <div class="card-title">Les questions indirectes</div>
+      <div class="card-desc">Can you tell me where the station is? : poser une question polie sans inversion.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Can you tell me</span>
+        <span class="pill">Do you know</span>
+        <span class="pill">if</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="causatif.html" data-level="Avancé" data-section="Syntaxe" data-tags="Phrase complexe" data-search="le causatif have something done, make someone do, let someone do : faire faire, obliger, laisser. syntaxe · causatif make · let have done make let phrase complexe syntaxe causatif faire faire avance" style="--ca:#fed7aa;--cb:#fb923c;--crgb:254,215,170;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:34px">Have it done</span>
+      <span class="badge">make · let</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Syntaxe · Causatif</div>
+      <div class="card-title">Le causatif</div>
+      <div class="card-desc">have something done, make someone do, let someone do : faire faire, obliger, laisser.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">have done</span>
+        <span class="pill">make</span>
+        <span class="pill">let</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="inversion.html" data-level="Expert" data-section="Syntaxe" data-tags="Phrase complexe" data-search="l&#x27;inversion emphatique never have i seen…, rarely does he…, had i known… : l&#x27;inversion du registre soutenu. expert · syntaxe inversion never have i not only had i known phrase complexe syntaxe inversion emphatique soutenu expert" style="--ca:#fca5a5;--cb:#b91c1c;--crgb:252,165,165;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:34px">Never have I</span>
+      <span class="badge">inversion</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Syntaxe</div>
+      <div class="card-title">L&#x27;inversion emphatique</div>
+      <div class="card-desc">Never have I seen…, Rarely does he…, Had I known… : l&#x27;inversion du registre soutenu.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Never have I</span>
+        <span class="pill">Not only</span>
+        <span class="pill">Had I known</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="phrases_clivees.html" data-level="Expert" data-section="Syntaxe" data-tags="Phrase complexe" data-search="phrases clivees et emphase it was tom who…, what i need is…, do emphatique : mettre en relief. expert · syntaxe is… it is… that what… is do emphatique phrase complexe syntaxe clivee emphase mise en relief expert" style="--ca:#a5f3fc;--cb:#0e7490;--crgb:165,243,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:34px">What I need</span>
+      <span class="badge">is…</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Syntaxe</div>
+      <div class="card-title">Phrases clivées et emphase</div>
+      <div class="card-desc">It was Tom who…, What I need is…, do emphatique : mettre en relief.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">It is… that</span>
+        <span class="pill">What… is</span>
+        <span class="pill">do emphatique</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="participiales.html" data-level="Expert" data-section="Syntaxe" data-tags="Phrase complexe" data-search="les propositions participiales having finished…, built in 1889… et le piege du participe flottant. expert · syntaxe participiales -ing having + pp pp phrase complexe syntaxe participe proposition participiale expert" style="--ca:#bbf7d0;--cb:#15803d;--crgb:187,247,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:34px">Having done</span>
+      <span class="badge">participiales</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Syntaxe</div>
+      <div class="card-title">Les propositions participiales</div>
+      <div class="card-desc">Having finished…, Built in 1889… et le piège du participe flottant.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">-ing</span>
+        <span class="pill">having + PP</span>
+        <span class="pill">PP</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
   </div>
 </section>
 
 <section class="sec" data-sec="Lexique">
   <div class="sec-head"><h2>Lexique</h2><p>Le vocabulaire du quotidien et du métier.</p></div>
   <div class="grid">
-  <a class="card t" href="se_presenter.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="se presenter dire son nom, son age, ou on habite, ses gouts, et poser les memes questions. lexique · communication my name is… what&#x27;s your name? i&#x27;m 15 i live in vie quotidienne lexique presentation" style="--ca:#fde047;--cb:#facc15;--crgb:253,224,71;animation-delay:0.90s">
+  <a class="card t" href="se_presenter.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="se presenter dire son nom, son age, ou on habite, ses gouts, et poser les memes questions. lexique · communication my name is… what&#x27;s your name? i&#x27;m 15 i live in vie quotidienne lexique presentation novice" style="--ca:#fde047;--cb:#facc15;--crgb:253,224,71;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Hello!</span>
       <span class="badge">My name is…</span>
     </div>
@@ -1476,9 +1830,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="famille.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="la famille mother, uncle, cousin, niece… et les liens de parente. lexique · famille aunt · nephew vocabulaire ecoute qui est-ce ? vie quotidienne lexique famille parents" style="--ca:#fda4af;--cb:#fb7185;--crgb:253,164,175;animation-delay:0.90s">
+  <a class="card t" href="famille.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="la famille mother, uncle, cousin, niece… et les liens de parente. lexique · famille aunt · nephew vocabulaire ecoute qui est-ce ? vie quotidienne lexique famille parents novice" style="--ca:#fda4af;--cb:#fb7185;--crgb:253,164,175;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Family</span>
       <span class="badge">aunt · nephew</span>
     </div>
@@ -1496,9 +1851,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="meteo.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="la meteo et les saisons what&#x27;s the weather like? sunny, rainy, windy… et les quatre saisons. lexique · meteo it&#x27;s raining meteo saisons ecoute vie quotidienne lexique meteo temps saisons" style="--ca:#7dd3fc;--cb:#38bdf8;--crgb:125,211,252;animation-delay:0.90s">
+  <a class="card t" href="meteo.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="la meteo et les saisons what&#x27;s the weather like? sunny, rainy, windy… et les quatre saisons. lexique · meteo it&#x27;s raining meteo saisons ecoute vie quotidienne lexique meteo temps saisons novice" style="--ca:#7dd3fc;--cb:#38bdf8;--crgb:125,211,252;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Sunny</span>
       <span class="badge">It&#x27;s raining</span>
     </div>
@@ -1516,9 +1872,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="nourriture.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="la nourriture aliments, boissons, repas, et commander au restaurant. lexique · nourriture breakfast · lunch aliments repas restaurant vie quotidienne lexique nourriture aliments restaurant" style="--ca:#fdba74;--cb:#f97316;--crgb:253,186,116;animation-delay:0.90s">
+  <a class="card t" href="nourriture.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="la nourriture aliments, boissons, repas, et commander au restaurant. lexique · nourriture breakfast · lunch aliments repas restaurant vie quotidienne lexique nourriture aliments restaurant novice" style="--ca:#fdba74;--cb:#f97316;--crgb:253,186,116;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Food</span>
       <span class="badge">breakfast · lunch</span>
     </div>
@@ -1536,9 +1893,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="vetements.html" data-section="Lexique" data-tags="Vie quotidienne|CAP Sapver" data-search="les vetements t-shirt, jumper, trousers… et wear, put on, take off, try on. lexique · vetements t-shirt · dress vocabulaire ecoute try on vie quotidienne cap sapver lexique vetements habits" style="--ca:#f0abfc;--cb:#e879f9;--crgb:240,171,252;animation-delay:0.90s">
+  <a class="card t" href="vetements.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne|CAP Sapver" data-search="les vetements t-shirt, jumper, trousers… et wear, put on, take off, try on. lexique · vetements t-shirt · dress vocabulaire ecoute try on vie quotidienne cap sapver lexique vetements habits novice" style="--ca:#f0abfc;--cb:#e879f9;--crgb:240,171,252;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label" style="font-size:42px">Clothes</span>
       <span class="badge">T-shirt · dress</span>
     </div>
@@ -1556,9 +1914,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="maison.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="la maison les pieces, les meubles et les objets de la maison. lexique · maison kitchen · bedroom pieces meubles ecoute vie quotidienne lexique maison pieces meubles" style="--ca:#d9f99d;--cb:#a3e635;--crgb:217,249,157;animation-delay:0.90s">
+  <a class="card t" href="maison.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="la maison les pieces, les meubles et les objets de la maison. lexique · maison kitchen · bedroom pieces meubles ecoute vie quotidienne lexique maison pieces meubles novice" style="--ca:#d9f99d;--cb:#a3e635;--crgb:217,249,157;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Home</span>
       <span class="badge">kitchen · bedroom</span>
     </div>
@@ -1576,9 +1935,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="metiers.html" data-section="Lexique" data-tags="Monde du travail" data-search="les metiers doctor, nurse, baker, mechanic… et ou ils travaillent. lexique · metiers nurse · baker vocabulaire ecoute lieux monde du travail lexique metiers professions" style="--ca:#a5b4fc;--cb:#818cf8;--crgb:165,180,252;animation-delay:0.90s">
+  <a class="card t" href="metiers.html" data-level="Novice" data-section="Lexique" data-tags="Monde du travail" data-search="les metiers doctor, nurse, baker, mechanic… et ou ils travaillent. lexique · metiers nurse · baker vocabulaire ecoute lieux monde du travail lexique metiers professions novice" style="--ca:#a5b4fc;--cb:#818cf8;--crgb:165,180,252;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">Jobs</span>
       <span class="badge">nurse · baker</span>
     </div>
@@ -1596,9 +1956,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="heure_dates.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="heure, dates et nombres dire l&#x27;heure, les dates (the third of may), les nombres et les prix. lexique · reperes half past seven l&#x27;heure les dates les prix vie quotidienne lexique heure date nombre ordinal prix" style="--ca:#93c5fd;--cb:#3b82f6;--crgb:147,197,253;animation-delay:0.90s">
+  <a class="card t" href="heure_dates.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="heure, dates et nombres dire l&#x27;heure, les dates (the third of may), les nombres et les prix. lexique · reperes half past seven l&#x27;heure les dates les prix vie quotidienne lexique heure date nombre ordinal prix novice" style="--ca:#93c5fd;--cb:#3b82f6;--crgb:147,197,253;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
       <span class="big-label">7:30</span>
       <span class="badge">half past seven</span>
     </div>
@@ -1616,9 +1977,94 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="phrasal_verbs.html" data-section="Lexique" data-tags="Vie quotidienne" data-search="les phrasal verbs get up, look for, look after, give up, try on… : verbe + particule. lexique · verbes look for · give up get up look for give up vie quotidienne lexique verbes a particule phrasal" style="--ca:#fcd34d;--cb:#fbbf24;--crgb:252,211,77;animation-delay:0.90s">
+  <a class="card t" href="ecole.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="l&#x27;ecole matieres, lieux et objets de l&#x27;ecole. lexique · ecole ruler · rubber matieres objets ecoute vie quotidienne lexique ecole classe matieres novice" style="--ca:#fef08a;--cb:#facc15;--crgb:254,240,138;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">School</span>
+      <span class="badge">ruler · rubber</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · École</div>
+      <div class="card-title">L&#x27;école</div>
+      <div class="card-desc">Matières, lieux et objets de l&#x27;école.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Matières</span>
+        <span class="pill">Objets</span>
+        <span class="pill">Écoute</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="loisirs_sports.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="les loisirs et les sports sports, loisirs, et quand utiliser play, do ou go. lexique · loisirs play · do · go sports loisirs play / do / go vie quotidienne lexique loisirs sports novice" style="--ca:#fdba74;--cb:#fb923c;--crgb:253,186,116;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">Sports</span>
+      <span class="badge">play · do · go</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Loisirs</div>
+      <div class="card-title">Les loisirs et les sports</div>
+      <div class="card-desc">Sports, loisirs, et quand utiliser play, do ou go.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Sports</span>
+        <span class="pill">Loisirs</span>
+        <span class="pill">play / do / go</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="transports.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="les transports les moyens de transport et le vocabulaire du voyage. lexique · transports on foot transports voyage by / on vie quotidienne lexique transports voyage novice" style="--ca:#93c5fd;--cb:#3b82f6;--crgb:147,197,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label" style="font-size:42px">By train</span>
+      <span class="badge">on foot</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Transports</div>
+      <div class="card-title">Les transports</div>
+      <div class="card-desc">Les moyens de transport et le vocabulaire du voyage.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Transports</span>
+        <span class="pill">Voyage</span>
+        <span class="pill">by / on</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="animaux.html" data-level="Novice" data-section="Lexique" data-tags="Vie quotidienne" data-search="les animaux animaux domestiques, de la ferme et sauvages. lexique · animaux cow · monkey domestiques ferme sauvages vie quotidienne lexique animaux novice" style="--ca:#bbf7d0;--cb:#22c55e;--crgb:187,247,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label" style="font-size:42px">Animals</span>
+      <span class="badge">cow · monkey</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Animaux</div>
+      <div class="card-title">Les animaux</div>
+      <div class="card-desc">Animaux domestiques, de la ferme et sauvages.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Domestiques</span>
+        <span class="pill">Ferme</span>
+        <span class="pill">Sauvages</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="phrasal_verbs.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Vie quotidienne" data-search="les phrasal verbs get up, look for, look after, give up, try on… : verbe + particule. lexique · verbes look for · give up get up look for give up vie quotidienne lexique verbes a particule phrasal intermediaire" style="--ca:#fcd34d;--cb:#fbbf24;--crgb:252,211,77;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Get up</span>
       <span class="badge">look for · give up</span>
     </div>
@@ -1636,9 +2082,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="cap_vente.html" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="l&#x27;anglais de la vente accueillir, conseiller, encaisser, telephoner : les phrases utiles au magasin. cap sapver · vente can i help you? accueil caisse telephone monde du travail cap sapver lexique cap sapver vente client magasin" style="--ca:#5eead4;--cb:#14b8a6;--crgb:94,234,212;animation-delay:0.90s">
+  <a class="card t" href="cap_vente.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="l&#x27;anglais de la vente accueillir, conseiller, encaisser, telephoner : les phrases utiles au magasin. cap sapver · vente can i help you? accueil caisse telephone monde du travail cap sapver lexique cap sapver vente client magasin intermediaire" style="--ca:#5eead4;--cb:#14b8a6;--crgb:94,234,212;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Shop</span>
       <span class="badge">Can I help you?</span>
     </div>
@@ -1656,9 +2103,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="cap_aide.html" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="l&#x27;anglais de l&#x27;aide a la personne le corps, la sante, les consignes et les questions pour aider et rassurer. cap sapver · aide a la personne how do you feel? le corps la sante consignes monde du travail cap sapver lexique cap sapver aide personne sante corps" style="--ca:#99f6e4;--cb:#5eead4;--crgb:153,246,228;animation-delay:0.90s">
+  <a class="card t" href="cap_aide.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="l&#x27;anglais de l&#x27;aide a la personne le corps, la sante, les consignes et les questions pour aider et rassurer. cap sapver · aide a la personne how do you feel? le corps la sante consignes monde du travail cap sapver lexique cap sapver aide personne sante corps intermediaire" style="--ca:#99f6e4;--cb:#5eead4;--crgb:153,246,228;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Care</span>
       <span class="badge">How do you feel?</span>
     </div>
@@ -1676,9 +2124,94 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="cap_ecrit_entretien.html" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="e-mail et entretien d&#x27;embauche ecrire un e-mail professionnel et repondre aux questions d&#x27;un entretien. cap sapver · emploi yours sincerely e-mail entretien qualites monde du travail cap sapver lexique cap sapver mail cv entretien embauche" style="--ca:#bae6fd;--cb:#7dd3fc;--crgb:186,230,253;animation-delay:0.90s">
+  <a class="card t" href="faux_amis.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Vie quotidienne" data-search="les faux amis actually, library, sensible, to attend… : les mots qui ressemblent au francais mais trompent. lexique · pieges = actuellement actually library sensible vie quotidienne lexique faux amis pieges intermediaire" style="--ca:#fecaca;--cb:#f87171;--crgb:254,202,202;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Actually</span>
+      <span class="badge">≠ actuellement</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Pièges</div>
+      <div class="card-title">Les faux amis</div>
+      <div class="card-desc">actually, library, sensible, to attend… : les mots qui ressemblent au français mais trompent.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">actually</span>
+        <span class="pill">library</span>
+        <span class="pill">sensible</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="ville_directions.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Vie quotidienne" data-search="la ville et les directions les lieux de la ville, demander et indiquer son chemin. lexique · ville where is…? lieux directions excuse me vie quotidienne lexique ville chemin directions intermediaire" style="--ca:#bbf7d0;--cb:#4ade80;--crgb:187,247,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Turn left</span>
+      <span class="badge">where is…?</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Ville</div>
+      <div class="card-title">La ville et les directions</div>
+      <div class="card-desc">Les lieux de la ville, demander et indiquer son chemin.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Lieux</span>
+        <span class="pill">Directions</span>
+        <span class="pill">Excuse me</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="emotions.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Vie quotidienne" data-search="les emotions et la personnalite happy, angry, worried, shy, lazy… et bored ou boring ? lexique · emotions bored · boring emotions caractere -ed / -ing vie quotidienne lexique emotions sentiments caractere intermediaire" style="--ca:#fbcfe8;--cb:#ec4899;--crgb:251,207,232;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Happy</span>
+      <span class="badge">bored · boring</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Émotions</div>
+      <div class="card-title">Les émotions et la personnalité</div>
+      <div class="card-desc">happy, angry, worried, shy, lazy… et bored ou boring ?</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Émotions</span>
+        <span class="pill">Caractère</span>
+        <span class="pill">-ed / -ing</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="argent_shopping.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Vie quotidienne|Monde du travail" data-search="l&#x27;argent et le shopping l&#x27;argent, les magasins et les phrases utiles pour acheter. lexique · achats how much? argent magasins how much? vie quotidienne monde du travail lexique argent shopping achats intermediaire" style="--ca:#86efac;--cb:#16a34a;--crgb:134,239,172;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">£</span>
+      <span class="badge">How much?</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Lexique · Achats</div>
+      <div class="card-title">L&#x27;argent et le shopping</div>
+      <div class="card-desc">L&#x27;argent, les magasins et les phrases utiles pour acheter.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Argent</span>
+        <span class="pill">Magasins</span>
+        <span class="pill">How much?</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cap_ecrit_entretien.html" data-level="Avancé" data-section="Lexique" data-tags="Monde du travail|CAP Sapver" data-search="e-mail et entretien d&#x27;embauche ecrire un e-mail professionnel et repondre aux questions d&#x27;un entretien. cap sapver · emploi yours sincerely e-mail entretien qualites monde du travail cap sapver lexique cap sapver mail cv entretien embauche avance" style="--ca:#bae6fd;--cb:#7dd3fc;--crgb:186,230,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
       <span class="big-label">Dear…</span>
       <span class="badge">Yours sincerely</span>
     </div>
@@ -1702,9 +2235,31 @@
 <section class="sec" data-sec="Phonologie">
   <div class="sec-head"><h2>Phonologie</h2><p>Prononcer : les sons, l&#x27;accent, les lettres muettes.</p></div>
   <div class="grid">
-  <a class="card t" href="phono_ed.html" data-section="Phonologie" data-tags="Sons" data-search="prononcer le -ed worked /t/, played /d/, wanted /ɪd/ : ecoute et classe les verbes. phonologie · sons /t/ · /d/ /t/ /d/ /ɪd/ sons phonologie prononciation ed preterit" style="--ca:#fca5a5;--cb:#f87171;--crgb:252,165,165;animation-delay:0.90s">
+  <a class="card t" href="phono_h.html" data-level="Novice" data-section="Phonologie" data-tags="Sons" data-search="le h aspire hat ou at ? heat ou eat ? prononcer le h, et les h muets. phonologie · sons at hat / at h muet ecoute sons phonologie h aspire novice" style="--ca:#fecdd3;--cb:#fb7185;--crgb:254,205,211;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">Hat</span>
+      <span class="badge">at</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Phonologie · Sons</div>
+      <div class="card-title">Le H aspiré</div>
+      <div class="card-desc">hat ou at ? heat ou eat ? Prononcer le h, et les h muets.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">hat / at</span>
+        <span class="pill">h muet</span>
+        <span class="pill">Écoute</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="phono_ed.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Sons" data-search="prononcer le -ed worked /t/, played /d/, wanted /ɪd/ : ecoute et classe les verbes. phonologie · sons /t/ · /d/ /t/ /d/ /ɪd/ sons phonologie prononciation ed preterit intermediaire" style="--ca:#fca5a5;--cb:#f87171;--crgb:252,165,165;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">/ɪd/</span>
       <span class="badge">/t/ · /d/</span>
     </div>
@@ -1722,9 +2277,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="phono_s.html" data-section="Phonologie" data-tags="Sons" data-search="prononcer le -s cats /s/, dogs /z/, buses /ɪz/ : pluriels et 3e personne. phonologie · sons /s/ · /z/ /s/ /z/ /ɪz/ sons phonologie prononciation s pluriel" style="--ca:#fdba74;--cb:#fb923c;--crgb:253,186,116;animation-delay:0.90s">
+  <a class="card t" href="phono_s.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Sons" data-search="prononcer le -s cats /s/, dogs /z/, buses /ɪz/ : pluriels et 3e personne. phonologie · sons /s/ · /z/ /s/ /z/ /ɪz/ sons phonologie prononciation s pluriel intermediaire" style="--ca:#fdba74;--cb:#fb923c;--crgb:253,186,116;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">/ɪz/</span>
       <span class="badge">/s/ · /z/</span>
     </div>
@@ -1742,9 +2298,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="accent_mot.html" data-section="Phonologie" data-tags="Accent" data-search="l&#x27;accent de mot quelle syllabe est accentuee ? ecoute, choisis et repete. phonologie · accent ho-tel 2 syllabes 3 syllabes ecoute accent phonologie accent tonique syllabe" style="--ca:#c4b5fd;--cb:#a78bfa;--crgb:196,181,253;animation-delay:0.90s">
+  <a class="card t" href="accent_mot.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Accent" data-search="l&#x27;accent de mot quelle syllabe est accentuee ? ecoute, choisis et repete. phonologie · accent ho-tel 2 syllabes 3 syllabes ecoute accent phonologie accent tonique syllabe intermediaire" style="--ca:#c4b5fd;--cb:#a78bfa;--crgb:196,181,253;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label" style="font-size:42px">TEA-cher</span>
       <span class="badge">ho-TEL</span>
     </div>
@@ -1762,9 +2319,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="lettres_muettes.html" data-section="Phonologie" data-tags="Sons" data-search="les lettres muettes knife, write, hour, island : les lettres qu&#x27;on ecrit mais qu&#x27;on ne prononce pas. phonologie · sons k · w · h k w h sons phonologie lettres muettes prononciation" style="--ca:#86efac;--cb:#4ade80;--crgb:134,239,172;animation-delay:0.90s">
+  <a class="card t" href="lettres_muettes.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Sons" data-search="les lettres muettes knife, write, hour, island : les lettres qu&#x27;on ecrit mais qu&#x27;on ne prononce pas. phonologie · sons k · w · h k w h sons phonologie lettres muettes prononciation intermediaire" style="--ca:#86efac;--cb:#4ade80;--crgb:134,239,172;animation-delay:0.90s">
     <div class="card-bar"></div>
     <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
       <span class="big-label">Knife</span>
       <span class="badge">k · w · h</span>
     </div>
@@ -1782,6 +2340,243 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
+  <a class="card t" href="phono_th.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Sons" data-search="prononcer le th /θ/ comme dans think, /ð/ comme dans this… et think ou sink ? phonologie · sons think · this /θ/ /ð/ think / sink sons phonologie prononciation th intermediaire" style="--ca:#fcd34d;--cb:#f59e0b;--crgb:252,211,77;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">TH</span>
+      <span class="badge">think · this</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Phonologie · Sons</div>
+      <div class="card-title">Prononcer le TH</div>
+      <div class="card-desc">/θ/ comme dans think, /ð/ comme dans this… et think ou sink ?</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">/θ/</span>
+        <span class="pill">/ð/</span>
+        <span class="pill">think / sink</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="phono_voyelles.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Sons" data-search="voyelles longues et courtes ship ou sheep ? full ou fool ? la longueur des voyelles change le sens. phonologie · sons sheep ship / sheep full / fool ecoute sons phonologie voyelles longues courtes intermediaire" style="--ca:#a5f3fc;--cb:#06b6d4;--crgb:165,243,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Ship</span>
+      <span class="badge">sheep</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Phonologie · Sons</div>
+      <div class="card-title">Voyelles longues et courtes</div>
+      <div class="card-desc">ship ou sheep ? full ou fool ? La longueur des voyelles change le sens.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">ship / sheep</span>
+        <span class="pill">full / fool</span>
+        <span class="pill">Écoute</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="intonation.html" data-level="Intermédiaire" data-section="Phonologie" data-tags="Accent" data-search="l&#x27;intonation intonation montante ou descendante selon le type de phrase. phonologie · intonation la melodie ↗ yes / no ↘ wh- ecoute accent phonologie intonation melodie intermediaire" style="--ca:#ddd6fe;--cb:#8b5cf6;--crgb:221,214,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">↗ ↘</span>
+      <span class="badge">la mélodie</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Phonologie · Intonation</div>
+      <div class="card-title">L&#x27;intonation</div>
+      <div class="card-desc">Intonation montante ou descendante selon le type de phrase.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">↗ yes / no</span>
+        <span class="pill">↘ wh-</span>
+        <span class="pill">Écoute</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="formes_faibles.html" data-level="Avancé" data-section="Phonologie" data-tags="Accent" data-search="les formes faibles can /kən/, to /tə/, and /ən/ : les petits mots qu&#x27;on prononce a peine. phonologie · rythme can · to · and /ə/ can / to forte / faible accent phonologie formes faibles schwa avance" style="--ca:#e9d5ff;--cb:#c084fc;--crgb:233,213,255;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">/ə/</span>
+      <span class="badge">can · to · and</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Phonologie · Rythme</div>
+      <div class="card-title">Les formes faibles</div>
+      <div class="card-desc">can /kən/, to /tə/, and /ən/ : les petits mots qu&#x27;on prononce à peine.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">/ə/</span>
+        <span class="pill">can / to</span>
+        <span class="pill">forte / faible</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="connected_speech.html" data-level="Expert" data-section="Phonologie" data-tags="Accent" data-search="connected speech liaisons, elisions, assimilations et formes reduites (gonna, wanna, dunno). expert · phonologie wanna · dunno liaison elision gonna accent phonologie connected speech oral expert" style="--ca:#e9d5ff;--cb:#7e22ce;--crgb:233,213,255;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label">Gonna</span>
+      <span class="badge">wanna · dunno</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Expert · Phonologie</div>
+      <div class="card-title">Connected speech</div>
+      <div class="card-desc">Liaisons, élisions, assimilations et formes réduites (gonna, wanna, dunno).</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">liaison</span>
+        <span class="pill">élision</span>
+        <span class="pill">gonna</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  </div>
+</section>
+
+<section class="sec" data-sec="Compréhension">
+  <div class="sec-head"><h2>Compréhension</h2><p>Lire et écouter des documents, puis répondre à des questions.</p></div>
+  <div class="grid">
+  <a class="card t" href="ce_famille.html" data-level="Novice" data-section="Compréhension" data-tags="Lecture" data-search="meet the parkers un texte court sur une famille anglaise : vrai / faux, questions, vocabulaire. comprehension ecrite meet the parkers vrai / faux questions vocabulaire lecture comprehension comprehension ecrite texte famille novice" style="--ca:#fde68a;--cb:#f59e0b;--crgb:253,230,138;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">Read</span>
+      <span class="badge">Meet the Parkers</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension écrite</div>
+      <div class="card-title">Meet the Parkers</div>
+      <div class="card-desc">Un texte court sur une famille anglaise : vrai / faux, questions, vocabulaire.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Vrai / faux</span>
+        <span class="pill">Questions</span>
+        <span class="pill">Vocabulaire</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="co_magasin.html" data-level="Novice" data-section="Compréhension" data-tags="Écoute|CAP Sapver" data-search="in a clothes shop un dialogue entre une vendeuse et une cliente. comprehension orale in a clothes shop dialogue vrai / faux questions ecoute cap sapver comprehension comprehension orale dialogue magasin novice" style="--ca:#5eead4;--cb:#0d9488;--crgb:94,234,212;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">Listen</span>
+      <span class="badge">In a clothes shop</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension orale</div>
+      <div class="card-title">In a clothes shop</div>
+      <div class="card-desc">Un dialogue entre une vendeuse et une cliente.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Dialogue</span>
+        <span class="pill">Vrai / faux</span>
+        <span class="pill">Questions</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="ce_vendeuse.html" data-level="Intermédiaire" data-section="Compréhension" data-tags="Lecture|CAP Sapver" data-search="a day at the shop la journee d&#x27;une jeune vendeuse a manchester. comprehension ecrite a day at the shop vrai / faux questions vocabulaire lecture cap sapver comprehension comprehension ecrite vendeuse magasin intermediaire" style="--ca:#99f6e4;--cb:#14b8a6;--crgb:153,246,228;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Read</span>
+      <span class="badge">A day at the shop</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension écrite</div>
+      <div class="card-title">A day at the shop</div>
+      <div class="card-desc">La journée d&#x27;une jeune vendeuse à Manchester.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Vrai / faux</span>
+        <span class="pill">Questions</span>
+        <span class="pill">Vocabulaire</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="co_message.html" data-level="Intermédiaire" data-section="Compréhension" data-tags="Écoute|CAP Sapver" data-search="a phone message un message sur repondeur d&#x27;une maison de retraite : dates, heures, numeros. comprehension orale a phone message message chiffres questions ecoute cap sapver comprehension comprehension orale telephone message intermediaire" style="--ca:#c7d2fe;--cb:#6366f1;--crgb:199,210,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Listen</span>
+      <span class="badge">A phone message</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension orale</div>
+      <div class="card-title">A phone message</div>
+      <div class="card-desc">Un message sur répondeur d&#x27;une maison de retraite : dates, heures, numéros.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Message</span>
+        <span class="pill">Chiffres</span>
+        <span class="pill">Questions</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="ce_londres.html" data-level="Avancé" data-section="Compréhension" data-tags="Lecture" data-search="a weekend in london le recit d&#x27;un voyage scolaire a londres, au preterit. comprehension ecrite a weekend in london vrai / faux questions vocabulaire lecture comprehension comprehension ecrite londres voyage avance" style="--ca:#bfdbfe;--cb:#3b82f6;--crgb:191,219,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Read</span>
+      <span class="badge">A weekend in London</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension écrite</div>
+      <div class="card-title">A weekend in London</div>
+      <div class="card-desc">Le récit d&#x27;un voyage scolaire à Londres, au prétérit.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Vrai / faux</span>
+        <span class="pill">Questions</span>
+        <span class="pill">Vocabulaire</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="co_annonces.html" data-level="Avancé" data-section="Compréhension" data-tags="Écoute" data-search="station &amp; weather une annonce en gare et un bulletin meteo. comprehension orale station &amp; weather annonce meteo questions ecoute comprehension comprehension orale gare meteo avance" style="--ca:#fecaca;--cb:#ef4444;--crgb:254,202,202;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Listen</span>
+      <span class="badge">Station &amp; weather</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Compréhension orale</div>
+      <div class="card-title">Station &amp; weather</div>
+      <div class="card-desc">Une annonce en gare et un bulletin météo.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Annonce</span>
+        <span class="pill">Météo</span>
+        <span class="pill">Questions</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
   </div>
 </section>
 
@@ -1795,17 +2590,26 @@
 
 
 
+
+
+
 <script>
 (function () {
   const KEY = "ea_index_v2";
-  const SECTIONS = ["Grammaire", "Syntaxe", "Lexique", "Phonologie"], STAGS = {"Grammaire": ["Présent", "Adjectifs & adverbes", "Passé", "Futur", "Verbes & modaux", "Noms & pronoms", "Comparer", "Prépositions"], "Syntaxe": ["Questions", "Phrase complexe", "Liens logiques"], "Lexique": ["Vie quotidienne", "Monde du travail"], "Phonologie": ["Sons", "Accent"]}, CAP = "CAP Sapver";
+  const SECTIONS = ["Grammaire", "Syntaxe", "Lexique", "Phonologie", "Compréhension"], STAGS = {"Grammaire": ["Présent", "Adjectifs & adverbes", "Passé", "Futur", "Verbes & modaux", "Noms & pronoms", "Comparer", "Prépositions"], "Syntaxe": ["Questions", "Phrase complexe", "Liens logiques"], "Lexique": ["Vie quotidienne", "Monde du travail"], "Phonologie": ["Sons", "Accent"], "Compréhension": ["Lecture", "Écoute"]}, CAP = "CAP Sapver";
   const cards = [...document.querySelectorAll(".card.t")], secs = [...document.querySelectorAll(".sec")];
   const tabsBox = document.getElementById("tabs"), chipsBox = document.getElementById("chips"), search = document.getElementById("search"), empty = document.getElementById("empty");
-  let st = { sec: "Tout", tag: "", q: "" };
+  let st = { sec: "Tout", tag: "", q: "", lvl: "" };
+  const LEVELS = ["Novice", "Intermédiaire", "Avancé", "Expert"], lvBox = document.getElementById("levels");
   try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   if (st.sec !== "Tout" && !SECTIONS.includes(st.sec)) st.sec = "Tout";
   const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const inSec = c => st.sec === "Tout" || c.dataset.section === st.sec;
+  const inSec = c => (st.sec === "Tout" || c.dataset.section === st.sec) && (!st.lvl || c.dataset.level === st.lvl);
+  lvBox.innerHTML = '<span class="lab">Niveau :</span>';
+  [""].concat(LEVELS).forEach((l, i) => {
+    const b = document.createElement("button"); b.className = "lv " + (l ? "lvl-" + (i - 1) : "all"); b.dataset.lvl = l;
+    b.textContent = l || "Tous"; b.onclick = () => { st.lvl = l; apply(); }; lvBox.appendChild(b);
+  });
   ["Tout"].concat(SECTIONS).forEach(s => {
     const b = document.createElement("button"); b.className = "tab"; b.dataset.sec = s;
     b.innerHTML = `${s}<span class="n">${s === "Tout" ? cards.length : cards.filter(c => c.dataset.section === s).length}</span>`;
@@ -1837,6 +2641,7 @@
     });
     secs.forEach(s => s.classList.toggle("hidden", !s.querySelector(".card.t:not(.hidden)")));
     tabsBox.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.sec === st.sec));
+    lvBox.querySelectorAll(".lv").forEach(b => b.classList.toggle("active", b.dataset.lvl === st.lvl));
     drawChips();
     empty.hidden = shown > 0;
     try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
