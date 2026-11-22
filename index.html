@@ -28,6 +28,10 @@
     --comp-b: #2fa8d8;
     --regirr-a: #4ecb7f;
     --regirr-b: #2da866;
+    --closedq-a: #ff9f43;
+    --closedq-b: #e8603c;
+    --openq-a: #f06fa4;
+    --openq-b: #c44d8a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -213,6 +217,8 @@
   .card:nth-child(4) { animation-delay: 0.75s; }
   .card:nth-child(5) { animation-delay: 0.85s; }
   .card:nth-child(6) { animation-delay: 0.95s; }
+  .card:nth-child(7) { animation-delay: 1.05s; }
+  .card:nth-child(8) { animation-delay: 1.15s; }
 
   .card:not(.locked):hover {
     transform: translateY(-4px);
@@ -383,6 +389,22 @@
   .regirr .card-category { color: var(--regirr-a); }
   .regirr:not(.locked):hover { border-color: rgba(78,203,127,0.35); }
 
+  /* Questions fermées */
+  .closedq .card-bar { background: linear-gradient(90deg, var(--closedq-a), var(--closedq-b)); }
+  .closedq .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(255,159,67,0.08) 0%, transparent 70%); }
+  .closedq .big-label { color: var(--closedq-a); }
+  .closedq .badge { color: var(--closedq-a); border-color: rgba(255,159,67,0.3); background: rgba(255,159,67,0.08); }
+  .closedq .card-category { color: var(--closedq-a); }
+  .closedq:not(.locked):hover { border-color: rgba(255,159,67,0.35); }
+
+  /* Questions ouvertes */
+  .openq .card-bar { background: linear-gradient(90deg, var(--openq-a), var(--openq-b)); }
+  .openq .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(240,111,164,0.08) 0%, transparent 70%); }
+  .openq .big-label { color: var(--openq-a); }
+  .openq .badge { color: var(--openq-a); border-color: rgba(240,111,164,0.3); background: rgba(240,111,164,0.08); }
+  .openq .card-category { color: var(--openq-a); }
+  .openq:not(.locked):hover { border-color: rgba(240,111,164,0.35); }
+
   /* ── FOOTER ── */
   .page-footer {
     text-align: center;
@@ -427,7 +449,7 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">5</div>
+      <div class="stat-num" id="countActivities">7</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
@@ -553,6 +575,50 @@
         <span class="pill">-ed / -d / -ied</span>
         <span class="pill">Forme spéciale</span>
         <span class="pill">10 pts</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Questions fermées -->
+  <a class="card closedq" href="questions_fermees.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Did?</span>
+      <span class="badge">Yes, I did / No, I didn't</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Questions</div>
+      <div class="card-title">Questions fermées</div>
+      <div class="card-desc">Poser une question en Did you…? et y répondre — prétérit affirmatif et négatif.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Did + BV</span>
+        <span class="pill">Short answers</span>
+        <span class="pill">-ED</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Questions ouvertes -->
+  <a class="card openq" href="questions_ouvertes.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Wh-?</span>
+      <span class="badge">When · Where · Who · How</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Questions</div>
+      <div class="card-title">Questions ouvertes</div>
+      <div class="card-desc">Pronoms interrogatifs, ordre des mots, traduction — et raconter ses dernières vacances.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Wh- + did</span>
+        <span class="pill">How long</span>
+        <span class="pill">Sum up</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>
