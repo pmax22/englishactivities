@@ -308,6 +308,14 @@
   .say-row { text-align: center; margin: 0 0 14px; }
   .listen-box { text-align: center; margin: 10px 0 24px; }
   .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -330,6 +338,9 @@
       <p class="ex">When I arrived at the station, the train <b>had</b> already <b>left</b>. (le train est parti avant que j'arrive)</p>
       <p>Mots repères : <b>already</b>, <b>before</b>, <b>after</b>, <b>when</b>, <b>by the time</b>.</p>
       <p><b>Négatif :</b> I hadn't seen him before. · <b>Question :</b> Had you eaten before the film?</p>
+      <h4>Past perfect be + -ing</h4>
+      <p><span class="hl">had been + verbe-ing</span> insiste sur la <b>durée</b> d'une action avant un moment du passé.</p>
+      <p class="ex">I had been waiting for an hour when the bus finally arrived. · She was tired because she had been running.</p>
     </div>
   </details>
   <div class="missions" id="missions"></div>
@@ -369,8 +380,8 @@
 
 <script>
 const STORE_KEY = "ea_past_perfect_v2";
-const DATA = {"gap": {"kind": "gap", "instr": "Mets le verbe au past perfect", "items": [{"line": "When I arrived, the train ____ .", "ans": ["had left"], "hint": "leave"}, {"line": "She was hungry because she ____ breakfast.", "ans": ["hadn't eaten", "had not eaten"], "hint": "not / eat"}, {"line": "I ____ that film before, so I knew the end.", "ans": ["had seen"], "hint": "see"}, {"line": "When we got home, someone ____ the door.", "ans": ["had opened"], "hint": "open"}, {"line": "He ____ before his trip to London.", "ans": ["had never flown"], "hint": "never / fly", "w": 220}, {"line": "They were tired because they ____ all day.", "ans": ["had worked"], "hint": "work"}, {"line": "By the time the police came, the thief ____ .", "ans": ["had escaped"], "hint": "escape"}, {"line": "She ____ her homework before dinner.", "ans": ["had finished"], "hint": "finish"}]}, "first": {"kind": "choice", "instr": "Quelle action a eu lieu en premier ?", "items": [{"opts": ["Le train est parti.", "Je suis arrivé."], "tip": "had left → action la plus ancienne.", "fr": "When I arrived, the train had left."}, {"opts": ["Elle a mangé.", "Elle est sortie."], "tip": "had eaten → avant.", "fr": "She went out after she had eaten."}, {"opts": ["Il avait perdu ses clés.", "Il a appelé sa mère."], "tip": "had lost → avant.", "fr": "He called his mum because he had lost his keys."}, {"opts": ["Le film avait commencé.", "Nous sommes arrivés."], "tip": "had started → avant.", "fr": "When we arrived, the film had started."}, {"opts": ["J'avais fini mes devoirs.", "J'ai regardé la télé."], "tip": "had finished → avant.", "fr": "I watched TV after I had finished my homework."}]}, "choice": {"kind": "choice", "instr": "Prétérit ou past perfect ?", "items": [{"opts": ["had gone", "went"], "line": "When I got to the party, Tom ____ home.", "tip": "Tom est parti avant mon arrivée → past perfect."}, {"opts": ["opened", "had opened"], "line": "I ____ the door and went in.", "tip": "actions successives → prétérit."}, {"opts": ["had forgotten", "forgot"], "line": "She couldn't pay because she ____ her purse.", "tip": "l'oubli est antérieur → past perfect."}, {"opts": ["got", "had got"], "line": "Yesterday I ____ up at 7.", "tip": "simple action passée → prétérit."}]}};
-const MDEF = [{"id": "gap", "icon": "✍️", "title": "Conjugue", "desc": "had + participe passé.", "from": ["gap"], "n": 8}, {"id": "first", "icon": "⏮️", "title": "Qu'est-ce qui s'est passé avant ?", "desc": "Repère l'action la plus ancienne.", "from": ["first"], "n": 5}, {"id": "choice", "icon": "⚖️", "title": "Prétérit ou past perfect ?", "desc": "Choisis le bon temps.", "from": ["choice"], "n": 4}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["gap", "first", "choice"], "n": 12}];
+const DATA = {"gap": {"kind": "gap", "instr": "Mets le verbe au past perfect", "items": [{"line": "When I arrived, the train ____ .", "ans": ["had left"], "hint": "leave"}, {"line": "She was hungry because she ____ breakfast.", "ans": ["hadn't eaten", "had not eaten"], "hint": "not / eat"}, {"line": "I ____ that film before, so I knew the end.", "ans": ["had seen"], "hint": "see"}, {"line": "When we got home, someone ____ the door.", "ans": ["had opened"], "hint": "open"}, {"line": "He ____ before his trip to London.", "ans": ["had never flown"], "hint": "never / fly", "w": 220}, {"line": "They were tired because they ____ all day.", "ans": ["had worked"], "hint": "work"}, {"line": "By the time the police came, the thief ____ .", "ans": ["had escaped"], "hint": "escape"}, {"line": "She ____ her homework before dinner.", "ans": ["had finished"], "hint": "finish"}]}, "first": {"kind": "choice", "instr": "Quelle action a eu lieu en premier ?", "items": [{"opts": ["Le train est parti.", "Je suis arrivé."], "tip": "had left → action la plus ancienne.", "fr": "When I arrived, the train had left."}, {"opts": ["Elle a mangé.", "Elle est sortie."], "tip": "had eaten → avant.", "fr": "She went out after she had eaten."}, {"opts": ["Il avait perdu ses clés.", "Il a appelé sa mère."], "tip": "had lost → avant.", "fr": "He called his mum because he had lost his keys."}, {"opts": ["Le film avait commencé.", "Nous sommes arrivés."], "tip": "had started → avant.", "fr": "When we arrived, the film had started."}, {"opts": ["J'avais fini mes devoirs.", "J'ai regardé la télé."], "tip": "had finished → avant.", "fr": "I watched TV after I had finished my homework."}]}, "cont": {"kind": "gap", "instr": "Mets le verbe au past perfect be + -ing", "items": [{"line": "I ____ for an hour when the bus arrived.", "ans": ["had been waiting"], "hint": "wait", "w": 230}, {"line": "She was out of breath because she ____ .", "ans": ["had been running"], "hint": "run", "w": 230}, {"line": "They ____ for three years when they got married.", "ans": ["had been dating"], "hint": "date", "w": 230}, {"line": "His eyes were red: he ____ .", "ans": ["had been crying"], "hint": "cry", "w": 230}, {"line": "We ____ all day, so we were exhausted.", "ans": ["had been working"], "hint": "work", "w": 230}, {"line": "How long ____ there before you moved?", "ans": ["had you been living"], "hint": "you / live", "w": 260}]}, "choice": {"kind": "choice", "instr": "Prétérit ou past perfect ?", "items": [{"opts": ["had gone", "went"], "line": "When I got to the party, Tom ____ home.", "tip": "Tom est parti avant mon arrivée → past perfect."}, {"opts": ["opened", "had opened"], "line": "I ____ the door and went in.", "tip": "actions successives → prétérit."}, {"opts": ["had forgotten", "forgot"], "line": "She couldn't pay because she ____ her purse.", "tip": "l'oubli est antérieur → past perfect."}, {"opts": ["got", "had got"], "line": "Yesterday I ____ up at 7.", "tip": "simple action passée → prétérit."}]}};
+const MDEF = [{"id": "gap", "icon": "✍️", "title": "Conjugue", "desc": "had + participe passé.", "from": ["gap"], "n": 8}, {"id": "first", "icon": "⏮️", "title": "Qu'est-ce qui s'est passé avant ?", "desc": "Repère l'action la plus ancienne.", "from": ["first"], "n": 5}, {"id": "choice", "icon": "⚖️", "title": "Prétérit ou past perfect ?", "desc": "Choisis le bon temps.", "from": ["choice"], "n": 4}, {"id": "cont", "icon": "⏳", "title": "had been + -ing", "desc": "La durée avant un moment du passé.", "from": ["cont"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["gap", "first", "choice", "cont"], "n": 12}];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -382,7 +393,34 @@ function speak(t) {
 }
 document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
 function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
+const DOCS_ = typeof DOCS !== "undefined" ? DOCS : {};
+function speakLines(lines) {
+  try {
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    const speakers = [];
+    lines.forEach(l => {
+      const m = l.match(/^([A-Z][\w ]{0,20}):\s*(.*)$/);
+      const who = m ? m[1] : "", text = m ? m[2] : l;
+      if (who && !speakers.includes(who)) speakers.push(who);
+      const k = Math.max(0, speakers.indexOf(who));
+      const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.85;
+      if (voices.length > 1) u.voice = voices[k % voices.length]; else u.pitch = k % 2 ? 1.35 : 0.9;
+      speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
+function docBox(id) {
+  const d = DOCS_[id]; if (!d) return "";
+  const body = d.lines.map(l => `<p>${esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
+    <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
+    <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
+  return `<div class="doc"><div class="doc-title">📄 ${esc(d.title)}</div><div class="doc-text">${body}</div></div>`;
+}
 function headOf(it) {
+  if (it.doc) return docBox(it.doc) + (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "");
   if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
   return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
     (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
@@ -413,7 +451,7 @@ function orderQ(it, instr) {
 }
 const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ };
 const MISSIONS = MDEF.map(m => Object.assign({}, m, {
-  build: () => shuffle(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
+  build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
 }));
 

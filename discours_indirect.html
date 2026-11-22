@@ -308,6 +308,14 @@
   .say-row { text-align: center; margin: 0 0 14px; }
   .listen-box { text-align: center; margin: 10px 0 24px; }
   .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -337,6 +345,12 @@
         <tr><td>can : "I <b>can</b> swim."</td><td>could : She said she <b>could</b> swim.</td></tr>
       </table>
       <p>Les pronoms changent aussi : <span class="ex">"I love <b>my</b> job." → She said she loved <b>her</b> job.</span></p>
+      <h4>Rapporter une question</h4>
+      <p>Question fermée → <span class="hl">asked if</span> + ordre affirmatif : <span class="ex">"Are you tired?" → He asked me if I was tired.</span></p>
+      <p>Question ouverte → <span class="hl">asked</span> + mot interrogatif + ordre affirmatif : <span class="ex">"Where do you live?" → She asked me where I lived.</span></p>
+      <h4>Rapporter un ordre ou une demande</h4>
+      <p><span class="hl">told / asked</span> + personne + <span class="hl">(not) to</span> + BV : <span class="ex">"Sit down!" → The teacher told us to sit down. · "Don't shout!" → She asked me not to shout.</span></p>
+      <p>Les repères de temps changent aussi : today → that day · tomorrow → the next day · yesterday → the day before.</p>
     </div>
   </details>
   <div class="missions" id="missions"></div>
@@ -376,8 +390,8 @@
 
 <script>
 const STORE_KEY = "ea_discours_indirect_v2";
-const DATA = {"saytell": {"kind": "choice", "instr": "say ou tell ?", "items": [{"opts": ["told", "said"], "line": "He ____ me that he was tired.", "tip": "+ personne (me) → told."}, {"opts": ["said", "told"], "line": "She ____ that she liked pizza.", "tip": "pas de personne → said."}, {"opts": ["told", "said"], "line": "They ____ us the truth.", "tip": "+ personne (us) → told."}, {"opts": ["said", "told"], "line": "Tom ____ he would come.", "tip": "pas de personne → said."}, {"opts": ["tell", "say"], "line": "Can you ____ me the time?", "tip": "+ personne → tell."}, {"opts": ["say", "tell"], "line": "What did she ____ ?", "tip": "pas de personne → say."}]}, "shift": {"kind": "choice", "instr": "Rapporte la phrase", "items": [{"opts": ["He said he was tired.", "He said he is tired.", "He said I was tired."], "tip": "am → was ; I → he.", "fr": "Tom : \"I am tired.\""}, {"opts": ["She said she liked pizza.", "She said she likes pizza.", "She said I liked pizza."], "tip": "like → liked.", "fr": "Emma : \"I like pizza.\""}, {"opts": ["He said he would come.", "He said he will come.", "He said he came."], "tip": "will → would.", "fr": "Lucas : \"I will come.\""}, {"opts": ["She said she could swim.", "She said she can swim.", "She said she swims."], "tip": "can → could.", "fr": "Léa : \"I can swim.\""}, {"opts": ["They said they were hungry.", "They said they are hungry.", "They said we were hungry."], "tip": "are → were ; we → they.", "fr": "Les enfants : \"We are hungry.\""}, {"opts": ["She said she loved her job.", "She said I loved my job.", "She said she loves my job."], "tip": "love → loved ; I → she ; my → her.", "fr": "Ma mère : \"I love my job.\""}, {"opts": ["He told me he didn't like football.", "He told me he doesn't like football.", "He said me he didn't like football."], "tip": "don't → didn't ; told me (pas said me).", "fr": "Tom (à moi) : \"I don't like football.\""}, {"opts": ["She said she had a dog.", "She said she has a dog.", "She said she haved a dog."], "tip": "have → had.", "fr": "Emma : \"I have a dog.\""}]}, "gap": {"kind": "gap", "instr": "Complète la phrase au discours indirect", "items": [{"line": "He said he ____ tired.", "ans": ["was"], "hint": "\"I am tired.\"", "tip": "am → was."}, {"line": "She said she ____ chocolate.", "ans": ["liked"], "hint": "\"I like chocolate.\"", "tip": "like → liked."}, {"line": "They said they ____ come.", "ans": ["would"], "hint": "\"We will come.\"", "tip": "will → would."}, {"line": "He said he ____ play the guitar.", "ans": ["could"], "hint": "\"I can play the guitar.\"", "tip": "can → could."}, {"line": "She said she ____ in Paris.", "ans": ["lived"], "hint": "\"I live in Paris.\"", "tip": "live → lived."}, {"line": "Tom said he ____ a new bike.", "ans": ["had"], "hint": "\"I have a new bike.\"", "tip": "have → had."}]}};
-const MDEF = [{"id": "saytell", "icon": "🗣️", "title": "say ou tell ?", "desc": "told me / said that…", "from": ["saytell"], "n": 6}, {"id": "shift", "icon": "🔁", "title": "Rapporte la phrase", "desc": "On recule d'un temps et on change les pronoms.", "from": ["shift"], "n": 8}, {"id": "gap", "icon": "✍️", "title": "Complète", "desc": "was, liked, would, could…", "from": ["gap"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["saytell", "shift", "gap"], "n": 12}];
+const DATA = {"saytell": {"kind": "choice", "instr": "say ou tell ?", "items": [{"opts": ["told", "said"], "line": "He ____ me that he was tired.", "tip": "+ personne (me) → told."}, {"opts": ["said", "told"], "line": "She ____ that she liked pizza.", "tip": "pas de personne → said."}, {"opts": ["told", "said"], "line": "They ____ us the truth.", "tip": "+ personne (us) → told."}, {"opts": ["said", "told"], "line": "Tom ____ he would come.", "tip": "pas de personne → said."}, {"opts": ["tell", "say"], "line": "Can you ____ me the time?", "tip": "+ personne → tell."}, {"opts": ["say", "tell"], "line": "What did she ____ ?", "tip": "pas de personne → say."}]}, "shift": {"kind": "choice", "instr": "Rapporte la phrase", "items": [{"opts": ["He said he was tired.", "He said he is tired.", "He said I was tired."], "tip": "am → was ; I → he.", "fr": "Tom : \"I am tired.\""}, {"opts": ["She said she liked pizza.", "She said she likes pizza.", "She said I liked pizza."], "tip": "like → liked.", "fr": "Emma : \"I like pizza.\""}, {"opts": ["He said he would come.", "He said he will come.", "He said he came."], "tip": "will → would.", "fr": "Lucas : \"I will come.\""}, {"opts": ["She said she could swim.", "She said she can swim.", "She said she swims."], "tip": "can → could.", "fr": "Léa : \"I can swim.\""}, {"opts": ["They said they were hungry.", "They said they are hungry.", "They said we were hungry."], "tip": "are → were ; we → they.", "fr": "Les enfants : \"We are hungry.\""}, {"opts": ["She said she loved her job.", "She said I loved my job.", "She said she loves my job."], "tip": "love → loved ; I → she ; my → her.", "fr": "Ma mère : \"I love my job.\""}, {"opts": ["He told me he didn't like football.", "He told me he doesn't like football.", "He said me he didn't like football."], "tip": "don't → didn't ; told me (pas said me).", "fr": "Tom (à moi) : \"I don't like football.\""}, {"opts": ["She said she had a dog.", "She said she has a dog.", "She said she haved a dog."], "tip": "have → had.", "fr": "Emma : \"I have a dog.\""}]}, "qo": {"kind": "choice", "instr": "Rapporte la question ou l'ordre", "items": [{"opts": ["He asked me if I was tired.", "He asked me was I tired.", "He asked me if was I tired."], "tip": "question fermée → asked if + ordre affirmatif.", "fr": "Tom : \"Are you tired?\""}, {"opts": ["She asked me where I lived.", "She asked me where did I live.", "She asked me where do I live."], "tip": "pas de do / did : ordre affirmatif.", "fr": "Emma : \"Where do you live?\""}, {"opts": ["The teacher told us to sit down.", "The teacher told us sit down.", "The teacher said us to sit down."], "tip": "told + personne + to + BV.", "fr": "Le professeur : \"Sit down!\""}, {"opts": ["She asked me not to shout.", "She asked me to not shouting.", "She asked me don't shout."], "tip": "ordre négatif → not to + BV.", "fr": "Léa : \"Don't shout!\""}, {"opts": ["He asked what time the film started.", "He asked what time did the film start.", "He asked what time the film does start."], "tip": "ordre affirmatif + recul du temps.", "fr": "Lucas : \"What time does the film start?\""}, {"opts": ["They asked if they could come.", "They asked can they come.", "They asked if could they come."], "tip": "can → could, ordre affirmatif.", "fr": "Les enfants : \"Can we come?\""}]}, "gap": {"kind": "gap", "instr": "Complète la phrase au discours indirect", "items": [{"line": "He said he ____ tired.", "ans": ["was"], "hint": "\"I am tired.\"", "tip": "am → was."}, {"line": "She said she ____ chocolate.", "ans": ["liked"], "hint": "\"I like chocolate.\"", "tip": "like → liked."}, {"line": "They said they ____ come.", "ans": ["would"], "hint": "\"We will come.\"", "tip": "will → would."}, {"line": "He said he ____ play the guitar.", "ans": ["could"], "hint": "\"I can play the guitar.\"", "tip": "can → could."}, {"line": "She said she ____ in Paris.", "ans": ["lived"], "hint": "\"I live in Paris.\"", "tip": "live → lived."}, {"line": "Tom said he ____ a new bike.", "ans": ["had"], "hint": "\"I have a new bike.\"", "tip": "have → had."}]}};
+const MDEF = [{"id": "saytell", "icon": "🗣️", "title": "say ou tell ?", "desc": "told me / said that…", "from": ["saytell"], "n": 6}, {"id": "shift", "icon": "🔁", "title": "Rapporte la phrase", "desc": "On recule d'un temps et on change les pronoms.", "from": ["shift"], "n": 8}, {"id": "gap", "icon": "✍️", "title": "Complète", "desc": "was, liked, would, could…", "from": ["gap"], "n": 6}, {"id": "qo", "icon": "❓", "title": "Questions et ordres", "desc": "asked if…, told me to…", "from": ["qo"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["saytell", "shift", "gap", "qo"], "n": 12}];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -389,7 +403,34 @@ function speak(t) {
 }
 document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
 function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
+const DOCS_ = typeof DOCS !== "undefined" ? DOCS : {};
+function speakLines(lines) {
+  try {
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    const speakers = [];
+    lines.forEach(l => {
+      const m = l.match(/^([A-Z][\w ]{0,20}):\s*(.*)$/);
+      const who = m ? m[1] : "", text = m ? m[2] : l;
+      if (who && !speakers.includes(who)) speakers.push(who);
+      const k = Math.max(0, speakers.indexOf(who));
+      const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.85;
+      if (voices.length > 1) u.voice = voices[k % voices.length]; else u.pitch = k % 2 ? 1.35 : 0.9;
+      speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
+function docBox(id) {
+  const d = DOCS_[id]; if (!d) return "";
+  const body = d.lines.map(l => `<p>${esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
+    <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
+    <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
+  return `<div class="doc"><div class="doc-title">📄 ${esc(d.title)}</div><div class="doc-text">${body}</div></div>`;
+}
 function headOf(it) {
+  if (it.doc) return docBox(it.doc) + (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "");
   if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
   return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
     (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
@@ -420,7 +461,7 @@ function orderQ(it, instr) {
 }
 const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ };
 const MISSIONS = MDEF.map(m => Object.assign({}, m, {
-  build: () => shuffle(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
+  build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
 }));
 

@@ -308,6 +308,14 @@
   .say-row { text-align: center; margin: 0 0 14px; }
   .listen-box { text-align: center; margin: 10px 0 24px; }
   .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -333,7 +341,13 @@
         <tr><td><span class="hl">that</span></td><td>une personne <b>ou</b> une chose</td><td>The film that we saw was great.</td></tr>
         <tr><td><span class="hl">where</span></td><td>un <b>lieu</b></td><td>This is the house where I was born.</td></tr>
         <tr><td><span class="hl">whose</span></td><td>la <b>possession</b> (dont le…)</td><td>The boy whose bike was stolen is sad.</td></tr>
+        <tr><td><span class="hl">whom</span></td><td>une personne <b>complément</b> (soutenu)</td><td>The man whom I met was French. · to whom</td></tr>
       </table>
+      <h4>Avec ou sans virgules ?</h4>
+      <p><b>Relative déterminative</b> (sans virgule) : indispensable pour savoir de qui / quoi on parle. <i>that</i> est possible. <span class="ex">The students who work hard will pass.</span></p>
+      <p><b>Relative explicative</b> (entre virgules) : information en plus. <b>Jamais that</b>. <span class="ex">My brother, who lives in London, is a doctor.</span></p>
+      <h4>Omission du relatif</h4>
+      <p>Quand le relatif est <b>complément</b> (suivi d'un sujet), on peut l'omettre : <span class="ex">The film (that) I saw was great. · The girl (who) you met is my cousin.</span> Impossible quand il est sujet : <span class="ex">The girl who lives next door… <s>The girl lives next door…</s></span></p>
     </div>
   </details>
   <div class="missions" id="missions"></div>
@@ -373,8 +387,8 @@
 
 <script>
 const STORE_KEY = "ea_relatifs_v2";
-const DATA = {"choice": {"kind": "choice", "instr": "Choisis le pronom relatif", "items": [{"opts": ["who", "which", "where"], "line": "The girl ____ lives next door is my friend.", "tip": "the girl = une personne → who."}, {"opts": ["which", "who", "where"], "line": "The book ____ is on the table is mine.", "tip": "the book = une chose → which."}, {"opts": ["where", "which", "who"], "line": "This is the house ____ I was born.", "tip": "un lieu → where."}, {"opts": ["which", "who", "where"], "line": "I have a dog ____ loves bones.", "tip": "un animal → which."}, {"opts": ["who", "which", "whose"], "line": "The man ____ is talking is my teacher.", "tip": "une personne → who."}, {"opts": ["where", "which", "who"], "line": "Paris is the city ____ I live.", "tip": "un lieu → where."}, {"opts": ["whose", "who", "which"], "line": "The boy ____ bike was stolen is sad.", "tip": "possession (dont le vélo) → whose."}, {"opts": ["which", "who", "where"], "line": "The phone ____ I bought is great.", "tip": "une chose → which (ou that)."}, {"opts": ["who", "which", "where"], "line": "She's the singer ____ won the prize.", "tip": "une personne → who."}, {"opts": ["where", "which", "who"], "line": "That's the restaurant ____ we had dinner.", "tip": "un lieu → where."}, {"opts": ["who", "which", "whose"], "line": "I know a woman ____ speaks five languages.", "tip": "une personne → who."}, {"opts": ["which", "who", "where"], "line": "The cake ____ you made is delicious.", "tip": "une chose → which."}]}, "order": {"kind": "order", "instr": "Remets les mots dans l'ordre", "items": [{"en": "The girl|who|lives|next door|is nice.", "fr": "La fille qui habite à côté est gentille.", "trap": "which"}, {"en": "This is|the town|where|I|was born.", "fr": "C'est la ville où je suis né.", "trap": "which"}, {"en": "The film|which|we|saw|was great.", "fr": "Le film que nous avons vu était génial.", "trap": "who", "alts": ["The film that we saw was great."]}, {"en": "I have|a friend|who|plays|the piano.", "fr": "J'ai un ami qui joue du piano.", "trap": "where"}]}};
-const MDEF = [{"id": "choice", "icon": "🎯", "title": "who, which, where ou whose ?", "desc": "Personne, chose, lieu ou possession ?", "from": ["choice"], "n": 12}, {"id": "order", "icon": "🧩", "title": "Remets dans l'ordre", "desc": "Construis la phrase. Attention au piège !", "from": ["order"], "n": 4}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["choice", "order"], "n": 12}];
+const DATA = {"choice": {"kind": "choice", "instr": "Choisis le pronom relatif", "items": [{"opts": ["who", "which", "where"], "line": "The girl ____ lives next door is my friend.", "tip": "the girl = une personne → who."}, {"opts": ["which", "who", "where"], "line": "The book ____ is on the table is mine.", "tip": "the book = une chose → which."}, {"opts": ["where", "which", "who"], "line": "This is the house ____ I was born.", "tip": "un lieu → where."}, {"opts": ["which", "who", "where"], "line": "I have a dog ____ loves bones.", "tip": "un animal → which."}, {"opts": ["who", "which", "whose"], "line": "The man ____ is talking is my teacher.", "tip": "une personne → who."}, {"opts": ["where", "which", "who"], "line": "Paris is the city ____ I live.", "tip": "un lieu → where."}, {"opts": ["whose", "who", "which"], "line": "The boy ____ bike was stolen is sad.", "tip": "possession (dont le vélo) → whose."}, {"opts": ["which", "who", "where"], "line": "The phone ____ I bought is great.", "tip": "une chose → which (ou that)."}, {"opts": ["who", "which", "where"], "line": "She's the singer ____ won the prize.", "tip": "une personne → who."}, {"opts": ["where", "which", "who"], "line": "That's the restaurant ____ we had dinner.", "tip": "un lieu → where."}, {"opts": ["who", "which", "whose"], "line": "I know a woman ____ speaks five languages.", "tip": "une personne → who."}, {"opts": ["which", "who", "where"], "line": "The cake ____ you made is delicious.", "tip": "une chose → which."}]}, "adv": {"kind": "choice", "instr": "Relatives : niveau avancé", "items": [{"opts": ["My sister, who lives in Paris, is a nurse.", "My sister, that lives in Paris, is a nurse.", "My sister who, lives in Paris, is a nurse."], "tip": "relative explicative (entre virgules) → jamais that."}, {"opts": ["The book I bought is boring.", "The book bought is boring I.", "The book I bought it is boring."], "tip": "relatif complément → on peut l'omettre (the book (that) I bought)."}, {"opts": ["The woman who called you is my aunt.", "The woman called you is my aunt.", "The woman whom called you is my aunt."], "tip": "relatif sujet → on ne peut pas l'omettre, et pas de whom."}, {"opts": ["The man to whom I spoke was very kind.", "The man to who I spoke was very kind.", "The man to that I spoke was very kind."], "tip": "après une préposition (soutenu) → whom."}, {"opts": ["Paris, which is the capital of France, is beautiful.", "Paris, that is the capital of France, is beautiful.", "Paris which, is the capital of France, is beautiful."], "tip": "explicative → which, pas that."}, {"opts": ["The students who work hard will pass.", "The students, who work hard, will pass all.", "The students that, work hard will pass."], "tip": "déterminative (seulement ceux qui travaillent) → pas de virgules."}]}, "order": {"kind": "order", "instr": "Remets les mots dans l'ordre", "items": [{"en": "The girl|who|lives|next door|is nice.", "fr": "La fille qui habite à côté est gentille.", "trap": "which"}, {"en": "This is|the town|where|I|was born.", "fr": "C'est la ville où je suis né.", "trap": "which"}, {"en": "The film|which|we|saw|was great.", "fr": "Le film que nous avons vu était génial.", "trap": "who", "alts": ["The film that we saw was great."]}, {"en": "I have|a friend|who|plays|the piano.", "fr": "J'ai un ami qui joue du piano.", "trap": "where"}]}};
+const MDEF = [{"id": "choice", "icon": "🎯", "title": "who, which, where ou whose ?", "desc": "Personne, chose, lieu ou possession ?", "from": ["choice"], "n": 12}, {"id": "order", "icon": "🧩", "title": "Remets dans l'ordre", "desc": "Construis la phrase. Attention au piège !", "from": ["order"], "n": 4}, {"id": "adv", "icon": "🎓", "title": "Virgules, omission, whom", "desc": "Relatives déterminatives et explicatives.", "from": ["adv"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["choice", "order", "adv"], "n": 12}];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -386,7 +400,34 @@ function speak(t) {
 }
 document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
 function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
+const DOCS_ = typeof DOCS !== "undefined" ? DOCS : {};
+function speakLines(lines) {
+  try {
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    const speakers = [];
+    lines.forEach(l => {
+      const m = l.match(/^([A-Z][\w ]{0,20}):\s*(.*)$/);
+      const who = m ? m[1] : "", text = m ? m[2] : l;
+      if (who && !speakers.includes(who)) speakers.push(who);
+      const k = Math.max(0, speakers.indexOf(who));
+      const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.85;
+      if (voices.length > 1) u.voice = voices[k % voices.length]; else u.pitch = k % 2 ? 1.35 : 0.9;
+      speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
+function docBox(id) {
+  const d = DOCS_[id]; if (!d) return "";
+  const body = d.lines.map(l => `<p>${esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
+    <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
+    <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
+  return `<div class="doc"><div class="doc-title">📄 ${esc(d.title)}</div><div class="doc-text">${body}</div></div>`;
+}
 function headOf(it) {
+  if (it.doc) return docBox(it.doc) + (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "");
   if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
   return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
     (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
@@ -417,7 +458,7 @@ function orderQ(it, instr) {
 }
 const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ };
 const MISSIONS = MDEF.map(m => Object.assign({}, m, {
-  build: () => shuffle(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
+  build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
 }));
 

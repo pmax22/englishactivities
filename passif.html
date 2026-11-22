@@ -308,6 +308,14 @@
   .say-row { text-align: center; margin: 0 0 14px; }
   .listen-box { text-align: center; margin: 10px 0 24px; }
   .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -333,6 +341,11 @@
         <tr><td>prétérit</td><td>Shakespeare wrote Hamlet.</td><td>Hamlet <b>was written</b> by Shakespeare.</td></tr>
       </table>
       <p>Participes passés : réguliers en -ed (cleaned, built…) · irréguliers : made, written, built, sold, eaten, stolen, taken, given…</p>
+      <h4>Pour aller plus loin</h4>
+      <p><b>Passif avec un modal</b> : modal + <span class="hl">be</span> + PP → <span class="ex">This must be done today. · It can't be repaired.</span></p>
+      <p><b>Passif au present perfect / be + -ing</b> : <span class="ex">The room has been cleaned. · The road is being repaired.</span></p>
+      <p><b>get</b> + PP (familier) : <span class="ex">He got arrested. · I got paid.</span></p>
+      <p><b>It is said that… / He is said to…</b> : <span class="ex">It is said that he is rich. = He is said to be rich.</span></p>
     </div>
   </details>
   <div class="missions" id="missions"></div>
@@ -372,8 +385,8 @@
 
 <script>
 const STORE_KEY = "ea_passif_v2";
-const DATA = {"gap": {"kind": "gap", "instr": "Mets la phrase au passif", "items": [{"line": "English ____ all over the world.", "ans": ["is spoken"], "hint": "speak · présent", "tip": "présent : is + participe (spoken)."}, {"line": "Hamlet ____ by Shakespeare.", "ans": ["was written"], "hint": "write · prétérit", "tip": "prétérit : was + participe (written)."}, {"line": "These cars ____ in Germany.", "ans": ["are made"], "hint": "make · présent", "tip": "pluriel, présent : are + made."}, {"line": "My bike ____ yesterday!", "ans": ["was stolen"], "hint": "steal · prétérit", "tip": "prétérit : was + stolen."}, {"line": "The Eiffel Tower ____ in 1889.", "ans": ["was built"], "hint": "build · prétérit", "tip": "was + built."}, {"line": "The windows ____ every week.", "ans": ["are cleaned"], "hint": "clean · présent", "tip": "are + cleaned."}, {"line": "The letters ____ this morning.", "ans": ["were sent"], "hint": "send · prétérit", "tip": "pluriel, prétérit : were + sent."}, {"line": "Bread ____ in this shop.", "ans": ["is sold"], "hint": "sell · présent", "tip": "is + sold."}, {"line": "The thieves ____ by the police.", "ans": ["were arrested"], "hint": "arrest · prétérit", "tip": "were + arrested."}, {"line": "This song ____ by millions of people.", "ans": ["is loved"], "hint": "love · présent", "tip": "is + loved."}]}, "choice": {"kind": "choice", "instr": "Actif ou passif : choisis la bonne forme", "items": [{"opts": ["was made", "made", "was make"], "line": "The cake ____ by my grandmother.", "tip": "passif : was + participe passé."}, {"opts": ["made", "was made", "is made"], "line": "My grandmother ____ the cake.", "tip": "la grand-mère fait l'action → actif."}, {"opts": ["is visited", "visits", "is visit"], "line": "The museum ____ every day by thousands of tourists.", "tip": "passif présent : is + visited."}, {"opts": ["is grown", "grows by", "is grow"], "line": "Rice ____ in Asia.", "tip": "passif : is + grown."}, {"opts": ["was broken", "broke", "was broke"], "line": "The window ____ by a ball.", "tip": "passif : was + broken."}, {"opts": ["visit", "are visited", "is visited"], "line": "Thousands of tourists ____ the museum.", "tip": "les touristes font l'action → actif."}]}, "pp": {"kind": "choice", "instr": "Choisis le participe passé", "items": [{"opts": ["made", "maked", "make"], "big": "make"}, {"opts": ["written", "wrote", "writed"], "big": "write"}, {"opts": ["built", "builded", "build"], "big": "build"}, {"opts": ["sold", "selled", "sell"], "big": "sell"}, {"opts": ["stolen", "stole", "stealed"], "big": "steal"}, {"opts": ["spoken", "spoke", "speaked"], "big": "speak"}, {"opts": ["taken", "took", "taked"], "big": "take"}, {"opts": ["given", "gave", "gived"], "big": "give"}]}};
-const MDEF = [{"id": "pp", "icon": "📚", "title": "Les participes passés", "desc": "made, written, built…", "from": ["pp"], "n": 8}, {"id": "gap", "icon": "✍️", "title": "Mets au passif", "desc": "be + participe passé.", "from": ["gap"], "n": 10}, {"id": "choice", "icon": "⚖️", "title": "Actif ou passif ?", "desc": "Qui fait l'action ?", "from": ["choice"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["pp", "gap", "choice"], "n": 12}];
+const DATA = {"gap": {"kind": "gap", "instr": "Mets la phrase au passif", "items": [{"line": "English ____ all over the world.", "ans": ["is spoken"], "hint": "speak · présent", "tip": "présent : is + participe (spoken)."}, {"line": "Hamlet ____ by Shakespeare.", "ans": ["was written"], "hint": "write · prétérit", "tip": "prétérit : was + participe (written)."}, {"line": "These cars ____ in Germany.", "ans": ["are made"], "hint": "make · présent", "tip": "pluriel, présent : are + made."}, {"line": "My bike ____ yesterday!", "ans": ["was stolen"], "hint": "steal · prétérit", "tip": "prétérit : was + stolen."}, {"line": "The Eiffel Tower ____ in 1889.", "ans": ["was built"], "hint": "build · prétérit", "tip": "was + built."}, {"line": "The windows ____ every week.", "ans": ["are cleaned"], "hint": "clean · présent", "tip": "are + cleaned."}, {"line": "The letters ____ this morning.", "ans": ["were sent"], "hint": "send · prétérit", "tip": "pluriel, prétérit : were + sent."}, {"line": "Bread ____ in this shop.", "ans": ["is sold"], "hint": "sell · présent", "tip": "is + sold."}, {"line": "The thieves ____ by the police.", "ans": ["were arrested"], "hint": "arrest · prétérit", "tip": "were + arrested."}, {"line": "This song ____ by millions of people.", "ans": ["is loved"], "hint": "love · présent", "tip": "is + loved."}]}, "choice": {"kind": "choice", "instr": "Actif ou passif : choisis la bonne forme", "items": [{"opts": ["was made", "made", "was make"], "line": "The cake ____ by my grandmother.", "tip": "passif : was + participe passé."}, {"opts": ["made", "was made", "is made"], "line": "My grandmother ____ the cake.", "tip": "la grand-mère fait l'action → actif."}, {"opts": ["is visited", "visits", "is visit"], "line": "The museum ____ every day by thousands of tourists.", "tip": "passif présent : is + visited."}, {"opts": ["is grown", "grows by", "is grow"], "line": "Rice ____ in Asia.", "tip": "passif : is + grown."}, {"opts": ["was broken", "broke", "was broke"], "line": "The window ____ by a ball.", "tip": "passif : was + broken."}, {"opts": ["visit", "are visited", "is visited"], "line": "Thousands of tourists ____ the museum.", "tip": "les touristes font l'action → actif."}]}, "adv": {"kind": "choice", "instr": "Le passif : niveau avancé", "items": [{"opts": ["be done", "done", "been done"], "line": "This work must ____ today.", "tip": "modal + be + PP."}, {"opts": ["is being repaired", "is repairing", "is been repaired"], "line": "The road ____ at the moment.", "tip": "be + -ing au passif → is being + PP."}, {"opts": ["has been cleaned", "has cleaned", "is been cleaned"], "line": "The room ____ . You can go in.", "tip": "present perfect passif → has been + PP."}, {"opts": ["got arrested", "got arrest", "was arresting"], "line": "He ____ for speeding yesterday.", "tip": "get + PP (familier)."}, {"opts": ["to be", "being", "be"], "line": "He is said ____ very rich.", "tip": "He is said to be…"}, {"opts": ["is said", "says", "is saying"], "line": "It ____ that the castle is haunted.", "tip": "It is said that…"}]}, "pp": {"kind": "choice", "instr": "Choisis le participe passé", "items": [{"opts": ["made", "maked", "make"], "big": "make"}, {"opts": ["written", "wrote", "writed"], "big": "write"}, {"opts": ["built", "builded", "build"], "big": "build"}, {"opts": ["sold", "selled", "sell"], "big": "sell"}, {"opts": ["stolen", "stole", "stealed"], "big": "steal"}, {"opts": ["spoken", "spoke", "speaked"], "big": "speak"}, {"opts": ["taken", "took", "taked"], "big": "take"}, {"opts": ["given", "gave", "gived"], "big": "give"}]}};
+const MDEF = [{"id": "pp", "icon": "📚", "title": "Les participes passés", "desc": "made, written, built…", "from": ["pp"], "n": 8}, {"id": "gap", "icon": "✍️", "title": "Mets au passif", "desc": "be + participe passé.", "from": ["gap"], "n": 10}, {"id": "choice", "icon": "⚖️", "title": "Actif ou passif ?", "desc": "Qui fait l'action ?", "from": ["choice"], "n": 6}, {"id": "adv", "icon": "🎓", "title": "Passif avancé", "desc": "must be done, is being repaired, he is said to…", "from": ["adv"], "n": 6}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test !", "from": ["pp", "gap", "choice", "adv"], "n": 12}];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -385,7 +398,34 @@ function speak(t) {
 }
 document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
 function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
+const DOCS_ = typeof DOCS !== "undefined" ? DOCS : {};
+function speakLines(lines) {
+  try {
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    const speakers = [];
+    lines.forEach(l => {
+      const m = l.match(/^([A-Z][\w ]{0,20}):\s*(.*)$/);
+      const who = m ? m[1] : "", text = m ? m[2] : l;
+      if (who && !speakers.includes(who)) speakers.push(who);
+      const k = Math.max(0, speakers.indexOf(who));
+      const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.85;
+      if (voices.length > 1) u.voice = voices[k % voices.length]; else u.pitch = k % 2 ? 1.35 : 0.9;
+      speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
+function docBox(id) {
+  const d = DOCS_[id]; if (!d) return "";
+  const body = d.lines.map(l => `<p>${esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
+    <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
+    <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
+  return `<div class="doc"><div class="doc-title">📄 ${esc(d.title)}</div><div class="doc-text">${body}</div></div>`;
+}
 function headOf(it) {
+  if (it.doc) return docBox(it.doc) + (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "");
   if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
   return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
     (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
@@ -416,7 +456,7 @@ function orderQ(it, instr) {
 }
 const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ };
 const MISSIONS = MDEF.map(m => Object.assign({}, m, {
-  build: () => shuffle(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
+  build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
 }));
 
