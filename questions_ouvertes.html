@@ -221,6 +221,24 @@
     .choices.grid3 { grid-template-columns: repeat(2, 1fr); }
     .field .row { flex-wrap: wrap; }
   }
+  /* Segments colorés (mission 5) */
+  .seg { --c: #5b8dee; border: 1px solid var(--border); border-left: 4px solid var(--c); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; background: var(--surface2); }
+  .seg-where { --c: #5b8dee; } .seg-howlong { --c: #b47cf0; } .seg-who { --c: #4ecb7f; }
+  .seg-when { --c: #f5c842; } .seg-how { --c: #ff8a5c; } .seg-what { --c: #4ec9f5; }
+  .seg-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .seg-pill { background: var(--c); color: #12131a; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 1px; padding: 3px 10px; border-radius: 999px; }
+  .seg-q { font-size: 17px; font-weight: 500; color: var(--text); }
+  .seg-fr { font-size: 13px; color: var(--muted); font-style: italic; }
+  .seg .row { display: flex; align-items: center; gap: 10px; }
+  .seg .pre { color: var(--text); font-size: 16px; white-space: nowrap; }
+  .seg input.answer { padding: 11px 14px; font-size: 16px; }
+  .seg input.answer { background: var(--bg); }
+  .seg input.answer:focus { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 20%, transparent); }
+  .seg .chip:hover { color: var(--c); border-color: var(--c); }
+  .preview .s { border-bottom: 3px solid var(--c); padding: 0 2px; background: color-mix(in srgb, var(--c) 14%, transparent); border-radius: 3px; }
+  .preview .s.blank { color: var(--muted); }
+  .preview-fr { border-left-color: var(--muted); font-size: 17px; }
+  .fr-note { font-size: 12.5px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -285,50 +303,54 @@
   </div>
 </main>
 
-<!-- ═════ BUILDER (Mission 8) ═════ -->
+<!-- ═════ BUILDER (Mission 5) ═════ -->
 <main class="wrap hidden" id="builder">
   <div class="card">
     <div class="q-instr">Mission 5 · Sum up your last vacation</div>
-    <p class="q-sub" style="font-style:normal">Réponds à chaque question pour raconter tes dernières vacances. Ta phrase se construit en bas ⬇️</p>
+    <p class="q-sub" style="font-style:normal">Réponds à chaque question pour raconter tes dernières vacances. Chaque couleur correspond à une question : tu la retrouves dans ton texte en bas.</p>
 
-    <div class="field">
-      <label><span class="qq">Where</span>did you go?</label>
-      <div class="row"><span class="pre">I went to</span><input class="answer" id="b-where" placeholder="Paris, my grandparents' house…"></div>
-      <div class="chips" data-for="b-where"><span class="chip">Paris</span><span class="chip">the seaside</span><span class="chip">the mountains</span><span class="chip">my grandparents' house</span><span class="chip">Spain</span></div>
+    <div class="seg seg-where">
+      <div class="seg-head"><span class="seg-pill">WHERE</span><span class="seg-q">did you go?</span><span class="seg-fr">Où ?</span></div>
+      <div class="row"><span class="pre">I went to</span><input class="answer" id="b-where" placeholder="Paris, the seaside…"></div>
+      <div class="chips" data-for="b-where"><span class="chip">Paris</span><span class="chip">the seaside</span><span class="chip">the mountains</span><span class="chip">my grandparents' house</span><span class="chip">Spain</span><span class="chip">London</span></div>
     </div>
-    <div class="field">
-      <label><span class="qq">How long</span>did you stay there?</label>
+    <div class="seg seg-howlong">
+      <div class="seg-head"><span class="seg-pill">HOW LONG</span><span class="seg-q">did you stay there?</span><span class="seg-fr">Combien de temps ?</span></div>
       <div class="row"><span class="pre">for</span><input class="answer" id="b-howlong" placeholder="a week, 3 days…"></div>
       <div class="chips" data-for="b-howlong"><span class="chip">a weekend</span><span class="chip">3 days</span><span class="chip">a week</span><span class="chip">two weeks</span><span class="chip">1 month</span></div>
     </div>
-    <div class="field">
-      <label><span class="qq">Who</span>did you go with?</label>
+    <div class="seg seg-who">
+      <div class="seg-head"><span class="seg-pill">WHO</span><span class="seg-q">did you go with?</span><span class="seg-fr">Avec qui ?</span></div>
       <div class="row"><span class="pre">with</span><input class="answer" id="b-who" placeholder="my parents, my friends…"></div>
       <div class="chips" data-for="b-who"><span class="chip">my parents</span><span class="chip">my family</span><span class="chip">my friends</span><span class="chip">my brother</span><span class="chip">my sister</span><span class="chip">my cousins</span></div>
     </div>
-    <div class="field">
-      <label><span class="qq">When</span>did you go?</label>
+    <div class="seg seg-when">
+      <div class="seg-head"><span class="seg-pill">WHEN</span><span class="seg-q">did you go?</span><span class="seg-fr">Quand ?</span></div>
       <div class="row"><span class="pre">in / last…</span><input class="answer" id="b-when" placeholder="in July, in October…"></div>
       <div class="chips" data-for="b-when"><span class="chip">in October</span><span class="chip">in July</span><span class="chip">in August</span><span class="chip">last summer</span><span class="chip">last week</span></div>
     </div>
-    <div class="field">
-      <label><span class="qq">How</span>did you go there?</label>
+    <div class="seg seg-how">
+      <div class="seg-head"><span class="seg-pill">HOW</span><span class="seg-q">did you go there?</span><span class="seg-fr">Comment ?</span></div>
       <div class="row"><span class="pre">by</span><input class="answer" id="b-how" placeholder="car, plane, train…"></div>
       <div class="chips" data-for="b-how"><span class="chip">car</span><span class="chip">plane</span><span class="chip">train</span><span class="chip">bus</span><span class="chip">bike</span><span class="chip">boat</span></div>
     </div>
-    <div class="field">
-      <label><span class="qq">What</span>did you do there? <i>(une phrase au prétérit)</i></label>
+    <div class="seg seg-what">
+      <div class="seg-head"><span class="seg-pill">WHAT</span><span class="seg-q">did you do there?</span><span class="seg-fr">Qu'as-tu fait ? (une phrase au prétérit)</span></div>
       <input class="answer" id="b-what" placeholder="I visited a museum and I ate crêpes.">
       <div class="warn hidden" id="b-warn"></div>
     </div>
 
-    <div class="q-instr" style="margin-top:22px">Ton texte</div>
+    <div class="q-instr" style="margin-top:26px">Ton texte</div>
     <div class="preview" id="b-preview"></div>
+
+    <div class="q-instr" style="margin-top:22px">Traduction en français</div>
+    <div class="preview preview-fr" id="b-preview-fr"></div>
+    <p class="fr-note" id="b-fr-note"></p>
 
     <div class="actions">
       <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
       <button class="btn btn-ghost" onclick="clearBuilder()">Effacer</button>
-      <button class="btn btn-primary" id="btnCopy" onclick="copyText()">📋 Copier mon texte</button>
+      <button class="btn btn-primary" id="btnCopy" onclick="copyText()">Copier mon texte</button>
     </div>
   </div>
 </main>
@@ -556,7 +578,7 @@ const MISSIONS = [
     }
   },
   {
-    id: "m7", seance: 2, icon: "🇬🇧", title: "Translate",
+    id: "m7", seance: 2, icon: "🔤", title: "Translate",
     desc: "Traduis la question en anglais avec les étiquettes (attention aux pièges !).",
     build() {
       return shuffle([
@@ -571,8 +593,8 @@ const MISSIONS = [
         ["Où as-tu mangé de la glace hier ?", "Where did you eat ice cream yesterday?", ["ATE"]],
         ["Combien de temps as-tu lu ?", "How long did you read?", ["WHEN"]]
       ]).slice(0, 7).map(([fr, en, d]) => ({
-        type: "order", instr: "Traduis en anglais",
-        prompt: `🇫🇷 ${fr}`, sub: "Un mot en trop s'est glissé dans les étiquettes !",
+        type: "order", instr: "Traduis cette question en anglais",
+        prompt: `${fr}`, sub: "Un mot en trop s'est glissé dans les étiquettes !",
         answer: en, tiles: en.replace("?", "").split(" ").map(w => w.toUpperCase()), distractors: d,
         tip: "Après DID, le verbe reste en base verbale."
       }));
@@ -772,7 +794,33 @@ B_IDS.forEach(id => document.getElementById("b-" + id).addEventListener("input",
 }
 
 function val(id) { return document.getElementById("b-" + id).value.trim(); }
-function blank(txt) { return `<span class="blank">${txt}</span>`; }
+function seg(cls, html, isBlank) { return `<span class="s seg-${cls}${isBlank ? " blank" : ""}">${html}</span>`; }
+
+/* Petit dictionnaire pour la traduction */
+const FR_MONTHS = { january:"janvier", february:"février", march:"mars", april:"avril", may:"mai", june:"juin", july:"juillet", august:"août", september:"septembre", october:"octobre", november:"novembre", december:"décembre" };
+const FR_WHERE = { "paris":"à Paris", "london":"à Londres", "the seaside":"à la mer", "the beach":"à la plage", "the mountains":"à la montagne", "my grandparents' house":"chez mes grands-parents", "my grandparents":"chez mes grands-parents", "spain":"en Espagne", "england":"en Angleterre", "italy":"en Italie", "germany":"en Allemagne", "portugal":"au Portugal", "the countryside":"à la campagne", "disneyland":"à Disneyland" };
+const FR_WHO = { "my parents":"mes parents", "my family":"ma famille", "my friends":"mes amis", "my friend":"mon ami(e)", "my brother":"mon frère", "my sister":"ma sœur", "my cousins":"mes cousins", "my cousin":"mon cousin / ma cousine", "my mother":"ma mère", "my mum":"ma mère", "my father":"mon père", "my dad":"mon père", "my grandparents":"mes grands-parents", "my class":"ma classe" };
+const FR_HOW = { "car":"en voiture", "plane":"en avion", "train":"en train", "bus":"en bus", "bike":"à vélo", "boat":"en bateau", "coach":"en car", "foot":"à pied", "on foot":"à pied" };
+function frWhere(v) { const k = v.toLowerCase(); return FR_WHERE[k] || null; }
+function frWho(v) { return FR_WHO[v.toLowerCase().replace(/^with /, "")] || null; }
+function frHow(v) { return FR_HOW[v.toLowerCase().replace(/^by /, "")] || null; }
+function frHowLong(v) {
+  let s = v.toLowerCase().replace(/^for /, "").trim();
+  const nums = { one:"un", two:"deux", three:"trois", four:"quatre", five:"cinq", six:"six", ten:"dix" };
+  s = s.replace(/\ba weekend\b/, "un week-end").replace(/\ba week\b/, "une semaine").replace(/\ba month\b/, "un mois").replace(/\ba day\b/, "une journée");
+  s = s.replace(/\b(one|two|three|four|five|six|ten)\b/g, m => nums[m]);
+  s = s.replace(/\bdays?\b/, m => m === "days" ? "jours" : "jour").replace(/\bweeks?\b/, m => m === "weeks" ? "semaines" : "semaine")
+       .replace(/\bmonths?\b/, "mois").replace(/\bweekends?\b/, "week-ends").replace(/\bhours?\b/, m => m === "hours" ? "heures" : "heure");
+  return /[a-z]{3,}/.test(s.replace(/jours?|semaines?|mois|week-ends?|un|une|deux|trois|quatre|cinq|six|dix|heures?|journée/g, "")) ? null : s;
+}
+function frWhen(v) {
+  const s = v.toLowerCase().trim();
+  let m = s.match(/^(in )?(january|february|march|april|may|june|july|august|september|october|november|december)$/);
+  if (m) return "en " + FR_MONTHS[m[2]];
+  const last = { "last summer":"l'été dernier", "last winter":"l'hiver dernier", "last week":"la semaine dernière", "last year":"l'année dernière", "last month":"le mois dernier", "last weekend":"le week-end dernier", "last spring":"le printemps dernier", "last autumn":"l'automne dernier", "at christmas":"à Noël", "in the summer":"en été", "in summer":"en été", "in winter":"en hiver" };
+  return last[s] || null;
+}
+
 function updatePreview() {
   const where = val("where"), hl = val("howlong"), who = val("who"), when = val("when"), how = val("how"), what = val("what");
   let whenTxt = when;
@@ -780,13 +828,34 @@ function updatePreview() {
   const howTxt = how ? (/^(by|on)\b/i.test(how) ? how : "by " + how) : "";
   const hlTxt = hl ? (/^for\b/i.test(hl) ? hl : "for " + hl) : "";
   const whoTxt = who ? (/^with\b/i.test(who) ? who : "with " + who) : "";
-  let html = "I went to " + (where ? esc(where) : blank("[where]")) +
-    " " + (hlTxt ? esc(hlTxt) : blank("for [how long]")) +
-    ", " + (whoTxt ? esc(whoTxt) : blank("with [who]")) +
-    ", " + (whenTxt ? esc(whenTxt) : blank("in [when]")) +
-    ", " + (howTxt ? esc(howTxt) : blank("by [how]")) + ".";
-  if (what) html += " " + esc(cap(what)) + (/[.!?]$/.test(what) ? "" : ".");
+
+  let html = "I went to " + seg("where", where ? esc(where) : "[where]", !where) +
+    " " + seg("howlong", hlTxt ? esc(hlTxt) : "for [how long]", !hl) +
+    ", " + seg("who", whoTxt ? esc(whoTxt) : "with [who]", !who) +
+    ", " + seg("when", whenTxt ? esc(whenTxt) : "in [when]", !when) +
+    ", " + seg("how", howTxt ? esc(howTxt) : "by [how]", !how) + ".";
+  if (what) html += " " + seg("what", esc(cap(what)) + (/[.!?]$/.test(what) ? "" : "."));
   document.getElementById("b-preview").innerHTML = html;
+
+  // Traduction française
+  const unknown = [];
+  function tr(cls, v, fn, placeholder) {
+    if (!v) return seg(cls, placeholder, true);
+    const t = fn(v);
+    if (t === null) { unknown.push(v); return seg(cls, "<i>" + esc(v) + "</i>"); }
+    return seg(cls, esc(t));
+  }
+  const whereFr = where ? (frWhere(where) || null) : null;
+  let fr = "Je suis allé(e) " + (where ? (whereFr ? seg("where", esc(whereFr)) : (unknown.push(where), seg("where", "à <i>" + esc(where) + "</i>"))) : seg("where", "à [où]", true)) +
+    " " + (hl ? (frHowLong(hl) ? seg("howlong", "pendant " + esc(frHowLong(hl))) : (unknown.push(hl), seg("howlong", "pendant <i>" + esc(hl) + "</i>"))) : seg("howlong", "pendant [combien de temps]", true)) +
+    ", " + (who ? (frWho(who) ? seg("who", "avec " + esc(frWho(who))) : (unknown.push(who), seg("who", "avec <i>" + esc(who) + "</i>"))) : seg("who", "avec [qui]", true)) +
+    ", " + tr("when", when, frWhen, "[quand]") +
+    ", " + tr("how", how, frHow, "[comment]") + ".";
+  document.getElementById("b-preview-fr").innerHTML = fr;
+  const notes = [];
+  if (unknown.length) notes.push("Les mots en italique n'ont pas pu être traduits automatiquement : traduis-les toi-même !");
+  if (what) notes.push("Ta phrase « What did you do? » n'est pas traduite : essaie de la traduire à l'oral.");
+  document.getElementById("b-fr-note").textContent = notes.join(" ");
 
   // Petit contrôle sur la phrase "What did you do?"
   const w = document.getElementById("b-warn");
@@ -803,9 +872,9 @@ function updatePreview() {
 }
 function clearBuilder() { B_IDS.forEach(id => document.getElementById("b-" + id).value = ""); updatePreview(); }
 function copyText() {
-  const txt = document.getElementById("b-preview").innerText;
+  const txt = document.getElementById("b-preview").innerText + "\n\n" + document.getElementById("b-preview-fr").innerText;
   const btn = document.getElementById("btnCopy");
-  const done = () => { btn.textContent = "✅ Copié !"; setTimeout(() => btn.textContent = "📋 Copier mon texte", 1600); };
+  const done = () => { btn.textContent = "Copié !"; setTimeout(() => btn.textContent = "Copier mon texte", 1600); };
   try { navigator.clipboard.writeText(txt).then(done, done); } catch (e) { done(); }
 }
 

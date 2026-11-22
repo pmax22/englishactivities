@@ -221,39 +221,38 @@
     .choices.grid3 { grid-template-columns: repeat(2, 1fr); }
     .field .row { flex-wrap: wrap; }
   }
-  /* ── Verb list & lexicon (même style que les autres pages) ── */
+  /* ── Liste des verbes (même style que les autres pages) ── */
   .verb-ref {
     width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
     border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
   }
-  .verb-ref-title {
-    font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 14px;
-  }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
   .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-  .verb-chip {
-    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-    padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text);
-  }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
   .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
   .verb-chip.irr { border-color: rgba(255,159,67,.35); }
   .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
-  .lex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 18px; font-size: 13.5px; }
-  .lex-grid div { padding: 4px 0; border-bottom: 1px dashed var(--border); }
-  .lex-grid .fr { color: var(--muted); }
-  .lex-grid .en { color: var(--text); font-weight: 500; }
 
-  .q-lex { font-size: 13px; color: var(--muted); margin: -10px 0 18px; }
-  .q-lex b { color: var(--accent); font-weight: 500; }
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .en-line { font-size: clamp(19px, 3.2vw, 24px); color: var(--muted); margin-bottom: 18px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
 
-  /* Réponse à trou */
-  .gap-q { font-size: clamp(18px, 3vw, 22px); color: var(--muted); margin-bottom: 14px; }
-  .gap-line { font-size: clamp(20px, 3.6vw, 26px); line-height: 2; }
+  /* Phrases à trous */
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
   .gap-line input.answer {
-    display: inline-block; width: 190px; padding: 6px 12px; font-size: 20px; vertical-align: baseline; margin: 0 4px;
+    display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px;
   }
-  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 4px; }
-  @media (max-width: 560px) { .gap-line input.answer { width: 150px; font-size: 17px; } }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .gap-q { font-size: clamp(18px, 3vw, 22px); color: var(--text); margin-bottom: 10px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
+  }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
 </style>
 </head>
 <body>
@@ -269,15 +268,15 @@
 <!-- ═════ MENU ═════ -->
 <main class="wrap" id="menu">
   <details class="lesson" open>
-    <summary>📘 Rappel de la leçon</summary>
+    <summary>Rappel de la leçon</summary>
     <div class="lesson-body">
       <p>Une <span class="hl">question fermée</span> = la réponse est toujours <b>oui</b> ou <b>non</b>.</p>
       <div class="formula"><span class="hl">Did</span> + sujet + verbe <span class="bv">BV</span> + complément + ?</div>
       <p class="ex">Did you celebrate Halloween? — Yes, I did. / No, I didn't.</p>
       <p><b>DID</b> est l'auxiliaire DO au prétérit : c'est <b>lui</b> qui porte la marque du passé. Le verbe reste donc en base verbale : <span class="ex">Did you <s>went</s> → Did you <b>go</b>?</span></p>
-      <p>✅ Réponse <b>affirmative</b> : pas d'auxiliaire, le verbe se met au <span class="hl">prétérit</span> (-ED ou forme irrégulière).</p>
+      <p><b>+</b> Réponse <b>affirmative</b> : Yes, I <span class="hl">did</span>. Puis le verbe au <span class="hl">prétérit</span> (-ED ou forme irrégulière).</p>
       <p class="ex">Yes, I did. I celebrated Halloween. · Yes, she did. She went hiking.</p>
-      <p>❌ Réponse <b>négative</b> : <span class="hl">didn't</span> + BV.</p>
+      <p><b>−</b> Réponse <b>négative</b> : No, I <span class="hl">didn't</span>. Puis <span class="hl">didn't</span> + BV.</p>
       <p class="ex">No, I didn't. I didn't play football.</p>
     </div>
   </details>
@@ -294,6 +293,7 @@
     <div id="qFeedback"></div>
     <div class="actions">
       <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
+      <button class="btn btn-ghost hidden" id="btnReset" onclick="resetOrder()">Effacer</button>
       <button class="btn btn-primary" id="btnMain" onclick="mainAction()">Valider</button>
     </div>
   </div>
@@ -314,77 +314,55 @@
   </div>
 </main>
 
-<!-- ═════ RÉFÉRENCES (toujours visibles) ═════ -->
+<!-- ═════ VERBES (toujours visibles) ═════ -->
 <section class="wrap">
   <div class="verb-ref">
     <div class="verb-ref-title">Verbes au programme · BV → prétérit</div>
     <div class="verb-grid" id="verbGrid"></div>
-    <p class="verb-legend">Bordure orange = verbe irrégulier. Rappel : après <b>did</b> / <b>didn't</b>, on utilise toujours la BV.</p>
-  </div>
-  <div class="verb-ref">
-    <div class="verb-ref-title">Lexique · français → anglais</div>
-    <div class="lex-grid" id="lexGrid"></div>
+    <p class="verb-legend">Bordure orange = verbe irrégulier. Après <b>did</b> / <b>didn't</b>, on utilise toujours la BV.</p>
   </div>
 </section>
 
 <script>
-/* ═══════════ VERBES & LEXIQUE ═══════════ */
-// [BV, prétérit, irrégulier]
+/* ═══════════ VERBES ═══════════ */
+// [BV, prétérit, irrégulier, français]
 const VERBS = [
-  ["celebrate","celebrated",0],["walk","walked",0],["play","played",0],["travel","travelled",0],
-  ["watch","watched",0],["bake","baked",0],["miss","missed",0],
-  ["read","read",1],["eat","ate",1],["take","took",1],["speak","spoke",1],["sleep","slept",1],
-  ["drink","drank",1],["see","saw",1],["have","had",1],["ride","rode",1],["go","went",1],["do","did",1]
+  ["celebrate","celebrated",0,"fêter"],["walk","walked",0,"se promener"],["play","played",0,"jouer"],["travel","travelled",0,"voyager"],
+  ["watch","watched",0,"regarder"],["bake","baked",0,"faire (cuire) un gâteau"],["miss","missed",0,"rater, manquer"],
+  ["read","read",1,"lire"],["eat","ate",1,"manger"],["take","took",1,"prendre"],["speak","spoke",1,"parler"],["sleep","slept",1,"dormir"],
+  ["drink","drank",1,"boire"],["see","saw",1,"voir"],["have","had",1,"avoir"],["ride","rode",1,"faire du (vélo)"],["go","went",1,"aller"],["do","did",1,"faire"]
 ];
 const PAST = Object.fromEntries(VERBS.map(v => [v[0], v[1]]));
+const IRR = Object.fromEntries(VERBS.map(v => [v[0], !!v[2]]));
+const VFR = Object.fromEntries(VERBS.map(v => [v[0], v[3]]));
 
-const LEXICON = [
-  ["tu / vous", "you"], ["il", "he"], ["elle", "she"], ["ils / elles", "they"], ["nous / on", "we"],
-  ["ton frère / ta sœur", "your brother / your sister"], ["tes parents", "your parents"], ["ta mère", "your mother"],
-  ["fêter Halloween", "celebrate Halloween"], ["se promener dans la forêt", "walk in the forest"],
-  ["jouer à des jeux", "play games"], ["jouer au football", "play football"], ["lire un livre", "read a book"],
-  ["voyager", "travel"], ["manger au restaurant", "eat in a restaurant"], ["manger des bonbons", "eat candies"],
-  ["regarder un film", "watch a movie"], ["prendre des photos", "take pictures"], ["parler anglais", "speak English"],
-  ["dormir tard", "sleep late"], ["boire du chocolat chaud", "drink hot chocolate"], ["voir un animal sauvage", "see a wild animal"],
-  ["faire un gâteau", "bake a cake"], ["se faire couper les cheveux", "have a haircut"], ["faire du vélo", "ride a bike"],
-  ["faire de la randonnée", "go hiking"], ["faire du shopping", "go shopping"], ["faire du sport", "do sport"],
-  ["faire une soirée pyjama", "have a sleepover"], ["manquer / rater l'école", "miss school"]
+/* ═══════════ DONNÉES : QUESTIONS ═══════════ */
+// [français, sujet anglais, BV, complément, aide sujet]
+const QS = [
+  ["As-tu fêté Halloween ?", "you", "celebrate", "Halloween"],
+  ["Est-ce qu'il s'est promené dans la forêt ?", "he", "walk", "in the forest"],
+  ["Est-ce qu'elle a lu un livre ?", "she", "read", "a book"],
+  ["Avez-vous voyagé ?", "you", "travel", ""],
+  ["Est-ce qu'ils ont mangé au restaurant ?", "they", "eat", "in a restaurant"],
+  ["As-tu regardé un film ?", "you", "watch", "a movie"],
+  ["Est-ce que Tom a pris des photos ?", "Tom", "take", "pictures"],
+  ["Est-ce que tu as parlé anglais ?", "you", "speak", "English"],
+  ["Est-ce que ta sœur a dormi tard ?", "your sister", "sleep", "late", "ta sœur = your sister"],
+  ["Est-ce qu'il a joué au football ?", "he", "play", "football"],
+  ["Est-ce qu'elles ont bu du chocolat chaud ?", "they", "drink", "hot chocolate", "elles = they"],
+  ["As-tu vu un animal sauvage ?", "you", "see", "a wild animal"],
+  ["Est-ce que ta mère a fait un gâteau ?", "your mother", "bake", "a cake", "ta mère = your mother"],
+  ["Est-ce que tu es allé(e) faire de la randonnée ?", "you", "go", "hiking"],
+  ["Est-ce que Léa a fait du vélo ?", "Léa", "ride", "a bike"],
+  ["Est-ce que tes parents sont allés faire du shopping ?", "your parents", "go", "shopping", "tes parents = your parents"],
+  ["Est-ce que tu as raté l'école ?", "you", "miss", "school"],
+  ["Est-ce que ton frère a fait du sport ?", "your brother", "do", "sport", "ton frère = your brother"],
+  ["Est-ce que vous vous êtes fait couper les cheveux ?", "you", "have", "a haircut"],
+  ["Est-ce qu'elle a joué à des jeux ?", "she", "play", "games"],
+  ["Est-ce que tu as mangé des bonbons ?", "you", "eat", "candies"]
 ];
+const enQ = ([, s, v, c]) => `Did ${s} ${v}${c ? " " + c : ""}?`;
 
-/* ═══════════ OUTILS ═══════════ */
-function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function norm(s) {
-  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
-    .replace(/[’‘`´]/g, "'").replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
-    .replace(/[.?!,;:]/g, " ").replace(/\s+/g, " ").trim();
-}
-function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-
-/* ═══════════ MISSION 1 : LES QUESTIONS ═══════════ */
-// [français, anglais, verbe BV utilisé, lexique affiché]
-const Q_FR_EN = [
-  ["As-tu fêté Halloween ?", "Did you celebrate Halloween?", "celebrate", "fêter Halloween = celebrate Halloween"],
-  ["Est-ce qu'il s'est promené dans la forêt ?", "Did he walk in the forest?", "walk", "se promener dans la forêt = walk in the forest"],
-  ["Est-ce qu'elle a lu un livre ?", "Did she read a book?", "read", "lire un livre = read a book"],
-  ["Avez-vous voyagé ?", "Did you travel?", "travel", "voyager = travel"],
-  ["Est-ce qu'ils ont mangé au restaurant ?", "Did they eat in a restaurant?", "eat", "manger au restaurant = eat in a restaurant"],
-  ["As-tu regardé un film ?", "Did you watch a movie?", "watch", "regarder un film = watch a movie"],
-  ["Est-ce que Tom a pris des photos ?", "Did Tom take pictures?", "take", "prendre des photos = take pictures"],
-  ["Est-ce que tu as parlé anglais ?", "Did you speak English?", "speak", "parler anglais = speak English"],
-  ["Est-ce que ta sœur a dormi tard ?", "Did your sister sleep late?", "sleep", "ta sœur = your sister · dormir tard = sleep late"],
-  ["Est-ce qu'il a joué au football ?", "Did he play football?", "play", "jouer au football = play football"],
-  ["Est-ce qu'elles ont bu du chocolat chaud ?", "Did they drink hot chocolate?", "drink", "elles = they · boire du chocolat chaud = drink hot chocolate"],
-  ["As-tu vu un animal sauvage ?", "Did you see a wild animal?", "see", "voir un animal sauvage = see a wild animal"],
-  ["Est-ce que ta mère a fait un gâteau ?", "Did your mother bake a cake?", "bake", "ta mère = your mother · faire un gâteau = bake a cake"],
-  ["Est-ce que tu es allé(e) faire de la randonnée ?", "Did you go hiking?", "go", "faire de la randonnée = go hiking"],
-  ["Est-ce que Léa a fait du vélo ?", "Did Léa ride a bike?", "ride", "faire du vélo = ride a bike"],
-  ["Est-ce que tes parents sont allés faire du shopping ?", "Did your parents go shopping?", "go", "tes parents = your parents · faire du shopping = go shopping"],
-  ["Est-ce que tu as raté l'école ?", "Did you miss school?", "miss", "rater l'école = miss school"],
-  ["Est-ce que ton frère a fait du sport ?", "Did your brother do sport?", "do", "ton frère = your brother · faire du sport = do sport"],
-  ["Est-ce que vous vous êtes fait couper les cheveux ?", "Did you have a haircut?", "have", "se faire couper les cheveux = have a haircut"],
-  ["Est-ce qu'elle a joué à des jeux ?", "Did she play games?", "play", "jouer à des jeux = play games"]
-];
-// [anglais, bonne traduction, distracteurs...]
 const Q_EN_FR = [
   ["Did she play games?", "A-t-elle joué à des jeux ?", "Joue-t-elle à des jeux ?", "As-tu joué à des jeux ?"],
   ["Did they travel?", "Ont-ils voyagé ?", "Voyagent-ils ?", "A-t-il voyagé ?"],
@@ -396,92 +374,146 @@ const Q_EN_FR = [
   ["Did you speak English?", "As-tu parlé anglais ?", "Parles-tu anglais ?", "A-t-elle parlé anglais ?"]
 ];
 
-function diagnoseQuestion(val, q) {
-  const v = " " + norm(val) + " ";
-  const past = PAST[q.verb];
-  if (!/^ did /.test(v)) return "La question fermée commence par l'auxiliaire <b>Did</b>.";
-  if (past !== q.verb && v.includes(" " + past + " ")) return `Après Did, le verbe reste en BV : <b>${q.verb}</b>, pas <s>${past}</s>.`;
-  return "Ordre : <b>Did</b> + sujet + verbe en BV + complément ?";
-}
-
-function buildQuestions() {
-  const typed = shuffle(Q_FR_EN).slice(0, 8).map(([fr, en, verb, lex]) => ({
-    kind: "type", instr: "Traduis en anglais 🇫🇷 → 🇬🇧", fr, verb, lex,
-    answers: [en], display: en, tip: "Did + sujet + verbe en BV + complément ?"
-  }));
-  const mcq = shuffle(Q_EN_FR).slice(0, 4).map(([en, ok, ...bad]) => ({
-    kind: "mcq", instr: "Choisis la bonne traduction 🇬🇧 → 🇫🇷", en,
-    options: [ok, ...bad], correct: 0,
-    tip: "Did = passé (passé composé en français). Regarde bien le sujet : you = tu/vous, he = il, she = elle, they = ils/elles, we = nous."
-  }));
-  // On alterne : 2 traductions FR→EN puis 1 EN→FR
-  const out = [];
-  while (typed.length || mcq.length) { out.push(...typed.splice(0, 2)); if (mcq.length) out.push(mcq.shift()); }
-  return out;
-}
-
-/* ═══════════ MISSION 2 : LES RÉPONSES ═══════════ */
-// [BV, complément]
+/* ═══════════ DONNÉES : RÉPONSES ═══════════ */
 const ACTS = [
   ["celebrate","Halloween"],["walk","in the forest"],["play","games"],["read","a book"],["travel",""],
   ["eat","in a restaurant"],["watch","a movie"],["take","pictures"],["speak","English"],["sleep","late"],
   ["play","football"],["drink","hot chocolate"],["see","a wild animal"],["bake","a cake"],["have","a haircut"],
   ["ride","a bike"],["eat","candies"],["go","hiking"],["do","sport"],["have","a sleepover"],["go","shopping"],["miss","school"]
 ];
-// [sujet dans la question, pronom dans la réponse]
 const SUBJ = [["you","I"],["you","I"],["he","he"],["she","she"],["they","they"],["Tom","he"],["Léa","she"],["your parents","they"],["your brother","he"],["your sister","she"]];
-function capF(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-function buildAnswers() {
-  const acts = shuffle(ACTS).slice(0, 12);
-  return acts.map(([bv, comp], i) => {
-    const [subj, pro] = SUBJ[Math.floor(Math.random() * SUBJ.length)];
-    const yes = i % 2 === 0 ? Math.random() < .7 : Math.random() < .3;
-    const past = PAST[bv];
+/* ═══════════ OUTILS ═══════════ */
+function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function norm(s) {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[’‘`´]/g, "'").replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
+    .replace(/[.?!,;:]/g, " ").replace(/\s+/g, " ").trim();
+}
+function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function capF(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function subjHint(q) { return q[4] ? `<p class="small-hint">Aide : <b>${esc(q[4])}</b></p>` : ""; }
+
+/* ═══════════ MISSIONS ═══════════ */
+// Mission 1 : traduire — l'élève écrit "did + sujet + BV", le complément est donné
+function buildTranslate() {
+  return shuffle(QS).slice(0, 10).map(q => {
+    const [fr, s, v, c] = q;
+    const gap = `did ${s} ${v}`;
     return {
-      kind: "gap", instr: yes ? "Réponse affirmative ✅ : complète avec le verbe" : "Réponse négative ❌ : complète avec le verbe",
-      question: `Did ${subj} ${bv} ${comp}`.trim() + "?",
-      yes, bv, past, pro, comp,
-      before: `${yes ? "Yes" : "No"}, ${pro} ${yes ? "did" : "didn't"}. ${capF(pro)}`,
-      after: comp ? ` ${comp}.` : ".",
-      answers: yes ? [past, ...(bv === "travel" ? ["traveled"] : [])] : ["didn't " + bv],
-      display: yes ? past : "didn't " + bv,
-      tip: yes ? (VERBS.find(v => v[0] === bv)[2] ? `Affirmatif → prétérit. ${bv} est irrégulier : ${past}.` : `Affirmatif → prétérit : ${bv} + ED = ${past}.`)
-               : "Négatif → didn't + BV."
+      kind: "gap", instr: "Traduis la question en anglais", label: fr,
+      head: `<div class="fr-line">${esc(fr)}</div>`,
+      parts: [{ answers: [gap], width: 230, ph: "Did … ?" }, (c ? " " + c : "") + " ?"],
+      foot: subjHint(q),
+      correct: enQ(q),
+      tip: `Did + sujet + verbe en BV : <b>${capF(gap)}</b>. (${v} = ${VFR[v]})`,
+      diagnose(vals) {
+        const v0 = " " + norm(vals[0]) + " ";
+        if (!/^ did /.test(v0)) return "La question fermée commence par <b>Did</b>.";
+        if (PAST[v] !== v && v0.includes(" " + PAST[v] + " ")) return `Après Did, le verbe reste en BV : <b>${v}</b>, pas <s>${PAST[v]}</s>.`;
+        if (!v0.includes(" " + v + " ")) return `Le verbe est <b>${v}</b> (${VFR[v]}). Regarde la liste des verbes en bas de la page.`;
+        return `Ordre : <b>Did</b> + sujet (${esc(s)}) + verbe en BV.`;
+      }
     };
   });
 }
-function diagnoseAnswer(val, q) {
-  const v = norm(val);
-  if (q.yes) {
-    if (v.startsWith("did")) return "À l'affirmatif, pas de <b>did</b> : on met directement le verbe au prétérit.";
-    if (v === q.bv && q.bv !== q.past) return `C'est la BV. À l'affirmatif, il faut le prétérit : <b>${q.past}</b>.`;
-    return `Le prétérit de ${q.bv} est <b>${q.past}</b>.`;
-  } else {
-    if (v === "didn't " + q.past && q.past !== q.bv) return `Après didn't, le verbe reste en BV : <b>${q.bv}</b>, pas <s>${q.past}</s>.`;
-    if (!v.startsWith("didn't")) return "À la négative, il faut <b>didn't</b> + BV.";
-    return "didn't + verbe en base verbale.";
-  }
+
+// Mission 2 : remettre les mots dans l'ordre
+function buildOrder() {
+  return shuffle(QS).slice(0, 8).map(q => {
+    const [fr, s, v, c] = q;
+    const tiles = ["Did", s, v].concat(c ? [c] : []);
+    const trap = PAST[v] !== v ? PAST[v] : "does";
+    return {
+      kind: "order", instr: "Remets les mots dans l'ordre", label: fr,
+      head: `<div class="fr-line">${esc(fr)}</div>`,
+      tiles, distractors: [trap], answer: enQ(q),
+      tip: `Did + sujet + BV + complément ? Le mot <b>${trap}</b> était un piège.`
+    };
+  });
 }
 
-/* ═══════════ MISSIONS ═══════════ */
+// Mission 3 : trouver la bonne question
+function buildChoose() {
+  return shuffle(QS.filter(q => PAST[q[2]] !== q[2])).slice(0, 8).map(q => {
+    const [fr, s, v, c] = q, C = c ? " " + c : "";
+    const opts = [enQ(q), `Did ${s} ${PAST[v]}${C}?`, `${capF(s)} did ${v}${C}?`, `Did ${v} ${s}${C}?`];
+    return {
+      kind: "mcq", instr: "Quelle question est correcte ?", label: fr,
+      head: `<div class="fr-line">${esc(fr)}</div>`,
+      options: opts, correct: 0,
+      tip: `Did + sujet + verbe en BV : <b>${esc(opts[0])}</b>`
+    };
+  });
+}
+
+// Mission 4 : comprendre la question (anglais → français)
+function buildUnderstand() {
+  return shuffle(Q_EN_FR).slice(0, 6).map(([en, ok, ...bad]) => ({
+    kind: "mcq", instr: "Que veut dire cette question ?", label: en,
+    head: `<div class="fr-line">${esc(en)}</div>`,
+    options: [ok, ...bad], correct: 0,
+    tip: "Did = passé (passé composé en français). Regarde bien le sujet : you = tu/vous, he = il, she = elle, they = ils/elles, we = nous."
+  }));
+}
+
+// Mission 5 : les réponses
+function buildAnswers() {
+  return shuffle(ACTS).slice(0, 10).map(([v, c], i) => {
+    const [subj, pro] = SUBJ[Math.floor(Math.random() * SUBJ.length)];
+    const yes = i % 2 === 0 ? Math.random() < .7 : Math.random() < .3;
+    const past = PAST[v], C = c ? " " + c : "";
+    const P = capF(pro);
+    const question = `Did ${subj} ${v}${C}?`;
+    return {
+      kind: "gap", instr: "Complète la réponse", label: question,
+      head: `<div class="gap-q">${esc(question)}</div>`,
+      sign: yes ? "plus" : "minus",
+      parts: [
+        `${yes ? "Yes" : "No"}, ${pro} `, { answers: [yes ? "did" : "didn't"], width: 90 }, `. ${P} `,
+        { answers: yes ? [past].concat(v === "travel" ? ["traveled"] : []) : ["didn't " + v], width: yes ? 150 : 190, hint: v },
+        C + "."
+      ],
+      correct: `${yes ? "Yes" : "No"}, ${pro} ${yes ? "did" : "didn't"}. ${P} ${yes ? past : "didn't " + v}${C}.`,
+      tip: yes ? `+ → Yes, ${pro} did. Puis le prétérit : ${v} → <b>${past}</b>${IRR[v] ? " (irrégulier)" : " (+ED)"}.`
+               : `− → No, ${pro} didn't. Puis <b>didn't + BV</b> : didn't ${v}.`,
+      diagnose(vals) {
+        const a = norm(vals[0]), b = norm(vals[1]);
+        const msgs = [];
+        if (a !== (yes ? "did" : "didn't")) msgs.push(yes ? "Réponse courte + : <b>Yes, " + pro + " did.</b>" : "Réponse courte − : <b>No, " + pro + " didn't.</b>");
+        if (yes && b !== norm(past) && !(v === "travel" && b === "traveled")) {
+          if (b.startsWith("did")) msgs.push("Dans la phrase affirmative, pas de did : le verbe se met directement au prétérit.");
+          else if (b === v && v !== past) msgs.push(`« ${v} » est la BV : il faut le prétérit <b>${past}</b>.`);
+          else msgs.push(`Le prétérit de ${v} est <b>${past}</b>.`);
+        }
+        if (!yes && b !== norm("didn't " + v)) {
+          if (b === norm("didn't " + past) && past !== v) msgs.push(`Après didn't, le verbe reste en BV : <b>${v}</b>, pas <s>${past}</s>.`);
+          else msgs.push(`Phrase négative : <b>didn't + BV</b> → didn't ${v}.`);
+        }
+        return msgs.join("<br>");
+      }
+    };
+  });
+}
+
 const MISSIONS = [
-  { id: "q", icon: "❓", title: "Les questions", desc: "Traduis des questions fermées (français ↔ anglais) avec le lexique : Did + sujet + BV ?", build: buildQuestions },
-  { id: "a", icon: "💬", title: "Les réponses", desc: "Complète les réponses affirmatives (prétérit) et négatives (didn't + BV).", build: buildAnswers }
+  { id: "t", icon: "✍️", title: "Traduis la question", desc: "Écris Did + sujet + BV : le reste de la question est déjà en anglais.", build: buildTranslate },
+  { id: "o", icon: "🧩", title: "Remets dans l'ordre", desc: "Construis la question avec les étiquettes. Attention, un mot est un piège !", build: buildOrder },
+  { id: "c", icon: "🔎", title: "Trouve la bonne question", desc: "Une seule question est correcte : laquelle ?", build: buildChoose },
+  { id: "u", icon: "💡", title: "Comprends la question", desc: "Lis la question en anglais et choisis la bonne traduction.", build: buildUnderstand },
+  { id: "a", icon: "💬", title: "Les réponses", desc: "Complète les réponses + et − : did / didn't, puis le prétérit ou didn't + BV.", build: buildAnswers }
 ];
 
 /* ═══════════ STOCKAGE ═══════════ */
-const STORE_KEY = "ea_questions_fermees_best";
+const STORE_KEY = "ea_questions_fermees_v2";
 let best = {};
 try { best = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { best = {}; }
 function saveBest() { try { localStorage.setItem(STORE_KEY, JSON.stringify(best)); } catch (e) {} }
 
 /* ═══════════ AFFICHAGE ═══════════ */
-function renderRefs() {
-  document.getElementById("verbGrid").innerHTML = VERBS.map(([bv, p, irr]) =>
-    `<div class="verb-chip ${irr ? "irr" : ""}">${bv} <span>${p}</span></div>`).join("");
-  document.getElementById("lexGrid").innerHTML = LEXICON.map(([fr, en]) =>
-    `<div><span class="fr">${fr}</span> = <span class="en">${en}</span></div>`).join("");
+function renderVerbs() {
+  document.getElementById("verbGrid").innerHTML = VERBS.map(([bv, p, irr, fr]) =>
+    `<div class="verb-chip ${irr ? "irr" : ""}">${bv} <span>${p}</span><em>${fr}</em></div>`).join("");
 }
 function renderMenu() {
   const box = document.getElementById("missions"); box.innerHTML = "";
@@ -502,7 +534,7 @@ function showOnly(id) {
 function showMenu() { renderMenu(); showOnly("menu"); }
 
 /* ═══════════ MOTEUR ═══════════ */
-let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [];
+let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [], orderChosen = [];
 
 function startMission(id) {
   current = MISSIONS.find(m => m.id === id);
@@ -519,35 +551,68 @@ function renderQuestion() {
   document.getElementById("qFeedback").innerHTML = "";
   const area = document.getElementById("qArea"), btn = document.getElementById("btnMain");
   btn.textContent = "Valider"; btn.classList.remove("hidden");
+  document.getElementById("btnReset").classList.add("hidden");
 
-  if (q.kind === "type") {
-    area.innerHTML = `<div class="q-prompt">🇫🇷 ${esc(q.fr)}</div>
-      <p class="q-lex">Lexique : <b>${esc(q.lex)}</b></p>
-      <input class="answer" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Did …?">`;
-    setTimeout(() => document.getElementById("ans").focus(), 50);
+  if (q.kind === "gap") {
+    let bi = 0;
+    const line = q.parts.map(p => {
+      if (typeof p === "string") return esc(p);
+      const i = bi++;
+      return `<input class="answer gapin" data-b="${i}" style="width:${p.width}px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${p.ph || ""}">` +
+        (p.hint ? `<span class="bvhint">(${p.hint})</span>` : "");
+    }).join("");
+    area.innerHTML = q.head + `<div class="gap-line">${q.sign ? `<span class="sign ${q.sign}">${q.sign === "plus" ? "+" : "−"}</span>` : ""}${line}</div>` + (q.foot || "");
+    setTimeout(() => { const f = area.querySelector(".gapin"); if (f) f.focus(); }, 50);
   } else if (q.kind === "mcq") {
     const order = shuffle(q.options.map((_, i) => i));
-    area.innerHTML = `<div class="q-prompt">🇬🇧 ${esc(q.en)}</div><p class="q-sub">Que veut dire cette question ?</p>
-      <div class="choices">${order.map(i => `<button class="btn-choice" data-i="${i}">${esc(q.options[i])}</button>`).join("")}</div>`;
+    area.innerHTML = q.head + `<div class="choices">${order.map(i => `<button class="btn-choice" data-i="${i}">${esc(q.options[i])}</button>`).join("")}</div>`;
     area.querySelectorAll(".btn-choice").forEach(b => b.onclick = () => submitMcq(+b.dataset.i));
     btn.classList.add("hidden");
-  } else if (q.kind === "gap") {
-    area.innerHTML = `<div class="gap-q">❓ ${esc(q.question)} &nbsp;${q.yes ? "👍" : "👎"}</div>
-      <div class="gap-line">${esc(q.before)} <input class="answer" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false"><span class="bvhint">(${q.bv})</span>${esc(q.after)}</div>`;
-    setTimeout(() => document.getElementById("ans").focus(), 50);
+  } else if (q.kind === "order") {
+    orderChosen = [];
+    const all = shuffle(q.tiles.concat(q.distractors || []));
+    area.innerHTML = q.head + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+      all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
+    area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
+    document.getElementById("btnReset").classList.remove("hidden");
   }
 }
+
+function addTile(b) { if (answered) return; b.classList.add("used"); orderChosen.push(b); drawZone(); }
+function drawZone() {
+  const zone = document.getElementById("zone"); zone.innerHTML = "";
+  zone.classList.toggle("empty", orderChosen.length === 0);
+  orderChosen.forEach((src, k) => {
+    const t = document.createElement("button"); t.className = "tile"; t.textContent = src.textContent;
+    t.onclick = () => { if (answered) return; src.classList.remove("used"); orderChosen.splice(k, 1); drawZone(); };
+    zone.appendChild(t);
+  });
+}
+function resetOrder() { if (answered) return; orderChosen.forEach(s => s.classList.remove("used")); orderChosen = []; drawZone(); }
 
 function mainAction() {
   if (answered) { nextQuestion(); return; }
   const q = questions[qi];
-  const el = document.getElementById("ans"); if (!el) return;
-  const val = el.value; if (!val.trim()) { el.focus(); return; }
-  const ok = q.answers.some(a => norm(a) === norm(val));
-  el.classList.add(ok ? "ok" : "ko"); el.disabled = true;
-  const why = ok ? "" : (q.kind === "type" ? diagnoseQuestion(val, q) : diagnoseAnswer(val, q));
-  const shown = q.kind === "gap" ? `${q.before} ${q.display}${q.after}` : q.display;
-  finish(ok, val, shown, why);
+  if (q.kind === "gap") {
+    const inputs = [...document.querySelectorAll(".gapin")];
+    const empty = inputs.find(i => !i.value.trim());
+    if (empty) { empty.focus(); return; }
+    const blanks = q.parts.filter(p => typeof p !== "string");
+    const vals = inputs.map(i => i.value);
+    let allOk = true;
+    inputs.forEach((inp, k) => {
+      const ok = blanks[k].answers.some(a => norm(a) === norm(inp.value));
+      inp.classList.add(ok ? "ok" : "ko"); inp.disabled = true; if (!ok) allOk = false;
+    });
+    finish(allOk, vals.join(" … "), q.correct, allOk ? "" : q.diagnose(vals));
+  } else if (q.kind === "order") {
+    if (!orderChosen.length) return;
+    const val = orderChosen.map(t => t.textContent).join(" ") + "?";
+    const ok = norm(val) === norm(q.answer);
+    document.getElementById("zone").classList.add(ok ? "ok" : "ko");
+    document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
+    finish(ok, val, q.answer, "");
+  }
 }
 
 function submitMcq(i) {
@@ -563,12 +628,12 @@ function submitMcq(i) {
 function finish(ok, given, correct, why) {
   answered = true; if (ok) score++;
   const q = questions[qi];
-  const label = q.kind === "type" ? q.fr : q.kind === "mcq" ? q.en : q.question;
-  recap.push({ ok, label, given, correct });
+  recap.push({ ok, label: q.label, given, correct });
   document.getElementById("qFeedback").innerHTML = ok
     ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip}</span></div>`
     : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip}</span></div>`;
   document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("btnReset").classList.add("hidden");
   const btn = document.getElementById("btnMain");
   btn.textContent = qi + 1 < questions.length ? "Suivant →" : "Voir mon score";
   btn.classList.remove("hidden"); btn.focus();
@@ -584,7 +649,7 @@ function showScore() {
   const stars = pct === 1 ? 3 : pct >= .7 ? 2 : pct >= .4 ? 1 : 0;
   document.getElementById("sStars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
   document.getElementById("sMsg").textContent =
-    pct === 1 ? "Perfect! Excellent travail 🎉" : pct >= .7 ? "Very good! Encore un petit effort pour le sans-faute." :
+    pct === 1 ? "Perfect! Excellent travail !" : pct >= .7 ? "Very good! Encore un petit effort pour le sans-faute." :
     pct >= .4 ? "Not bad! Relis la leçon et recommence." : "Keep going! Relis le rappel de la leçon puis réessaie.";
   document.getElementById("sRecap").innerHTML = recap.map(r =>
     `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
@@ -594,10 +659,19 @@ function showScore() {
 document.addEventListener("keydown", e => {
   if (e.key !== "Enter" || document.getElementById("quiz").classList.contains("hidden")) return;
   const q = questions[qi];
-  if (q && (q.kind !== "mcq" || answered)) { e.preventDefault(); mainAction(); }
+  if (!q) return;
+  if (answered || q.kind !== "mcq") {
+    // Dans une phrase à 2 trous : Entrée passe au trou suivant s'il est vide
+    if (!answered && q.kind === "gap") {
+      const inputs = [...document.querySelectorAll(".gapin")];
+      const idx = inputs.indexOf(document.activeElement);
+      if (idx > -1 && idx < inputs.length - 1 && !inputs[idx + 1].value.trim()) { e.preventDefault(); inputs[idx + 1].focus(); return; }
+    }
+    e.preventDefault(); mainAction();
+  }
 });
 
-renderRefs();
+renderVerbs();
 renderMenu();
 </script>
 </body>
