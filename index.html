@@ -219,6 +219,11 @@
   .card:nth-child(6) { animation-delay: 0.95s; }
   .card:nth-child(7) { animation-delay: 1.05s; }
   .card:nth-child(8) { animation-delay: 1.15s; }
+  .card:nth-child(9) { animation-delay: 1.25s; }
+  .card:nth-child(10) { animation-delay: 1.35s; }
+  .card:nth-child(11) { animation-delay: 1.45s; }
+  .card:nth-child(12) { animation-delay: 1.55s; }
+  .card:nth-child(13) { animation-delay: 1.65s; }
 
   .card:not(.locked):hover {
     transform: translateY(-4px);
@@ -405,6 +410,46 @@
   .openq .card-category { color: var(--openq-a); }
   .openq:not(.locked):hover { border-color: rgba(240,111,164,0.35); }
 
+  /* Pronoms personnels */
+  .pronoms .card-bar { background: linear-gradient(90deg, #60a5fa, #2563eb); }
+  .pronoms .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(96,165,250,0.08) 0%, transparent 70%); }
+  .pronoms .big-label { color: #60a5fa; }
+  .pronoms .badge { color: #60a5fa; border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.08); }
+  .pronoms .card-category { color: #60a5fa; }
+  .pronoms:not(.locked):hover { border-color: rgba(96,165,250,0.35); }
+
+  /* Be, Have & Play */
+  .bhp .card-bar { background: linear-gradient(90deg, #f87171, #dc2626); }
+  .bhp .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(248,113,113,0.08) 0%, transparent 70%); }
+  .bhp .big-label { color: #f87171; }
+  .bhp .badge { color: #f87171; border-color: rgba(248,113,113,0.3); background: rgba(248,113,113,0.08); }
+  .bhp .card-category { color: #f87171; }
+  .bhp:not(.locked):hover { border-color: rgba(248,113,113,0.35); }
+
+  /* Les articles */
+  .articles .card-bar { background: linear-gradient(90deg, #a3e635, #65a30d); }
+  .articles .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(163,230,53,0.08) 0%, transparent 70%); }
+  .articles .big-label { color: #a3e635; }
+  .articles .badge { color: #a3e635; border-color: rgba(163,230,53,0.3); background: rgba(163,230,53,0.08); }
+  .articles .card-category { color: #a3e635; }
+  .articles:not(.locked):hover { border-color: rgba(163,230,53,0.35); }
+
+  /* Les adjectifs */
+  .adjectifs .card-bar { background: linear-gradient(90deg, #e879f9, #c026d3); }
+  .adjectifs .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(232,121,249,0.08) 0%, transparent 70%); }
+  .adjectifs .big-label { color: #e879f9; }
+  .adjectifs .badge { color: #e879f9; border-color: rgba(232,121,249,0.3); background: rgba(232,121,249,0.08); }
+  .adjectifs .card-category { color: #e879f9; }
+  .adjectifs:not(.locked):hover { border-color: rgba(232,121,249,0.35); }
+
+  /* Adverbes de fréquence */
+  .adverbes .card-bar { background: linear-gradient(90deg, #fb923c, #ea580c); }
+  .adverbes .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(251,146,60,0.08) 0%, transparent 70%); }
+  .adverbes .big-label { color: #fb923c; }
+  .adverbes .badge { color: #fb923c; border-color: rgba(251,146,60,0.3); background: rgba(251,146,60,0.08); }
+  .adverbes .card-category { color: #fb923c; }
+  .adverbes:not(.locked):hover { border-color: rgba(251,146,60,0.35); }
+
   /* ── FOOTER ── */
   .page-footer {
     text-align: center;
@@ -449,7 +494,7 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">7</div>
+      <div class="stat-num" id="countActivities">12</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
@@ -619,6 +664,116 @@
         <span class="pill">Wh- + did</span>
         <span class="pill">How long</span>
         <span class="pill">Sum up</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Pronoms personnels -->
+  <a class="card pronoms" href="pronoms_personnels.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">I · me</span>
+      <span class="badge">he → him</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Pronoms</div>
+      <div class="card-title">Pronoms personnels</div>
+      <div class="card-desc">Pronoms sujets et compléments : I / me, he / him, they / them…</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Sujet</span>
+        <span class="pill">Complément</span>
+        <span class="pill">Traduction</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Be, Have & Play -->
+  <a class="card bhp" href="be_have_play.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Be</span>
+      <span class="badge">is · has · plays</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Conjugaison</div>
+      <div class="card-title">Be, Have & Play</div>
+      <div class="card-desc">Conjuguer be, have et play au présent : formes affirmative, négative et interrogative.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">am / is / are</span>
+        <span class="pill">don't / doesn't</span>
+        <span class="pill">Do / Does?</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Les articles -->
+  <a class="card articles" href="articles.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">a / an</span>
+      <span class="badge">the · Ø</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Articles</div>
+      <div class="card-title">Les articles</div>
+      <div class="card-desc">a, an, the ou pas d'article ? Son voyelle, chose précise, généralités, sports, langues…</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">a / an</span>
+        <span class="pill">the</span>
+        <span class="pill">Ø</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Les adjectifs -->
+  <a class="card adjectifs" href="adjectifs.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Adj.</span>
+      <span class="badge">a nice sister</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Adjectifs</div>
+      <div class="card-title">Les adjectifs</div>
+      <div class="card-desc">Niveau 1 : la place de l'adjectif · Niveau 2 : l'ordre des adjectifs (opinion, taille, âge…).</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Niveau 1</span>
+        <span class="pill">Niveau 2</span>
+        <span class="pill">Ordre</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+
+  <!-- Adverbes de fréquence -->
+  <a class="card adverbes" href="adverbes_frequence.html">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="big-label">Often</span>
+      <span class="badge">always → never</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Grammaire · Adverbes</div>
+      <div class="card-title">Adverbes de fréquence</div>
+      <div class="card-desc">always, usually, often, sometimes, rarely, never : sens, place dans la phrase et How often?</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">always</span>
+        <span class="pill">sometimes</span>
+        <span class="pill">never</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>

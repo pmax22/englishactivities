@@ -806,7 +806,7 @@ function orderQuestion(q) {
 const ofType = t => COMP.filter(q => q.type === t);
 const MISSIONS = [
   { id: "plus", icon: "➕", title: "Supériorité", desc: "plus … que : adjectif + -er than / more + adjectif + than.", build: () => shuffle(ofType("plus")).slice(0, 8).map(gapQuestion) },
-  { id: "eq", icon: "🟰", title: "Égalité", desc: "aussi … que : as + adjectif + as.", build: () => shuffle(ofType("eq")).slice(0, 8).map(gapQuestion) },
+  { id: "eq", icon: "⚖️", title: "Égalité", desc: "aussi … que : as + adjectif + as.", build: () => shuffle(ofType("eq")).slice(0, 8).map(gapQuestion) },
   { id: "minus", icon: "➖", title: "Infériorité", desc: "moins … que : less + adjectif + than.", build: () => shuffle(ofType("minus")).slice(0, 8).map(gapQuestion) },
   { id: "form", icon: "📏", title: "Court ou long ?", desc: "-er ou more ? Choisis le bon comparatif de supériorité.", build: () => shuffle(ADJ).slice(0, 10).map(formQuestion) },
   { id: "trad", icon: "🔎", title: "Quelle est la bonne traduction ?", desc: "Lis la phrase en français et choisis la bonne phrase anglaise.", build: () => shuffle(COMP).slice(0, 8).map(translateQuestion) },
