@@ -302,6 +302,12 @@
   .fr-line u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
   .lesson-body h4 { font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin: 14px 0 6px; }
   @media (max-width: 560px) { .choices.grid4 { grid-template-columns: repeat(2, 1fr); } }
+  .say { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+    background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .say:hover { background: rgba(var(--accent-rgb),.2); }
+  .say-row { text-align: center; margin: 0 0 14px; }
+  .listen-box { text-align: center; margin: 10px 0 24px; }
+  .listen-box .say { font-size: 18px; padding: 14px 28px; }
 </style>
 </head>
 <body>
@@ -374,8 +380,16 @@ const MDEF = [{"id": "reply", "icon": "🛍️", "title": "La bonne réplique", 
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
    order  : { en: "I|am going to|visit|London.", fr, trap, tip, alts }
    MDEF   : [{ id, icon, title, desc, from: [clés], n, group }] */
+const CAN_SPEAK = typeof window !== "undefined" && "speechSynthesis" in window;
+function speak(t) {
+  try { const u = new SpeechSynthesisUtterance(t); u.lang = "en-GB"; u.rate = 0.85; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
+function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
 function headOf(it) {
+  if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
   return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
+    (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
     (it.big ? `<div class="big-word">${esc(it.big)}</div>` + (it.bigsub ? `<div class="big-sub">${esc(it.bigsub)}</div>` : "") : "");
 }
 function gapQ(it, instr) {
