@@ -237,8 +237,6 @@
   .seg .chip:hover { color: var(--c); border-color: var(--c); }
   .preview .s { border-bottom: 3px solid var(--c); padding: 0 2px; background: color-mix(in srgb, var(--c) 14%, transparent); border-radius: 3px; }
   .preview .s.blank { color: var(--muted); }
-  .preview-fr { border-left-color: var(--muted); font-size: 17px; }
-  .fr-note { font-size: 12.5px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -343,9 +341,6 @@
     <div class="q-instr" style="margin-top:26px">Ton texte</div>
     <div class="preview" id="b-preview"></div>
 
-    <div class="q-instr" style="margin-top:22px">Traduction en français</div>
-    <div class="preview preview-fr" id="b-preview-fr"></div>
-    <p class="fr-note" id="b-fr-note"></p>
 
     <div class="actions">
       <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
@@ -796,31 +791,6 @@ B_IDS.forEach(id => document.getElementById("b-" + id).addEventListener("input",
 function val(id) { return document.getElementById("b-" + id).value.trim(); }
 function seg(cls, html, isBlank) { return `<span class="s seg-${cls}${isBlank ? " blank" : ""}">${html}</span>`; }
 
-/* Petit dictionnaire pour la traduction */
-const FR_MONTHS = { january:"janvier", february:"février", march:"mars", april:"avril", may:"mai", june:"juin", july:"juillet", august:"août", september:"septembre", october:"octobre", november:"novembre", december:"décembre" };
-const FR_WHERE = { "paris":"à Paris", "london":"à Londres", "the seaside":"à la mer", "the beach":"à la plage", "the mountains":"à la montagne", "my grandparents' house":"chez mes grands-parents", "my grandparents":"chez mes grands-parents", "spain":"en Espagne", "england":"en Angleterre", "italy":"en Italie", "germany":"en Allemagne", "portugal":"au Portugal", "the countryside":"à la campagne", "disneyland":"à Disneyland" };
-const FR_WHO = { "my parents":"mes parents", "my family":"ma famille", "my friends":"mes amis", "my friend":"mon ami(e)", "my brother":"mon frère", "my sister":"ma sœur", "my cousins":"mes cousins", "my cousin":"mon cousin / ma cousine", "my mother":"ma mère", "my mum":"ma mère", "my father":"mon père", "my dad":"mon père", "my grandparents":"mes grands-parents", "my class":"ma classe" };
-const FR_HOW = { "car":"en voiture", "plane":"en avion", "train":"en train", "bus":"en bus", "bike":"à vélo", "boat":"en bateau", "coach":"en car", "foot":"à pied", "on foot":"à pied" };
-function frWhere(v) { const k = v.toLowerCase(); return FR_WHERE[k] || null; }
-function frWho(v) { return FR_WHO[v.toLowerCase().replace(/^with /, "")] || null; }
-function frHow(v) { return FR_HOW[v.toLowerCase().replace(/^by /, "")] || null; }
-function frHowLong(v) {
-  let s = v.toLowerCase().replace(/^for /, "").trim();
-  const nums = { one:"un", two:"deux", three:"trois", four:"quatre", five:"cinq", six:"six", ten:"dix" };
-  s = s.replace(/\ba weekend\b/, "un week-end").replace(/\ba week\b/, "une semaine").replace(/\ba month\b/, "un mois").replace(/\ba day\b/, "une journée");
-  s = s.replace(/\b(one|two|three|four|five|six|ten)\b/g, m => nums[m]);
-  s = s.replace(/\bdays?\b/, m => m === "days" ? "jours" : "jour").replace(/\bweeks?\b/, m => m === "weeks" ? "semaines" : "semaine")
-       .replace(/\bmonths?\b/, "mois").replace(/\bweekends?\b/, "week-ends").replace(/\bhours?\b/, m => m === "hours" ? "heures" : "heure");
-  return /[a-z]{3,}/.test(s.replace(/jours?|semaines?|mois|week-ends?|un|une|deux|trois|quatre|cinq|six|dix|heures?|journée/g, "")) ? null : s;
-}
-function frWhen(v) {
-  const s = v.toLowerCase().trim();
-  let m = s.match(/^(in )?(january|february|march|april|may|june|july|august|september|october|november|december)$/);
-  if (m) return "en " + FR_MONTHS[m[2]];
-  const last = { "last summer":"l'été dernier", "last winter":"l'hiver dernier", "last week":"la semaine dernière", "last year":"l'année dernière", "last month":"le mois dernier", "last weekend":"le week-end dernier", "last spring":"le printemps dernier", "last autumn":"l'automne dernier", "at christmas":"à Noël", "in the summer":"en été", "in summer":"en été", "in winter":"en hiver" };
-  return last[s] || null;
-}
-
 function updatePreview() {
   const where = val("where"), hl = val("howlong"), who = val("who"), when = val("when"), how = val("how"), what = val("what");
   let whenTxt = when;
@@ -837,26 +807,6 @@ function updatePreview() {
   if (what) html += " " + seg("what", esc(cap(what)) + (/[.!?]$/.test(what) ? "" : "."));
   document.getElementById("b-preview").innerHTML = html;
 
-  // Traduction française
-  const unknown = [];
-  function tr(cls, v, fn, placeholder) {
-    if (!v) return seg(cls, placeholder, true);
-    const t = fn(v);
-    if (t === null) { unknown.push(v); return seg(cls, "<i>" + esc(v) + "</i>"); }
-    return seg(cls, esc(t));
-  }
-  const whereFr = where ? (frWhere(where) || null) : null;
-  let fr = "Je suis allé(e) " + (where ? (whereFr ? seg("where", esc(whereFr)) : (unknown.push(where), seg("where", "à <i>" + esc(where) + "</i>"))) : seg("where", "à [où]", true)) +
-    " " + (hl ? (frHowLong(hl) ? seg("howlong", "pendant " + esc(frHowLong(hl))) : (unknown.push(hl), seg("howlong", "pendant <i>" + esc(hl) + "</i>"))) : seg("howlong", "pendant [combien de temps]", true)) +
-    ", " + (who ? (frWho(who) ? seg("who", "avec " + esc(frWho(who))) : (unknown.push(who), seg("who", "avec <i>" + esc(who) + "</i>"))) : seg("who", "avec [qui]", true)) +
-    ", " + tr("when", when, frWhen, "[quand]") +
-    ", " + tr("how", how, frHow, "[comment]") + ".";
-  document.getElementById("b-preview-fr").innerHTML = fr;
-  const notes = [];
-  if (unknown.length) notes.push("Les mots en italique n'ont pas pu être traduits automatiquement : traduis-les toi-même !");
-  if (what) notes.push("Ta phrase « What did you do? » n'est pas traduite : essaie de la traduire à l'oral.");
-  document.getElementById("b-fr-note").textContent = notes.join(" ");
-
   // Petit contrôle sur la phrase "What did you do?"
   const w = document.getElementById("b-warn");
   const lw = " " + norm(what) + " ";
@@ -872,7 +822,7 @@ function updatePreview() {
 }
 function clearBuilder() { B_IDS.forEach(id => document.getElementById("b-" + id).value = ""); updatePreview(); }
 function copyText() {
-  const txt = document.getElementById("b-preview").innerText + "\n\n" + document.getElementById("b-preview-fr").innerText;
+  const txt = document.getElementById("b-preview").innerText;
   const btn = document.getElementById("btnCopy");
   const done = () => { btn.textContent = "Copié !"; setTimeout(() => btn.textContent = "Copier mon texte", 1600); };
   try { navigator.clipboard.writeText(txt).then(done, done); } catch (e) { done(); }
