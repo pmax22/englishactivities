@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture : Frankenstein and the perfect human</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent: #86efac;
+    --accent-rgb: 134,239,172;
+    --accent2: #1f2937;
+    --green: #4ecb7f;
+    --red: #e05c5c;
+    --text: #e8eaf0;
+    --muted: #8a8ea3;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 64px;
+    background-image: radial-gradient(ellipse at 20% 10%, rgba(134,239,172,0.08) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 80%, rgba(31,41,55,0.06) 0%, transparent 60%);
+  }
+  a { color: inherit; }
+  .topnav { width: 100%; max-width: 760px; margin-bottom: 18px; }
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+    transition: color .2s, border-color .2s;
+  }
+  .back:hover { color: var(--accent); border-color: rgba(134,239,172,0.4); }
+
+  header { text-align: center; margin-bottom: 32px; animation: fadeDown .6s ease both; }
+  header .tag {
+    display: inline-block; background: rgba(134,239,172,0.12); color: var(--accent);
+    font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(134,239,172,0.25); margin-bottom: 14px;
+  }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 46px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+  h1 span { color: var(--accent); }
+  .subtitle { color: var(--muted); margin-top: 10px; font-size: 15px; font-weight: 300; }
+
+  .wrap { width: 100%; max-width: 760px; }
+  .hidden { display: none !important; }
+
+  /* ── MENU ── */
+  .seance-title {
+    font-family: 'Syne', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin: 28px 0 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .seance-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .seance-title:first-child { margin-top: 0; }
+
+  details.lesson {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 14px; overflow: hidden;
+  }
+  details.lesson summary {
+    cursor: pointer; padding: 14px 18px; font-weight: 500; font-size: 14px; list-style: none;
+    display: flex; align-items: center; gap: 10px; color: var(--accent);
+  }
+  details.lesson summary::-webkit-details-marker { display: none; }
+  details.lesson summary::after { content: '▾'; margin-left: auto; transition: transform .2s; color: var(--muted); }
+  details.lesson[open] summary::after { transform: rotate(180deg); }
+  .lesson-body { padding: 0 18px 18px; font-size: 14px; line-height: 1.7; color: #cfd2de; }
+  .lesson-body p { margin-bottom: 8px; }
+  .formula {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 10px 14px; margin: 8px 0 12px; font-size: 14px;
+  }
+  .ex { color: var(--muted); font-style: italic; }
+  .hl { color: var(--accent); font-weight: 700; }
+  .bv { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0 5px; margin-left: 2px; }
+
+  .missions { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .mission {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; cursor: pointer; text-align: left; color: inherit; font: inherit;
+    display: flex; flex-direction: column; gap: 6px; position: relative;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .mission:hover { transform: translateY(-3px); border-color: rgba(134,239,172,0.4); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  .mission .m-icon { font-size: 26px; line-height: 1; }
+  .mission .m-num { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .mission .m-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .mission .m-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .mission .m-best {
+    position: absolute; top: 14px; right: 14px; font-size: 11px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; background: var(--surface2);
+  }
+  .mission .m-best.done { color: var(--green); border-color: rgba(78,203,127,.4); }
+
+  /* ── QUIZ CARD ── */
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 32px 32px 26px; position: relative; overflow: hidden; animation: fadeUp .45s ease both;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+  .progress-bar-wrap { background: var(--border); border-radius: 999px; height: 6px; margin-bottom: 26px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .5s cubic-bezier(.4,0,.2,1); }
+
+  .q-instr { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; font-family: 'Syne', sans-serif; }
+  .q-prompt { font-size: clamp(20px, 3.6vw, 28px); font-weight: 500; line-height: 1.35; margin-bottom: 8px; }
+  .q-prompt .big { font-size: clamp(48px, 10vw, 72px); display: block; text-align: center; margin: 6px 0; }
+  .q-prompt u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .q-sub { font-size: 14px; color: var(--muted); margin-bottom: 22px; font-style: italic; }
+
+  input.answer {
+    width: 100%; padding: 15px 18px; font-size: 18px; font-family: 'DM Sans', sans-serif;
+    background: var(--surface2); color: var(--text); border: 1.5px solid var(--border);
+    border-radius: var(--radius); outline: none; transition: border-color .2s, box-shadow .2s;
+  }
+  input.answer:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(134,239,172,.15); }
+  input.answer.ok { border-color: var(--green); background: rgba(78,203,127,.08); }
+  input.answer.ko { border-color: var(--red); background: rgba(224,92,92,.08); }
+
+  .choices { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .choices.grid3 { grid-template-columns: repeat(3, 1fr); }
+  .btn-choice {
+    padding: 14px 16px; border-radius: var(--radius); border: 1.5px solid var(--border);
+    background: var(--surface2); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px;
+    cursor: pointer; text-align: left; transition: border-color .2s, background .2s, transform .15s;
+  }
+  .choices.grid3 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; }
+  .btn-choice:hover:not(:disabled) { border-color: var(--accent); background: rgba(134,239,172,.06); transform: translateY(-1px); }
+  .btn-choice:disabled { cursor: default; }
+  .btn-choice.correct { border-color: var(--green); background: rgba(78,203,127,.12); }
+  .btn-choice.wrong { border-color: var(--red); background: rgba(224,92,92,.1); }
+  .btn-choice.dim { opacity: .45; }
+
+  /* Word order */
+  .order-zone {
+    min-height: 62px; border: 1.5px dashed var(--border); border-radius: var(--radius);
+    padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;
+    background: rgba(255,255,255,.015);
+  }
+  .order-zone.empty::before { content: 'Clique sur les mots dans le bon ordre…'; color: var(--muted); font-size: 13px; font-style: italic; padding-left: 6px; }
+  .order-zone.ok { border-color: var(--green); border-style: solid; background: rgba(78,203,127,.06); }
+  .order-zone.ko { border-color: var(--red); border-style: solid; background: rgba(224,92,92,.06); }
+  .tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tile {
+    padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface2);
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer;
+    transition: transform .12s, border-color .2s;
+  }
+  .tile:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
+  .tile.used { visibility: hidden; }
+  .order-zone .tile { border-color: rgba(134,239,172,.45); background: rgba(134,239,172,.08); }
+
+  .feedback {
+    margin-top: 18px; padding: 14px 16px; border-radius: var(--radius); font-size: 14.5px; line-height: 1.6;
+    animation: fadeUp .3s ease both;
+  }
+  .feedback.ok { background: rgba(78,203,127,.1); border: 1px solid rgba(78,203,127,.35); }
+  .feedback.ko { background: rgba(224,92,92,.08); border: 1px solid rgba(224,92,92,.35); }
+  .feedback b { color: var(--text); }
+  .feedback .tip { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+  .actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: .3px; transition: transform .15s, opacity .2s, box-shadow .2s;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #1a0f08; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(134,239,172,.25); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+  /* Score */
+  .score-big { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; text-align: center; line-height: 1; margin: 10px 0; }
+  .score-big span { color: var(--accent); }
+  .stars { text-align: center; font-size: 34px; letter-spacing: 6px; margin-bottom: 8px; }
+  .score-msg { text-align: center; color: var(--muted); margin-bottom: 18px; }
+  .recap { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .recap-item { font-size: 13.5px; padding: 6px 0; border-bottom: 1px dashed var(--border); display: flex; gap: 10px; }
+  .recap-item .r-ic { flex-shrink: 0; }
+  .recap-item .r-txt { color: var(--muted); }
+  .recap-item .r-txt b { color: var(--text); font-weight: 500; }
+
+  /* Builder (mission 8) */
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .field label .qq { color: var(--accent); font-weight: 700; font-family: 'Syne', sans-serif; font-size: 14px; margin-right: 6px; }
+  .field .row { display: flex; align-items: center; gap: 8px; }
+  .field .pre { color: var(--muted); font-size: 15px; white-space: nowrap; }
+  .field input { font-size: 16px; padding: 11px 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+  .chip {
+    font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--surface2); color: var(--muted);
+    border: 1px solid var(--border); cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .chip:hover { color: var(--accent); border-color: rgba(134,239,172,.4); }
+  .preview {
+    background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 12px; padding: 16px 18px; font-size: 18px; line-height: 1.6; margin-top: 8px; min-height: 60px;
+  }
+  .preview .blank { color: var(--muted); }
+  .warn { font-size: 13px; color: #f5c842; margin-top: 8px; }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  @media (max-width: 560px) {
+    .card { padding: 24px 18px 20px; }
+    .choices.grid3 { grid-template-columns: repeat(2, 1fr); }
+    .field .row { flex-wrap: wrap; }
+  }
+  /* ── Liste des verbes (même style que les autres pages) ── */
+  .verb-ref {
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
+  }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(134,239,172,.35); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .en-line { font-size: clamp(19px, 3.2vw, 24px); color: var(--muted); margin-bottom: 18px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
+
+  /* Phrases à trous */
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer {
+    display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px;
+  }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .gap-q { font-size: clamp(18px, 3vw, 22px); color: var(--text); margin-bottom: 10px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
+  }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
+  /* ── Liste des verbes (même style que les autres pages) ── */
+  .verb-ref {
+    width: 100%; margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px 24px; animation: fadeUp .7s ease both;
+  }
+  .verb-ref-title { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  details.verb-ref summary { cursor: pointer; list-style: none; margin-bottom: 0; }
+  details.verb-ref summary::-webkit-details-marker { display: none; }
+  details.verb-ref summary::after { content: ' ▾'; }
+  details.verb-ref[open] summary { margin-bottom: 14px; }
+  .verb-sub { font-size: 12px; color: var(--muted); margin: 12px 0 8px; font-weight: 500; }
+  .verb-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .verb-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--text); }
+  .verb-chip span { color: var(--accent); margin-left: 6px; font-size: 11px; }
+  .verb-chip em { color: var(--muted); margin-left: 6px; font-size: 11px; font-style: italic; font-weight: 400; }
+  .verb-chip.irr { border-color: rgba(var(--accent-rgb),.45); }
+  .verb-legend { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+  .fr-line { font-size: clamp(19px, 3.2vw, 24px); font-weight: 500; margin-bottom: 18px; }
+  .big-word { font-family: 'Syne', sans-serif; font-size: clamp(40px, 9vw, 64px); font-weight: 800; text-align: center; margin: 4px 0 6px; color: var(--text); }
+  .big-sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .small-hint { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .small-hint b { color: var(--accent); font-weight: 500; }
+
+  .gap-line { font-size: clamp(19px, 3.4vw, 25px); line-height: 2.1; }
+  .gap-line input.answer { display: inline-block; padding: 5px 10px; font-size: 19px; vertical-align: baseline; margin: 0 3px; max-width: 100%; }
+  .gap-line .bvhint { color: var(--accent); font-size: 15px; margin-left: 2px; }
+  .sign {
+    display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; margin-right: 8px; vertical-align: middle;
+  }
+  .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
+  .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  .sign.eq, .sign.q { background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .choices.grid2 { grid-template-columns: 1fr 1fr; }
+  .choices.grid2 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 18px; }
+  .choices.grid2 .btn-choice small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .lesson-body table { border-collapse: collapse; margin: 6px 0 12px; font-size: 13.5px; }
+  .lesson-body td, .lesson-body th { border: 1px solid var(--border); padding: 5px 10px; text-align: left; }
+  .lesson-body th { color: var(--accent); font-weight: 500; }
+  @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
+  .choices.grid4 { grid-template-columns: repeat(4, 1fr); }
+  .choices.grid4 .btn-choice, .choices.grid3 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 16px 8px; }
+  .choices.grid4 .btn-choice small { display:block; font-family:'DM Sans',sans-serif; font-weight:400; font-size:11px; color:var(--muted); }
+  .missions-wrap .missions { margin-bottom: 6px; }
+  .fr-line u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .lesson-body h4 { font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin: 14px 0 6px; }
+  @media (max-width: 560px) { .choices.grid4 { grid-template-columns: repeat(2, 1fr); } }
+  .say { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+    background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .say:hover { background: rgba(var(--accent-rgb),.2); }
+  .say-row { text-align: center; margin: 0 0 14px; }
+  .listen-box { text-align: center; margin: 10px 0 24px; }
+  .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
+
+/* ── Association de mots ── */
+.match { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbtn { font-family: inherit; font-size: 15px; padding: 12px 10px; border-radius: 12px; cursor: pointer; min-height: 48px;
+  background: var(--surface2); color: var(--text); border: 1.5px solid var(--border); transition: all .15s; line-height: 1.25; }
+.mbtn:hover { border-color: var(--accent); }
+.mbtn.sel { border-color: var(--accent); background: rgba(var(--accent-rgb), .15); }
+.mbtn.matched { border-color: rgba(74,222,128,.6); background: rgba(74,222,128,.12); color: #4ade80; cursor: default; }
+.mbtn.miss { border-color: #f87171; background: rgba(248,113,113,.15); animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.match-info { text-align: center; font-size: 13px; color: var(--muted); margin-top: 12px; }
+details.doc-fold { cursor: default; } details.doc-fold > summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details.doc-fold .doc-text { max-height: 50vh; overflow-y: auto; margin-top: 10px; }
+.doc-h { font-size: 14px; margin: 12px 0 4px; color: var(--accent); }
+@media (max-width: 560px) { .mbtn { font-size: 14px; padding: 10px 6px; } .match { gap: 8px; } }
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<script src="assets/ea.js"></script>
+</head>
+<body>
+
+<nav class="topnav"><a class="back" href="index.html">← Toutes les activités</a></nav>
+
+<header>
+  <div class="tag">Anglais · Culture</div>
+  <h1>Frankenstein <span>&amp; science</span></h1>
+  <p class="subtitle">Culture · Mary Shelley, l'eugénisme, Dolly et CRISPR</p>
+</header>
+
+<!-- ═════ MENU ═════ -->
+<main class="wrap" id="menu">
+  <details class="lesson" open>
+    <summary>Rappel de la leçon</summary>
+    <div class="lesson-body">
+      <p>Depuis Frankenstein (1818), la littérature interroge la responsabilité des scientifiques. Les progrès de la génétique rendent ces questions très actuelles.</p>
+      <p><span class="hl">1818</span> — Frankenstein de Mary Shelley</p>
+      <p><span class="hl">1883</span> — Galton invente le mot « eugenics »</p>
+      <p><span class="hl">1927</span> — la Cour suprême valide la stérilisation forcée</p>
+      <p><span class="hl">1978</span> — Louise Brown, premier bébé-éprouvette</p>
+      <p><span class="hl">1996</span> — Dolly, la brebis clonée</p>
+      <p><span class="hl">2012</span> — CRISPR, les ciseaux génétiques</p>
+      <p><b>Mots clés :</b> a scientist, a creature, responsibility, ethics, eugenics, cloning, genetic engineering, to play God</p><style>
+  details.dossier { margin-top: 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface2); }
+  details.dossier > summary { cursor: pointer; padding: 14px 16px; font-weight: 600; list-style: none; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  details.dossier > summary::-webkit-details-marker { display: none; }
+  details.dossier > summary .dz-time { font-weight: 400; font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; }
+  details.dossier > summary::after { content: "▾"; margin-left: auto; color: var(--muted); } details.dossier[open] > summary::after { content: "▴"; }
+  .dz-body { padding: 4px 20px 18px; font-size: 16px; line-height: 1.75; max-width: 70ch; }
+  .dz-body h4 { text-transform: none; letter-spacing: 0; font-family: 'Syne', sans-serif; font-size: 17px; margin: 20px 0 6px; color: var(--accent); }
+  .dz-body p { margin: 0 0 12px; } .dz-body ul { margin: 0 0 12px 20px; } .dz-body li { margin-bottom: 6px; }
+  .dz-body b { color: var(--text); } .dz-body .gl { font-size: .86em; color: var(--muted); font-style: italic; } .dz-link { display: inline-block; margin-top: 4px; padding: 8px 14px; border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); font-weight: 600; text-decoration: none; } .dz-link:hover { background: rgba(255,255,255,.06); } .dz-top { font-size: 12.5px; color: var(--muted); margin: 0 0 6px; }
+  @media (max-width: 560px) { .dz-body { padding: 2px 14px 14px; font-size: 15.5px; } }
+</style>
+      <details class="dossier"><summary>📖 Le dossier complet <span class="dz-time">⏱ 4 min de lecture</span></summary><div class="dz-body"><p class="dz-top">Pour approfondir, au calme : pendant le quart d'heure lecture, dans le bus… Les mots en gras sont à connaître en anglais.</p><h4>Frankenstein, né d'un défi</h4>
+<p>En juin 1816, l'« année sans été » (une éruption volcanique a assombri le ciel), un groupe d'écrivains anglais est bloqué par la pluie dans une villa au bord du lac Léman, en Suisse : le poète Lord Byron <span class="gl">(poète romantique anglais)</span>, Percy Shelley et sa compagne, <b>Mary</b>, 18 ans. Byron propose un défi : écrire chacun une histoire de fantômes. Mary imagine celle d'un savant qui donne vie à une créature. Publié en <b>1818</b>, <b>Frankenstein, or the Modern Prometheus</b> est souvent considéré comme le premier roman de <b>science-fiction</b>.</p>
+<h4>Le savant et sa créature</h4>
+<p>Le jeune scientifique <b>Victor Frankenstein</b>, fasciné par les découvertes sur l'électricité, assemble un corps à partir de morceaux de cadavres et parvient à l'animer. Mais horrifié par l'apparence de sa créature, il l'abandonne aussitôt. La créature, intelligente et sensible, apprend seule à parler et à lire ; rejetée par tous à cause de son aspect, elle devient violente et se venge de son créateur. Attention : <b>Frankenstein</b> est le nom du savant, pas du monstre, qui n'a pas de nom ! Le sous-titre fait référence à <b>Prométhée</b> <span class="gl">(titan de la mythologie grecque)</span>, le titan qui vola le feu aux dieux : le roman interroge l'orgueil de l'homme qui veut jouer à Dieu et sa <b>responsabilité</b> envers ce qu'il crée.</p>
+<h4>La quête de l'homme parfait : l'eugénisme</h4>
+<p>À la fin du 19e siècle, Francis Galton <span class="gl">(savant britannique, 1822-1911)</span>, cousin de Darwin, invente le mot <b>eugenics</b> : l'idée d'« améliorer » l'espèce humaine en favorisant la reproduction des personnes jugées « supérieures ». Au début du 20e siècle, plus de trente États américains adoptent des lois de <b>stérilisation forcée</b> visant des personnes handicapées, pauvres ou issues de minorités ; plus de 60 000 Américains en sont victimes, et la Cour suprême les valide en 1927. L'Allemagne nazie s'en inspire, jusqu'au meurtre de masse. Après 1945, l'eugénisme est condamné, mais la question revient avec les progrès de la génétique.</p>
+<h4>Des progrès qui posent des questions</h4>
+<ul><li>En <b>1978</b>, au Royaume-Uni, naît <b>Louise Brown</b>, le premier « bébé-éprouvette » conçu par fécondation in vitro : une révolution pour les couples infertiles, critiquée à l'époque comme contre nature.</li><li>En <b>1996</b>, à l'Institut Roslin, en Écosse, naît <b>Dolly</b>, la première brebis clonée à partir d'une cellule adulte.</li><li>En 2003, le génome humain est entièrement décrypté.</li><li>En 2012, l'Américaine Jennifer Doudna et la Française Emmanuelle Charpentier mettent au point <b>CRISPR</b>, des « ciseaux génétiques » qui permettent de modifier l'ADN ; elles reçoivent le prix Nobel en 2020. Ces outils pourraient guérir des maladies génétiques, mais en 2018, un chercheur chinois a modifié l'ADN de bébés, ce qui a provoqué un scandale mondial.</li></ul>
+<h4>Les débats éthiques</h4>
+<p>Peut-on choisir les caractéristiques de ses enfants (<b>designer babies</b>) ? Qui aura accès à ces technologies ? Où s'arrête la médecine et où commence l'« amélioration » de l'humain ? Comme Victor Frankenstein, les scientifiques d'aujourd'hui doivent se demander non seulement « peut-on le faire ? », mais aussi « doit-on le faire ? ».</p>
+<p><a class="dz-link" href="cu_dystopies.html">→ Voir aussi : les dystopies, de Brave New World à 1984</a></p></div></details>
+    </div>
+  </details>
+  <div class="missions" id="missions"></div>
+</main>
+
+<!-- ═════ QUIZ ═════ -->
+<main class="wrap hidden" id="quiz">
+  <div class="card">
+    <div class="progress-label"><span id="qTitle"></span><span id="qCount"></span></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="qBar"></div></div>
+    <div class="q-instr" id="qInstr"></div>
+    <div id="qArea"></div>
+    <div id="qFeedback"></div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="showMenu()">Menu</button>
+      <button class="btn btn-ghost hidden" id="btnReset" onclick="resetOrder()">Effacer</button>
+      <button class="btn btn-primary" id="btnMain" onclick="mainAction()">Valider</button>
+    </div>
+  </div>
+</main>
+
+<!-- ═════ SCORE ═════ -->
+<main class="wrap hidden" id="score">
+  <div class="card">
+    <div class="q-instr" id="sTitle"></div>
+    <div class="stars" id="sStars"></div>
+    <div class="score-big" id="sScore"></div>
+    <p class="score-msg" id="sMsg"></p>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="showMenu()">Retour aux missions</button>
+      <button class="btn btn-primary" onclick="startMission(current.id)">Recommencer</button>
+    </div>
+    <div class="recap" id="sRecap"></div>
+  </div>
+</main>
+
+
+<script>
+const STORE_KEY = "ea_cu_frankenstein_v2";
+const DOCS = {"fk": {"title": "Playing God", "audio": false, "lines": ["Mary Shelley was only 18 when she started writing Frankenstein. It was published in 1818 and is often called the first science fiction novel.", "In the novel, Victor Frankenstein, a young scientist, creates a living creature. But he is horrified and abandons it. Rejected by everybody, the creature becomes violent.", "In the early 20th century, some people wanted to create \"perfect\" humans. This idea, called eugenics, led to terrible injustices in the USA and in Nazi Germany.", "Today, science can do amazing things: in 1996, scientists in Scotland cloned a sheep called Dolly, and new tools can change our genes.", "These discoveries can cure diseases, but they also raise ethical questions: just because we can do something, should we do it?"]}, "dz": {"title": "Relire le dossier complet", "audio": false, "fold": true, "lines": ["## Frankenstein, né d'un défi", "En juin 1816, l'« année sans été » (une éruption volcanique a assombri le ciel), un groupe d'écrivains anglais est bloqué par la pluie dans une villa au bord du lac Léman, en Suisse : le poète Lord Byron (poète romantique anglais), Percy Shelley et sa compagne, **Mary**, 18 ans. Byron propose un défi : écrire chacun une histoire de fantômes. Mary imagine celle d'un savant qui donne vie à une créature. Publié en **1818**, **Frankenstein, or the Modern Prometheus** est souvent considéré comme le premier roman de **science-fiction**.", "## Le savant et sa créature", "Le jeune scientifique **Victor Frankenstein**, fasciné par les découvertes sur l'électricité, assemble un corps à partir de morceaux de cadavres et parvient à l'animer. Mais horrifié par l'apparence de sa créature, il l'abandonne aussitôt. La créature, intelligente et sensible, apprend seule à parler et à lire ; rejetée par tous à cause de son aspect, elle devient violente et se venge de son créateur. Attention : **Frankenstein** est le nom du savant, pas du monstre, qui n'a pas de nom ! Le sous-titre fait référence à **Prométhée** (titan de la mythologie grecque), le titan qui vola le feu aux dieux : le roman interroge l'orgueil de l'homme qui veut jouer à Dieu et sa **responsabilité** envers ce qu'il crée.", "## La quête de l'homme parfait : l'eugénisme", "À la fin du 19e siècle, Francis Galton (savant britannique, 1822-1911), cousin de Darwin, invente le mot **eugenics** : l'idée d'« améliorer » l'espèce humaine en favorisant la reproduction des personnes jugées « supérieures ». Au début du 20e siècle, plus de trente États américains adoptent des lois de **stérilisation forcée** visant des personnes handicapées, pauvres ou issues de minorités ; plus de 60 000 Américains en sont victimes, et la Cour suprême les valide en 1927. L'Allemagne nazie s'en inspire, jusqu'au meurtre de masse. Après 1945, l'eugénisme est condamné, mais la question revient avec les progrès de la génétique.", "## Des progrès qui posent des questions", "En **1978**, au Royaume-Uni, naît **Louise Brown**, le premier « bébé-éprouvette » conçu par fécondation in vitro : une révolution pour les couples infertiles, critiquée à l'époque comme contre nature.", "En **1996**, à l'Institut Roslin, en Écosse, naît **Dolly**, la première brebis clonée à partir d'une cellule adulte.", "En 2003, le génome humain est entièrement décrypté.", "En 2012, l'Américaine Jennifer Doudna et la Française Emmanuelle Charpentier mettent au point **CRISPR**, des « ciseaux génétiques » qui permettent de modifier l'ADN ; elles reçoivent le prix Nobel en 2020. Ces outils pourraient guérir des maladies génétiques, mais en 2018, un chercheur chinois a modifié l'ADN de bébés, ce qui a provoqué un scandale mondial.", "## Les débats éthiques", "Peut-on choisir les caractéristiques de ses enfants (**designer babies**) ? Qui aura accès à ces technologies ? Où s'arrête la médecine et où commence l'« amélioration » de l'humain ? Comme Victor Frankenstein, les scientifiques d'aujourd'hui doivent se demander non seulement « peut-on le faire ? », mais aussi « doit-on le faire ? »."]}};
+const DATA = {"mv": {"kind": "match", "instr": "Associe chaque mot anglais à sa traduction", "items": [{"kind": "match", "pairs": [["a scientist", "un scientifique"], ["a creature", "une créature"], ["a monster", "un monstre"], ["a novel", "un roman"]], "label": "Associer : a scientist, a creature, a monster, a novel"}, {"kind": "match", "pairs": [["life", "la vie"], ["a gene", "un gène"], ["to create", "créer"], ["responsible", "responsable"]], "label": "Associer : life, a gene, to create, responsible"}]}, "tv": {"kind": "choice", "instr": "Choisis la bonne traduction", "items": [{"opts": ["un scientifique", "un monstre", "un gène"], "fr": "Que veut dire « a scientist » ?"}, {"opts": ["a creature", "a novel", "to create"], "fr": "Comment dit-on « une créature » en anglais ?"}, {"opts": ["un monstre", "la vie", "responsable"], "fr": "Que veut dire « a monster » ?"}, {"opts": ["a novel", "a gene", "a scientist"], "fr": "Comment dit-on « un roman » en anglais ?"}, {"opts": ["la vie", "créer", "une créature"], "fr": "Que veut dire « life » ?"}, {"opts": ["a gene", "responsible", "a monster"], "fr": "Comment dit-on « un gène » en anglais ?"}, {"opts": ["créer", "un scientifique", "un roman"], "fr": "Que veut dire « to create » ?"}, {"opts": ["responsible", "a creature", "life"], "fr": "Comment dit-on « responsable » en anglais ?"}]}, "dq": {"kind": "choice", "instr": "Réponds en t'aidant du dossier complet", "items": [{"opts": ["Lors d'un défi d'histoires de fantômes avec Byron", "En lisant un journal", "En regardant un film"], "line": "Comment Mary Shelley a-t-elle eu l'idée de Frankenstein ?", "doc": "dz"}, {"opts": ["Le savant, pas la créature", "Le monstre", "Le village"], "line": "Qui s'appelle Frankenstein ?", "doc": "dz"}, {"opts": ["Elle est abandonnée et rejetée par tous", "Elle est née méchante", "Elle a faim"], "line": "Pourquoi la créature devient-elle violente ?", "doc": "dz"}, {"opts": ["L'idée d'« améliorer » l'espèce humaine en contrôlant la reproduction", "Une science du climat", "Une forme d'art"], "line": "Qu'est-ce que l'eugénisme ?", "doc": "dz"}, {"opts": ["La première brebis clonée, en Écosse en 1996", "Une chanteuse", "Un bébé-éprouvette"], "line": "Qui est Dolly ?", "doc": "dz"}, {"opts": ["Non seulement « peut-on le faire ? » mais aussi « doit-on le faire ? »", "Combien cela rapporte ?", "Aucune"], "line": "Quelle question doivent se poser les scientifiques ?", "doc": "dz"}]}, "tf": {"kind": "choice", "instr": "Vrai ou faux ?", "items": [{"opts": ["True", "False"], "tip": "« only 18 ».", "fr": "Mary Shelley was 18 when she started writing Frankenstein.", "keep": true, "doc": "fk"}, {"opts": ["True", "False"], "tip": "C'est le nom du savant (Victor Frankenstein).", "fr": "Frankenstein is the name of the creature.", "keep": true, "c": 1, "doc": "fk"}, {"opts": ["True", "False"], "tip": "« abandons it ».", "fr": "Victor abandons his creature.", "keep": true, "doc": "fk"}, {"opts": ["True", "False"], "tip": "« led to terrible injustices ».", "fr": "Eugenics led to terrible injustices.", "keep": true, "doc": "fk"}, {"opts": ["True", "False"], "tip": "« a sheep called Dolly ».", "fr": "Dolly was a cloned cow.", "keep": true, "c": 1, "doc": "fk"}, {"opts": ["True", "False"], "tip": "« they also raise ethical questions ».", "fr": "New discoveries raise no ethical questions.", "keep": true, "c": 1, "doc": "fk"}]}, "q": {"kind": "choice", "instr": "Choisis la bonne réponse", "items": [{"opts": ["It is often called the first science fiction novel.", "It is the first poem.", "It is a history book."], "line": "Why is Frankenstein important?", "doc": "fk"}, {"opts": ["It is rejected by everybody.", "It is hungry.", "It is born violent."], "line": "Why does the creature become violent?", "doc": "fk"}, {"opts": ["The idea of creating \"perfect\" humans.", "A type of medicine for animals.", "A sport."], "line": "What is eugenics?", "doc": "fk"}, {"opts": ["Just because we can do something, should we do it?", "How much do they cost?", "Who will win a prize?"], "line": "What question do new discoveries raise?", "doc": "fk"}]}, "d": {"kind": "choice", "instr": "Dates, personnages et repères", "items": [{"opts": ["Au bord du lac Léman, en Suisse", "À Londres", "À Édimbourg", "À Paris"], "line": "Où Mary Shelley a-t-elle imaginé son roman ?", "doc": "fk"}, {"opts": ["The Modern Prometheus", "The Monster", "The Creature", "A Ghost Story"], "line": "Quel est le sous-titre de Frankenstein ?", "doc": "fk"}, {"opts": ["En Écosse", "Aux États-Unis", "En France", "En Chine"], "line": "Où est née Dolly ?", "doc": "fk"}, {"opts": ["To play God", "To be God", "To make God", "To game God"], "line": "Comment dit-on « jouer à Dieu » ?", "doc": "fk"}]}, "w": {"kind": "gap", "instr": "Trouve le mot dans le document", "items": [{"line": "____", "ans": ["living creature", "a living creature"], "fr": "Trouve le mot qui veut dire « une créature vivante » (2 mots).", "w": 240, "doc": "fk"}, {"line": "____", "ans": ["horrified"], "fr": "Trouve le mot qui veut dire « horrifié ».", "w": 240, "doc": "fk"}, {"line": "____", "ans": ["cure"], "fr": "Trouve le mot qui veut dire « guérir ».", "w": 240, "doc": "fk"}, {"line": "____", "ans": ["ethical"], "fr": "Trouve le mot qui veut dire « éthiques ».", "w": 240, "doc": "fk"}]}};
+const MDEF = [{"id": "mv", "icon": "🔗", "title": "Associe les mots", "desc": "Relie chaque mot anglais à sa traduction française.", "from": ["mv"], "n": 2, "group": "Niveau 1 · Découverte (en français)", "ordered": true}, {"id": "tv", "icon": "🔤", "title": "Que veut dire… ?", "desc": "Traduis les mots clés, dans les deux sens.", "from": ["tv"], "n": 8, "group": "Niveau 1 · Découverte (en français)"}, {"id": "dq", "icon": "📖", "title": "Questions sur le dossier", "desc": "Questions en français sur le dossier complet. Tu peux le relire pendant la mission.", "from": ["dq"], "n": 6, "group": "Niveau 1 · Découverte (en français)", "ordered": true}, {"id": "tf", "icon": "✅", "title": "Vrai ou faux ?", "desc": "Lis chaque affirmation et vérifie dans le document.", "from": ["tf"], "n": 6, "group": "Niveau 2 · Approfondissement (en anglais)", "ordered": true}, {"id": "q", "icon": "❓", "title": "Questions de compréhension", "desc": "Choisis la bonne réponse.", "from": ["q"], "n": 4, "group": "Niveau 2 · Approfondissement (en anglais)", "ordered": true}, {"id": "d", "icon": "📅", "title": "Repères", "desc": "Dates, lieux, personnages : retiens l'essentiel.", "from": ["d"], "n": 4, "group": "Niveau 2 · Approfondissement (en anglais)"}, {"id": "w", "icon": "🔍", "title": "Vocabulaire", "desc": "Retrouve le mot anglais dans le document.", "from": ["w"], "n": 4, "group": "Niveau 2 · Approfondissement (en anglais)", "ordered": true}];
+/* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
+   gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
+   choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
+   order  : { en: "I|am going to|visit|London.", fr, trap, tip, alts }
+   MDEF   : [{ id, icon, title, desc, from: [clés], n, group }] */
+const CAN_SPEAK = typeof window !== "undefined" && "speechSynthesis" in window;
+function speak(t) {
+  try { const u = new SpeechSynthesisUtterance(t); u.lang = "en-GB"; u.rate = 0.85; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say"); if (b) speak(b.dataset.say); });
+function sayBtn(t, label) { return `<button class="say" type="button" data-say="${esc(t)}">🔊 ${label || "Écouter"}</button>`; }
+const DOCS_ = typeof DOCS !== "undefined" ? DOCS : {};
+function speakLines(lines) {
+  try {
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
+    const speakers = [];
+    lines.forEach(l => {
+      const m = l.match(/^([A-Z][\w ]{0,20}):\s*(.*)$/);
+      const who = m ? m[1] : "", text = m ? m[2] : l;
+      if (who && !speakers.includes(who)) speakers.push(who);
+      const k = Math.max(0, speakers.indexOf(who));
+      const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.85;
+      if (voices.length > 1) u.voice = voices[k % voices.length]; else u.pitch = k % 2 ? 1.35 : 0.9;
+      speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
+function docBox(id) {
+  const d = DOCS_[id]; if (!d) return "";
+  const body = d.lines.map(l => l.startsWith("## ") ? `<h4 class="doc-h">${esc(l.slice(3))}</h4>` :
+    `<p>${d.fold ? esc(l).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>") : esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.fold) return `<details class="doc doc-fold"><summary>📖 ${esc(d.title)}</summary><div class="doc-text">${body}</div></details>`;
+  if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
+    <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
+    <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
+  return `<div class="doc"><div class="doc-title">📄 ${esc(d.title)}</div><div class="doc-text">${body}</div></div>`;
+}
+function headOf(it) {
+  if (it.doc) return docBox(it.doc) + (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "");
+  if (it.listen) return `<div class="listen-box">${sayBtn(it.say, "Écouter le mot")}${CAN_SPEAK ? "" : `<div class="big-word">${esc(it.say)}</div>`}</div>`;
+  return (it.fr ? `<div class="fr-line">${esc(it.fr)}</div>` : "") +
+    (it.say ? `<div class="say-row">${sayBtn(it.say)}</div>` : "") +
+    (it.big ? `<div class="big-word">${esc(it.big)}</div>` + (it.bigsub ? `<div class="big-sub">${esc(it.bigsub)}</div>` : "") : "");
+}
+function gapQ(it, instr) {
+  const [pre, post] = it.line.split("____");
+  const w = it.w || Math.min(420, Math.max(110, 13 * Math.max(...it.ans.map(a => a.length)) + 50));
+  return { kind: "gap", instr: it.instr || instr, label: it.fr || it.line, sign: it.sign,
+    head: headOf(it), parts: [pre, { answers: it.ans, width: w, hint: it.hint }, post],
+    correct: (pre + it.ans[0] + post).trim(), tip: it.tip || "" };
+}
+function choiceQ(it, instr) {
+  let c = it.c || 0, opts = it.opts;
+  const line = it.line;
+  if (it.keep) { const good = opts[c]; opts = opts.slice().sort((a, b) => a.localeCompare(b)); c = opts.indexOf(good); }
+  const fill = line && line.includes("____") ? line.replace("____", opts[c]).replace(/^(.)/, m => m.toUpperCase()) : null;
+  return { kind: "mcq", grid: it.grid || (opts.every(o => o.length <= 12) && opts.length <= 4 ? opts.length : undefined),
+    keepOrder: !!it.keep, instr: it.instr || instr, label: it.fr || line || it.big,
+    head: headOf(it) + (line ? `<div class="fr-line">${esc(line)}</div>` : ""),
+    options: opts, correct: c, correctText: fill || undefined, tip: it.tip || "" };
+}
+function orderQ(it, instr) {
+  const answer = it.en.replace(/\|/g, " ");
+  const tiles = (it.en.includes("|") ? it.en.split("|") : it.en.split(" ")).map(t => t.replace(/[.?!]$/, "")).filter(Boolean);
+  return { kind: "order", instr: it.instr || instr, label: it.fr || answer, head: headOf(it),
+    tiles, distractors: it.trap ? [].concat(it.trap) : [], answer, alts: it.alts, tip: it.tip || "" };
+}
+function matchQ(it, instr) {
+  return { kind: "match", instr: it.instr || instr, label: it.label || it.pairs.map(p => p[0]).join(", "), head: headOf(it),
+    pairs: it.pairs, correct: it.pairs.map(p => p[0] + " = " + p[1]).join(" · "), tip: it.tip || "" };
+}
+const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ, match: matchQ };
+const MISSIONS = MDEF.map(m => Object.assign({}, m, {
+  build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
+    .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
+}));
+
+/* ═══════════ OUTILS ═══════════ */
+function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function norm(s) {
+  return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[’‘`´]/g, "'")
+    .replace(/\bi'm\b/g, "i am").replace(/'re\b/g, " are").replace(/\b(he|she|it|that|what|where|who)'s\b/g, "$1 is")
+    .replace(/\bdo not\b/g, "don't").replace(/\bdoes not\b/g, "doesn't").replace(/\bis not\b/g, "isn't").replace(/\bare not\b/g, "aren't")
+    .replace(/\bhas not\b/g, "hasn't").replace(/\bhave not\b/g, "haven't")
+    .replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
+    .replace(/\bwas not\b/g, "wasn't").replace(/\bwasnt\b/g, "wasn't")
+    .replace(/\bwere not\b/g, "weren't").replace(/\bwerent\b/g, "weren't")
+    .replace(/[.?!,;:]/g, " ").replace(/\s+/g, " ").trim();
+}
+function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function capF(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+/* ═══════════ STOCKAGE ═══════════ */
+let best = {};
+try { best = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { best = {}; }
+function saveBest() { try { localStorage.setItem(STORE_KEY, JSON.stringify(best)); } catch (e) {} }
+
+/* ═══════════ MENU ═══════════ */
+function renderMenu() {
+  const box = document.getElementById("missions"); box.innerHTML = "";
+  let lastGroup = null, grid = box;
+  MISSIONS.forEach((m, i) => {
+    if (m.group && m.group !== lastGroup) {
+      lastGroup = m.group; box.classList.remove("missions");
+      const h = document.createElement("div"); h.className = "seance-title"; h.textContent = m.group; box.appendChild(h);
+      grid = document.createElement("div"); grid.className = "missions"; box.appendChild(grid);
+    }
+    const b = document.createElement("button"); b.className = "mission";
+    const bs = best[m.id];
+    b.innerHTML = `${bs ? `<span class="m-best ${bs.s === bs.t ? "done" : ""}">★ ${bs.s}/${bs.t}</span>` : ""}
+      <span class="m-icon">${m.icon}</span><span class="m-num">Mission ${i + 1}</span>
+      <span class="m-title">${m.title}</span><span class="m-desc">${m.desc}</span>`;
+    b.onclick = () => startMission(m.id);
+    grid.appendChild(b);
+  });
+}
+function showOnly(id) {
+  ["menu", "quiz", "score"].forEach(x => document.getElementById(x).classList.toggle("hidden", x !== id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function showMenu() { renderMenu(); showOnly("menu"); }
+
+/* ═══════════ MOTEUR ═══════════ */
+let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [], orderChosen = [];
+let matchSel = null, matchErr = 0, matchDone = 0;
+
+function startMission(id) {
+  current = MISSIONS.find(m => m.id === id);
+  questions = current.build(); qi = 0; score = 0; recap = [];
+  showOnly("quiz"); renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[qi]; answered = false;
+  document.getElementById("qTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("qBar").style.width = (qi / questions.length * 100) + "%";
+  document.getElementById("qInstr").textContent = q.instr;
+  document.getElementById("qFeedback").innerHTML = "";
+  const area = document.getElementById("qArea"), btn = document.getElementById("btnMain");
+  btn.textContent = "Valider"; btn.classList.remove("hidden");
+  document.getElementById("btnReset").classList.add("hidden");
+  const head = q.head || "";
+
+  if (q.kind === "gap") {
+    let bi = 0;
+    const line = q.parts.map(p => {
+      if (typeof p === "string") return esc(p);
+      const i = bi++;
+      return `<input class="answer gapin" data-b="${i}" style="width:${p.width || 200}px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${p.ph || ""}">` +
+        (p.hint ? `<span class="bvhint">(${esc(p.hint)})</span>` : "");
+    }).join("");
+    area.innerHTML = head + `<div class="gap-line">${q.sign ? `<span class="sign ${q.sign}">${q.sign === "plus" ? "+" : q.sign === "minus" ? "−" : q.sign === "eq" ? "=" : "?"}</span>` : ""}${line}</div>` + (q.foot || "");
+    setTimeout(() => { const f = area.querySelector(".gapin"); if (f) f.focus(); }, 50);
+  } else if (q.kind === "mcq") {
+    const order = q.keepOrder ? q.options.map((_, i) => i) : shuffle(q.options.map((_, i) => i));
+    area.innerHTML = head + `<div class="choices ${q.grid ? "grid" + q.grid : ""}">${order.map(i => `<button class="btn-choice" data-i="${i}">${q.html ? q.options[i] : esc(q.options[i])}</button>`).join("")}</div>`;
+    area.querySelectorAll(".btn-choice").forEach(b => b.onclick = () => submitMcq(+b.dataset.i));
+    btn.classList.add("hidden");
+  } else if (q.kind === "order") {
+    orderChosen = [];
+    const all = shuffle(q.tiles.concat(q.distractors || []));
+    area.innerHTML = head + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+      all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
+    area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
+    document.getElementById("btnReset").classList.remove("hidden");
+  } else if (q.kind === "match") {
+    matchSel = null; matchErr = 0; matchDone = 0;
+    const idx = q.pairs.map((_, k) => k), L = shuffle(idx), R = shuffle(idx);
+    area.innerHTML = head + `<div class="match"><div class="mcol">${L.map(k => `<button class="mbtn" data-s="0" data-k="${k}" lang="en">${esc(q.pairs[k][0])}</button>`).join("")}</div>` +
+      `<div class="mcol">${R.map(k => `<button class="mbtn" data-s="1" data-k="${k}">${esc(q.pairs[k][1])}</button>`).join("")}</div></div>` +
+      `<div class="match-info" id="mInfo">Touche un mot anglais, puis sa traduction.</div>`;
+    area.querySelectorAll(".mbtn").forEach(b => b.onclick = () => matchClick(b));
+    btn.classList.add("hidden");
+  }
+}
+
+function matchClick(b) {
+  if (answered || b.classList.contains("matched")) return;
+  const q = questions[qi];
+  if (!matchSel || matchSel.dataset.s === b.dataset.s) {
+    document.querySelectorAll(".mbtn.sel").forEach(x => x.classList.remove("sel"));
+    matchSel = b; b.classList.add("sel"); return;
+  }
+  const a = matchSel; matchSel = null; a.classList.remove("sel");
+  if (a.dataset.k === b.dataset.k) {
+    a.classList.add("matched"); b.classList.add("matched"); a.disabled = b.disabled = true; matchDone++;
+  } else {
+    matchErr++; [a, b].forEach(x => { x.classList.add("miss"); setTimeout(() => x.classList.remove("miss"), 600); });
+  }
+  document.getElementById("mInfo").textContent = `${matchDone} / ${q.pairs.length} paires trouvées` + (matchErr ? ` · ${matchErr} erreur${matchErr > 1 ? "s" : ""}` : "");
+  if (matchDone === q.pairs.length) {
+    const ok = matchErr <= 1;
+    finish(ok, matchErr + " erreur" + (matchErr > 1 ? "s" : ""), q.correct, ok ? "" : "Plus d'une erreur : refais la mission pour mémoriser les paires.");
+  }
+}
+
+function addTile(b) { if (answered) return; b.classList.add("used"); orderChosen.push(b); drawZone(); }
+function drawZone() {
+  const zone = document.getElementById("zone"); zone.innerHTML = "";
+  zone.classList.toggle("empty", orderChosen.length === 0);
+  orderChosen.forEach((src, k) => {
+    const t = document.createElement("button"); t.className = "tile"; t.textContent = src.textContent;
+    t.onclick = () => { if (answered) return; src.classList.remove("used"); orderChosen.splice(k, 1); drawZone(); };
+    zone.appendChild(t);
+  });
+}
+function resetOrder() { if (answered) return; orderChosen.forEach(s => s.classList.remove("used")); orderChosen = []; drawZone(); }
+
+function mainAction() {
+  if (answered) { nextQuestion(); return; }
+  const q = questions[qi];
+  if (q.kind === "gap") {
+    const inputs = [...document.querySelectorAll(".gapin")];
+    const empty = inputs.find(i => !i.value.trim());
+    if (empty) { empty.focus(); return; }
+    const blanks = q.parts.filter(p => typeof p !== "string");
+    const vals = inputs.map(i => i.value);
+    let allOk = true;
+    inputs.forEach((inp, k) => {
+      const ok = blanks[k].answers.some(a => norm(a) === norm(inp.value));
+      inp.classList.add(ok ? "ok" : "ko"); inp.disabled = true; if (!ok) allOk = false;
+    });
+    finish(allOk, vals.join(" … "), q.correct, allOk || !q.diagnose ? "" : q.diagnose(vals));
+  } else if (q.kind === "order") {
+    if (!orderChosen.length) return;
+    const val = orderChosen.map(t => t.textContent).join(" ");
+    const ok = [q.answer].concat(q.alts || []).some(a => norm(val) === norm(a));
+    document.getElementById("zone").classList.add(ok ? "ok" : "ko");
+    document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
+    finish(ok, val, q.answer, "");
+  }
+}
+
+function submitMcq(i) {
+  if (answered) return;
+  const q = questions[qi], ok = i === q.correct;
+  document.querySelectorAll(".btn-choice").forEach(b => {
+    const bi = +b.dataset.i; b.disabled = true;
+    b.classList.add(bi === q.correct ? "correct" : bi === i ? "wrong" : "dim");
+  });
+  const strip = s => String(s).replace(/<[^>]+>/g, "");
+  finish(ok, strip(q.options[i]), q.correctText || strip(q.options[q.correct]), "");
+}
+
+function finish(ok, given, correct, why) {
+  answered = true; if (ok) score++;
+  const q = questions[qi];
+  recap.push({ ok, label: q.label, given, correct, q });
+  if (window.EA && EA.onAnswer) { try { EA.onAnswer(q, ok); } catch (e) {} }
+  document.getElementById("qFeedback").innerHTML = ok
+    ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip || ""}</span></div>`
+    : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip || ""}</span></div>`;
+  document.getElementById("qCount").textContent = `${qi + 1} / ${questions.length} · Score ${score}`;
+  document.getElementById("btnReset").classList.add("hidden");
+  const btn = document.getElementById("btnMain");
+  btn.textContent = qi + 1 < questions.length ? "Suivant →" : "Voir mon score";
+  btn.classList.remove("hidden"); btn.focus();
+}
+
+function nextQuestion() { qi++; if (qi < questions.length) renderQuestion(); else showScore(); }
+
+function showScore() {
+  const t = questions.length, pct = score / t, prev = best[current.id];
+  if (!prev || pct > prev.s / prev.t) { best[current.id] = { s: score, t }; saveBest(); }
+  document.getElementById("sTitle").textContent = `Mission ${MISSIONS.indexOf(current) + 1} · ${current.title}`;
+  document.getElementById("sScore").innerHTML = `${score}<span>/${t}</span>`;
+  const stars = pct === 1 ? 3 : pct >= .7 ? 2 : pct >= .4 ? 1 : 0;
+  document.getElementById("sStars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
+  document.getElementById("sMsg").textContent =
+    pct === 1 ? "Perfect! Excellent travail !" : pct >= .7 ? "Very good! Encore un petit effort pour le sans-faute." :
+    pct >= .4 ? "Not bad! Relis la leçon et recommence." : "Keep going! Relis le rappel de la leçon puis réessaie.";
+  document.getElementById("sRecap").innerHTML = recap.map(r =>
+    `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
+  showOnly("score");
+  if (window.EA) {
+    try {
+      const wrongs = recap.filter(r => !r.ok).map(r => {
+        const q = Object.assign({}, r.q, { correctText: r.correct });
+        const ids = [...String(q.head || "").matchAll(/data-doc="([\w-]+)"/g)].map(m => m[1]);
+        if (ids.length && typeof DOCS_ !== "undefined") { q.__docs = {}; ids.forEach(i => q.__docs[i] = DOCS_[i]); }
+        return q;
+      });
+      EA.afterScore({ id: current.id, title: current.title, score, total: t, wrongs });
+    } catch (e) {}
+  }
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter" || document.getElementById("quiz").classList.contains("hidden")) return;
+  const q = questions[qi];
+  if (!q) return;
+  if (answered || q.kind !== "mcq") {
+    if (!answered && q.kind === "gap") {
+      const inputs = [...document.querySelectorAll(".gapin")];
+      const idx = inputs.indexOf(document.activeElement);
+      if (idx > -1 && idx < inputs.length - 1 && !inputs[idx + 1].value.trim()) { e.preventDefault(); inputs[idx + 1].focus(); return; }
+    }
+    e.preventDefault(); mainAction();
+  }
+});
+
+renderMenu();
+
+</script>
+</body>
+</html>
