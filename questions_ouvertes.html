@@ -238,6 +238,9 @@
   .preview .s { border-bottom: 3px solid var(--c); padding: 0 2px; background: color-mix(in srgb, var(--c) 14%, transparent); border-radius: 3px; }
   .preview .s.blank { color: var(--muted); }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<script src="assets/ea.js"></script>
 </head>
 <body>
 
@@ -769,6 +772,8 @@ function showScore() {
     `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.prompt)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`
   ).join("");
   showOnly("score");
+  if (window.EA) { try { EA.afterScore({ id: current.id, title: current.title, score, total: t,
+    wrongs: recap.filter(r => !r.ok).map(r => ({ label: r.prompt, correctText: r.correct })) }); } catch (e) {} }
 }
 
 document.addEventListener("keydown", e => {

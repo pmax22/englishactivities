@@ -295,7 +295,31 @@
   .lesson-body td, .lesson-body th { border: 1px solid var(--border); padding: 5px 10px; text-align: left; }
   .lesson-body th { color: var(--accent); font-weight: 500; }
   @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
+  .choices.grid4 { grid-template-columns: repeat(4, 1fr); }
+  .choices.grid4 .btn-choice, .choices.grid3 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 16px 8px; }
+  .choices.grid4 .btn-choice small { display:block; font-family:'DM Sans',sans-serif; font-weight:400; font-size:11px; color:var(--muted); }
+  .missions-wrap .missions { margin-bottom: 6px; }
+  .fr-line u { text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .lesson-body h4 { font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin: 14px 0 6px; }
+  @media (max-width: 560px) { .choices.grid4 { grid-template-columns: repeat(2, 1fr); } }
+  .say { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+    background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .say:hover { background: rgba(var(--accent-rgb),.2); }
+  .say-row { text-align: center; margin: 0 0 14px; }
+  .listen-box { text-align: center; margin: 10px 0 24px; }
+  .listen-box .say { font-size: 18px; padding: 14px 28px; }
+  .doc { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
+  .doc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--accent); margin-bottom: 8px; }
+  .doc-text { max-height: 260px; overflow-y: auto; font-size: 15px; line-height: 1.65; padding-right: 6px; }
+  .doc-text p, .transcript p { margin-bottom: 6px; }
+  .transcript { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .transcript summary { cursor: pointer; font-size: 13px; }
+  .transcript[open] { color: var(--text); }
+  .doc .say { margin-top: 2px; }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<script src="assets/ea.js"></script>
 </head>
 <body>
 
@@ -819,6 +843,9 @@ function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0;
 function norm(s) {
   return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
     .replace(/[’‘`´]/g, "'")
+    .replace(/\bi'm\b/g, "i am").replace(/'re\b/g, " are").replace(/\b(he|she|it|that|what|where|who)'s\b/g, "$1 is")
+    .replace(/\bdo not\b/g, "don't").replace(/\bdoes not\b/g, "doesn't").replace(/\bis not\b/g, "isn't").replace(/\bare not\b/g, "aren't")
+    .replace(/\bhas not\b/g, "hasn't").replace(/\bhave not\b/g, "haven't")
     .replace(/\bdid not\b/g, "didn't").replace(/\bdidnt\b/g, "didn't")
     .replace(/\bwas not\b/g, "wasn't").replace(/\bwasnt\b/g, "wasn't")
     .replace(/\bwere not\b/g, "weren't").replace(/\bwerent\b/g, "weren't")
@@ -836,14 +863,20 @@ function saveBest() { try { localStorage.setItem(STORE_KEY, JSON.stringify(best)
 /* ═══════════ MENU ═══════════ */
 function renderMenu() {
   const box = document.getElementById("missions"); box.innerHTML = "";
+  let lastGroup = null, grid = box;
   MISSIONS.forEach((m, i) => {
+    if (m.group && m.group !== lastGroup) {
+      lastGroup = m.group; box.classList.remove("missions");
+      const h = document.createElement("div"); h.className = "seance-title"; h.textContent = m.group; box.appendChild(h);
+      grid = document.createElement("div"); grid.className = "missions"; box.appendChild(grid);
+    }
     const b = document.createElement("button"); b.className = "mission";
     const bs = best[m.id];
     b.innerHTML = `${bs ? `<span class="m-best ${bs.s === bs.t ? "done" : ""}">★ ${bs.s}/${bs.t}</span>` : ""}
       <span class="m-icon">${m.icon}</span><span class="m-num">Mission ${i + 1}</span>
       <span class="m-title">${m.title}</span><span class="m-desc">${m.desc}</span>`;
     b.onclick = () => startMission(m.id);
-    box.appendChild(b);
+    grid.appendChild(b);
   });
 }
 function showOnly(id) {
@@ -928,7 +961,7 @@ function mainAction() {
   } else if (q.kind === "order") {
     if (!orderChosen.length) return;
     const val = orderChosen.map(t => t.textContent).join(" ");
-    const ok = norm(val) === norm(q.answer);
+    const ok = [q.answer].concat(q.alts || []).some(a => norm(val) === norm(a));
     document.getElementById("zone").classList.add(ok ? "ok" : "ko");
     document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
     finish(ok, val, q.answer, "");
@@ -949,7 +982,8 @@ function submitMcq(i) {
 function finish(ok, given, correct, why) {
   answered = true; if (ok) score++;
   const q = questions[qi];
-  recap.push({ ok, label: q.label, given, correct });
+  recap.push({ ok, label: q.label, given, correct, q });
+  if (window.EA && EA.onAnswer) { try { EA.onAnswer(q, ok); } catch (e) {} }
   document.getElementById("qFeedback").innerHTML = ok
     ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip || ""}</span></div>`
     : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip || ""}</span></div>`;
@@ -975,6 +1009,17 @@ function showScore() {
   document.getElementById("sRecap").innerHTML = recap.map(r =>
     `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
   showOnly("score");
+  if (window.EA) {
+    try {
+      const wrongs = recap.filter(r => !r.ok).map(r => {
+        const q = Object.assign({}, r.q, { correctText: r.correct });
+        const ids = [...String(q.head || "").matchAll(/data-doc="([\w-]+)"/g)].map(m => m[1]);
+        if (ids.length && typeof DOCS_ !== "undefined") { q.__docs = {}; ids.forEach(i => q.__docs[i] = DOCS_[i]); }
+        return q;
+      });
+      EA.afterScore({ id: current.id, title: current.title, score, total: t, wrongs });
+    } catch (e) {}
+  }
 }
 
 document.addEventListener("keydown", e => {

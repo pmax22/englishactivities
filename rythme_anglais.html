@@ -317,6 +317,9 @@
   .transcript[open] { color: var(--text); }
   .doc .say { margin-top: 2px; }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<script src="assets/ea.js"></script>
 </head>
 <body>
 
@@ -595,7 +598,8 @@ function submitMcq(i) {
 function finish(ok, given, correct, why) {
   answered = true; if (ok) score++;
   const q = questions[qi];
-  recap.push({ ok, label: q.label, given, correct });
+  recap.push({ ok, label: q.label, given, correct, q });
+  if (window.EA && EA.onAnswer) { try { EA.onAnswer(q, ok); } catch (e) {} }
   document.getElementById("qFeedback").innerHTML = ok
     ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip || ""}</span></div>`
     : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip || ""}</span></div>`;
@@ -621,6 +625,17 @@ function showScore() {
   document.getElementById("sRecap").innerHTML = recap.map(r =>
     `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
   showOnly("score");
+  if (window.EA) {
+    try {
+      const wrongs = recap.filter(r => !r.ok).map(r => {
+        const q = Object.assign({}, r.q, { correctText: r.correct });
+        const ids = [...String(q.head || "").matchAll(/data-doc="([\w-]+)"/g)].map(m => m[1]);
+        if (ids.length && typeof DOCS_ !== "undefined") { q.__docs = {}; ids.forEach(i => q.__docs[i] = DOCS_[i]); }
+        return q;
+      });
+      EA.afterScore({ id: current.id, title: current.title, score, total: t, wrongs });
+    } catch (e) {}
+  }
 }
 
 document.addEventListener("keydown", e => {

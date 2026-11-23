@@ -254,6 +254,9 @@
   .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
   @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<script src="assets/ea.js"></script>
 </head>
 <body>
 
@@ -628,7 +631,7 @@ function submitMcq(i) {
 function finish(ok, given, correct, why) {
   answered = true; if (ok) score++;
   const q = questions[qi];
-  recap.push({ ok, label: q.label, given, correct });
+  recap.push({ ok, label: q.label, given, correct, q });
   document.getElementById("qFeedback").innerHTML = ok
     ? `<div class="feedback ok">✅ <b>Bravo !</b> ${esc(correct)}<span class="tip">${q.tip}</span></div>`
     : `<div class="feedback ko">❌ La bonne réponse : <b>${esc(correct)}</b><span class="tip">${why || q.tip}</span></div>`;
@@ -654,6 +657,8 @@ function showScore() {
   document.getElementById("sRecap").innerHTML = recap.map(r =>
     `<div class="recap-item"><span class="r-ic">${r.ok ? "✅" : "❌"}</span><span class="r-txt">${esc(r.label)} → <b>${esc(r.correct)}</b>${r.ok ? "" : ` <i>(ta réponse : ${esc(r.given)})</i>`}</span></div>`).join("");
   showOnly("score");
+  if (window.EA) { try { EA.afterScore({ id: current.id, title: current.title, score, total: t,
+    wrongs: recap.filter(r => !r.ok).map(r => Object.assign({}, r.q, { correctText: r.correct })) }); } catch (e) {} }
 }
 
 document.addEventListener("keydown", e => {
