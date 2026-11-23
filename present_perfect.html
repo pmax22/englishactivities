@@ -316,6 +316,22 @@
   .transcript summary { cursor: pointer; font-size: 13px; }
   .transcript[open] { color: var(--text); }
   .doc .say { margin-top: 2px; }
+
+/* ── Association de mots ── */
+.match { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbtn { font-family: inherit; font-size: 15px; padding: 12px 10px; border-radius: 12px; cursor: pointer; min-height: 48px;
+  background: var(--surface2); color: var(--text); border: 1.5px solid var(--border); transition: all .15s; line-height: 1.25; }
+.mbtn:hover { border-color: var(--accent); }
+.mbtn.sel { border-color: var(--accent); background: rgba(var(--accent-rgb), .15); }
+.mbtn.matched { border-color: rgba(74,222,128,.6); background: rgba(74,222,128,.12); color: #4ade80; cursor: default; }
+.mbtn.miss { border-color: #f87171; background: rgba(248,113,113,.15); animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.match-info { text-align: center; font-size: 13px; color: var(--muted); margin-top: 12px; }
+details.doc-fold { cursor: default; } details.doc-fold > summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details.doc-fold .doc-text { max-height: 50vh; overflow-y: auto; margin-top: 10px; }
+.doc-h { font-size: 14px; margin: 12px 0 4px; color: var(--accent); }
+@media (max-width: 560px) { .mbtn { font-size: 14px; padding: 10px 6px; } .match { gap: 8px; } }
 </style>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f1117">
@@ -414,7 +430,9 @@ function speakLines(lines) {
 document.addEventListener("click", e => { const b = e.target.closest(".say-doc"); if (b) speakLines(DOCS_[b.dataset.doc].lines); });
 function docBox(id) {
   const d = DOCS_[id]; if (!d) return "";
-  const body = d.lines.map(l => `<p>${esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  const body = d.lines.map(l => l.startsWith("## ") ? `<h4 class="doc-h">${esc(l.slice(3))}</h4>` :
+    `<p>${d.fold ? esc(l).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>") : esc(l).replace(/^([A-Z][\w ]{0,20}):/, "<b>$1 :</b>")}</p>`).join("");
+  if (d.fold) return `<details class="doc doc-fold"><summary>📖 ${esc(d.title)}</summary><div class="doc-text">${body}</div></details>`;
   if (d.audio) return `<div class="doc"><div class="doc-title">🎧 ${esc(d.title)}</div>
     <button class="say say-doc" type="button" data-doc="${id}">🔊 Écouter le document</button>
     <details class="transcript"><summary>Afficher le texte (seulement si tu bloques)</summary>${body}</details></div>`;
@@ -450,7 +468,11 @@ function orderQ(it, instr) {
   return { kind: "order", instr: it.instr || instr, label: it.fr || answer, head: headOf(it),
     tiles, distractors: it.trap ? [].concat(it.trap) : [], answer, alts: it.alts, tip: it.tip || "" };
 }
-const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ };
+function matchQ(it, instr) {
+  return { kind: "match", instr: it.instr || instr, label: it.label || it.pairs.map(p => p[0]).join(", "), head: headOf(it),
+    pairs: it.pairs, correct: it.pairs.map(p => p[0] + " = " + p[1]).join(" · "), tip: it.tip || "" };
+}
+const BUILD = { gap: gapQ, choice: choiceQ, order: orderQ, match: matchQ };
 const MISSIONS = MDEF.map(m => Object.assign({}, m, {
   build: () => (m.ordered ? (x => x) : shuffle)(m.from.flatMap(k => DATA[k].items.map(it => [it, DATA[k]])))
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
@@ -505,6 +527,7 @@ function showMenu() { renderMenu(); showOnly("menu"); }
 
 /* ═══════════ MOTEUR ═══════════ */
 let current = null, questions = [], qi = 0, score = 0, answered = false, recap = [], orderChosen = [];
+let matchSel = null, matchErr = 0, matchDone = 0;
 
 function startMission(id) {
   current = MISSIONS.find(m => m.id === id);
@@ -546,6 +569,34 @@ function renderQuestion() {
       all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
     area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
     document.getElementById("btnReset").classList.remove("hidden");
+  } else if (q.kind === "match") {
+    matchSel = null; matchErr = 0; matchDone = 0;
+    const idx = q.pairs.map((_, k) => k), L = shuffle(idx), R = shuffle(idx);
+    area.innerHTML = head + `<div class="match"><div class="mcol">${L.map(k => `<button class="mbtn" data-s="0" data-k="${k}" lang="en">${esc(q.pairs[k][0])}</button>`).join("")}</div>` +
+      `<div class="mcol">${R.map(k => `<button class="mbtn" data-s="1" data-k="${k}">${esc(q.pairs[k][1])}</button>`).join("")}</div></div>` +
+      `<div class="match-info" id="mInfo">Touche un mot anglais, puis sa traduction.</div>`;
+    area.querySelectorAll(".mbtn").forEach(b => b.onclick = () => matchClick(b));
+    btn.classList.add("hidden");
+  }
+}
+
+function matchClick(b) {
+  if (answered || b.classList.contains("matched")) return;
+  const q = questions[qi];
+  if (!matchSel || matchSel.dataset.s === b.dataset.s) {
+    document.querySelectorAll(".mbtn.sel").forEach(x => x.classList.remove("sel"));
+    matchSel = b; b.classList.add("sel"); return;
+  }
+  const a = matchSel; matchSel = null; a.classList.remove("sel");
+  if (a.dataset.k === b.dataset.k) {
+    a.classList.add("matched"); b.classList.add("matched"); a.disabled = b.disabled = true; matchDone++;
+  } else {
+    matchErr++; [a, b].forEach(x => { x.classList.add("miss"); setTimeout(() => x.classList.remove("miss"), 600); });
+  }
+  document.getElementById("mInfo").textContent = `${matchDone} / ${q.pairs.length} paires trouvées` + (matchErr ? ` · ${matchErr} erreur${matchErr > 1 ? "s" : ""}` : "");
+  if (matchDone === q.pairs.length) {
+    const ok = matchErr <= 1;
+    finish(ok, matchErr + " erreur" + (matchErr > 1 ? "s" : ""), q.correct, ok ? "" : "Plus d'une erreur : refais la mission pour mémoriser les paires.");
   }
 }
 
