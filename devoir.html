@@ -533,25 +533,23 @@ function drawDevoir() {
   let done = 0, pts = 0, tot = 0;
   const rows = files.map((f, i) => {
     const c = cat.find(x => x.f === f) || { t: f.replace(/\.html$/, "").replace(/_/g, " "), s: "" };
-    const pg = d.pages[f], ms = pg ? Object.values(pg.missions) : [];
-    const b = ms.reduce((s, x) => s + x.best, 0), t = ms.reduce((s, x) => s + x.total, 0);
-    if (ms.length) { done++; pts += b; tot += t; }
+    const pg = d.pages[f], ms = pg ? Object.values(pg.missions) : [], st = EA.pageStats(f);
+    if (ms.length) done++; pts += st.pct; tot += 100;
     return `<a class="dash-row dv-row ${ms.length ? "dv-done" : ""}" href="${esc(f)}"><span class="wr-n">${ms.length ? "✓" : i + 1}</span>
-      <span class="dr-t">${esc(c.t)}</span><span class="dr-m">${ms.length ? `${ms.length} mission${ms.length > 1 ? "s" : ""} faite${ms.length > 1 ? "s" : ""}` : "à faire"}</span>
-      <span class="dr-s ${t && b === t ? "done" : ""}">${t ? Math.round(b / t * 100) + "%" : "→"}</span></a>`;
+      <span class="dr-t">${esc(c.t)}</span><span class="dr-m">${ms.length ? `${st.done}/${st.n} mission${st.n > 1 ? "s" : ""}` : "à faire"}</span>
+      <span class="dr-s ${st.pct >= 100 ? "done" : ""}">${ms.length ? st.pct + "%" : "→"}</span></a>`;
   });
   box.innerHTML = `${msg ? `<div class="doc"><div class="doc-title">✉️ Message du professeur</div><div class="doc-text"><p>${esc(msg)}</p></div></div>` : ""}
     <div class="dash-name"><input class="answer" id="dvName" placeholder="Ton prénom et ta classe" value="${esc(EA.getName())}"></div>
-    <div class="dash-stats"><div><b>${done}/${files.length}</b><span>activités faites</span></div><div><b>${tot ? Math.round(pts / tot * 100) : 0}%</b><span>réussite</span></div></div>
-    <p class="dash-help">Fais au moins une mission de chaque activité. Reviens sur cette page pour voir ton avancement (garde le lien dans tes favoris).</p>
+    <div class="dash-stats"><div><b>${done}/${files.length}</b><span>activités faites</span></div><div><b>${tot ? Math.round(pts / tot * 100) : 0}%</b><span>avancement</span></div></div>
+    <p class="dash-help">Fais toutes les missions de chaque activité : le % montre ton avancement. Reviens sur cette page pour voir ton avancement (garde le lien dans tes favoris).</p>
     <div class="dash-list">${rows.join("")}</div>
     <div class="dash-actions"><button class="btn btn-primary" id="dvCopy" type="button">📋 Copier mon bilan pour le professeur</button></div>
     <div class="dash-bilan" id="dvBilan"></div>`;
   box.querySelector("#dvName").onchange = e => { EA.setName(e.target.value); drawDevoir(); };
   box.querySelector("#dvCopy").onclick = e => {
-    const lines = files.map(f => { const pg = d.pages[f], c = cat.find(x => x.f === f); const ms = pg ? Object.values(pg.missions) : [];
-      const b = ms.reduce((s, x) => s + x.best, 0), t = ms.reduce((s, x) => s + x.total, 0);
-      return `${c ? c.t : f} : ${ms.length ? b + "/" + t : "non fait"}`; });
+    const lines = files.map(f => { const c = cat.find(x => x.f === f), st = EA.pageStats(f);
+      return `${c ? c.t : f} : ${st.done ? st.done + "/" + st.n + " missions, " + st.pct + "%" : "non fait"}`; });
     const txt = EA.sign(`${EA.getName() || "(prénom ?)"} — ${title} — ${done}/${files.length} activités — ${tot ? Math.round(pts / tot * 100) : 0}% — ${EA.fmtDate(Date.now())}`) + "\n" + lines.join("\n");
     box.querySelector("#dvBilan").textContent = txt; EA.copy(txt, e.currentTarget);
   };

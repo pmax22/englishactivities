@@ -466,6 +466,8 @@
 
 
 
+
+
   /* ── Sections, recherche, filtres ── */
   .card.t .card-bar { background: linear-gradient(90deg, var(--ca), var(--cb)); }
   .card.t .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(var(--crgb),0.08) 0%, transparent 70%); }
@@ -567,7 +569,10 @@
   .qk-1:hover { border-color: #facc15; } .qk-2:hover { border-color: #4ade80; } .qk-3:hover { border-color: #f472b6; }
   .reco { max-width: 1100px; margin: -6px auto 16px; padding: 0 32px; font-size: 14px; color: var(--muted); }
   .reco button { font-family: inherit; font-size: 13px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 999px; padding: 4px 12px; margin-left: 6px; cursor: pointer; }
-  .card.done .card-visual::after { content: "✓ fait"; position: absolute; top: 10px; right: 12px; font-size: 10.5px; font-weight: 600; color: #4ade80; border: 1px solid rgba(74,222,128,.4); background: rgba(74,222,128,.08); border-radius: 999px; padding: 2px 8px; }
+  .card.done .card-visual::after { content: attr(data-pct); position: absolute; top: 10px; right: 12px; font-size: 10.5px; font-weight: 700; color: #fbbf24; border: 1px solid rgba(251,191,36,.45); background: rgba(15,17,23,.7); border-radius: 999px; padding: 2px 8px; }
+  .card.full .card-visual::after { content: "✓ " attr(data-pct); color: #4ade80; border-color: rgba(74,222,128,.45); }
+  .pbar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255,255,255,.08); }
+  .pbar i { display: block; height: 100%; background: #fbbf24; border-radius: 0 2px 2px 0; } .card.full .pbar i { background: #4ade80; }
   .page-footer a { color: inherit; }
   @media (max-width: 600px) {
     .quick { padding: 0 16px; gap: 6px; margin-bottom: 12px; }
@@ -604,6 +609,14 @@
     h1 { letter-spacing: -1px; }
   }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<script src="assets/ea.js"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<script src="assets/ea.js"></script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0f1117">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
@@ -3800,6 +3813,8 @@
 
 
 
+
+
 <script>
 (function () {
   const KEY = "ea_index_v2";
@@ -3807,13 +3822,23 @@
   const cards = [...document.querySelectorAll(".card.t")], secs = [...document.querySelectorAll(".sec")];
   const tabsBox = document.getElementById("tabs"), chipsBox = document.getElementById("chips"), search = document.getElementById("search"), empty = document.getElementById("empty");
   let st = { sec: "Tout", tag: "", q: "", lvl: "" };
+  const MCOUNT = {"be_have_play.html": 6, "present_simple.html": 5, "present_continu.html": 5, "adverbes_frequence.html": 6, "preterit.html": 6, "verbe_regulier_irregulier.html": 5, "preterit_continu.html": 5, "used_to.html": 6, "present_perfect.html": 5, "present_perfect_continu.html": 3, "past_perfect.html": 5, "futur.html": 6, "modaux.html": 4, "probabilite.html": 3, "imperatif.html": 4, "like_ing.html": 5, "verbes_to_ing.html": 3, "pronoms_personnels.html": 5, "pronoms_reflechis.html": 3, "possessifs.html": 5, "demonstratifs.html": 4, "articles.html": 5, "pluriels.html": 4, "there_is.html": 5, "denombrables.html": 4, "someone_anything.html": 3, "adjectifs.html": 6, "adverbes_maniere.html": 3, "too_enough.html": 3, "comparatif.html": 7, "superlatif.html": 5, "prepositions.html": 3, "preterit_cap_sapver.html": 6, "questions_fermees.html": 5, "questions_ouvertes.html": 8, "questions_sujet.html": 3, "question_tags.html": 1, "exclamatives.html": 3, "connecteurs.html": 3, "relatifs.html": 4, "subordonnees_temps.html": 3, "conditionnel.html": 7, "passif.html": 5, "discours_indirect.html": 5, "se_presenter.html": 4, "famille.html": 5, "meteo.html": 5, "nourriture.html": 5, "vetements.html": 5, "maison.html": 5, "metiers.html": 5, "heure_dates.html": 5, "phrasal_verbs.html": 3, "cap_vente.html": 5, "cap_aide.html": 5, "cap_ecrit_entretien.html": 4, "phono_ed.html": 3, "phono_s.html": 1, "accent_mot.html": 1, "lettres_muettes.html": 1, "so_neither.html": 1, "questions_indirectes.html": 3, "causatif.html": 1, "both_either.html": 1, "ago_for_since.html": 3, "be_used_to.html": 1, "wish.html": 1, "futur_ing.html": 3, "faux_amis.html": 3, "ville_directions.html": 4, "ecole.html": 4, "loisirs_sports.html": 5, "transports.html": 5, "emotions.html": 5, "animaux.html": 4, "argent_shopping.html": 4, "phono_th.html": 3, "phono_voyelles.html": 3, "phono_h.html": 3, "intonation.html": 1, "formes_faibles.html": 3, "ce_famille.html": 3, "ce_vendeuse.html": 3, "ce_londres.html": 3, "co_magasin.html": 2, "co_message.html": 2, "co_annonces.html": 2, "ce_ecole.html": 3, "ce_email.html": 3, "ce_reseaux.html": 3, "co_cafe.html": 3, "co_directions.html": 3, "co_entretien.html": 3, "ecriture_guidee.html": 8, "expression_orale.html": 7, "inversion.html": 3, "phrases_clivees.html": 1, "participiales.html": 3, "conditionnels_mixtes.html": 1, "subjonctif.html": 1, "remember_to_ing.html": 1, "connected_speech.html": 3, "but.html": 1, "conjonctions_avancees.html": 1, "substitution.html": 1, "prepositions_dependantes.html": 3, "prepositions_mouvement.html": 1, "modaux_complements.html": 1, "quantifieurs.html": 1, "one_ones.html": 1, "adjectifs_composes.html": 1, "comparatif_avance.html": 1, "expressions_avancees.html": 1, "ordre_mots.html": 3, "double_complement.html": 1, "negation.html": 3, "homophones.html": 1, "phono_cup_bird.html": 3, "diphtongues.html": 1, "graphies.html": 3, "accent_phrase.html": 3, "api_intro.html": 3, "phonemes_morphemes.html": 4, "accent_notation.html": 1, "suffixes_accent.html": 3, "prefixes_accent.html": 3, "composes_accent.html": 1, "transcription_api.html": 3, "reduction_vocalique.html": 1, "rythme_anglais.html": 3, "metre_poetique.html": 3, "rimes_figures.html": 3, "couleurs_nombres.html": 4, "calendrier.html": 5, "pays_nationalites.html": 4, "corps_sante.html": 5, "technologie.html": 4, "environnement.html": 4, "fetes_traditions.html": 5, "formation_mots.html": 4, "collocations.html": 3, "idiomes.html": 1};
   const LEVELS = ["Novice", "Intermédiaire", "Avancé", "Expert"], lvBox = document.getElementById("levels");
   try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   const P = new URLSearchParams(location.search);
   if (P.has("niveau") && LEVELS[+P.get("niveau")]) { st = { sec: "Tout", tag: "", q: "", lvl: LEVELS[+P.get("niveau")] }; history.replaceState(null, "", location.pathname); }
   try {
     const pr = JSON.parse(localStorage.getItem("ea_progress_v1") || "null");
-    if (pr && pr.pages) cards.forEach(c => { if (pr.pages[c.getAttribute("href")]) c.classList.add("done"); });
+    if (pr && pr.pages) cards.forEach(c => {
+      const f = c.getAttribute("href"), pg = pr.pages[f]; if (!pg) return;
+      const n = MCOUNT[f] || Object.keys(pg.missions).length;
+      const sum = Object.values(pg.missions).reduce((s, m) => s + (m.total ? Math.min(1, m.best / m.total) : 0), 0);
+      const pct = Math.min(100, Math.round(sum / n * 100)), nd = Object.keys(pg.missions).length;
+      c.classList.add("done"); if (pct >= 100) c.classList.add("full");
+      c.querySelector(".card-visual").dataset.pct = pct + " %"; c.title = `${Math.min(nd, n)} mission${nd > 1 ? "s" : ""} sur ${n} · ${pct} % de l'activité réussie`;
+      const bar = document.createElement("span"); bar.className = "pbar"; bar.innerHTML = `<i style="width:${pct}%"></i>`;
+      c.querySelector(".card-visual").appendChild(bar);
+    });
     const dv = localStorage.getItem("ea_devoir_last"); if (dv) document.getElementById("qkDevoir").href = "devoir.html" + dv;
     const lv = JSON.parse(localStorage.getItem("ea_level") || "null"), reco = document.getElementById("reco");
     if (lv && LEVELS[lv.lvl]) {

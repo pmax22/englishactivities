@@ -58,6 +58,14 @@
       d.errors = d.errors.filter(e => !(e.page === page && e.label === label));
       save(d);
     },
+    /* Avancement d'une activité : moyenne de la meilleure réussite de chaque mission, missions non faites = 0 */
+    pageStats(file) {
+      const pg = load().pages[file], ms = pg ? Object.values(pg.missions) : [];
+      const c = (window.EA_CATALOG || []).find(x => x.f === file);
+      const n = Math.max(c && c.m || 0, ms.length) || 1;
+      const sum = ms.reduce((s, m) => s + (m.total ? Math.min(1, m.best / m.total) : 0), 0);
+      return { done: ms.length, n, pct: Math.round(sum / n * 100) };
+    },
     reset() { save({ pages: {}, errors: [] }); },
 
     /* Code de contrôle : le professeur peut vérifier qu'une ligne de résultat n'a pas été modifiée (prof.html) */

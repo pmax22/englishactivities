@@ -573,10 +573,10 @@ function drawDash() {
     : `<p class="dash-help">Aucune erreur à revoir. Bravo !</p>`}`;
   box2.innerHTML = `
   ${pages.length ? `<div class="seance-title">Mes activités</div><div class="dash-list">${pages.map(([f, p]) => {
-      const m = Object.values(p.missions), b = m.reduce((s, x) => s + x.best, 0), t = m.reduce((s, x) => s + x.total, 0);
+      const st = EA.pageStats(f);
       return `<a class="dash-row" href="${EA.esc(f)}"><span class="dr-t">${EA.esc(catalogTitle(f) || p.title)}</span>
-        <span class="dr-m">${m.length} mission${m.length > 1 ? "s" : ""} · ${EA.fmtDate(p.date).split(" ")[0]}</span>
-        <span class="dr-s ${b === t ? "done" : ""}">${t ? Math.round(b / t * 100) : 0}%</span></a>`;
+        <span class="dr-m">${st.done}/${st.n} mission${st.n > 1 ? "s" : ""} · ${EA.fmtDate(p.date).split(" ")[0]}</span>
+        <span class="dr-s ${st.pct >= 100 ? "done" : ""}">${st.pct}%</span></a>`;
     }).join("")}</div>` : `<p class="dash-empty">Tu n'as encore fait aucune activité. <a href="index.html">Choisis une activité</a> : tes scores apparaîtront ici.</p>`}
   <div class="dash-actions">
     <button class="btn btn-primary" id="dCopy" type="button">📋 Copier mon bilan pour le professeur</button>
@@ -586,8 +586,8 @@ function drawDash() {
   box.querySelector("#dName").onchange = e => { EA.setName(e.target.value); drawDash(); };
   box2.querySelector("#dCopy").onclick = e => {
     const lines = pages.map(([f, p]) => {
-      const m = Object.values(p.missions), b = m.reduce((s, x) => s + x.best, 0), t = m.reduce((s, x) => s + x.total, 0);
-      return `${catalogTitle(f) || p.title} : ${b}/${t}`;
+      const st = EA.pageStats(f);
+      return `${catalogTitle(f) || p.title} : ${st.done}/${st.n} missions, ${st.pct}%`;
     });
     const txt = EA.sign(`${EA.getName() || "(prénom ?)"} — Bilan — ${pages.length} activités, ${ms.length} missions, ${tot ? Math.round(pts / tot * 100) : 0}% — ${EA.fmtDate(Date.now())}`)
       + (lines.length ? "\n" + lines.join("\n") : "");
