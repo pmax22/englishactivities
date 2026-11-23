@@ -1,0 +1,571 @@
+[
+ {
+  "fr": "Il n'a pas divorcé.",
+  "hint": "",
+  "answers": [
+   "he did not divorce",
+   "he didnt divorce"
+  ],
+  "correct": "He did not divorce. / He didn't divorce.",
+  "explanation": "<strong>Négation au prétérit</strong> : did not / didn't + <strong>base verbale</strong>. On garde divorce, jamais divorced."
+ },
+ {
+  "fr": "Je n'ai pas voyagé.",
+  "hint": "",
+  "answers": [
+   "i did not travel",
+   "i didnt travel"
+  ],
+  "correct": "I did not travel. / I didn't travel.",
+  "explanation": "<strong>did not / didn't + base verbale</strong>. La règle ne change pas avec « I »."
+ },
+ {
+  "fr": "Il ne s'est pas marié.",
+  "hint": "",
+  "answers": [
+   "he did not marry",
+   "he didnt marry"
+  ],
+  "correct": "He did not marry. / He didn't marry.",
+  "explanation": "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't."
+ },
+ {
+  "fr": "Elle n'a pas enregistré.",
+  "hint": "",
+  "answers": [
+   "she did not record",
+   "she didnt record"
+  ],
+  "correct": "She did not record. / She didn't record.",
+  "explanation": "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't."
+ },
+ {
+  "fr": "Il ne s'est pas installé.",
+  "hint": "",
+  "answers": [
+   "he did not settle",
+   "he didnt settle"
+  ],
+  "correct": "He did not settle. / He didn't settle.",
+  "explanation": "<strong>didn't + settle</strong> (base verbale). Pas de -d en forme négative."
+ },
+ {
+  "fr": "Ils ne sont pas partis.",
+  "hint": "",
+  "answers": [
+   "they did not leave",
+   "they didnt leave"
+  ],
+  "correct": "They did not leave. / They didn't leave.",
+  "explanation": "<strong>leave</strong> est irrégulier (→ left à l'affirmatif), mais après didn't on revient à la base verbale : <strong>leave</strong>."
+ },
+ {
+  "fr": "Il n'est pas mort.",
+  "hint": "",
+  "answers": [
+   "he did not die",
+   "he didnt die"
+  ],
+  "correct": "He did not die. / He didn't die.",
+  "explanation": "<strong>didn't + die</strong>. die → died à l'affirmatif, mais base verbale après didn't."
+ },
+ {
+  "fr": "Nous n'avons pas voyagé.",
+  "hint": "",
+  "answers": [
+   "we did not travel",
+   "we didnt travel"
+  ],
+  "correct": "We did not travel. / We didn't travel.",
+  "explanation": "<strong>did not / didn't + travel</strong>. Avec « we », même règle qu'avec tout autre sujet."
+ },
+ {
+  "fr": "Tu n'as pas joué.",
+  "hint": "",
+  "answers": [
+   "you did not play",
+   "you didnt play"
+  ],
+  "correct": "You did not play. / You didn't play.",
+  "explanation": "<strong>didn't + play</strong>. Base verbale : jamais played après didn't."
+ },
+ {
+  "fr": "Elle n'est pas partie.",
+  "hint": "",
+  "answers": [
+   "she did not leave",
+   "she didnt leave"
+  ],
+  "correct": "She did not leave. / She didn't leave.",
+  "explanation": "<strong>didn't + leave</strong> (base verbale). leave est irrégulier mais base verbale après didn't."
+ },
+ {
+  "fr": "Ils n'ont pas joué.",
+  "hint": "",
+  "answers": [
+   "they did not play",
+   "they didnt play"
+  ],
+  "correct": "They did not play. / They didn't play.",
+  "explanation": "<strong>didn't + play</strong>. Sujet pluriel → même structure."
+ },
+ {
+  "fr": "Nous ne nous sommes pas installés.",
+  "hint": "",
+  "answers": [
+   "we did not settle",
+   "we didnt settle"
+  ],
+  "correct": "We did not settle. / We didn't settle.",
+  "explanation": "<strong>didn't + settle</strong>. Pas de -d après didn't."
+ },
+ {
+  "fr": "Elle n'a pas divorcé.",
+  "hint": "",
+  "answers": [
+   "she did not divorce",
+   "she didnt divorce"
+  ],
+  "correct": "She did not divorce. / She didn't divorce.",
+  "explanation": "<strong>didn't + divorce</strong> (base verbale). Jamais divorced après didn't."
+ },
+ {
+  "fr": "Il ne s'est pas marié une deuxième fois.",
+  "hint": "fois = time",
+  "answers": [
+   "he did not marry a second time",
+   "he didnt marry a second time"
+  ],
+  "correct": "He did not marry a second time. / He didn't marry a second time.",
+  "explanation": "<strong>didn't + marry</strong>. <em>Time</em> traduit « fois »."
+ },
+ {
+  "fr": "Elle n'a pas rejoint le groupe.",
+  "hint": "le groupe = the group",
+  "answers": [
+   "she did not join the group",
+   "she didnt join the group"
+  ],
+  "correct": "She did not join the group. / She didn't join the group.",
+  "explanation": "<strong>didn't + join</strong> (base verbale). Pas de -ed après didn't."
+ },
+ {
+  "fr": "Ils n'ont pas enregistré d'album.",
+  "hint": "un album = an album",
+  "answers": [
+   "they did not record an album",
+   "they didnt record an album"
+  ],
+  "correct": "They did not record an album. / They didn't record an album.",
+  "explanation": "<strong>didn't + record</strong> (base verbale). Pas de -ed après didn't."
+ },
+ {
+  "fr": "Tu n'as pas voyagé.",
+  "hint": "",
+  "answers": [
+   "you did not travel",
+   "you didnt travel"
+  ],
+  "correct": "You did not travel. / You didn't travel.",
+  "explanation": "<strong>didn't + travel</strong>. Règle de base : base verbale après didn't."
+ },
+ {
+  "fr": "Il n'a pas rejoint la bande.",
+  "hint": "la bande = the band",
+  "answers": [
+   "he did not join the band",
+   "he didnt join the band"
+  ],
+  "correct": "He did not join the band. / He didn't join the band.",
+  "explanation": "<strong>didn't + join</strong> (base verbale)."
+ },
+ {
+  "fr": "Nous ne nous sommes pas mariés.",
+  "hint": "",
+  "answers": [
+   "we did not marry",
+   "we didnt marry"
+  ],
+  "correct": "We did not marry. / We didn't marry.",
+  "explanation": "<strong>didn't + marry</strong> (base verbale). Pas de -ied après didn't."
+ },
+ {
+  "fr": "Elle n'est pas morte.",
+  "hint": "",
+  "answers": [
+   "she did not die",
+   "she didnt die"
+  ],
+  "correct": "She did not die. / She didn't die.",
+  "explanation": "<strong>didn't + die</strong>. Base verbale die, même si die → died à l'affirmatif."
+ },
+ {
+  "fr": "Sommes-nous partis ?",
+  "hint": "",
+  "answers": [
+   "did we leave",
+   "did we leave?",
+   "did we leave ?"
+  ],
+  "correct": "Did we leave?",
+  "explanation": "<strong>Interrogatif prétérit</strong> : Did + sujet + <strong>base verbale ?</strong> leave est irrégulier mais base verbale après Did."
+ },
+ {
+  "fr": "Se sont-ils installés ?",
+  "hint": "",
+  "answers": [
+   "did they settle",
+   "did they settle?",
+   "did they settle ?"
+  ],
+  "correct": "Did they settle?",
+  "explanation": "<strong>Did + they + settle ?</strong> Pas de -d après Did."
+ },
+ {
+  "fr": "As-tu joué ?",
+  "hint": "",
+  "answers": [
+   "did you play",
+   "did you play?",
+   "did you play ?"
+  ],
+  "correct": "Did you play?",
+  "explanation": "<strong>Did + you + play ?</strong> La terminaison -ed disparaît après Did."
+ },
+ {
+  "fr": "A-t-il enregistré ?",
+  "hint": "",
+  "answers": [
+   "did he record",
+   "did he record?",
+   "did he record ?"
+  ],
+  "correct": "Did he record?",
+  "explanation": "<strong>Did + he + record ?</strong> L'auxiliaire Did porte le passé, base verbale après."
+ },
+ {
+  "fr": "Ont-ils voyagé ?",
+  "hint": "",
+  "answers": [
+   "did they travel",
+   "did they travel?",
+   "did they travel ?"
+  ],
+  "correct": "Did they travel?",
+  "explanation": "<strong>Did + they + travel ?</strong> Même structure quel que soit le sujet."
+ },
+ {
+  "fr": "A-t-il rejoint le groupe ?",
+  "hint": "le groupe = the group",
+  "answers": [
+   "did he join the group",
+   "did he join the group?",
+   "did he join the group ?"
+  ],
+  "correct": "Did he join the group?",
+  "explanation": "<strong>Did + he + join ?</strong> L'auxiliaire Did porte le passé."
+ },
+ {
+  "fr": "Est-elle morte ?",
+  "hint": "",
+  "answers": [
+   "did she die",
+   "did she die?",
+   "did she die ?"
+  ],
+  "correct": "Did she die?",
+  "explanation": "<strong>Did + she + die ?</strong> Base verbale (die) après Did, même pour les irréguliers."
+ },
+ {
+  "fr": "Ont-ils divorcé ?",
+  "hint": "",
+  "answers": [
+   "did they divorce",
+   "did they divorce?",
+   "did they divorce ?"
+  ],
+  "correct": "Did they divorce?",
+  "explanation": "<strong>Did + they + divorce ?</strong> Structure interrogative standard."
+ },
+ {
+  "fr": "A-t-elle voyagé ?",
+  "hint": "",
+  "answers": [
+   "did she travel",
+   "did she travel?",
+   "did she travel ?"
+  ],
+  "correct": "Did she travel?",
+  "explanation": "<strong>Did + she + travel ?</strong> Base verbale après Did."
+ },
+ {
+  "fr": "T'es-tu marié ?",
+  "hint": "",
+  "answers": [
+   "did you marry",
+   "did you marry?",
+   "did you marry ?"
+  ],
+  "correct": "Did you marry?",
+  "explanation": "<strong>Did + you + marry ?</strong> Base verbale : pas de -ied après Did."
+ },
+ {
+  "fr": "Ont-ils enregistré ?",
+  "hint": "",
+  "answers": [
+   "did they record",
+   "did they record?",
+   "did they record ?"
+  ],
+  "correct": "Did they record?",
+  "explanation": "<strong>Did + they + record ?</strong> Même structure pour tous les sujets."
+ },
+ {
+  "fr": "A-t-il rejoint la bande ?",
+  "hint": "la bande = the band",
+  "answers": [
+   "did he join the band",
+   "did he join the band?",
+   "did he join the band ?"
+  ],
+  "correct": "Did he join the band?",
+  "explanation": "<strong>Did + he + join ?</strong> Base verbale après Did."
+ },
+ {
+  "fr": "Es-tu parti ?",
+  "hint": "",
+  "answers": [
+   "did you leave",
+   "did you leave?",
+   "did you leave ?"
+  ],
+  "correct": "Did you leave?",
+  "explanation": "<strong>Did + you + leave ?</strong> leave est irrégulier mais base verbale après Did."
+ },
+ {
+  "fr": "S'est-il installé à Chicago ?",
+  "hint": "à Chicago = in Chicago",
+  "answers": [
+   "did he settle in chicago",
+   "did he settle in chicago?",
+   "did he settle in chicago ?"
+  ],
+  "correct": "Did he settle in Chicago?",
+  "explanation": "<strong>Did + he + settle ?</strong> Pas de -d après Did."
+ },
+ {
+  "fr": "A-t-elle rejoint le groupe ?",
+  "hint": "le groupe = the group",
+  "answers": [
+   "did she join the group",
+   "did she join the group?",
+   "did she join the group ?"
+  ],
+  "correct": "Did she join the group?",
+  "explanation": "<strong>Did + she + join ?</strong> Base verbale après Did."
+ },
+ {
+  "fr": "Ont-ils divorcé une deuxième fois ?",
+  "hint": "fois = time",
+  "answers": [
+   "did they divorce a second time",
+   "did they divorce a second time?",
+   "did they divorce a second time ?"
+  ],
+  "correct": "Did they divorce a second time?",
+  "explanation": "<strong>Did + they + divorce ?</strong> Base verbale après Did. <em>Time</em> = fois."
+ },
+ {
+  "fr": "Ils ont enregistré.",
+  "hint": "",
+  "answers": [
+   "they recorded"
+  ],
+  "correct": "They recorded.",
+  "explanation": "<strong>record → recorded</strong>. Prétérit affirmatif : sujet + verbe -ed."
+ },
+ {
+  "fr": "Il est mort.",
+  "hint": "",
+  "answers": [
+   "he died"
+  ],
+  "correct": "He died.",
+  "explanation": "<strong>die → died</strong> (verbe régulier : -e → -ed)."
+ },
+ {
+  "fr": "Elle a voyagé.",
+  "hint": "",
+  "answers": [
+   "she travelled",
+   "she traveled"
+  ],
+  "correct": "She travelled. / She traveled.",
+  "explanation": "<strong>travel → travelled</strong> (ou traveled en américain). Prétérit affirmatif."
+ },
+ {
+  "fr": "Ils se sont mariés.",
+  "hint": "",
+  "answers": [
+   "they married"
+  ],
+  "correct": "They married.",
+  "explanation": "<strong>marry → married</strong> (verbe en -y → -ied)."
+ },
+ {
+  "fr": "Il a rejoint le groupe.",
+  "hint": "le groupe = the group",
+  "answers": [
+   "he joined the group"
+  ],
+  "correct": "He joined the group.",
+  "explanation": "<strong>join → joined</strong> (régulier, + -ed)."
+ },
+ {
+  "fr": "Elle est partie.",
+  "hint": "",
+  "answers": [
+   "she left"
+  ],
+  "correct": "She left.",
+  "explanation": "<strong>leave → left</strong> (irrégulier). Prétérit affirmatif : sujet + left."
+ },
+ {
+  "fr": "Il s'est installé.",
+  "hint": "",
+  "answers": [
+   "he settled"
+  ],
+  "correct": "He settled.",
+  "explanation": "<strong>settle → settled</strong> (régulier, -e + d)."
+ },
+ {
+  "fr": "Ils ont divorcé.",
+  "hint": "",
+  "answers": [
+   "they divorced"
+  ],
+  "correct": "They divorced.",
+  "explanation": "<strong>divorce → divorced</strong> (régulier, -e + d)."
+ },
+ {
+  "fr": "Nous avons voyagé.",
+  "hint": "",
+  "answers": [
+   "we travelled",
+   "we traveled"
+  ],
+  "correct": "We travelled. / We traveled.",
+  "explanation": "<strong>travel → travelled</strong>. Prétérit affirmatif, pas d'auxiliaire."
+ },
+ {
+  "fr": "Tu as joué.",
+  "hint": "",
+  "answers": [
+   "you played"
+  ],
+  "correct": "You played.",
+  "explanation": "<strong>play → played</strong> (régulier, + -ed)."
+ },
+ {
+  "fr": "Elle s'est installée.",
+  "hint": "",
+  "answers": [
+   "she settled"
+  ],
+  "correct": "She settled.",
+  "explanation": "<strong>settle → settled</strong>. Même forme pour il/elle."
+ },
+ {
+  "fr": "Il a enregistré.",
+  "hint": "",
+  "answers": [
+   "he recorded"
+  ],
+  "correct": "He recorded.",
+  "explanation": "<strong>record → recorded</strong> (régulier, + -ed)."
+ },
+ {
+  "fr": "Elle est morte.",
+  "hint": "",
+  "answers": [
+   "she died"
+  ],
+  "correct": "She died.",
+  "explanation": "<strong>die → died</strong> (régulier)."
+ },
+ {
+  "fr": "Ils sont partis.",
+  "hint": "",
+  "answers": [
+   "they left"
+  ],
+  "correct": "They left.",
+  "explanation": "<strong>leave → left</strong> (irrégulier). Même forme au singulier et au pluriel."
+ },
+ {
+  "fr": "Il s'est marié une troisième fois.",
+  "hint": "fois = time",
+  "answers": [
+   "he married a third time"
+  ],
+  "correct": "He married a third time.",
+  "explanation": "<strong>marry → married</strong> (-y → -ied). <em>Time</em> = fois."
+ },
+ {
+  "fr": "Elle a rejoint la bande.",
+  "hint": "la bande = the band",
+  "answers": [
+   "she joined the band"
+  ],
+  "correct": "She joined the band.",
+  "explanation": "<strong>join → joined</strong> (+ -ed)."
+ },
+ {
+  "fr": "Ils ont voyagé en France.",
+  "hint": "en France = in France",
+  "answers": [
+   "they travelled in france",
+   "they traveled in france"
+  ],
+  "correct": "They travelled in France. / They traveled in France.",
+  "explanation": "<strong>travel → travelled</strong>. Prétérit affirmatif."
+ },
+ {
+  "fr": "Nous nous sommes installés.",
+  "hint": "",
+  "answers": [
+   "we settled"
+  ],
+  "correct": "We settled.",
+  "explanation": "<strong>settle → settled</strong>."
+ },
+ {
+  "fr": "Ils ont enregistré un album.",
+  "hint": "un album = an album",
+  "answers": [
+   "they recorded an album"
+  ],
+  "correct": "They recorded an album.",
+  "explanation": "<strong>record → recorded</strong> (+ -ed)."
+ },
+ {
+  "fr": "Tu as voyagé.",
+  "hint": "",
+  "answers": [
+   "you travelled",
+   "you traveled"
+  ],
+  "correct": "You travelled. / You traveled.",
+  "explanation": "<strong>travel → travelled</strong>."
+ },
+ {
+  "fr": "Il a joué.",
+  "hint": "",
+  "answers": [
+   "he played"
+  ],
+  "correct": "He played.",
+  "explanation": "<strong>play → played</strong> (+ -ed)."
+ }
+]

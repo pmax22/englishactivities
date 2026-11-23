@@ -1,0 +1,1206 @@
+[
+ {
+  "fr": "Je n'ai pas aidé le client.",
+  "begin": [
+   "i did not help",
+   "i didnt help"
+  ],
+  "end": "the customer.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + base verbale</strong> → did not help (pas helped)."
+ },
+ {
+  "fr": "Elle n'a pas aidé la vendeuse.",
+  "begin": [
+   "she did not help",
+   "she didnt help"
+  ],
+  "end": "the saleswoman.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + help</strong>. Même règle pour she."
+ },
+ {
+  "fr": "Nous n'avons pas aidé les personnes âgées.",
+  "begin": [
+   "we did not help",
+   "we didnt help"
+  ],
+  "end": "the elderly people.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + help</strong>."
+ },
+ {
+  "fr": "Je ne suis pas allé(e) en magasin.",
+  "begin": [
+   "i did not go",
+   "i didnt go"
+  ],
+  "end": "to the shop.",
+  "type": "neg",
+  "explanation": "<strong>did not + go</strong> (base verbale, pas went)."
+ },
+ {
+  "fr": "Il n'est pas allé au rayon vêtements.",
+  "begin": [
+   "he did not go",
+   "he didnt go"
+  ],
+  "end": "to the clothing section.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + go</strong>."
+ },
+ {
+  "fr": "Ils ne sont pas allés au travail.",
+  "begin": [
+   "they did not go",
+   "they didnt go"
+  ],
+  "end": "to work.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + go</strong>."
+ },
+ {
+  "fr": "Il n'a pas travaillé le week-end.",
+  "begin": [
+   "he did not work",
+   "he didnt work"
+  ],
+  "end": "at the weekend.",
+  "type": "neg",
+  "explanation": "<strong>did not + work</strong> (pas worked) à la négation."
+ },
+ {
+  "fr": "Nous n'avons pas travaillé en équipe.",
+  "begin": [
+   "we did not work",
+   "we didnt work"
+  ],
+  "end": "as a team.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + work</strong>."
+ },
+ {
+  "fr": "Elle n'a pas travaillé à la caisse.",
+  "begin": [
+   "she did not work",
+   "she didnt work"
+  ],
+  "end": "at the till.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + work</strong>."
+ },
+ {
+  "fr": "Il n'a pas enseigné le bon geste.",
+  "begin": [
+   "he did not teach",
+   "he didnt teach"
+  ],
+  "end": "the right technique.",
+  "type": "neg",
+  "explanation": "<strong>did not + teach</strong> (base verbale, pas taught)."
+ },
+ {
+  "fr": "Le tuteur n'a pas enseigné les règles.",
+  "begin": [
+   "the trainer did not teach",
+   "the trainer didnt teach"
+  ],
+  "end": "the rules.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + teach</strong>."
+ },
+ {
+  "fr": "Je n'ai pas commencé à temps.",
+  "begin": [
+   "i did not start",
+   "i didnt start"
+  ],
+  "end": "on time.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + start</strong>."
+ },
+ {
+  "fr": "Elle n'a pas commencé la formation.",
+  "begin": [
+   "she did not start",
+   "she didnt start"
+  ],
+  "end": "the training.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + start</strong>."
+ },
+ {
+  "fr": "Nous n'avons pas commencé le rangement.",
+  "begin": [
+   "we did not start",
+   "we didnt start"
+  ],
+  "end": "the tidying.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + start</strong>."
+ },
+ {
+  "fr": "Il n'a pas donné le reçu.",
+  "begin": [
+   "he did not give",
+   "he didnt give"
+  ],
+  "end": "the receipt.",
+  "type": "neg",
+  "explanation": "<strong>did not + give</strong> (pas gave)."
+ },
+ {
+  "fr": "Je n'ai pas donné les bons conseils.",
+  "begin": [
+   "i did not give",
+   "i didnt give"
+  ],
+  "end": "the right advice.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + give</strong>."
+ },
+ {
+  "fr": "Je n'ai pas parlé au directeur.",
+  "begin": [
+   "i did not talk",
+   "i didnt talk"
+  ],
+  "end": "to the manager.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + talk</strong>."
+ },
+ {
+  "fr": "Elle n'a pas parlé aux clients.",
+  "begin": [
+   "she did not talk",
+   "she didnt talk"
+  ],
+  "end": "to the customers.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + talk</strong>."
+ },
+ {
+  "fr": "Je n'étais pas disponible.",
+  "begin": [
+   "i was not",
+   "i wasnt"
+  ],
+  "end": "available.",
+  "type": "neg",
+  "explanation": "<strong>was not / wasn't</strong> (pas de did avec be)."
+ },
+ {
+  "fr": "Il n'était pas en uniforme.",
+  "begin": [
+   "he was not",
+   "he wasnt"
+  ],
+  "end": "in uniform.",
+  "type": "neg",
+  "explanation": "<strong>was not / wasn't</strong>."
+ },
+ {
+  "fr": "Nous n'étions pas en retard.",
+  "begin": [
+   "we were not",
+   "we werent"
+  ],
+  "end": "late.",
+  "type": "neg",
+  "explanation": "<strong>were not / weren't</strong> pour we/they/you."
+ },
+ {
+  "fr": "Il n'a pas organisé la vitrine.",
+  "begin": [
+   "he did not organise",
+   "he didnt organise",
+   "he did not organize",
+   "he didnt organize"
+  ],
+  "end": "the window display.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + organise</strong>."
+ },
+ {
+  "fr": "Nous n'avons pas organisé le stock.",
+  "begin": [
+   "we did not organise",
+   "we didnt organise",
+   "we did not organize",
+   "we didnt organize"
+  ],
+  "end": "the stock.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + organise</strong>."
+ },
+ {
+  "fr": "Il n'a pas vendu les pantalons.",
+  "begin": [
+   "he did not sell",
+   "he didnt sell"
+  ],
+  "end": "the trousers.",
+  "type": "neg",
+  "explanation": "<strong>did not + sell</strong> (pas sold)."
+ },
+ {
+  "fr": "Je n'ai pas vendu de vêtements.",
+  "begin": [
+   "i did not sell",
+   "i didnt sell"
+  ],
+  "end": "any clothes.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + sell</strong>."
+ },
+ {
+  "fr": "Il n'a pas géré la réclamation.",
+  "begin": [
+   "he did not handle",
+   "he didnt handle"
+  ],
+  "end": "the complaint.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + handle</strong>."
+ },
+ {
+  "fr": "Elle n'a pas géré la caisse.",
+  "begin": [
+   "she did not handle",
+   "she didnt handle"
+  ],
+  "end": "the till.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + handle</strong>."
+ },
+ {
+  "fr": "Je n'ai pas passé la journée au magasin.",
+  "begin": [
+   "i did not spend",
+   "i didnt spend"
+  ],
+  "end": "the day at the shop.",
+  "type": "neg",
+  "explanation": "<strong>did not + spend</strong> (pas spent)."
+ },
+ {
+  "fr": "Ils n'ont pas passé beaucoup de temps en rayon.",
+  "begin": [
+   "they did not spend",
+   "they didnt spend"
+  ],
+  "end": "much time on the shop floor.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + spend</strong>."
+ },
+ {
+  "fr": "Elle n'a pas amélioré son accueil.",
+  "begin": [
+   "she did not improve",
+   "she didnt improve"
+  ],
+  "end": "her customer service.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + improve</strong>."
+ },
+ {
+  "fr": "Nous n'avons pas amélioré nos ventes.",
+  "begin": [
+   "we did not improve",
+   "we didnt improve"
+  ],
+  "end": "our sales.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + improve</strong>."
+ },
+ {
+  "fr": "Il n'a pas construit une bonne relation avec les clients.",
+  "begin": [
+   "he did not build",
+   "he didnt build"
+  ],
+  "end": "a good relationship with the customers.",
+  "type": "neg",
+  "explanation": "<strong>did not + build</strong> (pas built)."
+ },
+ {
+  "fr": "Je n'ai pas rejoint l'équipe.",
+  "begin": [
+   "i did not join",
+   "i didnt join"
+  ],
+  "end": "the team.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + join</strong>."
+ },
+ {
+  "fr": "Il n'a pas rejoint le magasin l'année dernière.",
+  "begin": [
+   "he did not join",
+   "he didnt join"
+  ],
+  "end": "the shop last year.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + join</strong>."
+ },
+ {
+  "fr": "Je n'ai pas appris les tailles.",
+  "begin": [
+   "i did not learn",
+   "i didnt learn"
+  ],
+  "end": "the sizes.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + learn</strong>."
+ },
+ {
+  "fr": "Ils n'ont pas appris les gestes professionnels.",
+  "begin": [
+   "they did not learn",
+   "they didnt learn"
+  ],
+  "end": "the professional techniques.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + learn</strong>."
+ },
+ {
+  "fr": "Elle n'a pas préparé la commande.",
+  "begin": [
+   "she did not prepare",
+   "she didnt prepare"
+  ],
+  "end": "the order.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + prepare</strong>."
+ },
+ {
+  "fr": "Nous n'avons pas préparé les cabines.",
+  "begin": [
+   "we did not prepare",
+   "we didnt prepare"
+  ],
+  "end": "the fitting rooms.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + prepare</strong>."
+ },
+ {
+  "fr": "Je n'ai pas eu de pause.",
+  "begin": [
+   "i did not have",
+   "i didnt have"
+  ],
+  "end": "a break.",
+  "type": "neg",
+  "explanation": "<strong>did not + have</strong> (pas had)."
+ },
+ {
+  "fr": "Il n'avait pas d'expérience.",
+  "begin": [
+   "he did not have",
+   "he didnt have"
+  ],
+  "end": "any experience.",
+  "type": "neg",
+  "explanation": "<strong>did not / didn't + have</strong>."
+ },
+ {
+  "fr": "As-tu aidé la cliente ?",
+  "begin": [
+   "did you help"
+  ],
+  "end": "the customer?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + help ?</strong> Base verbale après Did."
+ },
+ {
+  "fr": "A-t-elle aidé les personnes âgées ?",
+  "begin": [
+   "did she help"
+  ],
+  "end": "the elderly people?",
+  "type": "inter",
+  "explanation": "<strong>Did + she + help ?</strong>"
+ },
+ {
+  "fr": "T'ont-ils aidé au rayon ?",
+  "begin": [
+   "did they help"
+  ],
+  "end": "you on the shop floor?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + help ?</strong>"
+ },
+ {
+  "fr": "Est-il allé en réserve ?",
+  "begin": [
+   "did he go"
+  ],
+  "end": "to the stockroom?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + go ?</strong> go, pas went."
+ },
+ {
+  "fr": "Êtes-vous allés en formation ?",
+  "begin": [
+   "did you go"
+  ],
+  "end": "to the training?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + go ?</strong>"
+ },
+ {
+  "fr": "A-t-il travaillé en boutique ?",
+  "begin": [
+   "did he work"
+  ],
+  "end": "in the shop?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + work ?</strong> work, pas worked."
+ },
+ {
+  "fr": "Avez-vous travaillé le samedi ?",
+  "begin": [
+   "did you work"
+  ],
+  "end": "on Saturdays?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + work ?</strong>"
+ },
+ {
+  "fr": "Vous a-t-on enseigné les techniques de vente ?",
+  "begin": [
+   "did they teach"
+  ],
+  "end": "you the sales techniques?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + teach ?</strong> teach, pas taught."
+ },
+ {
+  "fr": "Le formateur a-t-il enseigné les gestes ?",
+  "begin": [
+   "did the trainer teach"
+  ],
+  "end": "the techniques?",
+  "type": "inter",
+  "explanation": "<strong>Did + the trainer + teach ?</strong>"
+ },
+ {
+  "fr": "As-tu commencé le stage l'année dernière ?",
+  "begin": [
+   "did you start"
+  ],
+  "end": "the internship last year?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + start ?</strong>"
+ },
+ {
+  "fr": "Ont-ils commencé le rangement ?",
+  "begin": [
+   "did they start"
+  ],
+  "end": "the tidying?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + start ?</strong>"
+ },
+ {
+  "fr": "A-t-il donné le bon de réduction ?",
+  "begin": [
+   "did he give"
+  ],
+  "end": "the voucher?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + give ?</strong> give, pas gave."
+ },
+ {
+  "fr": "Leur avez-vous donné les consignes ?",
+  "begin": [
+   "did you give"
+  ],
+  "end": "them the instructions?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + give ?</strong>"
+ },
+ {
+  "fr": "As-tu parlé au responsable ?",
+  "begin": [
+   "did you talk"
+  ],
+  "end": "to the supervisor?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + talk ?</strong>"
+ },
+ {
+  "fr": "A-t-elle parlé aux fournisseurs ?",
+  "begin": [
+   "did she talk"
+  ],
+  "end": "to the suppliers?",
+  "type": "inter",
+  "explanation": "<strong>Did + she + talk ?</strong>"
+ },
+ {
+  "fr": "Était-il en uniforme ?",
+  "begin": [
+   "was he"
+  ],
+  "end": "in uniform?",
+  "type": "inter",
+  "explanation": "<strong>Was + he ?</strong> Inversion be/sujet. Pas de Did."
+ },
+ {
+  "fr": "Étais-tu satisfait(e) du travail ?",
+  "begin": [
+   "were you"
+  ],
+  "end": "happy with the job?",
+  "type": "inter",
+  "explanation": "<strong>Were + you ?</strong> Inversion be/sujet."
+ },
+ {
+  "fr": "Étiez-vous disponibles ce matin ?",
+  "begin": [
+   "were you"
+  ],
+  "end": "available this morning?",
+  "type": "inter",
+  "explanation": "<strong>Were + you ?</strong>"
+ },
+ {
+  "fr": "A-t-il organisé la vitrine ?",
+  "begin": [
+   "did he organise",
+   "did he organize"
+  ],
+  "end": "the window display?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + organise ?</strong>"
+ },
+ {
+  "fr": "Ont-ils organisé le rayon vêtements ?",
+  "begin": [
+   "did they organise",
+   "did they organize"
+  ],
+  "end": "the clothing section?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + organise ?</strong>"
+ },
+ {
+  "fr": "As-tu vendu des chaussures ?",
+  "begin": [
+   "did you sell"
+  ],
+  "end": "any shoes?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + sell ?</strong> sell, pas sold."
+ },
+ {
+  "fr": "A-t-elle vendu les manteaux ?",
+  "begin": [
+   "did she sell"
+  ],
+  "end": "the coats?",
+  "type": "inter",
+  "explanation": "<strong>Did + she + sell ?</strong>"
+ },
+ {
+  "fr": "A-t-il géré la réclamation ?",
+  "begin": [
+   "did he handle"
+  ],
+  "end": "the complaint?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + handle ?</strong>"
+ },
+ {
+  "fr": "Avez-vous géré les retours ?",
+  "begin": [
+   "did you handle"
+  ],
+  "end": "the returns?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + handle ?</strong>"
+ },
+ {
+  "fr": "As-tu passé la journée en rayon ?",
+  "begin": [
+   "did you spend"
+  ],
+  "end": "the day on the shop floor?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + spend ?</strong> spend, pas spent."
+ },
+ {
+  "fr": "A-t-elle amélioré ses compétences ?",
+  "begin": [
+   "did she improve"
+  ],
+  "end": "her skills?",
+  "type": "inter",
+  "explanation": "<strong>Did + she + improve ?</strong>"
+ },
+ {
+  "fr": "Avez-vous amélioré le service client ?",
+  "begin": [
+   "did you improve"
+  ],
+  "end": "the customer service?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + improve ?</strong>"
+ },
+ {
+  "fr": "A-t-il construit une bonne relation avec l'équipe ?",
+  "begin": [
+   "did he build"
+  ],
+  "end": "a good relationship with the team?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + build ?</strong> build, pas built."
+ },
+ {
+  "fr": "As-tu rejoint l'équipe ?",
+  "begin": [
+   "did you join"
+  ],
+  "end": "the team?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + join ?</strong>"
+ },
+ {
+  "fr": "Ont-ils rejoint le groupe ?",
+  "begin": [
+   "did they join"
+  ],
+  "end": "the group?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + join ?</strong>"
+ },
+ {
+  "fr": "Avez-vous appris les tailles ?",
+  "begin": [
+   "did you learn"
+  ],
+  "end": "the sizes?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + learn ?</strong> learn, pas learnt."
+ },
+ {
+  "fr": "A-t-elle appris les gestes professionnels ?",
+  "begin": [
+   "did she learn"
+  ],
+  "end": "the professional techniques?",
+  "type": "inter",
+  "explanation": "<strong>Did + she + learn ?</strong>"
+ },
+ {
+  "fr": "As-tu préparé la commande ?",
+  "begin": [
+   "did you prepare"
+  ],
+  "end": "the order?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + prepare ?</strong>"
+ },
+ {
+  "fr": "Ont-ils préparé les cabines d'essayage ?",
+  "begin": [
+   "did they prepare"
+  ],
+  "end": "the fitting rooms?",
+  "type": "inter",
+  "explanation": "<strong>Did + they + prepare ?</strong>"
+ },
+ {
+  "fr": "As-tu eu une formation ?",
+  "begin": [
+   "did you have"
+  ],
+  "end": "a training session?",
+  "type": "inter",
+  "explanation": "<strong>Did + you + have ?</strong> have, pas had."
+ },
+ {
+  "fr": "A-t-il eu une pause à midi ?",
+  "begin": [
+   "did he have"
+  ],
+  "end": "a break at lunchtime?",
+  "type": "inter",
+  "explanation": "<strong>Did + he + have ?</strong>"
+ },
+ {
+  "fr": "Tu as aidé ta collègue.",
+  "begin": [
+   "you helped"
+  ],
+  "end": "your colleague.",
+  "type": "aff",
+  "explanation": "<strong>help → helped</strong> (régulier)."
+ },
+ {
+  "fr": "Il a aidé le client.",
+  "begin": [
+   "he helped"
+  ],
+  "end": "the customer.",
+  "type": "aff",
+  "explanation": "<strong>help → helped</strong>."
+ },
+ {
+  "fr": "Nous avons aidé les personnes âgées.",
+  "begin": [
+   "we helped"
+  ],
+  "end": "the elderly people.",
+  "type": "aff",
+  "explanation": "<strong>help → helped</strong>."
+ },
+ {
+  "fr": "Je suis allé(e) en réserve.",
+  "begin": [
+   "i went"
+  ],
+  "end": "to the stockroom.",
+  "type": "aff",
+  "explanation": "<strong>go → went</strong> (irrégulier)."
+ },
+ {
+  "fr": "Elle est allée au rayon vêtements.",
+  "begin": [
+   "she went"
+  ],
+  "end": "to the clothing section.",
+  "type": "aff",
+  "explanation": "<strong>go → went</strong>."
+ },
+ {
+  "fr": "Nous sommes allés en formation.",
+  "begin": [
+   "we went"
+  ],
+  "end": "to the training.",
+  "type": "aff",
+  "explanation": "<strong>go → went</strong>."
+ },
+ {
+  "fr": "J'ai travaillé à la caisse.",
+  "begin": [
+   "i worked"
+  ],
+  "end": "at the till.",
+  "type": "aff",
+  "explanation": "<strong>work → worked</strong> (régulier)."
+ },
+ {
+  "fr": "Il a travaillé en boutique.",
+  "begin": [
+   "he worked"
+  ],
+  "end": "in the shop.",
+  "type": "aff",
+  "explanation": "<strong>work → worked</strong>."
+ },
+ {
+  "fr": "Nous avons travaillé en équipe.",
+  "begin": [
+   "we worked"
+  ],
+  "end": "as a team.",
+  "type": "aff",
+  "explanation": "<strong>work → worked</strong>."
+ },
+ {
+  "fr": "Le formateur a enseigné les gestes.",
+  "begin": [
+   "the trainer taught"
+  ],
+  "end": "the techniques.",
+  "type": "aff",
+  "explanation": "<strong>teach → taught</strong> (irrégulier)."
+ },
+ {
+  "fr": "Elle a enseigné les règles de sécurité.",
+  "begin": [
+   "she taught"
+  ],
+  "end": "the safety rules.",
+  "type": "aff",
+  "explanation": "<strong>teach → taught</strong>."
+ },
+ {
+  "fr": "J'ai commencé l'année dernière.",
+  "begin": [
+   "i started"
+  ],
+  "end": "last year.",
+  "type": "aff",
+  "explanation": "<strong>start → started</strong> (régulier)."
+ },
+ {
+  "fr": "Elle a commencé la formation.",
+  "begin": [
+   "she started"
+  ],
+  "end": "the training.",
+  "type": "aff",
+  "explanation": "<strong>start → started</strong>."
+ },
+ {
+  "fr": "Nous avons commencé le rangement.",
+  "begin": [
+   "we started"
+  ],
+  "end": "the tidying.",
+  "type": "aff",
+  "explanation": "<strong>start → started</strong>."
+ },
+ {
+  "fr": "Il a donné le reçu.",
+  "begin": [
+   "he gave"
+  ],
+  "end": "the receipt.",
+  "type": "aff",
+  "explanation": "<strong>give → gave</strong> (irrégulier)."
+ },
+ {
+  "fr": "J'ai donné les bons conseils.",
+  "begin": [
+   "i gave"
+  ],
+  "end": "the right advice.",
+  "type": "aff",
+  "explanation": "<strong>give → gave</strong>."
+ },
+ {
+  "fr": "Nous avons donné les consignes.",
+  "begin": [
+   "we gave"
+  ],
+  "end": "the instructions.",
+  "type": "aff",
+  "explanation": "<strong>give → gave</strong>."
+ },
+ {
+  "fr": "J'ai parlé au responsable.",
+  "begin": [
+   "i talked"
+  ],
+  "end": "to the supervisor.",
+  "type": "aff",
+  "explanation": "<strong>talk → talked</strong> (régulier)."
+ },
+ {
+  "fr": "Elle a parlé aux clients.",
+  "begin": [
+   "she talked"
+  ],
+  "end": "to the customers.",
+  "type": "aff",
+  "explanation": "<strong>talk → talked</strong>."
+ },
+ {
+  "fr": "Ils ont parlé aux fournisseurs.",
+  "begin": [
+   "they talked"
+  ],
+  "end": "to the suppliers.",
+  "type": "aff",
+  "explanation": "<strong>talk → talked</strong>."
+ },
+ {
+  "fr": "J'étais disponible.",
+  "begin": [
+   "i was"
+  ],
+  "end": "available.",
+  "type": "aff",
+  "explanation": "<strong>be → was</strong> pour I/he/she."
+ },
+ {
+  "fr": "Il était en uniforme.",
+  "begin": [
+   "he was"
+  ],
+  "end": "in uniform.",
+  "type": "aff",
+  "explanation": "<strong>be → was</strong>."
+ },
+ {
+  "fr": "Nous étions en retard.",
+  "begin": [
+   "we were"
+  ],
+  "end": "late.",
+  "type": "aff",
+  "explanation": "<strong>be → were</strong> pour we/they/you."
+ },
+ {
+  "fr": "J'étais content(e).",
+  "begin": [
+   "i was"
+  ],
+  "end": "happy.",
+  "type": "aff",
+  "explanation": "<strong>be → was</strong>."
+ },
+ {
+  "fr": "Ils ont organisé mon anniversaire.",
+  "begin": [
+   "they organised",
+   "they organized"
+  ],
+  "end": "my birthday.",
+  "type": "aff",
+  "explanation": "<strong>organise → organised</strong> (régulier)."
+ },
+ {
+  "fr": "Il a organisé la vitrine.",
+  "begin": [
+   "he organised",
+   "he organized"
+  ],
+  "end": "the window display.",
+  "type": "aff",
+  "explanation": "<strong>organise → organised</strong>."
+ },
+ {
+  "fr": "Nous avons organisé le stock.",
+  "begin": [
+   "we organised",
+   "we organized"
+  ],
+  "end": "the stock.",
+  "type": "aff",
+  "explanation": "<strong>organise → organised</strong>."
+ },
+ {
+  "fr": "J'ai vendu des chaussures.",
+  "begin": [
+   "i sold"
+  ],
+  "end": "some shoes.",
+  "type": "aff",
+  "explanation": "<strong>sell → sold</strong> (irrégulier)."
+ },
+ {
+  "fr": "Elle a vendu les manteaux.",
+  "begin": [
+   "she sold"
+  ],
+  "end": "the coats.",
+  "type": "aff",
+  "explanation": "<strong>sell → sold</strong>."
+ },
+ {
+  "fr": "Ils ont vendu beaucoup de vêtements.",
+  "begin": [
+   "they sold"
+  ],
+  "end": "a lot of clothes.",
+  "type": "aff",
+  "explanation": "<strong>sell → sold</strong>."
+ },
+ {
+  "fr": "Il a géré la réclamation.",
+  "begin": [
+   "he handled"
+  ],
+  "end": "the complaint.",
+  "type": "aff",
+  "explanation": "<strong>handle → handled</strong> (régulier)."
+ },
+ {
+  "fr": "J'ai géré les retours.",
+  "begin": [
+   "i handled"
+  ],
+  "end": "the returns.",
+  "type": "aff",
+  "explanation": "<strong>handle → handled</strong>."
+ },
+ {
+  "fr": "Elle a géré la caisse.",
+  "begin": [
+   "she handled"
+  ],
+  "end": "the till.",
+  "type": "aff",
+  "explanation": "<strong>handle → handled</strong>."
+ },
+ {
+  "fr": "J'ai passé la journée en magasin.",
+  "begin": [
+   "i spent"
+  ],
+  "end": "the day at the shop.",
+  "type": "aff",
+  "explanation": "<strong>spend → spent</strong> (irrégulier)."
+ },
+ {
+  "fr": "Nous avons passé la journée au rayon.",
+  "begin": [
+   "we spent"
+  ],
+  "end": "the day on the shop floor.",
+  "type": "aff",
+  "explanation": "<strong>spend → spent</strong>."
+ },
+ {
+  "fr": "Elle a amélioré son accueil.",
+  "begin": [
+   "she improved"
+  ],
+  "end": "her customer service.",
+  "type": "aff",
+  "explanation": "<strong>improve → improved</strong> (régulier)."
+ },
+ {
+  "fr": "Nous avons amélioré nos ventes.",
+  "begin": [
+   "we improved"
+  ],
+  "end": "our sales.",
+  "type": "aff",
+  "explanation": "<strong>improve → improved</strong>."
+ },
+ {
+  "fr": "J'ai amélioré mes compétences.",
+  "begin": [
+   "i improved"
+  ],
+  "end": "my skills.",
+  "type": "aff",
+  "explanation": "<strong>improve → improved</strong>."
+ },
+ {
+  "fr": "Il a construit une bonne relation avec les clients.",
+  "begin": [
+   "he built"
+  ],
+  "end": "a good relationship with the customers.",
+  "type": "aff",
+  "explanation": "<strong>build → built</strong> (irrégulier)."
+ },
+ {
+  "fr": "Nous avons construit une bonne équipe.",
+  "begin": [
+   "we built"
+  ],
+  "end": "a good team.",
+  "type": "aff",
+  "explanation": "<strong>build → built</strong>."
+ },
+ {
+  "fr": "J'ai rejoint l'équipe.",
+  "begin": [
+   "i joined"
+  ],
+  "end": "the team.",
+  "type": "aff",
+  "explanation": "<strong>join → joined</strong> (régulier)."
+ },
+ {
+  "fr": "Il a rejoint le groupe.",
+  "begin": [
+   "he joined"
+  ],
+  "end": "the group.",
+  "type": "aff",
+  "explanation": "<strong>join → joined</strong>."
+ },
+ {
+  "fr": "Ils ont rejoint le magasin l'année dernière.",
+  "begin": [
+   "they joined"
+  ],
+  "end": "the shop last year.",
+  "type": "aff",
+  "explanation": "<strong>join → joined</strong>."
+ },
+ {
+  "fr": "J'ai appris les tailles.",
+  "begin": [
+   "i learnt",
+   "i learned"
+  ],
+  "end": "the sizes.",
+  "type": "aff",
+  "explanation": "<strong>learn → learnt / learned</strong>."
+ },
+ {
+  "fr": "Il a appris les techniques de vente.",
+  "begin": [
+   "he learnt",
+   "he learned"
+  ],
+  "end": "the sales techniques.",
+  "type": "aff",
+  "explanation": "<strong>learn → learnt / learned</strong>."
+ },
+ {
+  "fr": "Nous avons appris nos leçons.",
+  "begin": [
+   "we learnt",
+   "we learned"
+  ],
+  "end": "our lessons.",
+  "type": "aff",
+  "explanation": "<strong>learn → learnt / learned</strong>."
+ },
+ {
+  "fr": "Nous avons préparé nos bagages.",
+  "begin": [
+   "we prepared"
+  ],
+  "end": "our luggage.",
+  "type": "aff",
+  "explanation": "<strong>prepare → prepared</strong> (régulier)."
+ },
+ {
+  "fr": "Elle a préparé la commande.",
+  "begin": [
+   "she prepared"
+  ],
+  "end": "the order.",
+  "type": "aff",
+  "explanation": "<strong>prepare → prepared</strong>."
+ },
+ {
+  "fr": "J'ai préparé les cabines d'essayage.",
+  "begin": [
+   "i prepared"
+  ],
+  "end": "the fitting rooms.",
+  "type": "aff",
+  "explanation": "<strong>prepare → prepared</strong>."
+ },
+ {
+  "fr": "J'ai eu une pause.",
+  "begin": [
+   "i had"
+  ],
+  "end": "a break.",
+  "type": "aff",
+  "explanation": "<strong>have → had</strong> (irrégulier)."
+ },
+ {
+  "fr": "Il avait de l'expérience.",
+  "begin": [
+   "he had"
+  ],
+  "end": "experience.",
+  "type": "aff",
+  "explanation": "<strong>have → had</strong>."
+ },
+ {
+  "fr": "Nous avons eu une réunion.",
+  "begin": [
+   "we had"
+  ],
+  "end": "a meeting.",
+  "type": "aff",
+  "explanation": "<strong>have → had</strong>."
+ }
+]

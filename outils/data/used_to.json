@@ -1,0 +1,423 @@
+[
+ {
+  "before": "",
+  "verb": "live",
+  "after": "in the north of the USA.",
+  "subject": "I",
+  "answers": [
+   "used to live"
+  ],
+  "correct": "I used to live",
+  "explanation": "<div class=\"structure-box\">I <em>used to live</em> in the north of the USA.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to live</em> exprime une habitude passée révolue : j'y vivais autrefois, mais plus maintenant."
+ },
+ {
+  "before": "",
+  "verb": "play",
+  "after": "the piano when she was younger.",
+  "subject": "She",
+  "answers": [
+   "used to play"
+  ],
+  "correct": "She used to play",
+  "explanation": "<div class=\"structure-box\">She <em>used to play</em> the piano when she was younger.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to play</em> décrit une habitude passée qui n'existe plus aujourd'hui."
+ },
+ {
+  "before": "",
+  "verb": "have",
+  "after": "a dog when I was a child.",
+  "subject": "We",
+  "answers": [
+   "used to have"
+  ],
+  "correct": "We used to have",
+  "explanation": "<div class=\"structure-box\">We <em>used to have</em> a dog when I was a child.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to have</em> décrit un état passé révolu. On peut utiliser <em>used to</em> avec des états aussi bien que des actions."
+ },
+ {
+  "before": "",
+  "verb": "ride",
+  "after": "her bike to school every day.",
+  "subject": "She",
+  "answers": [
+   "used to ride"
+  ],
+  "correct": "She used to ride",
+  "explanation": "<div class=\"structure-box\">She <em>used to ride</em> her bike to school every day.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Every day</em> confirme qu'il s'agit d'une habitude passée régulière, parfaite pour <em>used to</em>."
+ },
+ {
+  "before": "",
+  "verb": "spend",
+  "after": "summers at our grandparents' house.",
+  "subject": "We",
+  "answers": [
+   "used to spend"
+  ],
+  "correct": "We used to spend",
+  "explanation": "<div class=\"structure-box\">We <em>used to spend</em> summers at our grandparents' house.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to spend</em> évoque une habitude passée nostalgique — on le faisait chaque été autrefois."
+ },
+ {
+  "before": "",
+  "verb": "walk",
+  "after": "to work every morning.",
+  "subject": "He",
+  "answers": [
+   "used to walk"
+  ],
+  "correct": "He used to walk",
+  "explanation": "<div class=\"structure-box\">He <em>used to walk</em> to work every morning.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to walk</em> décrit une routine passée qui a changé (il prend peut-être la voiture maintenant)."
+ },
+ {
+  "before": "",
+  "verb": "go",
+  "after": "to the cinema every weekend.",
+  "subject": "My parents",
+  "answers": [
+   "used to go"
+  ],
+  "correct": "My parents used to go",
+  "explanation": "<div class=\"structure-box\">My parents <em>used to go</em> to the cinema every weekend.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Every weekend</em> souligne la régularité de l'habitude. <em>Used to go</em> est la forme correcte."
+ },
+ {
+  "before": "",
+  "verb": "be",
+  "after": "afraid of spiders when I was little.",
+  "subject": "I",
+  "answers": [
+   "used to be"
+  ],
+  "correct": "I used to be",
+  "explanation": "<div class=\"structure-box\">I <em>used to be</em> afraid of spiders when I was little.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to be</em> exprime un état passé révolu. <em>Be</em> s'utilise en base verbale après <em>used to</em>."
+ },
+ {
+  "before": "",
+  "verb": "live",
+  "after": "in a small village in the countryside.",
+  "subject": "They",
+  "answers": [
+   "used to live"
+  ],
+  "correct": "They used to live",
+  "explanation": "<div class=\"structure-box\">They <em>used to live</em> in a small village in the countryside.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to live</em> indique un état passé permanent qui a changé depuis."
+ },
+ {
+  "before": "",
+  "verb": "read",
+  "after": "a lot of comics when she was a teenager.",
+  "subject": "She",
+  "answers": [
+   "used to read"
+  ],
+  "correct": "She used to read",
+  "explanation": "<div class=\"structure-box\">She <em>used to read</em> a lot of comics when she was a teenager.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\nLa précision temporelle <em>when she was a teenager</em> confirme qu'il s'agit d'une période passée révolue."
+ },
+ {
+  "before": "",
+  "verb": "play",
+  "after": "football every Saturday.",
+  "subject": "He",
+  "answers": [
+   "used to play"
+  ],
+  "correct": "He used to play",
+  "explanation": "<div class=\"structure-box\">He <em>used to play</em> football every Saturday.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to play</em> décrit une habitude sportive passée et régulière."
+ },
+ {
+  "before": "",
+  "verb": "eat",
+  "after": "dinner together as a family every night.",
+  "subject": "We",
+  "answers": [
+   "used to eat"
+  ],
+  "correct": "We used to eat",
+  "explanation": "<div class=\"structure-box\">We <em>used to eat</em> dinner together as a family every night.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to eat</em> évoque une habitude familiale passée et régulière."
+ },
+ {
+  "before": "",
+  "verb": "make",
+  "after": "homemade bread every Sunday.",
+  "subject": "My grandmother",
+  "answers": [
+   "used to make"
+  ],
+  "correct": "My grandmother used to make",
+  "explanation": "<div class=\"structure-box\">My grandmother <em>used to make</em> homemade bread every Sunday.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Every Sunday</em> = chaque dimanche. <em>Used to make</em> décrit une habitude passée et régulière."
+ },
+ {
+  "before": "",
+  "verb": "wake up",
+  "after": "at 6 a.m. every day.",
+  "subject": "I",
+  "answers": [
+   "used to wake up"
+  ],
+  "correct": "I used to wake up",
+  "explanation": "<div class=\"structure-box\">I <em>used to wake up</em> at 6 a.m. every day.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Wake up</em> est un verbe à particule (phrasal verb). On le garde intact après <em>used to</em>."
+ },
+ {
+  "before": "",
+  "verb": "dream",
+  "after": "of becoming a doctor.",
+  "subject": "She",
+  "answers": [
+   "used to dream"
+  ],
+  "correct": "She used to dream",
+  "explanation": "<div class=\"structure-box\">She <em>used to dream</em> of becoming a doctor.</div>\nPhrase <strong>affirmative</strong> : <strong>sujet + used to + base verbale</strong>.<br>\n<em>Used to dream</em> décrit un rêve ou une aspiration passée qui a peut-être changé."
+ },
+ {
+  "before": "",
+  "verb": "not go",
+  "after": "skiing.",
+  "subject": "He",
+  "answers": [
+   "didn't use to go",
+   "did not use to go"
+  ],
+  "correct": "He didn't use to go",
+  "explanation": "<div class=\"structure-box\">He <em>didn't use to go</em> skiing.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n⚠️ À la forme négative, on écrit <strong>use to</strong> (sans <em>d</em>) car <em>didn't</em> porte déjà le passé."
+ },
+ {
+  "before": "",
+  "verb": "not like",
+  "after": "spicy food.",
+  "subject": "They",
+  "answers": [
+   "didn't use to like",
+   "did not use to like"
+  ],
+  "correct": "They didn't use to like",
+  "explanation": "<div class=\"structure-box\">They <em>didn't use to like</em> spicy food.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Didn't use to</em> indique quelque chose qui n'était pas habituel dans le passé."
+ },
+ {
+  "before": "",
+  "verb": "not watch",
+  "after": "horror movies.",
+  "subject": "My brother",
+  "answers": [
+   "didn't use to watch",
+   "did not use to watch"
+  ],
+  "correct": "My brother didn't use to watch",
+  "explanation": "<div class=\"structure-box\">My brother <em>didn't use to watch</em> horror movies.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n⚠️ Avec <em>didn't</em>, on écrit toujours <strong>use to</strong> sans <em>d</em> final."
+ },
+ {
+  "before": "",
+  "verb": "not enjoy",
+  "after": "reading books.",
+  "subject": "He",
+  "answers": [
+   "didn't use to enjoy",
+   "did not use to enjoy"
+  ],
+  "correct": "He didn't use to enjoy",
+  "explanation": "<div class=\"structure-box\">He <em>didn't use to enjoy</em> reading books.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Enjoy + -ing</em> : après <em>enjoy</em>, le verbe suivant prend toujours la forme <em>-ing</em> — mais ici <em>enjoy</em> est la base verbale après <em>use to</em>."
+ },
+ {
+  "before": "",
+  "verb": "not travel",
+  "after": "abroad.",
+  "subject": "They",
+  "answers": [
+   "didn't use to travel",
+   "did not use to travel"
+  ],
+  "correct": "They didn't use to travel",
+  "explanation": "<div class=\"structure-box\">They <em>didn't use to travel</em> abroad.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Abroad</em> = à l'étranger. Rappel clé : avec <em>didn't</em>, jamais de <em>-d</em> sur <em>use</em>."
+ },
+ {
+  "before": "",
+  "verb": "not eat",
+  "after": "vegetables when she was a child.",
+  "subject": "She",
+  "answers": [
+   "didn't use to eat",
+   "did not use to eat"
+  ],
+  "correct": "She didn't use to eat",
+  "explanation": "<div class=\"structure-box\">She <em>didn't use to eat</em> vegetables when she was a child.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\nLa précision <em>when she was a child</em> ancre l'habitude dans le passé révolu."
+ },
+ {
+  "before": "",
+  "verb": "not like",
+  "after": "coffee when I was a teenager.",
+  "subject": "I",
+  "answers": [
+   "didn't use to like",
+   "did not use to like"
+  ],
+  "correct": "I didn't use to like",
+  "explanation": "<div class=\"structure-box\">I <em>didn't use to like</em> coffee when I was a teenager.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\nIndique que le goût a changé avec le temps — on peut ne pas aimer quelque chose puis l'apprécier plus tard."
+ },
+ {
+  "before": "",
+  "verb": "not talk",
+  "after": "much in class.",
+  "subject": "He",
+  "answers": [
+   "didn't use to talk",
+   "did not use to talk"
+  ],
+  "correct": "He didn't use to talk",
+  "explanation": "<div class=\"structure-box\">He <em>didn't use to talk</em> much in class.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Much</em> = beaucoup. <em>Didn't use to talk much</em> décrit un comportement passé habituel (être silencieux)."
+ },
+ {
+  "before": "",
+  "verb": "not have",
+  "after": "a computer at home.",
+  "subject": "We",
+  "answers": [
+   "didn't use to have",
+   "did not use to have"
+  ],
+  "correct": "We didn't use to have",
+  "explanation": "<div class=\"structure-box\">We <em>didn't use to have</em> a computer at home.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Used to</em> s'utilise aussi pour parler d'un état passé (possession). <em>Have</em> = avoir/posséder."
+ },
+ {
+  "before": "",
+  "verb": "not own",
+  "after": "a car when they were young.",
+  "subject": "My parents",
+  "answers": [
+   "didn't use to own",
+   "did not use to own"
+  ],
+  "correct": "My parents didn't use to own",
+  "explanation": "<div class=\"structure-box\">My parents <em>didn't use to own</em> a car when they were young.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Own</em> = posséder. <em>Used to</em> fonctionne bien avec les verbes d'état comme <em>own</em>, <em>have</em>, <em>be</em>."
+ },
+ {
+  "before": "",
+  "verb": "not wear",
+  "after": "glasses when she was a child.",
+  "subject": "She",
+  "answers": [
+   "didn't use to wear",
+   "did not use to wear"
+  ],
+  "correct": "She didn't use to wear",
+  "explanation": "<div class=\"structure-box\">She <em>didn't use to wear</em> glasses when she was a child.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Wear</em> = porter (un vêtement, des lunettes…). Verbe irrégulier au prétérit simple (<em>wore</em>), mais on utilise la base verbale après <em>use to</em>."
+ },
+ {
+  "before": "",
+  "verb": "not go",
+  "after": "to bed so late when they were kids.",
+  "subject": "They",
+  "answers": [
+   "didn't use to go",
+   "did not use to go"
+  ],
+  "correct": "They didn't use to go",
+  "explanation": "<div class=\"structure-box\">They <em>didn't use to go</em> to bed so late when they were kids.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Go to bed</em> = aller au lit. Expression idiomatique très fréquente — la base verbale reste <em>go</em>."
+ },
+ {
+  "before": "",
+  "verb": "not know",
+  "after": "how to swim.",
+  "subject": "I",
+  "answers": [
+   "didn't use to know",
+   "did not use to know"
+  ],
+  "correct": "I didn't use to know",
+  "explanation": "<div class=\"structure-box\">I <em>didn't use to know</em> how to swim.</div>\nPhrase <strong>négative</strong> : <strong>sujet + didn't use to + base verbale</strong>.<br>\n<em>Know how to</em> = savoir (faire quelque chose). <em>Know</em> est ici la base verbale après <em>use to</em>."
+ },
+ {
+  "before": "",
+  "verb": "you / live",
+  "after": "in this city when you were a child?",
+  "answers": [
+   "did you use to live"
+  ],
+  "correct": "Did you use to live",
+  "explanation": "<div class=\"structure-box\"><em>Did you use to live</em> in this city…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n⚠️ À la forme interrogative, on commence par <em>Did</em> et on écrit <strong>use to</strong> (sans <em>d</em>)."
+ },
+ {
+  "before": "",
+  "verb": "he / walk",
+  "after": "to school when he was young?",
+  "answers": [
+   "did he use to walk"
+  ],
+  "correct": "Did he use to walk",
+  "explanation": "<div class=\"structure-box\"><em>Did he use to walk</em> to school…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Did</em> porte le passé → le verbe reste à la <strong>base verbale</strong> : <em>walk</em>, pas <em>walked</em>."
+ },
+ {
+  "before": "",
+  "verb": "she / enjoy",
+  "after": "sports when she was at school?",
+  "answers": [
+   "did she use to enjoy"
+  ],
+  "correct": "Did she use to enjoy",
+  "explanation": "<div class=\"structure-box\"><em>Did she use to enjoy</em> sports…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Enjoy</em> reste à la base verbale après <em>use to</em>. On ne dit pas <em>did she used to</em> — c'est une erreur très fréquente !"
+ },
+ {
+  "before": "",
+  "verb": "they / have",
+  "after": "a garden when they were children?",
+  "answers": [
+   "did they use to have"
+  ],
+  "correct": "Did they use to have",
+  "explanation": "<div class=\"structure-box\"><em>Did they use to have</em> a garden…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Used to</em> peut porter sur un état (<em>have a garden</em>) aussi bien que sur une action habituelle."
+ },
+ {
+  "before": "",
+  "verb": "you / like",
+  "after": "vegetables when you were a child?",
+  "answers": [
+   "did you use to like"
+  ],
+  "correct": "Did you use to like",
+  "explanation": "<div class=\"structure-box\"><em>Did you use to like</em> vegetables…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\nQuestion classique sur un goût passé. Rappel : <strong>use to</strong> (pas <em>used to</em>) après <em>Did</em>."
+ },
+ {
+  "before": "",
+  "verb": "he / play",
+  "after": "video games when he was a teenager?",
+  "answers": [
+   "did he use to play"
+  ],
+  "correct": "Did he use to play",
+  "explanation": "<div class=\"structure-box\"><em>Did he use to play</em> video games…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>When he was a teenager</em> ancre la question dans une période passée précise."
+ },
+ {
+  "before": "",
+  "verb": "your parents / live",
+  "after": "abroad when they were young?",
+  "answers": [
+   "did your parents use to live"
+  ],
+  "correct": "Did your parents use to live",
+  "explanation": "<div class=\"structure-box\"><em>Did your parents use to live</em> abroad…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Abroad</em> = à l'étranger. Le sujet peut être un groupe nominal comme <em>your parents</em>."
+ },
+ {
+  "before": "",
+  "verb": "she / be",
+  "after": "shy when she was a child?",
+  "answers": [
+   "did she use to be"
+  ],
+  "correct": "Did she use to be",
+  "explanation": "<div class=\"structure-box\"><em>Did she use to be</em> shy…?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Be</em> s'utilise en base verbale, même dans les questions. <em>Shy</em> = timide."
+ },
+ {
+  "before": "",
+  "verb": "they / go",
+  "after": "on holiday every summer?",
+  "answers": [
+   "did they use to go"
+  ],
+  "correct": "Did they use to go",
+  "explanation": "<div class=\"structure-box\"><em>Did they use to go</em> on holiday every summer?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Go on holiday</em> = partir en vacances. <em>Every summer</em> souligne le caractère habituel et répété."
+ },
+ {
+  "before": "",
+  "verb": "you / wake up",
+  "after": "early on school days?",
+  "answers": [
+   "did you use to wake up"
+  ],
+  "correct": "Did you use to wake up",
+  "explanation": "<div class=\"structure-box\"><em>Did you use to wake up</em> early on school days?</div>\nPhrase <strong>interrogative</strong> : <strong>Did + sujet + use to + base verbale ?</strong><br>\n<em>Wake up</em> est un verbe à particule. On garde les deux mots ensemble après <em>use to</em>."
+ }
+]
