@@ -374,6 +374,15 @@
   .pf-row .lvl { font-size: 11px; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
   .pf-sel { display: flex; flex-direction: column; gap: 6px; } .pf-pick { display: flex; align-items: center; gap: 8px; font-size: 14px; }
   .dv-done { border-color: rgba(74,222,128,.4); } .dv-done .wr-n { background: #4ade80; }
+  .dg-group { margin-top: 18px; }
+  .dg-item { background: var(--surface2); border: 1px solid var(--border); border-left: 4px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; }
+  .dg-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; } .dg-name { flex: 1; font-weight: 600; font-size: 14px; }
+  .dg-lv { font-size: 11px; color: var(--muted); } .dg-pct { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; }
+  .dg-item .lb-track { height: 7px; } .dg-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 13px; }
+  .dg-links a { color: var(--accent); text-decoration: none; } .dg-links a:hover { text-decoration: underline; }
+  .dg-tw { border-left-color: #f87171; } .dg-tw .dg-pct { color: #f87171; } .dg-tw .lb-fill { background: #f87171; }
+  .dg-fr { border-left-color: #fbbf24; } .dg-fr .dg-pct { color: #fbbf24; } .dg-fr .lb-fill { background: #fbbf24; }
+  .dg-ac { border-left-color: #4ade80; } .dg-ac .dg-pct { color: #4ade80; } .dg-ac .lb-fill { background: #4ade80; }
   @media (max-width: 560px) { .dr-m { display: none; } .lvl-bar { grid-template-columns: 90px 1fr 40px; } }
 </style>
 
@@ -385,7 +394,7 @@
 <header>
   <div class="tag">English Activities</div>
   <h1>Par où <span>commencer ?</span></h1>
-  <p class="subtitle">Un petit test pour savoir quelles activités faire en premier.</p>
+  <p class="subtitle">Un test pour savoir ce qui est acquis et ce qui est à travailler.</p>
 </header>
 
 <!-- ═════ MENU ═════ -->
@@ -393,9 +402,9 @@
   <details class="lesson" open>
     <summary>Mode d'emploi</summary>
     <div class="lesson-body">
-      <p><b>Ce test sert à te conseiller par où commencer.</b> Il ne compte pas, il n'est pas noté.</p>
-      <p>Les questions vont du plus simple au plus difficile. À la fin, tu verras ton niveau conseillé (Novice, Intermédiaire, Avancé ou Expert) et une liste d'activités pour démarrer.</p>
-      <p>Tu peux refaire le test quand tu veux, par exemple dans quelques semaines pour voir tes progrès.</p>
+      <p><b>Ce test fait le point sur ce que tu sais déjà.</b> Il ne compte pas, il n'est pas noté. Il porte sur <b>27 notions</b>, avec 3 questions par notion, de la plus simple à la plus difficile.</p>
+      <p>Si tu ne connais pas la réponse, choisis <b>« Je ne sais pas »</b> plutôt que de répondre au hasard : le diagnostic sera plus juste. Si un niveau est trop difficile, le test s'arrête tout seul.</p>
+      <p>À la fin, tu verras ton score en %, ton niveau conseillé et la liste de tes notions <b>✅ acquises</b>, <b>⚠️ fragiles</b> et <b>❌ à travailler</b>, avec les activités du site pour progresser. Ton diagnostic reste dans « Mes progrès ».</p>
     </div>
   </details>
   <div class="missions" id="missions"></div>
@@ -435,9 +444,8 @@
 
 <script>
 const STORE_KEY = "ea_test_niveau_v2";
-const DATA = {"n0": {"kind": "choice", "instr": "Choisis la bonne réponse", "items": [{"opts": ["is", "are", "am", "be"], "line": "She ____ fourteen.", "tip": "she → is.", "lvl": 0, "keep": false}, {"opts": ["have", "has", "am", "is"], "line": "I ____ got a brother.", "tip": "I have got.", "lvl": 0, "keep": false}, {"opts": ["plays", "play", "playing", "is play"], "line": "He ____ football every Saturday.", "tip": "3e personne : -s.", "lvl": 0, "keep": false}, {"opts": ["Do", "Does", "Are", "Is"], "line": "____ you like chocolate?", "tip": "you → Do.", "lvl": 0, "keep": false}, {"opts": ["are", "is", "have", "has"], "line": "There ____ two cats in the garden.", "tip": "pluriel → there are.", "lvl": 0, "keep": false}, {"opts": ["an", "a", "the a", "—"], "line": "This is ____ apple.", "tip": "an devant un son voyelle.", "lvl": 0, "keep": false}, {"opts": ["My sister's name is Amy.", "The name of my sister is Amy's.", "My sister name's is Amy.", "Amy is the sister name."], "tip": "Le génitif : my sister's name.", "fr": "Quelle phrase est correcte ?", "lvl": 0, "keep": false}]}, "n1": {"kind": "choice", "instr": "Choisis la bonne réponse", "items": [{"opts": ["went", "go", "goes", "have gone"], "line": "Yesterday, I ____ to the cinema.", "tip": "Yesterday → prétérit : went.", "lvl": 1, "keep": false}, {"opts": ["Did", "Do", "Were", "Have"], "line": "____ you watch TV last night?", "tip": "Question au prétérit : Did + BV.", "lvl": 1, "keep": false}, {"opts": ["do", "did", "does", "done"], "line": "She didn't ____ her homework.", "tip": "didn't + base verbale.", "lvl": 1, "keep": false}, {"opts": ["bigger", "more big", "biggest", "big"], "line": "London is ____ than Paris.", "tip": "Adjectif court : -er.", "lvl": 1, "keep": false}, {"opts": ["is raining", "rains", "rain", "rained"], "line": "Look! It ____ .", "tip": "Look! → en ce moment : be + -ing.", "lvl": 1, "keep": false}, {"opts": ["to", "for", "at", "—"], "line": "I'm going ____ visit my aunt tomorrow.", "tip": "be going to + BV.", "lvl": 1, "keep": false}]}, "n2": {"kind": "choice", "instr": "Choisis la bonne réponse", "items": [{"opts": ["have lived", "live", "lived", "am living"], "line": "I ____ in this town since 2015.", "tip": "since + présent perfect.", "lvl": 2, "keep": false}, {"opts": ["will stay", "would stay", "stayed", "stay will"], "line": "If it rains, we ____ at home.", "tip": "If + présent → will.", "lvl": 2, "keep": false}, {"opts": ["was written", "wrote", "has write", "was wrote"], "line": "The book ____ by a famous author.", "tip": "Passif : be + participe passé.", "lvl": 2, "keep": false}, {"opts": ["was", "is being", "be", "were been"], "line": "He said that he ____ tired.", "tip": "Discours indirect : concordance des temps.", "lvl": 2, "keep": false}, {"opts": ["had", "has", "was", "did"], "line": "When I arrived, the film ____ already started.", "tip": "Antériorité dans le passé : past perfect.", "lvl": 2, "keep": false}, {"opts": ["must", "mustn't", "needn't", "may"], "line": "You ____ wear a seatbelt. It's the law.", "tip": "Obligation : must.", "lvl": 2, "keep": false}]}, "n3": {"kind": "choice", "instr": "Choisis la bonne réponse", "items": [{"opts": ["would have told", "would tell", "will tell", "told"], "line": "If I had known, I ____ you.", "tip": "Conditionnel type 3.", "lvl": 3, "keep": false}, {"opts": ["have I seen", "I have seen", "I saw", "did I saw"], "line": "Never ____ such a beautiful view.", "tip": "Inversion après Never en tête de phrase.", "lvl": 3, "keep": false}, {"opts": ["left", "leave", "will leave", "have left"], "line": "It's high time we ____ .", "tip": "It's high time + prétérit modal.", "lvl": 3, "keep": false}, {"opts": ["didn't", "don't", "won't", "not"], "line": "I'd rather you ____ smoke here.", "tip": "I'd rather + sujet + prétérit.", "lvl": 3, "keep": false}, {"opts": ["Disturbed", "Disturbing", "To disturb", "Disturb"], "line": "____ by the noise, she woke up.", "tip": "Participiale passive.", "lvl": 3, "keep": false}]}};
-const MDEF = [{"id": "test", "icon": "🗺️", "title": "Lancer le test", "desc": "24 questions, de plus en plus difficiles. Réponds sans regarder les leçons : si tu ne sais pas, choisis au hasard, ce n'est pas grave !", "from": ["n0", "n1", "n2", "n3"], "n": 24, "ordered": true}];
-/* ── Test de positionnement ── */
+/* ── Test de positionnement : diagnostic par notion (acquis / fragile / à travailler) ── */
+const DATA = {}, MDEF = [];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -511,30 +519,86 @@ const MISSIONS = MDEF.map(m => Object.assign({}, m, {
     .slice(0, m.n || 10).map(([it, d]) => BUILD[it.kind || d.kind](it, d.instr))
 }));
 
+const NOTIONS = [{"id": "be", "name": "Be et have got", "l": 0, "files": ["be_have_play.html"], "qs": [["My parents ____ teachers.", ["are", "is", "am", "be"], "they → are."], ["She ____ got blue eyes.", ["has", "have", "is", "does"], "she → has got."], ["____ you hungry?", ["Are", "Do", "Have", "Is"], "be : Are you…?"]]}, {"id": "ps", "name": "Présent simple", "l": 0, "files": ["present_simple.html", "adverbes_frequence.html"], "qs": [["My brother ____ in a bank.", ["works", "work", "working", "is work"], "3e personne : -s."], ["She ____ like fish.", ["doesn't", "don't", "isn't", "not"], "she → doesn't + BV."], ["Where ____ your father live?", ["does", "do", "is", "did"], "your father = he → does."]]}, {"id": "pc", "name": "Présent be + -ing", "l": 0, "files": ["present_continu.html"], "qs": [["Be quiet! The baby ____.", ["is sleeping", "sleeps", "sleep", "is sleep"], "En ce moment : be + -ing."], ["What ____ you doing now?", ["are", "do", "is", "does"], "you → are + -ing."], ["Look! They ____ football in the rain.", ["are playing", "play", "plays", "playing"], "Look! → action en cours."]]}, {"id": "pro", "name": "Pronoms et possessifs", "l": 0, "files": ["pronoms_personnels.html", "possessifs.html"], "qs": [["This is Tom. I like ____ very much.", ["him", "he", "his", "her"], "Complément masculin : him."], ["Emma and ____ sister are twins.", ["her", "his", "she", "their"], "Emma → her (possesseur féminin)."], ["Is this your bag? — Yes, it's ____.", ["mine", "my", "me", "I"], "Pronom possessif : mine."]]}, {"id": "art", "name": "Articles et pluriels", "l": 0, "files": ["articles.html", "pluriels.html"], "qs": [["I've got two ____.", ["children", "childs", "child", "childrens"], "Pluriel irrégulier : children."], ["She is ____ engineer.", ["an", "a", "the", "(pas d'article)"], "Métier : a / an ; an devant un son voyelle."], ["I love ____ music.", ["(pas d'article)", "the", "a", "an"], "Sens général : pas d'article."]]}, {"id": "there", "name": "There is / prépositions", "l": 0, "files": ["there_is.html", "prepositions.html", "heure_dates.html"], "qs": [["There ____ a lot of people in the street.", ["are", "is", "have", "has"], "people est pluriel → there are."], ["My birthday is ____ May.", ["in", "on", "at", "of"], "in + mois."], ["See you ____ Monday!", ["on", "in", "at", "to"], "on + jour."]]}, {"id": "lex0", "name": "Vocabulaire du quotidien", "l": 0, "files": ["famille.html", "nourriture.html", "calendrier.html"], "qs": [["Your mother's brother is your…", ["uncle", "cousin", "nephew", "grandfather"], "uncle = oncle."], ["Which word is a vegetable?", ["carrot", "pear", "cheese", "bread"], "carrot = carotte."], ["« Mercredi » in English is…", ["Wednesday", "Tuesday", "Thursday", "Saturday"], "Wednesday."]]}, {"id": "pret", "name": "Prétérit", "l": 1, "files": ["preterit.html", "verbe_regulier_irregulier.html"], "qs": [["Last summer, we ____ to Spain.", ["went", "go", "goed", "have gone"], "Last summer → prétérit : go → went."], ["She ____ a new phone yesterday.", ["bought", "buyed", "buys", "has bought"], "buy → bought."], ["I ____ my keys this morning, so I was late.", ["lost", "lose", "losed", "have lose"], "lose → lost."]]}, {"id": "quest", "name": "Poser des questions", "l": 1, "files": ["questions_fermees.html", "questions_ouvertes.html", "questions_sujet.html"], "qs": [["____ you see the match last night?", ["Did", "Do", "Were", "Have"], "Question au prétérit : Did + BV."], ["Where ____ they go last summer?", ["did", "do", "were", "have"], "Wh- + did + sujet + BV."], ["How much ____ this T-shirt cost?", ["does", "do", "is", "are"], "this T-shirt = it → does."]]}, {"id": "fut", "name": "Le futur", "l": 1, "files": ["futur.html"], "qs": [["Look at those clouds! It ____ rain.", ["is going to", "will to", "goes to", "is raining to"], "Indice visible → be going to."], ["I think he ____ pass his exam.", ["will", "is going", "goes", "would to"], "Prédiction / opinion : will."], ["I've planned it: tomorrow I ____ my grandmother.", ["am going to visit", "visit", "will to visit", "visiting"], "Projet décidé → be going to."]]}, {"id": "comp", "name": "Comparatif et superlatif", "l": 1, "files": ["comparatif.html", "superlatif.html"], "qs": [["This exercise is ____ than the first one.", ["easier", "more easy", "easyer", "the easiest"], "Adjectif court : -er (y → ier)."], ["She is ____ student in the class.", ["the best", "the better", "the goodest", "best"], "good → the best."], ["My bag is as heavy ____ yours.", ["as", "than", "that", "like"], "as … as."]]}, {"id": "mod", "name": "Les modaux", "l": 1, "files": ["modaux.html"], "qs": [["You ____ smoke in the hospital. It's forbidden.", ["mustn't", "don't have to", "needn't", "can"], "Interdiction : mustn't."], ["____ I open the window, please?", ["Can", "Must", "Should to", "Do"], "Demander la permission : Can I…?"], ["You look tired. You ____ go to bed.", ["should", "must to", "ought", "can to"], "Conseil : should + BV."]]}, {"id": "qty", "name": "Quantité (much, many, some, any)", "l": 1, "files": ["denombrables.html", "quantifieurs.html"], "qs": [["How ____ money have you got?", ["much", "many", "lot", "few"], "money est indénombrable → much."], ["There isn't ____ milk left.", ["any", "some", "no", "many"], "Phrase négative → any."], ["I need ____ information.", ["some", "an", "a few", "many"], "information est indénombrable."]]}, {"id": "pho", "name": "Prononciation (-ed, lettres muettes)", "l": 1, "files": ["phono_ed.html", "lettres_muettes.html"], "qs": [["Dans « walked », -ed se prononce…", ["/t/", "/d/", "/ɪd/"], "Après /k/ (son sourd) → /t/."], ["Dans « wanted », -ed se prononce…", ["/ɪd/", "/t/", "/d/"], "Après t ou d → /ɪd/."], ["Quelle lettre est muette dans « listen » ?", ["t", "l", "s", "n"], "listen /ˈlɪsən/."]]}, {"id": "pro2", "name": "Vocabulaire professionnel", "l": 1, "files": ["cap_vente.html", "argent_shopping.html", "cap_ecrit_entretien.html"], "qs": [["Where do customers pay in a shop?", ["at the till", "in the fitting room", "on the shelf", "in the warehouse"], "the till = la caisse."], ["« Un ticket de caisse » =", ["a receipt", "a recipe", "a ticket", "a bill"], "a recipe = une recette !"], ["« Un stage en entreprise » =", ["a work placement", "a stage", "a job centre", "a workshop"], "stage est un faux ami."]]}, {"id": "pp", "name": "Present perfect, for / since / ago", "l": 2, "files": ["present_perfect.html", "ago_for_since.html"], "qs": [["I have never ____ to Japan.", ["been", "went", "go", "was"], "have + participe passé : been."], ["She has lived here ____ 2010.", ["since", "for", "ago", "during"], "Point de départ → since."], ["We met three years ____.", ["ago", "since", "for", "before"], "Prétérit + durée + ago."]]}, {"id": "pastp", "name": "Past perfect et prétérit be + -ing", "l": 2, "files": ["past_perfect.html", "preterit_continu.html"], "qs": [["When the phone rang, I ____ a shower.", ["was having", "had", "have had", "am having"], "Action en cours dans le passé : was + -ing."], ["When we arrived, the train ____ already left.", ["had", "has", "was", "did"], "Antériorité dans le passé : had + PP."], ["He was tired because he ____ all day.", ["had worked", "has worked", "works", "was work"], "Cause antérieure : past perfect."]]}, {"id": "cond", "name": "Le conditionnel (if)", "l": 2, "files": ["conditionnel.html"], "qs": [["If I ____ rich, I would travel the world.", ["were", "am", "will be", "would be"], "Type 2 : if + prétérit (were)."], ["If you heat ice, it ____.", ["melts", "would melt", "melted", "will melting"], "Vérité générale : if + présent, présent."], ["If she had studied, she ____ the exam.", ["would have passed", "would pass", "will pass", "passed"], "Type 3 : would have + PP."]]}, {"id": "pass", "name": "Le passif", "l": 2, "files": ["passif.html"], "qs": [["This bridge ____ in 1890.", ["was built", "built", "is build", "has build"], "be + participe passé."], ["English ____ all over the world.", ["is spoken", "speaks", "is speaking", "spoken"], "Passif au présent : is spoken."], ["The letters ____ tomorrow.", ["will be sent", "will send", "are send", "will sent"], "Passif au futur : will be + PP."]]}, {"id": "ind", "name": "Discours indirect", "l": 2, "files": ["discours_indirect.html", "questions_indirectes.html"], "qs": [["She said she ____ tired.", ["was", "is being", "be", "were been"], "Concordance des temps : is → was."], ["He asked me where I ____.", ["lived", "did I live", "do I live", "living"], "Question indirecte : pas d'inversion."], ["She told me ____ the door.", ["to close", "close", "closing", "that close"], "Ordre rapporté : tell + to + BV."]]}, {"id": "rel", "name": "Pronoms relatifs", "l": 2, "files": ["relatifs.html"], "qs": [["The man ____ lives next door is a doctor.", ["who", "which", "whose", "what"], "Antécédent humain sujet : who."], ["This is the book ____ I told you about.", ["that", "who", "what", "whose"], "Antécédent non humain : that / which."], ["That's the girl ____ brother is in my class.", ["whose", "who's", "who", "which"], "Possession : whose."]]}, {"id": "conn", "name": "Connecteurs logiques", "l": 2, "files": ["connecteurs.html", "conjonctions_avancees.html"], "qs": [["I was ill, ____ I stayed at home.", ["so", "but", "because", "although"], "Conséquence : so."], ["____ it was raining, we went out.", ["Although", "Because", "Despite", "So"], "Concession + proposition : although."], ["He is rich. ____, he isn't happy.", ["However", "Therefore", "Moreover", "Because"], "Opposition : however."]]}, {"id": "toing", "name": "Verbe + to ou -ing", "l": 2, "files": ["verbes_to_ing.html", "like_ing.html"], "qs": [["I enjoy ____ in the sea.", ["swimming", "to swim", "swim", "swam"], "enjoy + -ing."], ["She decided ____ a new job.", ["to find", "finding", "find", "found"], "decide + to."], ["I'm looking forward to ____ you.", ["seeing", "see", "saw", "be seeing"], "look forward to + -ing (to est une préposition)."]]}, {"id": "inv", "name": "Inversion emphatique", "l": 3, "files": ["inversion.html"], "qs": [["Never ____ such a mess!", ["have I seen", "I have seen", "I saw", "did I saw"], "Never en tête → inversion."], ["Not only ____ late, but he also forgot his books.", ["was he", "he was", "he is", "did he was"], "Not only + inversion."], ["Had I known, I ____ earlier.", ["would have come", "would come", "will come", "had come"], "Had I known = If I had known."]]}, {"id": "wish", "name": "Wish et conditionnels mixtes", "l": 3, "files": ["wish.html", "conditionnels_mixtes.html"], "qs": [["I wish I ____ more time now.", ["had", "have", "would have", "will have"], "Regret présent : wish + prétérit."], ["If I had taken the job, I ____ rich now.", ["would be", "would have been", "will be", "am"], "Mixte : passé → conséquence présente."], ["I wish you ____ making that noise!", ["would stop", "stop", "stopped", "will stop"], "Agacement : wish + would."]]}, {"id": "subj", "name": "Subjonctif, it's time, I'd rather", "l": 3, "files": ["subjonctif.html"], "qs": [["It's high time we ____.", ["left", "leave", "will leave", "have left"], "It's high time + prétérit."], ["I'd rather you ____ tell anyone.", ["didn't", "don't", "won't", "not"], "I'd rather + sujet + prétérit."], ["The doctor insisted that he ____ in bed.", ["stay", "stays", "will stay", "is staying"], "Subjonctif : base verbale."]]}, {"id": "cleft", "name": "Mise en relief et participiales", "l": 3, "files": ["phrases_clivees.html", "participiales.html"], "qs": [["____ I need is a holiday.", ["What", "That", "Which", "It"], "Pseudo-clivée : What I need is…"], ["____ by the noise, she woke up.", ["Disturbed", "Disturbing", "To disturb", "Disturb"], "Participiale passive."], ["It was Tom ____ broke the window.", ["who", "which", "what", "whose"], "Clivée : It was … who."]]}];
 const LVN = ["Novice", "Intermédiaire", "Avancé", "Expert"];
-{
-  const m = MISSIONS[0], orig = m.build;
-  m.build = () => { const items = MDEF[0].from.flatMap(k => DATA[k].items); return orig().map((q, i) => Object.assign(q, { lvl: items[i].lvl })); };
+const IDK = "Je ne sais pas";
+const STOP_BELOW = 0.5;           /* si un niveau entier est sous 50 %, on arrête : les niveaux suivants sont trop difficiles */
+const ACQUIS = 0.8, FRAGILE = 0.5;
+function buildTest() {
+  const out = [];
+  [0, 1, 2, 3].forEach(l => {
+    const qs = [];
+    NOTIONS.filter(n => n.l === l).forEach(n => n.qs.forEach(([line, opts, tip]) => {
+      const order = shuffle(opts.slice()), options = order.concat(IDK);
+      const fill = line.includes("____") ? line.replace("____", opts[0]).replace(/^(.)/, m => m.toUpperCase()) : opts[0];
+      qs.push({ kind: "mcq", instr: "Choisis la bonne réponse · " + n.name, label: line, keepOrder: true,
+        head: `<div class="fr-line">${esc(line)}</div>`, options, correct: order.indexOf(opts[0]), correctText: fill, tip: tip || "", notion: n.id, lvl: l });
+    }));
+    out.push(...shuffle(qs));
+  });
+  return out;
 }
+MISSIONS.push({ id: "test", icon: "🗺️", title: "Lancer le test", desc: `${NOTIONS.reduce((s, n) => s + n.qs.length, 0)} questions au maximum sur ${NOTIONS.length} notions, environ 15 minutes. Le test s'arrête plus tôt si les questions deviennent trop difficiles.`, build: buildTest });
+
+/* Arrêt anticipé à la fin d'un niveau trop difficile */
+nextQuestion = function () {
+  const q = questions[qi], nx = questions[qi + 1];
+  if (nx && nx.lvl !== q.lvl) {
+    const r = recap.filter((x, i) => questions[i].lvl === q.lvl);
+    if (r.filter(x => x.ok).length / r.length < STOP_BELOW) { questions = questions.slice(0, qi + 1); showScore(); return; }
+  }
+  qi++; if (qi < questions.length) renderQuestion(); else showScore();
+};
+
 const _show = showScore;
 showScore = function () {
   _show();
   if (current.id !== "test") return;
+  const sh = document.getElementById("sShare"); if (sh) sh.remove();
+  const res = {};
+  recap.forEach((r, i) => { const q = questions[i]; const o = res[q.notion] = res[q.notion] || { ok: 0, n: 0 }; o.n++; if (r.ok) o.ok++; });
   const by = [0, 1, 2, 3].map(l => { const r = recap.filter((x, i) => questions[i].lvl === l); return { ok: r.filter(x => x.ok).length, n: r.length }; });
   let lvl = 0;
-  for (let l = 0; l < 4; l++) { if (by[l].n && by[l].ok / by[l].n >= 0.6) lvl = Math.min(3, l + 1); else break; }
-  if (by[3].n && by[3].ok / by[3].n >= 0.8 && lvl === 3) lvl = 3;
-  try { localStorage.setItem("ea_level", JSON.stringify({ lvl, date: Date.now(), by })); } catch (e) {}
-  const cat = (window.EA_CATALOG || []).filter(c => c.l === lvl && c.s !== "Production");
-  const pickSec = s => cat.filter(c => c.s === s);
-  const sugg = [].concat(pickSec("Grammaire").slice(0, 4), pickSec("Lexique").slice(0, 2), pickSec("Syntaxe").slice(0, 1), pickSec("Phonologie").slice(0, 1), pickSec("Compréhension").slice(0, 2));
-  document.getElementById("sMsg").innerHTML = `<div class="lvl-result">
-    <div class="lvl-bars">${by.map((b, i) => `<div class="lvl-bar"><span>${LVN[i]}</span><div class="lb-track"><div class="lb-fill" style="width:${b.n ? b.ok / b.n * 100 : 0}%"></div></div><b>${b.ok}/${b.n}</b></div>`).join("")}</div>
-    <p class="lvl-reco">Niveau conseillé pour t'entraîner : <b>${LVN[lvl]}</b></p>
-    <p class="lvl-help">Commence par ces activités, puis explore les autres de ce niveau. Ce n'est qu'un conseil : tu peux faire toutes les activités du site !</p>
-    <div class="dash-list">${sugg.map(c => `<a class="dash-row" href="${c.f}"><span class="dr-t">${EA.esc(c.t)}</span><span class="dr-m">${c.s}</span><span class="dr-s">→</span></a>`).join("")}</div>
-    <p style="margin-top:14px"><a class="btn btn-primary" href="index.html?niveau=${lvl}">Voir toutes les activités ${LVN[lvl]}</a></p></div>`;
+  for (let l = 0; l < 4; l++) { if (by[l].n && by[l].ok / by[l].n >= 0.7) lvl = Math.min(3, l + 1); else break; }
+  const rows = NOTIONS.map(n => {
+    const r = res[n.id]; if (!r) return Object.assign({}, n, { pct: null, st: "ne" });
+    const pct = Math.round(r.ok / r.n * 100);
+    return Object.assign({}, n, { pct, st: pct >= ACQUIS * 100 ? "ac" : pct >= FRAGILE * 100 ? "fr" : "tw" });
+  });
+  const total = recap.length, good = recap.filter(r => r.ok).length;
+  const diag = { date: Date.now(), lvl, pct: Math.round(good / total * 100), notions: rows.filter(r => r.pct != null).map(r => ({ id: r.id, name: r.name, l: r.l, pct: r.pct, st: r.st, files: r.files })) };
+  try { localStorage.setItem("ea_level", JSON.stringify({ lvl, date: Date.now(), by })); localStorage.setItem("ea_diag", JSON.stringify(diag)); } catch (e) {}
+  const cat = window.EA_CATALOG || [];
+  const ttl = f => (cat.find(c => c.f === f) || { t: f.replace(".html", "") }).t;
+  const item = r => `<div class="dg-item dg-${r.st}">
+      <div class="dg-top"><span class="dg-name">${esc(r.name)}</span><span class="dg-lv">${LVN[r.l]}</span><span class="dg-pct">${r.pct}%</span></div>
+      <div class="lb-track"><div class="lb-fill" style="width:${r.pct}%"></div></div>
+      ${r.st !== "ac" ? `<div class="dg-links">${r.files.map(f => `<a href="${f}">${esc(ttl(f))} →</a>`).join("")}</div>` : ""}</div>`;
+  const group = (st, title, help) => { const g = rows.filter(r => r.st === st).sort((a, b) => a.pct - b.pct || a.l - b.l);
+    return g.length ? `<div class="dg-group"><div class="seance-title">${title} <span class="dash-count">${g.length}</span></div><p class="lvl-help">${help}</p>${g.map(item).join("")}</div>` : ""; };
+  const ne = rows.filter(r => r.st === "ne");
   document.getElementById("sStars").textContent = "🗺️";
+  document.getElementById("sScore").innerHTML = `${diag.pct}<span>%</span>`;
+  document.getElementById("sMsg").innerHTML = `<div class="lvl-result">
+    <p class="lvl-help" style="text-align:center">${good} bonnes réponses sur ${total} questions.</p>
+    <div class="lvl-bars">${by.map((b, i) => `<div class="lvl-bar"><span>${LVN[i]}</span><div class="lb-track"><div class="lb-fill" style="width:${b.n ? b.ok / b.n * 100 : 0}%"></div></div><b>${b.n ? Math.round(b.ok / b.n * 100) + "%" : "—"}</b></div>`).join("")}</div>
+    <p class="lvl-reco">Niveau conseillé pour t'entraîner : <b>${LVN[lvl]}</b></p>
+    ${group("tw", "❌ À travailler en priorité", "Moins de 50 % de réussite : relis la leçon et fais l'activité proposée.")}
+    ${group("fr", "⚠️ Fragile", "De 50 à 79 % : c'est en bonne voie, encore un peu d'entraînement pour consolider.")}
+    ${group("ac", "✅ Acquis", "80 % ou plus : bravo, cette notion est maîtrisée.")}
+    ${ne.length ? `<div class="dg-group"><div class="seance-title">Non évalué <span class="dash-count">${ne.length}</span></div><p class="lvl-help">Le test s'est arrêté avant ces notions plus difficiles : travaille d'abord les notions ci-dessus. ${ne.map(n => esc(n.name)).join(" · ")}</p></div>` : ""}
+    <div class="dash-name" style="margin-top:18px"><input class="answer" id="dgName" placeholder="Ton prénom et ta classe" value="${esc(EA.getName())}"></div>
+    <div class="dash-actions"><button class="btn btn-primary" type="button" id="dgCopy">📋 Copier mon diagnostic pour le professeur</button><a class="btn btn-ghost" href="index.html?niveau=${lvl}">Activités ${LVN[lvl]}</a></div>
+    <div class="dash-bilan" id="dgOut"></div></div>`;
+  document.getElementById("dgName").onchange = e => EA.setName(e.target.value);
+  document.getElementById("dgCopy").onclick = e => {
+    const L = st => rows.filter(r => r.st === st).map(r => `${r.name} ${r.pct}%`).join(", ") || "—";
+    const txt = EA.sign(`${EA.getName() || "(prénom ?)"} — Test de niveau — ${diag.pct}% — niveau conseillé ${LVN[lvl]} — ${EA.fmtDate(Date.now())}`) +
+      `\nÀ travailler : ${L("tw")}\nFragile : ${L("fr")}\nAcquis : ${L("ac")}` + (ne.length ? `\nNon évalué : ${ne.map(n => n.name).join(", ")}` : "");
+    document.getElementById("dgOut").textContent = txt; EA.copy(txt, e.currentTarget);
+  };
+  const rc = document.getElementById("sRecap");
+  rc.innerHTML = `<details class="dash-errs"><summary>Voir le détail de mes réponses</summary>${rc.innerHTML}</details>`;
 };
 
 /* ═══════════ OUTILS ═══════════ */

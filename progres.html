@@ -374,6 +374,15 @@
   .pf-row .lvl { font-size: 11px; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
   .pf-sel { display: flex; flex-direction: column; gap: 6px; } .pf-pick { display: flex; align-items: center; gap: 8px; font-size: 14px; }
   .dv-done { border-color: rgba(74,222,128,.4); } .dv-done .wr-n { background: #4ade80; }
+  .dg-group { margin-top: 18px; }
+  .dg-item { background: var(--surface2); border: 1px solid var(--border); border-left: 4px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; }
+  .dg-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; } .dg-name { flex: 1; font-weight: 600; font-size: 14px; }
+  .dg-lv { font-size: 11px; color: var(--muted); } .dg-pct { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; }
+  .dg-item .lb-track { height: 7px; } .dg-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 13px; }
+  .dg-links a { color: var(--accent); text-decoration: none; } .dg-links a:hover { text-decoration: underline; }
+  .dg-tw { border-left-color: #f87171; } .dg-tw .dg-pct { color: #f87171; } .dg-tw .lb-fill { background: #f87171; }
+  .dg-fr { border-left-color: #fbbf24; } .dg-fr .dg-pct { color: #fbbf24; } .dg-fr .lb-fill { background: #fbbf24; }
+  .dg-ac { border-left-color: #4ade80; } .dg-ac .dg-pct { color: #4ade80; } .dg-ac .lb-fill { background: #4ade80; }
   @media (max-width: 560px) { .dr-m { display: none; } .lvl-bar { grid-template-columns: 90px 1fr 40px; } }
 </style>
 
@@ -520,6 +529,18 @@ if (window.EA) EA.onAnswer = (q, ok) => { if (ok && q.__page) EA.resolve(q.__pag
 
 const LVN = ["Novice", "Intermédiaire", "Avancé", "Expert"];
 function catalogTitle(f) { const c = (window.EA_CATALOG || []).find(x => x.f === f); return c ? c.t : null; }
+function diagHtml() {
+  let d = null; try { d = JSON.parse(localStorage.getItem("ea_diag") || "null"); } catch (e) {}
+  if (!d || !d.notions) return "";
+  const cat = window.EA_CATALOG || [], ttl = f => (cat.find(c => c.f === f) || { t: f }).t;
+  const row = n => `<div class="dg-item dg-${n.st}"><div class="dg-top"><span class="dg-name">${EA.esc(n.name)}</span><span class="dg-pct">${n.pct}%</span></div>
+    <div class="lb-track"><div class="lb-fill" style="width:${n.pct}%"></div></div>
+    <div class="dg-links">${n.files.map(f => `<a href="${f}">${EA.esc(ttl(f))} →</a>`).join("")}</div></div>`;
+  const tw = d.notions.filter(n => n.st === "tw").sort((a, b) => a.pct - b.pct), fr = d.notions.filter(n => n.st === "fr"), ac = d.notions.filter(n => n.st === "ac");
+  return `<div class="seance-title">Mon diagnostic <span class="dash-count">${EA.fmtDate(d.date).split(" ")[0]} · ${d.pct}%</span></div>
+    <p class="dash-help">✅ ${ac.length} acquise${ac.length > 1 ? "s" : ""} · ⚠️ ${fr.length} fragile${fr.length > 1 ? "s" : ""} · ❌ ${tw.length} à travailler — <a href="test_niveau.html">refaire le test</a></p>
+    ${tw.concat(fr).map(row).join("") || `<p class="dash-help">Toutes les notions testées sont acquises. Bravo !</p>`}`;
+}
 function drawDash() {
   if (!window.EA) return;
   let box = document.getElementById("dash"), box2 = document.getElementById("dash2");
@@ -545,6 +566,7 @@ function drawDash() {
   </div>
   ${lvl ? `<p class="dash-lvl">🗺️ Niveau conseillé par le test : <b>${LVN[lvl.lvl]}</b> · <a href="index.html?niveau=${lvl.lvl}">voir les activités de ce niveau</a></p>`
         : `<p class="dash-lvl">🗺️ Tu ne sais pas par où commencer ? <a href="test_niveau.html">Fais le test de niveau</a>.</p>`}
+  ${diagHtml()}
   <div class="seance-title">Mes erreurs à retravailler <span class="dash-count">${errs.length}</span></div>
   ${errs.length ? `<p class="dash-help">${rep ? "Lance une mission ci-dessous : chaque bonne réponse efface l'erreur de la liste." : ""}</p>
     <details class="dash-errs"><summary>Voir la liste</summary>${errs.slice(0, 40).map(e => `<div class="recap-item"><span class="r-ic">❌</span><span class="r-txt">${EA.esc(e.label)} → <b>${EA.esc(e.correct)}</b> <i>(${EA.esc(catalogTitle(e.page) || e.ptitle)})</i></span></div>`).join("")}</details>`
