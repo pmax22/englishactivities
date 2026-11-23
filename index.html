@@ -468,6 +468,9 @@
 
 
 
+
+
+
   /* ── Sections, recherche, filtres ── */
   .card.t .card-bar { background: linear-gradient(90deg, var(--ca), var(--cb)); }
   .card.t .card-visual { background: radial-gradient(ellipse at 50% 80%, rgba(var(--crgb),0.08) 0%, transparent 70%); }
@@ -501,6 +504,16 @@
   .chip.active { background: rgba(255,255,255,.12); color: var(--text); border-color: var(--text); }
   .chip.cap { border-style: dashed; }
   .sec { margin-top: 34px; }
+  .stabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .stabs[hidden] { display: none; }
+  .stab { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; padding: 6px 14px; border-radius: 10px; cursor: pointer;
+    background: transparent; color: var(--muted); border: 1px solid var(--border); transition: all .2s; }
+  .stab:hover { color: var(--text); } .stab.active { background: rgba(255,255,255,.12); color: var(--text); border-color: var(--text); }
+  .stab .n { opacity: .6; margin-left: 5px; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  .fam-head { max-width: 1100px; margin: 46px auto -14px; padding: 0 32px; }
+  .fam-head span { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+    border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+  .fam-head.hidden { display: none; }
   .sec-head { max-width: 1100px; margin: 0 auto 16px; padding: 0 32px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .sec-head h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.5px; }
   .sec-head p { color: var(--muted); font-size: 14px; }
@@ -523,8 +536,8 @@
   .sub-title span { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 400; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; }
   @media (max-width: 600px) { .sub-title { padding: 0 16px; } }
   /* ── Compact : une ligne par rangée de filtres, défilement horizontal ── */
-  .tabs, .levels, .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
-  .tabs::-webkit-scrollbar, .levels::-webkit-scrollbar, .chips::-webkit-scrollbar { display: none; }
+  .tabs, .stabs, .levels, .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+  .tabs::-webkit-scrollbar, .stabs::-webkit-scrollbar, .levels::-webkit-scrollbar, .chips::-webkit-scrollbar { display: none; }
   .tab, .lv, .chip { flex-shrink: 0; white-space: nowrap; }
   .tab { font-size: 14px; padding: 8px 16px; border-radius: 10px; }
   .chips:empty { display: none; }
@@ -580,7 +593,7 @@
     .reco { padding: 0 16px; font-size: 13px; }
     .card.done .card-visual::after { top: 8px; right: 10px; font-size: 9px; padding: 1px 6px; }
   }
-  @media (max-width: 600px) { .toolbar, .sec-head { padding: 0 16px; } }
+  @media (max-width: 600px) { .toolbar, .sec-head, .fam-head { padding: 0 16px; } .fam-head { margin: 30px auto -10px; } .stab { font-size: 12px; padding: 5px 11px; white-space: nowrap; } }
 
   /* ── FOOTER ── */
   .page-footer {
@@ -629,6 +642,18 @@
 <meta name="theme-color" content="#0f1117">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
 <script src="assets/ea.js"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<script src="assets/ea.js"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<script src="assets/ea.js"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<script src="assets/ea.js"></script>
 </head>
 <body>
 
@@ -646,12 +671,12 @@
 
   <div class="stats-bar">
     <div class="stat">
-      <div class="stat-num" id="countActivities">142</div>
+      <div class="stat-num" id="countActivities">163</div>
       <div class="stat-label">Activités</div>
     </div>
     <div class="stats-sep"></div>
     <div class="stat">
-      <div class="stat-num">6</div>
+      <div class="stat-num">9</div>
       <div class="stat-label">Sections</div>
     </div>
     <div class="stats-sep"></div>
@@ -675,9 +700,12 @@
 <div class="toolbar">
   <input class="search" id="search" type="search" placeholder="Rechercher une notion : prétérit, did, adjectifs, météo…" autocomplete="off">
   <div class="tabs" id="tabs"></div>
+  <div class="stabs" id="stabs" hidden></div>
   <div class="levels" id="levels"></div>
   <div class="chips" id="chips"></div>
 </div>
+
+<div class="fam-head" data-fam="Linguistique"><span>Compétence linguistique</span></div>
 
 <section class="sec" data-sec="Grammaire">
   <div class="sec-head"><h2>Grammaire</h2><p>Les formes : temps, verbes, noms, pronoms, adjectifs…</p></div>
@@ -2619,7 +2647,7 @@
     </div>
   </div>
   <div class="sub" data-sub="Société &amp; culture">
-    <h3 class="sub-title">Société &amp; culture<span>4</span></h3>
+    <h3 class="sub-title">Société &amp; culture<span>3</span></h3>
     <div class="grid">
   <a class="card t" href="pays_nationalites.html" data-level="Novice" data-section="Lexique" data-tags="Société &amp; culture" data-search="pays et nationalites france / french, germany / german, the usa / american… lexique · monde spain · spanish pays nationalites langues societe &amp; culture lexique pays nationalites langues novice" style="--ca:#bbf7d0;--cb:#15803d;--crgb:187,247,208;animation-delay:0.90s">
     <div class="card-bar"></div>
@@ -2684,31 +2712,10 @@
       <span class="card-arrow">↗</span>
     </div>
   </a>
-  <a class="card t" href="fetes_traditions.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Société &amp; culture" data-search="fetes et traditions halloween, bonfire night, thanksgiving, christmas, st patrick&#x27;s day… lexique · culture bonfire night fetes dates traditions societe &amp; culture lexique fetes traditions culture intermediaire" style="--ca:#fcd34d;--cb:#d97706;--crgb:252,211,77;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="lvl lvl-1">Intermédiaire</span>
-      <span class="big-label" style="font-size:42px">Halloween</span>
-      <span class="badge">Bonfire Night</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Lexique · Culture</div>
-      <div class="card-title">Fêtes et traditions</div>
-      <div class="card-desc">Halloween, Bonfire Night, Thanksgiving, Christmas, St Patrick&#x27;s Day…</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">Fêtes</span>
-        <span class="pill">Dates</span>
-        <span class="pill">Traditions</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
     </div>
   </div>
   <div class="sub" data-sub="Formation &amp; expressions">
-    <h3 class="sub-title">Formation &amp; expressions<span>5</span></h3>
+    <h3 class="sub-title">Formation &amp; expressions<span>4</span></h3>
     <div class="grid">
   <a class="card t" href="phrasal_verbs.html" data-level="Intermédiaire" data-section="Lexique" data-tags="Formation &amp; expressions" data-search="les phrasal verbs get up, look for, look after, give up, try on… : verbe + particule. lexique · verbes look for · give up get up look for give up formation &amp; expressions lexique verbes a particule phrasal intermediaire" style="--ca:#fcd34d;--cb:#fbbf24;--crgb:252,211,77;animation-delay:0.90s">
     <div class="card-bar"></div>
@@ -2788,26 +2795,6 @@
       <div class="card-pills">
         <span class="pill">préfixes</span>
         <span class="pill">suffixes</span>
-      </div>
-      <span class="card-arrow">↗</span>
-    </div>
-  </a>
-  <a class="card t" href="idiomes.html" data-level="Avancé" data-section="Lexique" data-tags="Formation &amp; expressions" data-search="les expressions idiomatiques it&#x27;s raining cats and dogs, break a leg, a piece of cake… lexique · expressions piece of cake sens figure equivalents formation &amp; expressions lexique expressions idiomatiques idioms avance" style="--ca:#fed7aa;--cb:#c2410c;--crgb:254,215,170;animation-delay:0.90s">
-    <div class="card-bar"></div>
-    <div class="card-visual">
-      <span class="lvl lvl-2">Avancé</span>
-      <span class="big-label">Idioms</span>
-      <span class="badge">piece of cake</span>
-    </div>
-    <div class="card-body">
-      <div class="card-category">Lexique · Expressions</div>
-      <div class="card-title">Les expressions idiomatiques</div>
-      <div class="card-desc">It&#x27;s raining cats and dogs, break a leg, a piece of cake…</div>
-    </div>
-    <div class="card-footer">
-      <div class="card-pills">
-        <span class="pill">sens figuré</span>
-        <span class="pill">équivalents</span>
       </div>
       <span class="card-arrow">↗</span>
     </div>
@@ -3468,6 +3455,558 @@
   </div>
 </section>
 
+<div class="fam-head" data-fam="Sociolinguistique"><span>Compétence sociolinguistique</span></div>
+
+<section class="sec" data-sec="Sociolinguistique">
+  <div class="sec-head"><h2>Sociolinguistique</h2><p>Adapter sa langue à la situation : registres, politesse, variétés d&#x27;anglais, expressions.</p></div>
+  <div class="sub" data-sub="Registres &amp; politesse">
+    <h3 class="sub-title">Registres &amp; politesse<span>2</span></h3>
+    <div class="grid">
+  <a class="card t" href="so_registres.html" data-level="Intermédiaire" data-section="Sociolinguistique" data-tags="Registres &amp; politesse|CAP Sapver" data-search="formal or informal? registres de langue, politesse, emails formels. sociolinguistique · registres could you…? registres politesse emails registres &amp; politesse cap sapver sociolinguistique registre formel informel politesse email soutenu familier intermediaire" style="--ca:#f0abfc;--cb:#a21caf;--crgb:240,171,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Formal?</span>
+      <span class="badge">Could you…?</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Sociolinguistique · Registres</div>
+      <div class="card-title">Formal or informal?</div>
+      <div class="card-desc">Registres de langue, politesse, emails formels.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Registres</span>
+        <span class="pill">Politesse</span>
+        <span class="pill">Emails</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="so_familier.html" data-level="Intermédiaire" data-section="Sociolinguistique" data-tags="Registres &amp; politesse" data-search="informal english &amp; slang gonna, wanna, mate, quid, awesome… : comprendre l&#x27;anglais parle. sociolinguistique · registres mate · dude formes reduites argot registre registres &amp; politesse sociolinguistique argot familier slang gonna wanna mate intermediaire" style="--ca:#fdba74;--cb:#c2410c;--crgb:253,186,116;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">gonna</span>
+      <span class="badge">mate · dude</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Sociolinguistique · Registres</div>
+      <div class="card-title">Informal English &amp; slang</div>
+      <div class="card-desc">gonna, wanna, mate, quid, awesome… : comprendre l&#x27;anglais parlé.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Formes réduites</span>
+        <span class="pill">Argot</span>
+        <span class="pill">Registre</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Variétés d&#x27;anglais">
+    <h3 class="sub-title">Variétés d&#x27;anglais<span>1</span></h3>
+    <div class="grid">
+  <a class="card t" href="so_british_american.html" data-level="Intermédiaire" data-section="Sociolinguistique" data-tags="Variétés d&#x27;anglais" data-search="british or american? vocabulaire, orthographe et grammaire : anglais britannique et americain. sociolinguistique · varietes apartment vocabulaire orthographe grammaire varietes d&#x27;anglais sociolinguistique anglais britannique americain differences vocabulaire orthographe intermediaire" style="--ca:#bfdbfe;--cb:#dc2626;--crgb:191,219,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">flat</span>
+      <span class="badge">apartment</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Sociolinguistique · Variétés</div>
+      <div class="card-title">British or American?</div>
+      <div class="card-desc">Vocabulaire, orthographe et grammaire : anglais britannique et américain.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Vocabulaire</span>
+        <span class="pill">Orthographe</span>
+        <span class="pill">Grammaire</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Expressions">
+    <h3 class="sub-title">Expressions<span>1</span></h3>
+    <div class="grid">
+  <a class="card t" href="idiomes.html" data-level="Avancé" data-section="Sociolinguistique" data-tags="Expressions" data-search="les expressions idiomatiques it&#x27;s raining cats and dogs, break a leg, a piece of cake… sociolinguistique · expressions piece of cake sens figure equivalents expressions sociolinguistique expressions idiomatiques idioms avance" style="--ca:#fed7aa;--cb:#c2410c;--crgb:254,215,170;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Idioms</span>
+      <span class="badge">piece of cake</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Sociolinguistique · Expressions</div>
+      <div class="card-title">Les expressions idiomatiques</div>
+      <div class="card-desc">It&#x27;s raining cats and dogs, break a leg, a piece of cake…</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">sens figuré</span>
+        <span class="pill">équivalents</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+</section>
+
+<div class="fam-head" data-fam="Pragmatique"><span>Compétence pragmatique</span></div>
+
+<section class="sec" data-sec="Pragmatique">
+  <div class="sec-head"><h2>Pragmatique</h2><p>Agir avec la langue : demander, s&#x27;excuser, convaincre, comprendre l&#x27;implicite.</p></div>
+  <div class="sub" data-sub="Actes de parole">
+    <h3 class="sub-title">Actes de parole<span>1</span></h3>
+    <div class="grid">
+  <a class="card t" href="pr_actes_parole.html" data-level="Intermédiaire" data-section="Pragmatique" data-tags="Actes de parole|CAP Sapver" data-search="speech acts demander, proposer, accepter, refuser, s&#x27;excuser, remercier. pragmatique · actes de parole would you like…? demander proposer s&#x27;excuser actes de parole cap sapver pragmatique actes de parole demander proposer excuser remercier refuser intermediaire" style="--ca:#a5b4fc;--cb:#4f46e5;--crgb:165,180,252;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label">Sorry!</span>
+      <span class="badge">Would you like…?</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Pragmatique · Actes de parole</div>
+      <div class="card-title">Speech acts</div>
+      <div class="card-desc">Demander, proposer, accepter, refuser, s&#x27;excuser, remercier.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Demander</span>
+        <span class="pill">Proposer</span>
+        <span class="pill">S&#x27;excuser</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Implicite">
+    <h3 class="sub-title">Implicite<span>1</span></h3>
+    <div class="grid">
+  <a class="card t" href="pr_implicite.html" data-level="Avancé" data-section="Pragmatique" data-tags="Implicite" data-search="reading between the lines understatement, ironie, politesse indirecte : ce qu&#x27;on veut vraiment dire. pragmatique · implicite understatement implicite ironie tact implicite pragmatique implicite understatement ironie sous-entendu diplomatie avance" style="--ca:#fbcfe8;--cb:#be185d;--crgb:251,207,232;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Not bad…</span>
+      <span class="badge">understatement</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Pragmatique · Implicite</div>
+      <div class="card-title">Reading between the lines</div>
+      <div class="card-desc">Understatement, ironie, politesse indirecte : ce qu&#x27;on veut vraiment dire.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Implicite</span>
+        <span class="pill">Ironie</span>
+        <span class="pill">Tact</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Argumenter">
+    <h3 class="sub-title">Argumenter<span>1</span></h3>
+    <div class="grid">
+  <a class="card t" href="pr_argumenter.html" data-level="Avancé" data-section="Pragmatique" data-tags="Argumenter" data-search="give your opinion argumenter, structurer un paragraphe, reagir dans un debat. pragmatique · discours however, … opinion arguments debat argumenter pragmatique argumenter opinion debat structurer discours avance" style="--ca:#86efac;--cb:#15803d;--crgb:134,239,172;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:34px">In my opinion</span>
+      <span class="badge">However, …</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Pragmatique · Discours</div>
+      <div class="card-title">Give your opinion</div>
+      <div class="card-desc">Argumenter, structurer un paragraphe, réagir dans un débat.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Opinion</span>
+        <span class="pill">Arguments</span>
+        <span class="pill">Débat</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+</section>
+
+<div class="fam-head" data-fam="Culturelle"><span>Compétence culturelle</span></div>
+
+<section class="sec" data-sec="Culture">
+  <div class="sec-head"><h2>Culture</h2><p>Repères historiques, institutions et société du monde anglophone.</p></div>
+  <div class="sub" data-sub="Royaume-Uni">
+    <h3 class="sub-title">Royaume-Uni<span>5</span></h3>
+    <div class="grid">
+  <a class="card t" href="cu_uk.html" data-level="Novice" data-section="Culture" data-tags="Royaume-Uni" data-search="the united kingdom quatre nations, quatre capitales, le drapeau, la langue : les bases. culture · royaume-uni 4 nations nations drapeau capitales royaume-uni culture culture royaume-uni uk angleterre ecosse galles union jack novice" style="--ca:#93c5fd;--cb:#1d4ed8;--crgb:147,197,253;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">UK</span>
+      <span class="badge">4 nations</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Royaume-Uni</div>
+      <div class="card-title">The United Kingdom</div>
+      <div class="card-desc">Quatre nations, quatre capitales, le drapeau, la langue : les bases.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Nations</span>
+        <span class="pill">Drapeau</span>
+        <span class="pill">Capitales</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_monarchie.html" data-level="Intermédiaire" data-section="Culture" data-tags="Royaume-Uni" data-search="the royal family de henry viii a charles iii : rois, reines et monarchie constitutionnelle. culture · royaume-uni charles iii rois reines role royaume-uni culture culture monarchie roi reine royal family elizabeth charles intermediaire" style="--ca:#fde68a;--cb:#b45309;--crgb:253,230,138;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">The Crown</span>
+      <span class="badge">Charles III</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Royaume-Uni</div>
+      <div class="card-title">The Royal Family</div>
+      <div class="card-desc">De Henry VIII à Charles III : rois, reines et monarchie constitutionnelle.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Rois</span>
+        <span class="pill">Reines</span>
+        <span class="pill">Rôle</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_institutions_uk.html" data-level="Intermédiaire" data-section="Culture" data-tags="Royaume-Uni" data-search="how the uk is governed parlement, premier ministre, elections, devolution. culture · royaume-uni mps · pm parlement elections partis royaume-uni culture culture institutions parlement westminster premier ministre elections intermediaire" style="--ca:#a7f3d0;--cb:#047857;--crgb:167,243,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:34px">Westminster</span>
+      <span class="badge">MPs · PM</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Royaume-Uni</div>
+      <div class="card-title">How the UK is governed</div>
+      <div class="card-desc">Parlement, Premier ministre, élections, dévolution.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Parlement</span>
+        <span class="pill">Élections</span>
+        <span class="pill">Partis</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_empire.html" data-level="Avancé" data-section="Culture" data-tags="Royaume-Uni" data-search="from empire to commonwealth l&#x27;empire britannique, les dominions, la decolonisation, le windrush. culture · royaume-uni dominions empire dominions commonwealth royaume-uni culture culture empire colonies dominions commonwealth windrush decolonisation inde canada australie avance" style="--ca:#fca5a5;--cb:#b91c1c;--crgb:252,165,165;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Empire</span>
+      <span class="badge">dominions</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Royaume-Uni</div>
+      <div class="card-title">From Empire to Commonwealth</div>
+      <div class="card-desc">L&#x27;Empire britannique, les dominions, la décolonisation, le Windrush.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Empire</span>
+        <span class="pill">Dominions</span>
+        <span class="pill">Commonwealth</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_brexit.html" data-level="Avancé" data-section="Culture" data-tags="Royaume-Uni" data-search="brexit le referendum de 2016, les arguments, la frontiere irlandaise, les consequences. culture · royaume-uni leave · remain referendum arguments consequences royaume-uni culture culture brexit union europeenne referendum leave remain avance" style="--ca:#c7d2fe;--cb:#4338ca;--crgb:199,210,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">Brexit</span>
+      <span class="badge">Leave · Remain</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Royaume-Uni</div>
+      <div class="card-title">Brexit</div>
+      <div class="card-desc">Le référendum de 2016, les arguments, la frontière irlandaise, les conséquences.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Référendum</span>
+        <span class="pill">Arguments</span>
+        <span class="pill">Conséquences</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Irlande">
+    <h3 class="sub-title">Irlande<span>2</span></h3>
+    <div class="grid">
+  <a class="card t" href="cu_famine.html" data-level="Avancé" data-section="Culture" data-tags="Irlande" data-search="the great famine la grande famine irlandaise : mildiou, faim, emigration, diaspora. culture · irlande great famine famine emigration diaspora irlande culture culture irlande grande famine pomme de terre emigration diaspora avance" style="--ca:#bbf7d0;--cb:#15803d;--crgb:187,247,208;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label">1845</span>
+      <span class="badge">Great Famine</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Irlande</div>
+      <div class="card-title">The Great Famine</div>
+      <div class="card-desc">La Grande Famine irlandaise : mildiou, faim, émigration, diaspora.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Famine</span>
+        <span class="pill">Émigration</span>
+        <span class="pill">Diaspora</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_troubles.html" data-level="Avancé" data-section="Culture" data-tags="Irlande" data-search="northern ireland &amp; the troubles bloody sunday, blanket et dirty protests, greves de la faim, accord du vendredi saint. culture · irlande du nord bloody sunday bloody sunday h-blocks paix irlande culture culture irlande du nord troubles bloody sunday dirty protest blanket greve de la faim bobby sands good friday avance" style="--ca:#fed7aa;--cb:#c2410c;--crgb:254,215,170;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Troubles</span>
+      <span class="badge">Bloody Sunday</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Irlande du Nord</div>
+      <div class="card-title">Northern Ireland &amp; the Troubles</div>
+      <div class="card-desc">Bloody Sunday, blanket et dirty protests, grèves de la faim, accord du Vendredi saint.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Bloody Sunday</span>
+        <span class="pill">H-Blocks</span>
+        <span class="pill">Paix</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="États-Unis">
+    <h3 class="sub-title">États-Unis<span>7</span></h3>
+    <div class="grid">
+  <a class="card t" href="cu_usa.html" data-level="Novice" data-section="Culture" data-tags="États-Unis" data-search="the united states 50 etats, la capitale, le drapeau, l&#x27;independance : les bases. culture · etats-unis 50 states etats drapeau 4 juillet etats-unis culture culture etats-unis usa amerique drapeau independance novice" style="--ca:#bfdbfe;--cb:#1e40af;--crgb:191,219,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label">USA</span>
+      <span class="badge">50 states</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">The United States</div>
+      <div class="card-desc">50 États, la capitale, le drapeau, l&#x27;indépendance : les bases.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">États</span>
+        <span class="pill">Drapeau</span>
+        <span class="pill">4 juillet</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_institutions_us.html" data-level="Intermédiaire" data-section="Culture" data-tags="États-Unis" data-search="how the usa is governed constitution, congres, president, cour supreme, elections. culture · etats-unis checks &amp; balances constitution congres president etats-unis culture culture institutions constitution congres president cour supreme elections intermediaire" style="--ca:#fecdd3;--cb:#be123c;--crgb:254,205,211;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:34px">We the People</span>
+      <span class="badge">checks &amp; balances</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">How the USA is governed</div>
+      <div class="card-desc">Constitution, Congrès, Président, Cour suprême, élections.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Constitution</span>
+        <span class="pill">Congrès</span>
+        <span class="pill">Président</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_manifest_destiny.html" data-level="Avancé" data-section="Culture" data-tags="États-Unis" data-search="manifest destiny la conquete de l&#x27;ouest, la ruee vers l&#x27;or, la piste des larmes, wounded knee. culture · etats-unis manifest destiny ouest frontiere amerindiens etats-unis culture culture manifest destiny conquete ouest frontiere amerindiens trail of tears ruee vers l&#x27;or avance" style="--ca:#fcd34d;--cb:#a16207;--crgb:252,211,77;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Go West</span>
+      <span class="badge">Manifest Destiny</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">Manifest Destiny</div>
+      <div class="card-desc">La conquête de l&#x27;Ouest, la ruée vers l&#x27;or, la Piste des larmes, Wounded Knee.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Ouest</span>
+        <span class="pill">Frontière</span>
+        <span class="pill">Amérindiens</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_red_scare.html" data-level="Avancé" data-section="Culture" data-tags="États-Unis" data-search="the red scare la peur du communisme, mccarthy, hollywood, the crucible. culture · etats-unis witch hunt guerre froide mccarthy hollywood etats-unis culture culture red scare maccarthysme mccarthy communisme guerre froide chasse aux sorcieres avance" style="--ca:#fecaca;--cb:#991b1b;--crgb:254,202,202;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:42px">Red Scare</span>
+      <span class="badge">witch hunt</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">The Red Scare</div>
+      <div class="card-desc">La peur du communisme, McCarthy, Hollywood, The Crucible.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Guerre froide</span>
+        <span class="pill">McCarthy</span>
+        <span class="pill">Hollywood</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_armes_usa.html" data-level="Avancé" data-section="Culture" data-tags="États-Unis" data-search="guns in america le deuxieme amendement, la nra, les tueries scolaires, le debat sur les armes. culture · etats-unis gun debate constitution debat ecoles etats-unis culture culture armes deuxieme amendement nra tueries scolaires gun control avance" style="--ca:#cbd5e1;--cb:#334155;--crgb:203,213,225;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-2">Avancé</span>
+      <span class="big-label" style="font-size:34px">2nd Amendment</span>
+      <span class="badge">gun debate</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">Guns in America</div>
+      <div class="card-desc">Le deuxième amendement, la NRA, les tueries scolaires, le débat sur les armes.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Constitution</span>
+        <span class="pill">Débat</span>
+        <span class="pill">Écoles</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_watergate.html" data-level="Expert" data-section="Culture" data-tags="États-Unis" data-search="the watergate scandal le cambriolage, les journalistes, les bandes, la demission de nixon. culture · etats-unis 1972 – 1974 nixon presse demission etats-unis culture culture watergate nixon scandale journalisme washington post expert" style="--ca:#ddd6fe;--cb:#6d28d9;--crgb:221,214,254;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:42px">Watergate</span>
+      <span class="badge">1972 – 1974</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">The Watergate scandal</div>
+      <div class="card-desc">Le cambriolage, les journalistes, les bandes, la démission de Nixon.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Nixon</span>
+        <span class="pill">Presse</span>
+        <span class="pill">Démission</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="cu_televangelisme.html" data-level="Expert" data-section="Culture" data-tags="États-Unis" data-search="televangelism religion, television et politique : billy graham, la moral majority, les scandales. culture · etats-unis televangelists religion television politique etats-unis culture culture televangelisme religion evangelique television droite religieuse expert" style="--ca:#fef08a;--cb:#ca8a04;--crgb:254,240,138;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-3">Expert</span>
+      <span class="big-label" style="font-size:34px">Faith &amp; TV</span>
+      <span class="badge">televangelists</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · États-Unis</div>
+      <div class="card-title">Televangelism</div>
+      <div class="card-desc">Religion, télévision et politique : Billy Graham, la Moral Majority, les scandales.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Religion</span>
+        <span class="pill">Télévision</span>
+        <span class="pill">Politique</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+  <div class="sub" data-sub="Monde anglophone &amp; traditions">
+    <h3 class="sub-title">Monde anglophone &amp; traditions<span>2</span></h3>
+    <div class="grid">
+  <a class="card t" href="cu_anglophone.html" data-level="Novice" data-section="Culture" data-tags="Monde anglophone &amp; traditions" data-search="english around the world canada, australie, inde, nigeria… : l&#x27;anglais sur tous les continents. culture · monde anglophone worldwide pays varietes capitales monde anglophone &amp; traditions culture culture monde anglophone pays anglophones canada australie inde novice" style="--ca:#99f6e4;--cb:#0f766e;--crgb:153,246,228;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-0">Novice</span>
+      <span class="big-label" style="font-size:42px">English</span>
+      <span class="badge">worldwide</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Monde anglophone</div>
+      <div class="card-title">English around the world</div>
+      <div class="card-desc">Canada, Australie, Inde, Nigeria… : l&#x27;anglais sur tous les continents.</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Pays</span>
+        <span class="pill">Variétés</span>
+        <span class="pill">Capitales</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+  <a class="card t" href="fetes_traditions.html" data-level="Intermédiaire" data-section="Culture" data-tags="Monde anglophone &amp; traditions" data-search="fetes et traditions halloween, bonfire night, thanksgiving, christmas, st patrick&#x27;s day… culture · traditions bonfire night fetes dates traditions monde anglophone &amp; traditions culture fetes traditions culture intermediaire" style="--ca:#fcd34d;--cb:#d97706;--crgb:252,211,77;animation-delay:0.90s">
+    <div class="card-bar"></div>
+    <div class="card-visual">
+      <span class="lvl lvl-1">Intermédiaire</span>
+      <span class="big-label" style="font-size:42px">Halloween</span>
+      <span class="badge">Bonfire Night</span>
+    </div>
+    <div class="card-body">
+      <div class="card-category">Culture · Traditions</div>
+      <div class="card-title">Fêtes et traditions</div>
+      <div class="card-desc">Halloween, Bonfire Night, Thanksgiving, Christmas, St Patrick&#x27;s Day…</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-pills">
+        <span class="pill">Fêtes</span>
+        <span class="pill">Dates</span>
+        <span class="pill">Traditions</span>
+      </div>
+      <span class="card-arrow">↗</span>
+    </div>
+  </a>
+    </div>
+  </div>
+</section>
+
+<div class="fam-head" data-fam="Comprendre &amp; produire"><span>Activités langagières</span></div>
+
 <section class="sec" data-sec="Compréhension">
   <div class="sec-head"><h2>Compréhension</h2><p>Lire et écouter des documents, puis répondre à des questions.</p></div>
   <div class="sub" data-sub="Compréhension écrite">
@@ -3815,18 +4354,21 @@
 
 
 
+
+
+
 <script>
 (function () {
   const KEY = "ea_index_v2";
-  const SECTIONS = ["Grammaire", "Syntaxe", "Lexique", "Phonologie", "Compréhension", "Production"], STAGS = {"Grammaire": ["Conjugaison", "Verbes & modaux", "Noms & déterminants", "Pronoms", "Adjectifs & adverbes", "Comparaison", "Prépositions"], "Syntaxe": ["Questions & réponses", "Liens logiques", "Phrase complexe", "Ordre des mots & négation", "Mise en relief"], "Lexique": ["Vie quotidienne", "Société & culture", "Formation & expressions", "Monde du travail"], "Phonologie": ["Les sons", "Accent, rythme & intonation", "API & phonologie avancée", "Prosodie & poésie"], "Compréhension": ["Compréhension écrite", "Compréhension orale"], "Production": ["Écrit", "Oral"]}, CAP = "CAP Sapver";
+  const SECTIONS = ["Grammaire", "Syntaxe", "Lexique", "Phonologie", "Sociolinguistique", "Pragmatique", "Culture", "Compréhension", "Production"], STAGS = {"Grammaire": ["Conjugaison", "Verbes & modaux", "Noms & déterminants", "Pronoms", "Adjectifs & adverbes", "Comparaison", "Prépositions"], "Syntaxe": ["Questions & réponses", "Liens logiques", "Phrase complexe", "Ordre des mots & négation", "Mise en relief"], "Lexique": ["Vie quotidienne", "Société & culture", "Formation & expressions", "Monde du travail"], "Phonologie": ["Les sons", "Accent, rythme & intonation", "API & phonologie avancée", "Prosodie & poésie"], "Sociolinguistique": ["Registres & politesse", "Variétés d'anglais", "Expressions"], "Pragmatique": ["Actes de parole", "Implicite", "Argumenter"], "Culture": ["Royaume-Uni", "Irlande", "États-Unis", "Monde anglophone & traditions"], "Compréhension": ["Compréhension écrite", "Compréhension orale"], "Production": ["Écrit", "Oral"]}, CAP = "CAP Sapver";
   const cards = [...document.querySelectorAll(".card.t")], secs = [...document.querySelectorAll(".sec")];
   const tabsBox = document.getElementById("tabs"), chipsBox = document.getElementById("chips"), search = document.getElementById("search"), empty = document.getElementById("empty");
-  let st = { sec: "Tout", tag: "", q: "", lvl: "" };
-  const MCOUNT = {"be_have_play.html": 6, "present_simple.html": 5, "present_continu.html": 5, "adverbes_frequence.html": 6, "preterit.html": 6, "verbe_regulier_irregulier.html": 5, "preterit_continu.html": 5, "used_to.html": 6, "present_perfect.html": 5, "present_perfect_continu.html": 3, "past_perfect.html": 5, "futur.html": 6, "modaux.html": 4, "probabilite.html": 3, "imperatif.html": 4, "like_ing.html": 5, "verbes_to_ing.html": 3, "pronoms_personnels.html": 5, "pronoms_reflechis.html": 3, "possessifs.html": 5, "demonstratifs.html": 4, "articles.html": 5, "pluriels.html": 4, "there_is.html": 5, "denombrables.html": 4, "someone_anything.html": 3, "adjectifs.html": 6, "adverbes_maniere.html": 3, "too_enough.html": 3, "comparatif.html": 7, "superlatif.html": 5, "prepositions.html": 3, "preterit_cap_sapver.html": 6, "questions_fermees.html": 5, "questions_ouvertes.html": 8, "questions_sujet.html": 3, "question_tags.html": 1, "exclamatives.html": 3, "connecteurs.html": 3, "relatifs.html": 4, "subordonnees_temps.html": 3, "conditionnel.html": 7, "passif.html": 5, "discours_indirect.html": 5, "se_presenter.html": 4, "famille.html": 5, "meteo.html": 5, "nourriture.html": 5, "vetements.html": 5, "maison.html": 5, "metiers.html": 5, "heure_dates.html": 5, "phrasal_verbs.html": 3, "cap_vente.html": 5, "cap_aide.html": 5, "cap_ecrit_entretien.html": 4, "phono_ed.html": 3, "phono_s.html": 1, "accent_mot.html": 1, "lettres_muettes.html": 1, "so_neither.html": 1, "questions_indirectes.html": 3, "causatif.html": 1, "both_either.html": 1, "ago_for_since.html": 3, "be_used_to.html": 1, "wish.html": 1, "futur_ing.html": 3, "faux_amis.html": 3, "ville_directions.html": 4, "ecole.html": 4, "loisirs_sports.html": 5, "transports.html": 5, "emotions.html": 5, "animaux.html": 4, "argent_shopping.html": 4, "phono_th.html": 3, "phono_voyelles.html": 3, "phono_h.html": 3, "intonation.html": 1, "formes_faibles.html": 3, "ce_famille.html": 3, "ce_vendeuse.html": 3, "ce_londres.html": 3, "co_magasin.html": 2, "co_message.html": 2, "co_annonces.html": 2, "ce_ecole.html": 3, "ce_email.html": 3, "ce_reseaux.html": 3, "co_cafe.html": 3, "co_directions.html": 3, "co_entretien.html": 3, "ecriture_guidee.html": 8, "expression_orale.html": 7, "inversion.html": 3, "phrases_clivees.html": 1, "participiales.html": 3, "conditionnels_mixtes.html": 1, "subjonctif.html": 1, "remember_to_ing.html": 1, "connected_speech.html": 3, "but.html": 1, "conjonctions_avancees.html": 1, "substitution.html": 1, "prepositions_dependantes.html": 3, "prepositions_mouvement.html": 1, "modaux_complements.html": 1, "quantifieurs.html": 1, "one_ones.html": 1, "adjectifs_composes.html": 1, "comparatif_avance.html": 1, "expressions_avancees.html": 1, "ordre_mots.html": 3, "double_complement.html": 1, "negation.html": 3, "homophones.html": 1, "phono_cup_bird.html": 3, "diphtongues.html": 1, "graphies.html": 3, "accent_phrase.html": 3, "api_intro.html": 3, "phonemes_morphemes.html": 4, "accent_notation.html": 1, "suffixes_accent.html": 3, "prefixes_accent.html": 3, "composes_accent.html": 1, "transcription_api.html": 3, "reduction_vocalique.html": 1, "rythme_anglais.html": 3, "metre_poetique.html": 3, "rimes_figures.html": 3, "couleurs_nombres.html": 4, "calendrier.html": 5, "pays_nationalites.html": 4, "corps_sante.html": 5, "technologie.html": 4, "environnement.html": 4, "fetes_traditions.html": 5, "formation_mots.html": 4, "collocations.html": 3, "idiomes.html": 1};
+  let st = { fam: "Tout", sec: "", tag: "", q: "", lvl: "" };
+  const MCOUNT = {"be_have_play.html": 6, "present_simple.html": 5, "present_continu.html": 5, "adverbes_frequence.html": 6, "preterit.html": 6, "verbe_regulier_irregulier.html": 5, "preterit_continu.html": 5, "used_to.html": 6, "present_perfect.html": 5, "present_perfect_continu.html": 3, "past_perfect.html": 5, "futur.html": 6, "modaux.html": 4, "probabilite.html": 3, "imperatif.html": 4, "like_ing.html": 5, "verbes_to_ing.html": 3, "pronoms_personnels.html": 5, "pronoms_reflechis.html": 3, "possessifs.html": 5, "demonstratifs.html": 4, "articles.html": 5, "pluriels.html": 4, "there_is.html": 5, "denombrables.html": 4, "someone_anything.html": 3, "adjectifs.html": 6, "adverbes_maniere.html": 3, "too_enough.html": 3, "comparatif.html": 7, "superlatif.html": 5, "prepositions.html": 3, "preterit_cap_sapver.html": 6, "questions_fermees.html": 5, "questions_ouvertes.html": 8, "questions_sujet.html": 3, "question_tags.html": 1, "exclamatives.html": 3, "connecteurs.html": 3, "relatifs.html": 4, "subordonnees_temps.html": 3, "conditionnel.html": 7, "passif.html": 5, "discours_indirect.html": 5, "se_presenter.html": 4, "famille.html": 5, "meteo.html": 5, "nourriture.html": 5, "vetements.html": 5, "maison.html": 5, "metiers.html": 5, "heure_dates.html": 5, "phrasal_verbs.html": 3, "cap_vente.html": 5, "cap_aide.html": 5, "cap_ecrit_entretien.html": 4, "phono_ed.html": 3, "phono_s.html": 1, "accent_mot.html": 1, "lettres_muettes.html": 1, "so_neither.html": 1, "questions_indirectes.html": 3, "causatif.html": 1, "both_either.html": 1, "ago_for_since.html": 3, "be_used_to.html": 1, "wish.html": 1, "futur_ing.html": 3, "faux_amis.html": 3, "ville_directions.html": 4, "ecole.html": 4, "loisirs_sports.html": 5, "transports.html": 5, "emotions.html": 5, "animaux.html": 4, "argent_shopping.html": 4, "phono_th.html": 3, "phono_voyelles.html": 3, "phono_h.html": 3, "intonation.html": 1, "formes_faibles.html": 3, "ce_famille.html": 3, "ce_vendeuse.html": 3, "ce_londres.html": 3, "co_magasin.html": 2, "co_message.html": 2, "co_annonces.html": 2, "cu_uk.html": 4, "cu_monarchie.html": 4, "cu_institutions_uk.html": 4, "cu_empire.html": 4, "cu_brexit.html": 4, "cu_famine.html": 4, "cu_troubles.html": 4, "cu_usa.html": 4, "cu_institutions_us.html": 4, "cu_manifest_destiny.html": 4, "cu_red_scare.html": 4, "cu_watergate.html": 4, "cu_televangelisme.html": 4, "cu_armes_usa.html": 4, "cu_anglophone.html": 4, "so_registres.html": 3, "so_british_american.html": 3, "so_familier.html": 3, "pr_actes_parole.html": 2, "pr_implicite.html": 2, "pr_argumenter.html": 3, "ce_ecole.html": 3, "ce_email.html": 3, "ce_reseaux.html": 3, "co_cafe.html": 3, "co_directions.html": 3, "co_entretien.html": 3, "ecriture_guidee.html": 8, "expression_orale.html": 7, "inversion.html": 3, "phrases_clivees.html": 1, "participiales.html": 3, "conditionnels_mixtes.html": 1, "subjonctif.html": 1, "remember_to_ing.html": 1, "connected_speech.html": 3, "but.html": 1, "conjonctions_avancees.html": 1, "substitution.html": 1, "prepositions_dependantes.html": 3, "prepositions_mouvement.html": 1, "modaux_complements.html": 1, "quantifieurs.html": 1, "one_ones.html": 1, "adjectifs_composes.html": 1, "comparatif_avance.html": 1, "expressions_avancees.html": 1, "ordre_mots.html": 3, "double_complement.html": 1, "negation.html": 3, "homophones.html": 1, "phono_cup_bird.html": 3, "diphtongues.html": 1, "graphies.html": 3, "accent_phrase.html": 3, "api_intro.html": 3, "phonemes_morphemes.html": 4, "accent_notation.html": 1, "suffixes_accent.html": 3, "prefixes_accent.html": 3, "composes_accent.html": 1, "transcription_api.html": 3, "reduction_vocalique.html": 1, "rythme_anglais.html": 3, "metre_poetique.html": 3, "rimes_figures.html": 3, "couleurs_nombres.html": 4, "calendrier.html": 5, "pays_nationalites.html": 4, "corps_sante.html": 5, "technologie.html": 4, "environnement.html": 4, "fetes_traditions.html": 5, "formation_mots.html": 4, "collocations.html": 3, "idiomes.html": 1};
   const LEVELS = ["Novice", "Intermédiaire", "Avancé", "Expert"], lvBox = document.getElementById("levels");
   try { st = Object.assign(st, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   const P = new URLSearchParams(location.search);
-  if (P.has("niveau") && LEVELS[+P.get("niveau")]) { st = { sec: "Tout", tag: "", q: "", lvl: LEVELS[+P.get("niveau")] }; history.replaceState(null, "", location.pathname); }
+  if (P.has("niveau") && LEVELS[+P.get("niveau")]) { st = { fam: "Tout", sec: "", tag: "", q: "", lvl: LEVELS[+P.get("niveau")] }; history.replaceState(null, "", location.pathname); }
   try {
     const pr = JSON.parse(localStorage.getItem("ea_progress_v1") || "null");
     if (pr && pr.pages) cards.forEach(c => {
@@ -3844,26 +4386,42 @@
     if (lv && LEVELS[lv.lvl]) {
       reco.hidden = false;
       reco.innerHTML = `🗺️ Ton niveau conseillé : <b>${LEVELS[lv.lvl]}</b><button type="button">Afficher ces activités</button>`;
-      reco.querySelector("button").onclick = () => { st.sec = "Tout"; st.tag = ""; st.q = ""; search.value = ""; st.lvl = LEVELS[lv.lvl]; apply(); };
+      reco.querySelector("button").onclick = () => { st.fam = "Tout"; st.sec = ""; st.tag = ""; st.q = ""; search.value = ""; st.lvl = LEVELS[lv.lvl]; apply(); };
     }
   } catch (e) {}
-  if (st.sec !== "Tout" && !SECTIONS.includes(st.sec)) st.sec = "Tout";
+  const FAMS = [{"name": "Linguistique", "long": "Compétence linguistique", "secs": ["Grammaire", "Syntaxe", "Lexique", "Phonologie"]}, {"name": "Sociolinguistique", "long": "Compétence sociolinguistique", "secs": ["Sociolinguistique"]}, {"name": "Pragmatique", "long": "Compétence pragmatique", "secs": ["Pragmatique"]}, {"name": "Culturelle", "long": "Compétence culturelle", "secs": ["Culture"]}, {"name": "Comprendre & produire", "long": "Activités langagières", "secs": ["Compréhension", "Production"]}], FAM_OF = {}; FAMS.forEach(f => f.secs.forEach(s => FAM_OF[s] = f.name));
+  if (!st.fam) st.fam = FAM_OF[st.sec] || "Tout";
+  if (st.fam !== "Tout" && !FAMS.some(f => f.name === st.fam)) st.fam = "Tout";
+  if (!SECTIONS.includes(st.sec) || (st.fam !== "Tout" && FAM_OF[st.sec] !== st.fam)) st.sec = "";
+  const stabsBox = document.getElementById("stabs"), famHeads = [...document.querySelectorAll(".fam-head")];
   const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const inSec = c => (st.sec === "Tout" || c.dataset.section === st.sec) && (!st.lvl || c.dataset.level === st.lvl);
+  const inSec = c => (st.fam === "Tout" || FAM_OF[c.dataset.section] === st.fam) && (!st.sec || c.dataset.section === st.sec) && (!st.lvl || c.dataset.level === st.lvl);
   lvBox.innerHTML = '<span class="lab">Niveau :</span>';
   [""].concat(LEVELS).forEach((l, i) => {
     const b = document.createElement("button"); b.className = "lv " + (l ? "lvl-" + (i - 1) : "all"); b.dataset.lvl = l;
     b.textContent = l || "Tous"; b.onclick = () => { st.lvl = l; apply(); }; lvBox.appendChild(b);
   });
-  ["Tout"].concat(SECTIONS).forEach(s => {
-    const b = document.createElement("button"); b.className = "tab"; b.dataset.sec = s;
-    b.innerHTML = `${s}<span class="n">${s === "Tout" ? cards.length : cards.filter(c => c.dataset.section === s).length}</span>`;
-    b.onclick = () => { st.sec = s; st.tag = ""; apply(); };
+  ["Tout"].concat(FAMS.map(f => f.name)).forEach(f => {
+    const b = document.createElement("button"); b.className = "tab"; b.dataset.fam = f;
+    b.innerHTML = `${f}<span class="n">${f === "Tout" ? cards.length : cards.filter(c => FAM_OF[c.dataset.section] === f).length}</span>`;
+    b.onclick = () => { st.fam = f; st.sec = ""; st.tag = ""; apply(); };
     tabsBox.appendChild(b);
   });
+  function drawStabs() {
+    const f = FAMS.find(x => x.name === st.fam);
+    stabsBox.innerHTML = ""; stabsBox.hidden = !f || f.secs.length < 2;
+    if (stabsBox.hidden) return;
+    [""].concat(f.secs).forEach(s => {
+      const b = document.createElement("button"); b.className = "stab" + (st.sec === s ? " active" : "");
+      b.innerHTML = `${s || "Tout"}<span class="n">${cards.filter(c => (s ? c.dataset.section === s : f.secs.includes(c.dataset.section))).length}</span>`;
+      b.onclick = () => { st.sec = s; st.tag = ""; apply(); };
+      stabsBox.appendChild(b);
+    });
+  }
   function drawChips() {
     chipsBox.innerHTML = "";
-    let tags = st.sec === "Tout" ? [] : STAGS[st.sec].slice();
+    const f = FAMS.find(x => x.name === st.fam), one = st.sec || (f && f.secs.length === 1 ? f.secs[0] : "");
+    let tags = one ? STAGS[one].slice() : [];
     tags = tags.filter((t, i) => tags.indexOf(t) === i);
     if (cards.some(c => inSec(c) && c.dataset.tags.split("|").includes(CAP))) tags.push(CAP);
     if (st.tag && !tags.includes(st.tag)) st.tag = "";
@@ -3886,7 +4444,9 @@
     });
     document.querySelectorAll(".sub").forEach(s => { const n = s.querySelectorAll(".card.t:not(.hidden)").length; s.classList.toggle("hidden", !n); s.querySelector(".sub-title span").textContent = n; });
     secs.forEach(s => s.classList.toggle("hidden", !s.querySelector(".card.t:not(.hidden)")));
-    tabsBox.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.sec === st.sec));
+    famHeads.forEach(h => h.classList.toggle("hidden", !secs.some(s => FAM_OF[s.dataset.sec] === h.dataset.fam && !s.classList.contains("hidden"))));
+    tabsBox.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.fam === st.fam));
+    drawStabs();
     lvBox.querySelectorAll(".lv").forEach(b => b.classList.toggle("active", b.dataset.lvl === st.lvl));
     drawChips();
     empty.hidden = shown > 0;
