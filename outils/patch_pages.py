@@ -1,5 +1,7 @@
-"""Filet de sécurité : ajoute l'avertissement « intrus » aux pages dont le moteur
-inclus n'a pas encore été régénéré depuis engine.js / base.css. Idempotent."""
+"""Filet de sécurité pour les pages faites à la main (sans générateur) : y reporte les
+évolutions du moteur (engine.js / base.css). Idempotent.
+- avertissement « intrus » dans « Remets dans l'ordre »
+- signe + / − / ? à gauche de la zone de réponse, « ? » en bleu"""
 import glob, os, re
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,3 +40,25 @@ for p in sorted(glob.glob(f"{REPO}/*.html")):
     else:
         print("NON PATCHÉ :", os.path.basename(p))
 print("intrus patché :", done)
+
+SG = '''    const sg = q.sign || (/n[ée]gati/i.test(q.instr || "") ? "minus" : /interrogati/i.test(q.instr || "") ? "q" : /affirmati/i.test(q.instr || "") ? "plus" : "");
+    const sgn = sg ? `<span class="sign ${sg}" title="${sg === "minus" ? "Forme négative" : sg === "q" ? "Forme interrogative" : sg === "plus" ? "Forme affirmative" : ""}">${sg === "plus" ? "+" : sg === "minus" ? "−" : sg === "eq" ? "=" : "?"}</span>` : "";
+'''
+CSS2 = ("\n  .sign.q { background: rgba(96,165,250,.14); color: #60a5fa; border: 1px solid rgba(96,165,250,.45); }"
+        "\n  .order-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 12px; }"
+        "\n  .order-row .order-zone { flex: 1; min-width: 0; margin-bottom: 0; }"
+        "\n  .order-row .sign { width: 38px; height: auto; min-height: 38px; margin: 0; font-size: 24px; flex-shrink: 0; }")
+done = []
+for p in sorted(glob.glob(f"{REPO}/*.html")):
+    s = open(p, encoding="utf-8").read()
+    if "order-zone empty" not in s or "order-row" in s:
+        continue
+    s2 = re.sub(r'\n(    area\.innerHTML = [^\n]*?)`<div class="order-zone empty" id="zone"></div>',
+                lambda m: "\n" + SG + m.group(1) + '`<div class="order-row">${sgn}<div class="order-zone empty" id="zone"></div></div>', s, count=1)
+    s2 = s2.replace(".sign.eq, .sign.q {", ".sign.eq {", 1)
+    s2 = re.sub(r"(\n  \.tiles \{[^}]*\})", lambda m: m.group(1) + CSS2, s2, count=1)
+    if s2.count("order-row") >= 3:
+        open(p, "w", encoding="utf-8").write(s2); done.append(os.path.basename(p))
+    else:
+        print("SIGNE NON PATCHÉ :", os.path.basename(p))
+print("signe patché :", done)

@@ -56,6 +56,6 @@ bash outils/build.sh cu_salem.html prof.html  # + teste ces pages dans un naviga
 
 Les tests navigateur demandent Playwright (`pip install playwright && playwright install chromium`).
 
-`outils/patch_intrus.py` ajoute l'avertissement « intrus » aux quelques pages faites à la main (`questions_fermees.html`, `questions_ouvertes.html`…). `build.sh` le lance automatiquement.
+`outils/patch_pages.py` reporte les évolutions du moteur (avertissement « intrus », signes + − ? dans « Remets dans l'ordre ») sur les quelques pages faites à la main (`questions_fermees.html`, `questions_ouvertes.html`…). `build.sh` le lance automatiquement.
 
 Les autres scripts de `outils/` (`content1.py` à `content18.py`, `gen.py`, `gen2.py`, `flow*.py`, `shot*.py`) ont servi à créer les premières pages ou à faire des captures d'écran. Ils sont conservés comme référence, mais la construction normale ne les utilise pas.

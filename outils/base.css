@@ -247,4 +247,8 @@
   }
   .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
   .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  .sign.q { background: rgba(96,165,250,.14); color: #60a5fa; border: 1px solid rgba(96,165,250,.45); }
+  .order-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 12px; }
+  .order-row .order-zone { flex: 1; min-width: 0; margin-bottom: 0; }
+  .order-row .sign { width: 38px; height: auto; min-height: 38px; margin: 0; font-size: 24px; flex-shrink: 0; }
   @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }

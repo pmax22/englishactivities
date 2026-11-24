@@ -87,7 +87,9 @@ function renderQuestion() {
     const all = shuffle(q.tiles.concat(q.distractors || []));
     const nD = (q.distractors || []).length;
     const note = nD ? `<div class="order-note"><b>Attention :</b> ${nD > 1 ? nD + " étiquettes sont en trop" : "une étiquette est en trop"} (intrus). Ne ${nD > 1 ? "les" : "l'"}utilise pas.</div>` : "";
-    area.innerHTML = head + note + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+    const sg = q.sign || (/n[ée]gati/i.test(q.instr || "") ? "minus" : /interrogati/i.test(q.instr || "") ? "q" : /affirmati/i.test(q.instr || "") ? "plus" : "");
+    const sgn = sg ? `<span class="sign ${sg}" title="${sg === "minus" ? "Forme négative" : sg === "q" ? "Forme interrogative" : sg === "plus" ? "Forme affirmative" : ""}">${sg === "plus" ? "+" : sg === "minus" ? "−" : sg === "eq" ? "=" : "?"}</span>` : "";
+    area.innerHTML = head + note + `<div class="order-row">${sgn}<div class="order-zone empty" id="zone"></div></div><div class="tiles" id="pool">` +
       all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
     area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
     document.getElementById("btnReset").classList.remove("hidden");

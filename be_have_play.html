@@ -255,6 +255,10 @@
   }
   .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
   .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
+  .sign.q { background: rgba(96,165,250,.14); color: #60a5fa; border: 1px solid rgba(96,165,250,.45); }
+  .order-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 12px; }
+  .order-row .order-zone { flex: 1; min-width: 0; margin-bottom: 0; }
+  .order-row .sign { width: 38px; height: auto; min-height: 38px; margin: 0; font-size: 24px; flex-shrink: 0; }
   @media (max-width: 560px) { .gap-line input.answer { font-size: 16px; } }
   /* ── Liste des verbes (même style que les autres pages) ── */
   .verb-ref {
@@ -289,7 +293,11 @@
   }
   .sign.plus { background: rgba(78,203,127,.15); color: var(--green); border: 1px solid rgba(78,203,127,.4); }
   .sign.minus { background: rgba(224,92,92,.12); color: var(--red); border: 1px solid rgba(224,92,92,.4); }
-  .sign.eq, .sign.q { background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .sign.eq { background: rgba(var(--accent-rgb),.12); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.4); }
+  .sign.q { background: rgba(96,165,250,.14); color: #60a5fa; border: 1px solid rgba(96,165,250,.45); }
+  .order-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 12px; }
+  .order-row .order-zone { flex: 1; min-width: 0; margin-bottom: 0; }
+  .order-row .sign { width: 38px; height: auto; min-height: 38px; margin: 0; font-size: 24px; flex-shrink: 0; }
   .choices.grid2 { grid-template-columns: 1fr 1fr; }
   .choices.grid2 .btn-choice { text-align: center; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 18px; padding: 18px; }
   .choices.grid2 .btn-choice small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -462,10 +470,24 @@ function transformQuestion(target, from) {
   const { v, S, p, c } = rand();
   from = from || "aff";
   const src = conj(S, p, v, c, from), ok = conj(S, p, v, c, target);
+  /* L'élève n'écrit que la partie qui change : le reste de la phrase est déjà donné. */
+  const s3 = p === "s3", full = x => x.replace("n't", " not");
+  let mid_, parts;
+  if (v === "be") {
+    const be = p === "i" ? "am" : s3 ? "is" : "are";
+    mid_ = target === "aff" ? [be] : target === "neg" ? (p === "i" ? ["am not"] : [s3 ? "isn't" : "aren't", be + " not"]) : [capF(be) + " " + mid(S)];
+  } else {
+    const aff = v === "have" ? (s3 ? "has" : "have") : (s3 ? "plays" : "play");
+    const aux = s3 ? "doesn't" : "don't";
+    mid_ = target === "aff" ? [aff] : target === "neg" ? [aux + " " + v, full(aux) + " " + v] : [(s3 ? "Does" : "Do") + " " + mid(S) + " " + v];
+  }
+  const w = Math.max(110, Math.min(260, mid_[0].length * 13 + 30));
+  if (target === "inter") parts = [{ answers: mid_, width: w, ph: "…" }, " " + c + "?"];
+  else parts = [S + " ", { answers: mid_, width: w, ph: "…" }, " " + c + "."];
   return {
     kind: "gap", instr: `Mets la phrase à la forme ${FORM_LABEL[target]}`, label: src, sign: target === "neg" ? "minus" : target === "inter" ? "q" : "plus",
     head: `<div class="fr-line">${esc(src)}</div>`,
-    parts: [{ answers: [ok], width: 420, ph: target === "inter" ? "…?" : "…" }], correct: ok, tip: rule(v, target, p),
+    parts, correct: ok, tip: rule(v, target, p),
     diagnose(vals) {
       const t = " " + norm(vals[0]) + " ";
       if (v === "be" && / (do|does|don't|doesn't) /.test(t)) return "Avec <b>be</b>, on n'utilise jamais do / does : " + rule("be", target, p);
@@ -506,7 +528,7 @@ function orderQuestion() {
   const trap = v === "be" ? (form === "inter" || form === "aff" ? (s3 ? "are" : "is") : "don't")
     : form === "aff" ? (s3 ? v : (v === "have" ? "has" : "plays")) : form === "neg" ? (s3 ? "don't" : "doesn't") : (s3 ? "Do" : "Does");
   return {
-    kind: "order", instr: `Remets les mots dans l'ordre · forme ${FORM_LABEL[form]}`, label: sent,
+    kind: "order", instr: `Remets les mots dans l'ordre · forme ${FORM_LABEL[form]}`, label: sent, sign: form === "neg" ? "minus" : form === "inter" ? "q" : "plus",
     tiles, distractors: [trap === "is" && form === "inter" ? "Is" : trap === "are" && form === "inter" ? "Are" : trap], answer: sent,
     tip: rule(v, form, p)
   };
@@ -609,7 +631,9 @@ function renderQuestion() {
     const all = shuffle(q.tiles.concat(q.distractors || []));
     const nD = (q.distractors || []).length;
     const note = nD ? `<div class="order-note"><b>Attention :</b> ${nD > 1 ? nD + " étiquettes sont en trop" : "une étiquette est en trop"} (intrus). Ne ${nD > 1 ? "les" : "l'"}utilise pas.</div>` : "";
-    area.innerHTML = head + note + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+    const sg = q.sign || (/n[ée]gati/i.test(q.instr || "") ? "minus" : /interrogati/i.test(q.instr || "") ? "q" : /affirmati/i.test(q.instr || "") ? "plus" : "");
+    const sgn = sg ? `<span class="sign ${sg}" title="${sg === "minus" ? "Forme négative" : sg === "q" ? "Forme interrogative" : sg === "plus" ? "Forme affirmative" : ""}">${sg === "plus" ? "+" : sg === "minus" ? "−" : sg === "eq" ? "=" : "?"}</span>` : "";
+    area.innerHTML = head + note + `<div class="order-row">${sgn}<div class="order-zone empty" id="zone"></div></div><div class="tiles" id="pool">` +
       all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
     area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
     document.getElementById("btnReset").classList.remove("hidden");

@@ -50,10 +50,24 @@ function transformQuestion(target, from) {
   const { v, S, p, c } = rand();
   from = from || "aff";
   const src = conj(S, p, v, c, from), ok = conj(S, p, v, c, target);
+  /* L'élève n'écrit que la partie qui change : le reste de la phrase est déjà donné. */
+  const s3 = p === "s3", full = x => x.replace("n't", " not");
+  let mid_, parts;
+  if (v === "be") {
+    const be = p === "i" ? "am" : s3 ? "is" : "are";
+    mid_ = target === "aff" ? [be] : target === "neg" ? (p === "i" ? ["am not"] : [s3 ? "isn't" : "aren't", be + " not"]) : [capF(be) + " " + mid(S)];
+  } else {
+    const aff = v === "have" ? (s3 ? "has" : "have") : (s3 ? "plays" : "play");
+    const aux = s3 ? "doesn't" : "don't";
+    mid_ = target === "aff" ? [aff] : target === "neg" ? [aux + " " + v, full(aux) + " " + v] : [(s3 ? "Does" : "Do") + " " + mid(S) + " " + v];
+  }
+  const w = Math.max(110, Math.min(260, mid_[0].length * 13 + 30));
+  if (target === "inter") parts = [{ answers: mid_, width: w, ph: "…" }, " " + c + "?"];
+  else parts = [S + " ", { answers: mid_, width: w, ph: "…" }, " " + c + "."];
   return {
     kind: "gap", instr: `Mets la phrase à la forme ${FORM_LABEL[target]}`, label: src, sign: target === "neg" ? "minus" : target === "inter" ? "q" : "plus",
     head: `<div class="fr-line">${esc(src)}</div>`,
-    parts: [{ answers: [ok], width: 420, ph: target === "inter" ? "…?" : "…" }], correct: ok, tip: rule(v, target, p),
+    parts, correct: ok, tip: rule(v, target, p),
     diagnose(vals) {
       const t = " " + norm(vals[0]) + " ";
       if (v === "be" && / (do|does|don't|doesn't) /.test(t)) return "Avec <b>be</b>, on n'utilise jamais do / does : " + rule("be", target, p);
@@ -94,7 +108,7 @@ function orderQuestion() {
   const trap = v === "be" ? (form === "inter" || form === "aff" ? (s3 ? "are" : "is") : "don't")
     : form === "aff" ? (s3 ? v : (v === "have" ? "has" : "plays")) : form === "neg" ? (s3 ? "don't" : "doesn't") : (s3 ? "Do" : "Does");
   return {
-    kind: "order", instr: `Remets les mots dans l'ordre · forme ${FORM_LABEL[form]}`, label: sent,
+    kind: "order", instr: `Remets les mots dans l'ordre · forme ${FORM_LABEL[form]}`, label: sent, sign: form === "neg" ? "minus" : form === "inter" ? "q" : "plus",
     tiles, distractors: [trap === "is" && form === "inter" ? "Is" : trap === "are" && form === "inter" ? "Are" : trap], answer: sent,
     tip: rule(v, form, p)
   };
