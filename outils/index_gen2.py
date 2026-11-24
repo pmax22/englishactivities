@@ -524,7 +524,9 @@ CSS = '''
   .lv { font-family: inherit; font-size: 12.5px; padding: 6px 13px; border-radius: 999px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--muted); transition: all .2s; }
   .lv:hover { color: var(--text); }
   .lv.active.lvl-0, .lv.active.lvl-1, .lv.active.lvl-2, .lv.active.lvl-3 { font-weight: 600; }
-  .lv:not(.active) { color: var(--muted); border-color: var(--border); background: transparent; }
+  .lv:not(.active) { color: #c9ccd8; border-color: rgba(255,255,255,.55); background: transparent; }
+  .lv:not(.active):hover { color: var(--text); border-color: var(--text); }
+  .lv.active.lvl-0 { border-color: #4ecb7f; } .lv.active.lvl-1 { border-color: #60a5fa; } .lv.active.lvl-2 { border-color: #fb923c; } .lv.active.lvl-3 { border-color: #f472b6; }
   .lv.all.active { background: rgba(255,255,255,.12); color: var(--text); border-color: var(--text); }
   .sub { margin-top: 22px; }
   .sub.hidden { display: none; }
