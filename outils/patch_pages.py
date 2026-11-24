@@ -1,7 +1,8 @@
 """Filet de sécurité pour les pages faites à la main (sans générateur) : y reporte les
 évolutions du moteur (engine.js / base.css). Idempotent.
 - avertissement « intrus » dans « Remets dans l'ordre »
-- signe + / − / ? à gauche de la zone de réponse, « ? » en bleu"""
+- signe + / − / ? à gauche de la zone de réponse, « ? » en bleu
+- traduction des exemples des leçons (traductions.json), affichée au clic par ea.js"""
 import glob, os, re
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -62,3 +63,31 @@ for p in sorted(glob.glob(f"{REPO}/*.html")):
     else:
         print("SIGNE NON PATCHÉ :", os.path.basename(p))
 print("signe patché :", done)
+
+
+import json, html as _html
+TR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "traductions.json"), encoding="utf-8"))
+n_tr = 0
+for p in sorted(glob.glob(f"{REPO}/*.html")):
+    s = open(p, encoding="utf-8").read(); o = s
+    def add(m):
+        global n_tr
+        tag, inner = m.group(1), m.group(2)
+        fr = TR.get(inner)
+        if not fr or 'class="tr"' in s[m.end():m.end() + 40]: return m.group(0)
+        n_tr += 1
+        return m.group(0) + ' <span class="tr">' + _html.escape(fr, quote=False) + '</span>'
+    s = re.sub(r'<(span|p|div) class="ex">(.*?)</\1>', add, s, flags=re.S)
+    if s != o: open(p, "w", encoding="utf-8").write(s)
+print("traductions ajoutées :", n_tr)
+
+
+# Lien vers la liste des verbes irréguliers dans les leçons qui parlent du prétérit (pages faites à la main)
+LINK = '<p><a class="lesson-link" href="verbes_irreguliers.html" style="color:var(--accent);font-weight:600">Voir la liste des verbes irréguliers (avec recherche) →</a></p>'
+for f in ["verbe_regulier_irregulier.html", "questions_fermees.html", "questions_ouvertes.html", "preterit_continu.html"]:
+    p = f"{REPO}/{f}"
+    s = open(p, encoding="utf-8").read()
+    if "verbes_irreguliers.html" in s or '<div class="lesson-body">' not in s: continue
+    i = s.index('<div class="lesson-body">'); j = s.index("\n    </div>", i)
+    s = s[:j] + "\n      " + LINK + s[j:]
+    open(p, "w", encoding="utf-8").write(s); print("lien verbes irréguliers :", f)

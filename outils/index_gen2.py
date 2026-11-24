@@ -58,7 +58,7 @@ A = [
  ("preterit_cap_sapver.html", GR, "#4ec9f5", "#3f7ee0", "Past", "Prétérit simple", "CAP Sapver · Temps", "Prétérit — Vente & Aide", "Prétérit simple orienté vente et aide à la personne — verbes métiers, vocabulaire professionnel.", ["Affirmatif", "Négatif", "Interrogatif"], ["Passé", CAP], "cap sapver vente preterit"),
  # ── Syntaxe ──
  ("questions_fermees.html", SY, "#ff9f43", "#e8603c", "Did?", "Yes, I did / No, I didn't", "Syntaxe · Questions", "Questions fermées", "Traduire des questions en Did + sujet + BV, puis compléter les réponses affirmatives et négatives.", ["Did + BV", "didn't + BV", "Prétérit"], ["Questions"], "did you questions fermees"),
- ("questions_ouvertes.html", SY, "#f06fa4", "#c44d8a", "Wh-?", "When · Where · Who · How", "Syntaxe · Questions", "Questions ouvertes", "Pronoms interrogatifs, ordre des mots, traduction — et raconter ses dernières vacances.", ["Wh- + did", "How long", "Sum up"], ["Questions"], "when where who what how vacances"),
+ ("questions_ouvertes.html", SY, "#f06fa4", "#c44d8a", "Wh-?", "When · Where · Who · How", "Syntaxe · Questions", "Questions ouvertes", "Questions au prétérit (When did you…?) : mots interrogatifs, ordre des mots, traduction — et raconter ses dernières vacances.", ["Wh- + did", "How long", "Sum up"], ["Questions"], "when where who what how vacances"),
  ("questions_sujet.html", SY, "#f9a8d4", "#f472b6", "Who?", "called / did you call", "Syntaxe · Questions", "Questions sur le sujet", "Who called you? ou Who did you call? Avec ou sans did selon la fonction du mot interrogatif.", ["Who + verbe", "Who did…?", "What?"], ["Questions"], "question sujet objet"),
  ("question_tags.html", SY, "#c4b5fd", "#a78bfa", "…isn't it?", "tags", "Syntaxe · Questions", "Les question tags", "It's cold, isn't it? · You like pizza, don't you? : la petite question de fin de phrase.", ["isn't it", "don't you", "can't she"], ["Questions"], "question tags n est ce pas"),
  ("exclamatives.html", SY, "#fcd34d", "#f59e0b", "What a…!", "How nice!", "Syntaxe · Exclamatives", "Les exclamatives", "What a beautiful day! How nice! So / such : construire une exclamation.", ["What a", "How", "so / such"], ["Phrase complexe"], "exclamation"),
@@ -524,9 +524,11 @@ CSS = '''
   .lv { font-family: inherit; font-size: 12.5px; padding: 6px 13px; border-radius: 999px; cursor: pointer; background: transparent; border: 1px solid var(--border); color: var(--muted); transition: all .2s; }
   .lv:hover { color: var(--text); }
   .lv.active.lvl-0, .lv.active.lvl-1, .lv.active.lvl-2, .lv.active.lvl-3 { font-weight: 600; }
-  .lv:not(.active) { color: #c9ccd8; border-color: rgba(255,255,255,.55); background: transparent; }
-  .lv:not(.active):hover { color: var(--text); border-color: var(--text); }
-  .lv.active.lvl-0 { border-color: #4ecb7f; } .lv.active.lvl-1 { border-color: #60a5fa; } .lv.active.lvl-2 { border-color: #fb923c; } .lv.active.lvl-3 { border-color: #f472b6; }
+  .lv:not(.active) { color: var(--muted); border-color: rgba(255,255,255,.28); background: transparent; }
+  .lv:not(.active):hover { color: var(--text); border-color: rgba(255,255,255,.6); }
+  .lv.active { color: #fff; font-weight: 700; }
+  .lv.active.lvl-0 { border-color: #4ecb7f; background: rgba(78,203,127,.32); } .lv.active.lvl-1 { border-color: #60a5fa; background: rgba(96,165,250,.32); } .lv.active.lvl-2 { border-color: #fb923c; background: rgba(251,146,60,.32); } .lv.active.lvl-3 { border-color: #f472b6; background: rgba(244,114,182,.32); }
+  .lv.all.active { background: rgba(255,255,255,.85) !important; color: #0e0f14 !important; border-color: #fff !important; }
   .lv.all.active { background: rgba(255,255,255,.12); color: var(--text); border-color: var(--text); }
   .sub { margin-top: 22px; }
   .sub.hidden { display: none; }
@@ -579,10 +581,10 @@ CSS = '''
   }
   .empty { text-align: center; color: var(--muted); padding: 40px 0; font-size: 15px; }
   /* ── Accès rapides ── */
-  .quick { max-width: 1100px; margin: 0 auto 18px; padding: 0 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; animation: fadeUp 0.6s 0.3s ease both; opacity: 0; }
+  .quick { max-width: 1100px; margin: 0 auto 18px; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; animation: fadeUp 0.6s 0.3s ease both; opacity: 0; }
   .qk { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px; border-radius: 14px; text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--border); transition: border-color .2s, transform .2s; }
   .qk:hover { transform: translateY(-2px); } .qk b { font-family: 'Syne', sans-serif; font-size: 15px; } .qk span { font-size: 12.5px; color: var(--muted); }
-  .qk-1:hover { border-color: #facc15; } .qk-2:hover { border-color: #4ade80; } .qk-3:hover { border-color: #f472b6; }
+  .qk-1:hover { border-color: #facc15; } .qk-2:hover { border-color: #4ade80; } .qk-3:hover { border-color: #f472b6; } .qk-4:hover { border-color: #4ec9f5; }
   .reco { max-width: 1100px; margin: -6px auto 16px; padding: 0 32px; font-size: 14px; color: var(--muted); }
   .reco button { font-family: inherit; font-size: 13px; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 999px; padding: 4px 12px; margin-left: 6px; cursor: pointer; }
   .card.done .card-visual::after { content: attr(data-pct); position: absolute; top: 10px; right: 12px; font-size: 10.5px; font-weight: 700; color: #fbbf24; border: 1px solid rgba(251,191,36,.45); background: rgba(15,17,23,.7); border-radius: 999px; padding: 2px 8px; }
@@ -591,7 +593,7 @@ CSS = '''
   .pbar i { display: block; height: 100%; background: #fbbf24; border-radius: 0 2px 2px 0; } .card.full .pbar i { background: #4ade80; }
   .page-footer a { color: inherit; }
   @media (max-width: 600px) {
-    .quick { padding: 0 16px; gap: 6px; margin-bottom: 12px; }
+    .quick { padding: 0 16px; gap: 6px; margin-bottom: 12px; grid-template-columns: repeat(2, 1fr); }
     .qk { padding: 10px 8px; text-align: center; } .qk b { font-size: 12.5px; } .qk span { display: none; }
     .reco { padding: 0 16px; font-size: 13px; }
     .card.done .card-visual::after { top: 8px; right: 10px; font-size: 9px; padding: 1px 6px; }
@@ -705,7 +707,8 @@ a = s.index('<div class="quick">') if '<div class="quick">' in s else s.index('<
 b = s.index('<p class="page-footer">')
 QUICK = ('<div class="quick">\n  <a class="qk qk-1" href="test_niveau.html"><b>🗺️ Par où commencer ?</b><span>Test de niveau</span></a>\n'
          '  <a class="qk qk-2" href="progres.html"><b>📈 Mes progrès</b><span>Scores et erreurs à revoir</span></a>\n'
-         '  <a class="qk qk-3" href="devoir.html" id="qkDevoir"><b>📌 Travail de la semaine</b><span>Le travail donné par ton prof</span></a>\n</div>\n'
+         '  <a class="qk qk-3" href="devoir.html" id="qkDevoir"><b>📌 Travail de la semaine</b><span>Le travail donné par ton prof</span></a>\n'
+         '  <a class="qk qk-4" href="verbes_irreguliers.html"><b>📖 Verbes irréguliers</b><span>La liste, avec une recherche</span></a>\n</div>\n'
          '<div class="reco" id="reco" hidden></div>\n\n')
 body = (QUICK + '<p class="section-label">Activités disponibles</p>\n\n<div class="toolbar">\n  <input class="search" id="search" type="search" placeholder="Rechercher une notion : prétérit, did, adjectifs, météo…" autocomplete="off">\n'
         '  <div class="tabs" id="tabs"></div>\n  <div class="stabs" id="stabs" hidden></div>\n  <div class="levels" id="levels"></div>\n  <div class="chips" id="chips"></div>\n</div>\n\n' + "\n\n".join(blocks) +

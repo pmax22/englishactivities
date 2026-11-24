@@ -98,13 +98,14 @@ def verb_chips(verbs, title="Verbes au programme · BV → prétérit", legend=T
     return f'<div class="verb-ref"><div class="verb-ref-title">{title}</div><div class="verb-grid">{chips}</div>{leg}</div>'
 
 PRETERIT_LESSON = '''      <p>Le <span class="hl">prétérit</span> sert à parler d'une action <b>terminée</b> dans le passé.</p>
+      <p><b>Mots repères :</b> <b>yesterday</b> (hier) · <b>last week / last year</b> (la semaine dernière / l'année dernière) · <b>two days ago</b> (il y a deux jours) · <b>in 2010</b> (en 2010) · <b>when I was a child</b> (quand j'étais enfant)</p>
       <p><b>+ Affirmatif</b> : sujet + verbe au prétérit.</p>
-      <div class="formula">Verbes <b>réguliers</b> : BV + <span class="hl">-ED</span> (play → played, settle → settled, marry → married)<br>Verbes <b>irréguliers</b> : forme à apprendre (leave → <span class="hl">left</span>, go → <span class="hl">went</span>)</div>
-      <p class="ex">He travelled. · She left.</p>
+      <div class="formula">Verbes <b>réguliers</b> : BV + <span class="hl">-ED</span> (play → played, settle → settled, marry → married)<br>Verbes <b>irréguliers</b> : forme à apprendre (leave → <span class="hl">left</span>, go → <span class="hl">went</span>)<br><a class="lesson-link" href="verbes_irreguliers.html">Voir la liste des verbes irréguliers (avec recherche) →</a></div>
+      <p><span class="ex">He travelled. · She left.</span> <span class="tr">Il a voyagé. · Elle est partie.</span></p>
       <p><b>− Négatif</b> : sujet + <span class="hl">didn't</span> (did not) + BV.</p>
-      <p class="ex">He didn't travel. · She didn't leave. <s>She didn't left.</s></p>
+      <p><span class="ex">He didn't travel. · She didn't leave. <s>She didn't left.</s></span> <span class="tr">Il n'a pas voyagé. · Elle n'est pas partie.</span></p>
       <p><b>? Interrogatif</b> : <span class="hl">Did</span> + sujet + BV + ?</p>
-      <p class="ex">Did he travel? · Did she leave?</p>
+      <p><span class="ex">Did he travel? · Did she leave?</span> <span class="tr">Est-ce qu'il a voyagé ? · Est-ce qu'elle est partie ?</span></p>
       <p><b>DID</b> porte déjà la marque du passé : après did / didn't, le verbe reste <b>toujours</b> en base verbale.</p>
       <p>Attention au verbe <b>be</b> : I/he/she/it <span class="hl">was</span> · you/we/they <span class="hl">were</span> → négatif <b>wasn't / weren't</b>, question <b>Was he…? / Were they…?</b> (pas de did).</p>'''
 

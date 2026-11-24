@@ -7,15 +7,17 @@ exec(open(_EA_OUT+"/content_helpers.py", encoding="utf-8").read())
 S3 = "he / she / it → verbe + <b>-s</b>."
 newpage("present_simple.html", "Présent simple – Entraînement", 'Le présent <span>simple</span>',
   "Habitudes et vérités générales · he / she / it + -s", ("#38bdf8", "#0284c7"),
-  '''      <p>Le <span class="hl">présent simple</span> sert à parler des <b>habitudes</b>, des goûts et des vérités générales. Mots repères : <i>every day, usually, often, on Mondays…</i></p>
+  '''      <p>Le <span class="hl">présent simple</span> sert à parler des <b>habitudes</b>, des goûts et des vérités générales. </p>
+      <p><b>Mots repères :</b> <b>every day</b> (tous les jours) · <b>always</b> (toujours) · <b>usually</b> (d'habitude) · <b>often</b> (souvent) · <b>sometimes</b> (parfois) · <b>never</b> (jamais) · <b>on Mondays</b> (le lundi, tous les lundis) · <b>in the morning</b> (le matin)</p>
       <table>
         <tr><th></th><th>I / you / we / they</th><th>he / she / it</th></tr>
         <tr><td><b>+</b></td><td>I work</td><td>she work<span class="hl">s</span></td></tr>
         <tr><td><b>−</b></td><td>I <span class="hl">don't</span> work</td><td>she <span class="hl">doesn't</span> work</td></tr>
         <tr><td><b>?</b></td><td><span class="hl">Do</span> you work?</td><td><span class="hl">Does</span> she work?</td></tr>
       </table>
+      <p class="tr-line">I work = je travaille · she doesn't work = elle ne travaille pas · Does she work? = Est-ce qu'elle travaille ?</p>
       <p><b>Orthographe du -s :</b> watch → watch<b>es</b>, go → go<b>es</b>, finish → finish<b>es</b> (après -ch, -sh, -s, -x, -o) · study → stud<b>ies</b> (consonne + y) · have → <b>has</b>.</p>
-      <p>Après <b>don't / doesn't / do / does</b> : base verbale, sans -s. <span class="ex">She doesn't like fish. <s>She doesn't likes.</s></span></p>''',
+      <p>Après <b>don't / doesn't / do / does</b> : base verbale, sans -s. <span class="ex">She doesn't like fish. <s>She doesn't likes.</s></span> <span class="tr">Elle n'aime pas le poisson.</span></p>''',
   {
     "aff": ("gap", "Conjugue le verbe au présent simple", [
       G("She ____ in a shop.", "works", "work", tip=S3), G("They ____ in Lyon.", "live", "live", tip="they → base verbale, sans -s."),
@@ -75,16 +77,22 @@ newpage("present_simple.html", "Présent simple – Entraînement", 'Le présent
 
 # ═════════════ PRÉSENT EN BE + ING ═════════════
 newpage("present_continu.html", "Présent en be + -ing – Entraînement", 'Le présent <span>be + -ing</span>',
-  "Ce qui se passe en ce moment · am / is / are + verbe-ing", ("#22d3ee", "#0891b2"),
-  '''      <p>Le <span class="hl">présent en be + -ing</span> sert à parler d'une action <b>en cours</b>, en ce moment. Mots repères : <i>now, at the moment, right now, Look!, Listen!</i></p>
+  "Ce qui se passe en ce moment, décrire une image · am / is / are + verbe-ing", ("#22d3ee", "#0891b2"),
+  '''      <p>Le <span class="hl">présent en be + -ing</span> sert à :</p>
+      <ul>
+        <li>parler d'une action <b>en cours</b>, en ce moment : <span class="ex">I am reading.</span> <span class="tr">Je lis / je suis en train de lire.</span></li>
+        <li><b>décrire une image</b> : ce que font les personnes sur la photo. <span class="ex">In the picture, a boy is riding a bike.</span> <span class="tr">Sur l'image, un garçon fait du vélo.</span> <span class="ex">On the left, two girls are laughing.</span> <span class="tr">À gauche, deux filles rient.</span></li>
+      </ul>
+      <p><b>Mots repères :</b> <b>now</b> (maintenant) · <b>at the moment</b> (en ce moment) · <b>right now</b> (en ce moment même) · <b>Look!</b> (Regarde !) · <b>Listen!</b> (Écoute !) · <b>in the picture</b> (sur l'image) · <b>on the left / right</b> (à gauche / à droite) · <b>in the background</b> (à l'arrière-plan)</p>
       <div class="formula">sujet + <span class="hl">am / is / are</span> + verbe<span class="hl">-ing</span></div>
       <table>
         <tr><th>+</th><th>−</th><th>?</th></tr>
         <tr><td>I am reading.<br>She is reading.<br>They are reading.</td><td>I'm not reading.<br>She isn't reading.<br>They aren't reading.</td><td>Am I reading?<br>Is she reading?<br>Are they reading?</td></tr>
       </table>
+      <p class="tr-line">She is reading = elle lit (en ce moment) · She isn't reading = elle ne lit pas · Is she reading? = Est-ce qu'elle lit ?</p>
       <p><b>Orthographe :</b> write → writ<b>ing</b> (on enlève le -e) · run → ru<b>nning</b>, swim → swi<b>mming</b> (consonne doublée) · lie → l<b>ying</b>.</p>
       <h4>Présent simple ou be + -ing ?</h4>
-      <p>Habitude → présent simple : <span class="ex">I go to school every day.</span><br>En ce moment → be + -ing : <span class="ex">I am going to school now.</span></p>''',
+      <p>Habitude → présent simple : <span class="ex">I go to school every day.</span> <span class="tr">Je vais à l'école tous les jours.</span><br>En ce moment → be + -ing : <span class="ex">I am going to school now.</span> <span class="tr">Je suis en train d'aller à l'école.</span></p>''',
   {
     "form": ("gap", "Mets le verbe au présent en be + -ing", [
       G("I ____ a book now.", "am reading", "read", tip="I → am + verbe-ing."),
