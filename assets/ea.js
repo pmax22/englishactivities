@@ -162,6 +162,87 @@
     }
   });
 
+  /* ── Confort de lecture (DYS) : réglages enregistrés sur l'appareil ── */
+  const CKEY = "ea_confort_v1";
+  const OPTS = [
+    ["big", "Texte plus grand", "Agrandit tout le texte de la page."],
+    ["air", "Texte aéré", "Plus d'espace entre les lettres, les mots et les lignes. Plus d'italique ni de mots en majuscules."],
+    ["luc", "Police Luciole", "Une police conçue pour une lecture facilitée."],
+    ["light", "Fond clair", "Texte foncé sur fond clair au lieu du fond sombre."]
+  ];
+  function cload() { try { return JSON.parse(localStorage.getItem(CKEY) || "{}") || {}; } catch (e) { return {}; } }
+  function capply(c) { OPTS.forEach(([k]) => document.documentElement.classList.toggle("ea-" + k, !!c[k])); }
+  capply(cload());
+  const ccss = `
+  @font-face { font-family: "Luciole"; src: url("assets/luciole-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Luciole"; src: url("assets/luciole-bold.woff2") format("woff2"); font-weight: 600 900; font-style: normal; font-display: swap; }
+  html.ea-big body { zoom: 1.2; }
+  html.ea-air body, html.ea-air body *, html.ea-air body *::before, html.ea-air body *::after { letter-spacing: .06em !important; word-spacing: .16em !important; font-style: normal !important; text-transform: none !important; }
+  html.ea-air body { line-height: 1.7 !important; }
+  html.ea-air body :is(p, li, td, th, dd, label, blockquote, .lesson-body, .lesson-body *, .q-text, .prompt, .tip, .why, .fb, .feedback, .sub) { line-height: 1.75 !important; }
+  html.ea-air body :is(p, li) + :is(p, li) { margin-top: .5em; }
+  html.ea-luc body, html.ea-luc body *:not(svg):not(svg *) { font-family: "Luciole", "DM Sans", sans-serif !important; }
+  html.ea-light { filter: invert(1) hue-rotate(180deg); background: #0e0f14; }
+  html.ea-light :is(img, video, picture, canvas, iframe, .ea-noinv) { filter: invert(1) hue-rotate(180deg); }
+  .ea-cbtn { font: inherit; font-size: 13px; color: var(--muted, #8a8ea3); background: transparent; padding: 6px 12px; border: 1px solid var(--border, #2a2d3a); border-radius: 999px; cursor: pointer; }
+  .ea-cbtn:hover { color: var(--text, #fff); }
+  .ea-cbtn b { font-weight: 700; margin-right: 4px; }
+  .ea-top { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ea-top.ea-float { justify-content: flex-end; padding: 12px 14px 0; position: relative; z-index: 50; }
+  .ea-cov { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .ea-cbox { background: var(--surface, #16181f); color: var(--text, #e8eaf0); border: 1px solid var(--border, #2a2d3a); border-radius: 16px; max-width: 440px; width: 100%; max-height: 90vh; overflow: auto; padding: 20px; font-family: inherit; }
+  html.ea-big .ea-cbox { max-height: 72vh; }
+  .ea-cbox h2 { font-size: 19px; margin: 0 0 4px; }
+  .ea-cbox .ea-cintro { color: var(--muted, #8a8ea3); font-size: 14px; margin: 0 0 14px; line-height: 1.5; }
+  .ea-copt { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--border, #2a2d3a); cursor: pointer; }
+  .ea-copt input { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; accent-color: #4ecb7f; cursor: pointer; }
+  .ea-copt span { display: block; font-weight: 600; font-size: 15px; }
+  .ea-copt small { display: block; color: var(--muted, #8a8ea3); font-size: 13px; line-height: 1.45; margin-top: 2px; }
+  .ea-cact { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .ea-cact button { font: inherit; font-size: 14px; padding: 9px 14px; border-radius: 10px; cursor: pointer; border: 1px solid var(--border, #2a2d3a); background: transparent; color: var(--text, #e8eaf0); }
+  .ea-cact .ea-call { background: #4ecb7f; color: #0e0f14; border-color: #4ecb7f; font-weight: 600; }
+  .ea-cact .ea-cok { margin-left: auto; }
+  .ea-ccredit { color: var(--muted, #8a8ea3); font-size: 11px; margin: 14px 0 0; }
+  @media print { html.ea-light { filter: none; } html.ea-big body { zoom: 1; } .ea-cbtn { display: none !important; } }`;
+  const cst = document.createElement("style"); cst.textContent = ccss; document.head.appendChild(cst);
+
+  function copen() {
+    const c = cload();
+    const ov = document.createElement("div"); ov.className = "ea-cov";
+    ov.innerHTML = `<div class="ea-cbox" role="dialog" aria-modal="true" aria-labelledby="eaCT">
+      <h2 id="eaCT">Confort de lecture</h2>
+      <p class="ea-cintro">Choisis ce qui t'aide à lire. Tes réglages restent enregistrés sur cet appareil, pour toutes les activités.</p>
+      ${OPTS.map(([k, t, d]) => `<label class="ea-copt"><input type="checkbox" data-k="${k}" ${c[k] ? "checked" : ""}><div><span>${t}</span><small>${d}</small></div></label>`).join("")}
+      <div class="ea-cact"><button type="button" class="ea-call">Tout activer</button><button type="button" class="ea-creset">Tout désactiver</button><button type="button" class="ea-cok">Fermer</button></div>
+      <p class="ea-ccredit">Police Luciole © Laurent Bourcellier &amp; Jonathan Perez, licence CC BY 4.0.</p>
+    </div>`;
+    const set = (k, v) => { const n = cload(); n[k] = v; try { localStorage.setItem(CKEY, JSON.stringify(n)); } catch (e) {} capply(n); };
+    ov.querySelectorAll("input").forEach(i => i.onchange = () => set(i.dataset.k, i.checked));
+    const all = v => ov.querySelectorAll("input").forEach(i => { i.checked = v; set(i.dataset.k, v); });
+    ov.querySelector(".ea-call").onclick = () => all(true);
+    ov.querySelector(".ea-creset").onclick = () => all(false);
+    const close = () => { ov.remove(); document.removeEventListener("keydown", esc_); };
+    const esc_ = e => { if (e.key === "Escape") close(); };
+    ov.querySelector(".ea-cok").onclick = close;
+    ov.onclick = e => { if (e.target === ov) close(); };
+    document.addEventListener("keydown", esc_);
+    document.body.appendChild(ov); ov.querySelector("input").focus();
+  }
+  EA.openConfort = copen;
+  function cbutton() {
+    const b = document.createElement("button"); b.type = "button"; b.className = "ea-cbtn";
+    b.innerHTML = "<b>Aa</b>Lecture"; b.title = "Confort de lecture"; b.setAttribute("aria-label", "Confort de lecture");
+    b.onclick = copen; return b;
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    let box = document.querySelector(".ea-top");
+    if (!box) {
+      box = document.createElement("div"); box.className = "ea-top ea-float";
+      document.body.prepend(box);
+    }
+    box.prepend(cbutton());
+  });
+
   /* ── Hors connexion ── */
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });

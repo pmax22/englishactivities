@@ -411,6 +411,7 @@ function norm(s) {
     .replace(/[.?!,;:]/g, " ")
     .replace(/\s+/g, " ").trim();
 }
+function tileCase(w) { return /^(I|[A-Z]{2,}|Paris|Halloween|London|Spain|July|James|Disneyland|Miami|Brittany|Christmas|English|French)$/.test(w) ? w : w.toLowerCase(); }
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function phrase(g) { return (g[0] + " " + g[2]).trim(); }
@@ -550,7 +551,7 @@ const MISSIONS = [
       ]).slice(0, 8).map(a => ({
         type: "order", instr: "Remets les mots dans l'ordre",
         prompt: "🧩 Construis la question", sub: "Pronom interrogatif + DID + sujet + BV + complément ?",
-        answer: a, tiles: a.replace("?", "").split(" ").map(w => w.toUpperCase()), distractors: [],
+        answer: a, tiles: a.replace("?", "").split(" ").map(tileCase), distractors: [],
         tip: "Pronom interrogatif + DID + sujet + verbe (BV) + complément ?"
       }));
     }
@@ -582,20 +583,20 @@ const MISSIONS = [
     desc: "Traduis la question en anglais avec les étiquettes (attention aux pièges !).",
     build() {
       return shuffle([
-        ["Où es-tu allé(e) hier ?", "Where did you go yesterday?", ["WENT"]],
-        ["Quand as-tu visité ce château ?", "When did you visit this castle?", ["VISITED"]],
-        ["Avec qui as-tu joué ?", "Who did you play with?", ["PLAYED"]],
-        ["Combien de temps as-tu dormi ?", "How long did you sleep?", ["SLEPT"]],
-        ["Comment es-tu allé(e) à Paris ?", "How did you go to Paris?", ["WENT"]],
-        ["Qu'est-ce que tu as mangé ?", "What did you eat?", ["ATE"]],
-        ["As-tu pris des photos ?", "Did you take pictures?", ["TOOK"]],
-        ["Est-ce que tu as fêté Halloween ?", "Did you celebrate Halloween?", ["CELEBRATED"]],
-        ["Où as-tu mangé de la glace hier ?", "Where did you eat ice cream yesterday?", ["ATE"]],
-        ["Combien de temps as-tu lu ?", "How long did you read?", ["WHEN"]]
+        ["Où es-tu allé(e) hier ?", "Where did you go yesterday?", ["went"]],
+        ["Quand as-tu visité ce château ?", "When did you visit this castle?", ["visited"]],
+        ["Avec qui as-tu joué ?", "Who did you play with?", ["played"]],
+        ["Combien de temps as-tu dormi ?", "How long did you sleep?", ["slept"]],
+        ["Comment es-tu allé(e) à Paris ?", "How did you go to Paris?", ["went"]],
+        ["Qu'est-ce que tu as mangé ?", "What did you eat?", ["ate"]],
+        ["As-tu pris des photos ?", "Did you take pictures?", ["took"]],
+        ["Est-ce que tu as fêté Halloween ?", "Did you celebrate Halloween?", ["celebrated"]],
+        ["Où as-tu mangé de la glace hier ?", "Where did you eat ice cream yesterday?", ["ate"]],
+        ["Combien de temps as-tu lu ?", "How long did you read?", ["when"]]
       ]).slice(0, 7).map(([fr, en, d]) => ({
         type: "order", instr: "Traduis cette question en anglais",
         prompt: `${fr}`, sub: "Un mot en trop s'est glissé dans les étiquettes !",
-        answer: en, tiles: en.replace("?", "").split(" ").map(w => w.toUpperCase()), distractors: d,
+        answer: en, tiles: en.replace("?", "").split(" ").map(tileCase), distractors: d,
         tip: "Après DID, le verbe reste en base verbale."
       }));
     }
