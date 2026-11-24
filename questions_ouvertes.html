@@ -508,11 +508,15 @@ const MISSIONS = [
     desc: "Associe les images et complète les questions avec le bon pronom.",
     build() {
       const icons = [
-        ["🌍", "Where", "le lieu"], ["📅", "When", "le moment"], ["🎁", "What", "la chose"],
-        ["👤", "Who", "la personne"], ["🚗", "How", "le moyen / la manière"], ["⏳", "How long", "la durée"]
-      ].map(([ic, ans, hint]) => ({
+        ["🌍", "Where", "le lieu", "à Londres, à la plage, chez mes grands-parents…"],
+        ["📅", "When", "le moment", "hier, en juillet, l'été dernier…"],
+        ["🎁", "What", "la chose", "une pizza, un souvenir, un film…"],
+        ["👤", "Who", "la personne", "mon cousin, ma meilleure amie…"],
+        ["🚗", "How", "le moyen, la manière", "en voiture, à vélo, en train…"],
+        ["⏳", "How long", "la durée", "deux semaines, un week-end…"]
+      ].map(([ic, ans, hint, ex]) => ({
         type: "mcq", grid3: true, instr: "Quel pronom correspond à l'image ?",
-        prompt: `<span class="big">${ic}</span>`, sub: "", options: PRONOUNS, correct: PRONOUNS.indexOf(ans),
+        prompt: `<span class="big">${ic}</span>`, sub: `On demande ${hint} : ${ex}`, options: PRONOUNS, correct: PRONOUNS.indexOf(ans),
         tip: `${ans} → ${hint}.`
       }));
       const sentences = [
