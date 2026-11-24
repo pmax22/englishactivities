@@ -7,8 +7,9 @@ cd "$(dirname "$0")/.."
 O=outils
 
 echo "1/5 Dossiers culture et pages récentes"
-for f in 19 21 22 23 25 26 27 28 29 30 31 32 33 34 35 36 37 38; do python3 $O/content$f.py >/dev/null; done
+for f in 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38; do python3 $O/content$f.py >/dev/null; done
 
+python3 $O/patch_intrus.py >/dev/null
 echo "2/5 Serveur local"
 python3 -m http.server 8765 >/dev/null 2>&1 & SRV=$!
 trap 'kill $SRV 2>/dev/null' EXIT

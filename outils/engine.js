@@ -85,7 +85,9 @@ function renderQuestion() {
   } else if (q.kind === "order") {
     orderChosen = [];
     const all = shuffle(q.tiles.concat(q.distractors || []));
-    area.innerHTML = head + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
+    const nD = (q.distractors || []).length;
+    const note = nD ? `<div class="order-note"><b>Attention :</b> ${nD > 1 ? nD + " étiquettes sont en trop" : "une étiquette est en trop"} (intrus). Ne ${nD > 1 ? "les" : "l'"}utilise pas.</div>` : "";
+    area.innerHTML = head + note + `<div class="order-zone empty" id="zone"></div><div class="tiles" id="pool">` +
       all.map(t => `<button class="tile">${esc(t)}</button>`).join("") + `</div>`;
     area.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => addTile(b));
     document.getElementById("btnReset").classList.remove("hidden");
@@ -152,7 +154,13 @@ function mainAction() {
     const val = orderChosen.map(t => t.textContent).join(" ");
     const ok = [q.answer].concat(q.alts || []).some(a => norm(val) === norm(a));
     document.getElementById("zone").classList.add(ok ? "ok" : "ko");
-    document.querySelectorAll("#pool .tile").forEach(t => t.disabled = true);
+    const ds = q.distractors || [];
+    document.querySelectorAll("#pool .tile").forEach(t => { t.disabled = true; if (ds.includes(t.textContent)) t.classList.add("intrus"); });
+    if (ds.length && !q._intrus) {
+      q._intrus = true;
+      const miss = ds.filter(d => !(q.tip || "").includes(d));
+      if (miss.length) q.tip = (q.tip ? q.tip + " " : "") + `L'intrus était : <b>${miss.map(esc).join(", ")}</b>.`;
+    }
     finish(ok, val, q.answer, "");
   }
 }
