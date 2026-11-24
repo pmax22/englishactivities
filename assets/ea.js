@@ -185,12 +185,14 @@
   html.ea-luc body, html.ea-luc body *:not(svg):not(svg *) { font-family: "Luciole", "DM Sans", sans-serif !important; }
   html.ea-light { filter: invert(1) hue-rotate(180deg); background: #0e0f14; }
   html.ea-light :is(img, video, picture, canvas, iframe, .ea-noinv) { filter: invert(1) hue-rotate(180deg); }
-  .lesson-body .tr { display: none; color: var(--muted, #8a8ea3); font-style: normal !important; font-size: .92em; }
+  .lesson-body .tr, .lesson-body .tr-line { color: #c4b5fd; }
+  .lesson-body .tr { display: none; font-style: normal !important; font-size: .95em; }
   .lesson-body .tr.open, html.ea-trall .lesson-body .tr { display: inline; }
   .lesson-body .tr.tr-block.open, html.ea-trall .lesson-body .tr.tr-block { display: block; margin: -2px 0 8px; }
   .lesson-body .tr::before { content: "→ "; }
   .tr-btn { font: inherit; font-style: normal !important; font-size: 11px; font-weight: 700; letter-spacing: .03em; color: var(--muted, #8a8ea3); background: transparent; border: 1px solid var(--border, #2a2d3a); border-radius: 6px; padding: 1px 6px; margin-left: 6px; cursor: pointer; vertical-align: 1px; }
-  .tr-btn:hover, .tr-btn[aria-expanded="true"] { color: var(--text, #e8eaf0); border-color: var(--muted, #8a8ea3); }
+  .tr-btn { color: #c4b5fd; border-color: rgba(196,181,253,.45); }
+  .tr-btn:hover, .tr-btn[aria-expanded="true"] { color: #fff; border-color: #c4b5fd; background: rgba(196,181,253,.15); }
   html.ea-trall .tr-btn { display: none; }
   @media print { .lesson-body .tr { display: inline !important; } .lesson-body .tr.tr-block { display: block !important; } .tr-btn { display: none !important; } }
   .ea-cbtn { font: inherit; font-size: 13px; color: var(--muted, #8a8ea3); background: transparent; padding: 6px 12px; border: 1px solid var(--border, #2a2d3a); border-radius: 999px; cursor: pointer; }
