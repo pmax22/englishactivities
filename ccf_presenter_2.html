@@ -449,7 +449,7 @@ details.doc-fold .doc-text { max-height: 50vh; overflow-y: auto; margin-top: 10p
 <script>
 const STORE_KEY = "ea_ccf_presenter_v2";
 const DATA = {};
-const MDEF = [{"id": "hobbies", "icon": "🎨", "title": "Les loisirs", "desc": "Jouer aux échecs, chanter, faire du camping…", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "qualites", "icon": "⚖️", "title": "Qualités et défauts", "desc": "Traduire, puis classer : qualité ou défaut ?", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "ecrire", "icon": "✍️", "title": "Écris les mots", "desc": "Loisirs, qualités, défauts : écris le mot anglais.", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "pronoms", "icon": "👫", "title": "He, she, his, her", "desc": "Garçon ou fille : le bon pronom.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "fiche", "icon": "🪪", "title": "Complète la présentation", "desc": "Lis la fiche et complète la phrase.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "ordre", "icon": "🧩", "title": "Remets dans l'ordre", "desc": "Les phrases de la présentation.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "oral", "icon": "🎙️", "title": "Fiche d'identité", "desc": "Une fiche au hasard : présente la personne, enregistre-toi, compare.", "group": "L'oral du CCF", "from": [], "n": 0}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test avant le CCF !", "group": "Bilan", "from": [], "n": 0}];
+const MDEF = [{"id": "hobbies", "icon": "🎨", "title": "Les loisirs", "desc": "Jouer aux échecs, chanter, faire du camping…", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "qualites", "icon": "⚖️", "title": "Qualités et défauts", "desc": "Traduire, puis classer : qualité ou défaut ?", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "contraires", "icon": "↔️", "title": "Trouve le contraire", "desc": "nice ↔ mean, tidy ↔ messy, shy ↔ outgoing…", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "ecrire", "icon": "✍️", "title": "Écris les mots", "desc": "Loisirs, qualités, défauts : écris le mot anglais.", "group": "Vocabulaire", "from": [], "n": 0}, {"id": "pronoms", "icon": "👫", "title": "He, she, his, her", "desc": "Garçon ou fille : le bon pronom.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "fiche", "icon": "🪪", "title": "Complète la présentation", "desc": "Lis la fiche et complète la phrase.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "ordre", "icon": "🧩", "title": "Remets dans l'ordre", "desc": "Les phrases de la présentation.", "group": "Présenter quelqu'un", "from": [], "n": 0}, {"id": "oral", "icon": "🎙️", "title": "Fiche d'identité", "desc": "Une fiche au hasard : présente la personne, enregistre-toi, compare.", "group": "L'oral du CCF", "from": [], "n": 0}, {"id": "mix", "icon": "🎲", "title": "Tout mélangé", "desc": "Le grand test avant le CCF !", "group": "Bilan", "from": [], "n": 0}];
 /* Format générique : DATA = { clé: { kind: "gap" | "choice" | "order", instr, items: [...] } }
    gap    : { line: "She ____ in a shop.", ans: [...], hint, fr, tip, sign }
    choice : { line?: "…____…", fr?, big?, opts: [bonne, fausses…], keep, grid, tip }   (bonne réponse = opts[c || 0])
@@ -889,6 +889,20 @@ function genQualites() {
   const cl = shuffle(all).slice(0, 5).map(([w, q]) => choiceQ({ big: w.en, opts: q ? ["Qualité ✅", "Défaut ❌"] : ["Défaut ❌", "Qualité ✅"], c: 0, keep: true, grid: 2, tip: `${w.en} = ${w.fr.toLowerCase()}` }, "Qualité ou défaut ?"));
   return shuffle(tr.concat(cl));
 }
+/* paires de contraires de la fiche (qualité ↔ défaut) */
+const PAIRS = [["nice", "mean"], ["serious", "silly"], ["patient", "impatient"], ["cheerful", "grumpy"], ["generous", "selfish"],
+  ["flexible", "stubborn"], ["responsible", "irresponsible"], ["honest", "dishonest"], ["tidy", "messy"], ["outgoing", "shy"],
+  ["hardworking", "lazy"], ["polite", "rude"], ["a good listener", "a bad listener"], ["optimistic", "pessimistic"],
+  ["confident", "insecure"], ["reliable", "unreliable"]];
+function genContraires() {
+  const W = en => QUALITIES.concat(FLAWS).find(w => w.en === en);
+  return shuffle(PAIRS).slice(0, 10).map(([q, d]) => {
+    const fromQ = Math.random() < 0.5, word = fromQ ? q : d, opp = fromQ ? d : q;
+    const pool = (fromQ ? FLAWS : QUALITIES).map(w => w.en).filter(x => x !== opp);
+    return choiceQ({ big: word, opts: [opp].concat(shuffle(pool).slice(0, 3)),
+      tip: `${word} ≠ ${opp} (${W(word).fr.toLowerCase()} ≠ ${W(opp).fr.toLowerCase()})` }, fromQ ? "Trouve le contraire (un défaut)" : "Trouve le contraire (une qualité)");
+  });
+}
 function genEcrire() {
   return shuffle(HOBBIES.concat(QUALITIES, FLAWS)).slice(0, 12).map(w =>
     gapQ({ fr: w.fr, line: "____", ans: ans(w), tip: w.alt ? "On accepte aussi : " + w.alt.join(", ") : "" }, "Écris le mot en anglais"));
@@ -936,7 +950,7 @@ function genOrdre() {
       tiles, distractors: [trap], answer: s, tip: "" };
   });
 }
-const GEN = { hobbies: genHobbies, qualites: genQualites, ecrire: genEcrire, pronoms: genPronoms, fiche: genFiche, ordre: genOrdre };
+const GEN = { hobbies: genHobbies, qualites: genQualites, contraires: genContraires, ecrire: genEcrire, pronoms: genPronoms, fiche: genFiche, ordre: genOrdre };
 MISSIONS.forEach(m => {
   if (GEN[m.id]) m.build = GEN[m.id];
   if (m.id === "mix") m.build = () => shuffle([].concat(...Object.values(GEN).map(g => g().slice(0, 3)))).slice(0, 15);
