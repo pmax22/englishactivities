@@ -783,15 +783,15 @@ const HOBBIES = [
   { fr: "Cuisiner", en: "cook", alt: ["cooking"] }
 ];
 const QUALITIES = [
-  { fr: "Amical", en: "friendly" }, { fr: "Gentil", en: "kind", alt: ["nice"] }, { fr: "Poli", en: "polite" },
-  { fr: "Honnête", en: "honest" }, { fr: "Travailleur", en: "hardworking", alt: ["hard-working"] },
-  { fr: "Généreux", en: "generous" }, { fr: "Patient", en: "patient" }, { fr: "Fiable", en: "reliable" },
+  { fr: "Amical", ff: "Amicale", en: "friendly" }, { fr: "Gentil", ff: "Gentille", en: "kind", alt: ["nice"] }, { fr: "Poli", ff: "Polie", en: "polite" },
+  { fr: "Honnête", en: "honest" }, { fr: "Travailleur", ff: "Travailleuse", en: "hardworking", alt: ["hard-working"] },
+  { fr: "Généreux", ff: "Généreuse", en: "generous" }, { fr: "Patient", ff: "Patiente", en: "patient" }, { fr: "Fiable", en: "reliable" },
   { fr: "Responsable", en: "responsible" }, { fr: "Optimiste", en: "optimistic" }
 ];
 const FLAWS = [
-  { fr: "Impoli", en: "rude", alt: ["impolite"] }, { fr: "Paresseux", en: "lazy" }, { fr: "Malhonnête", en: "dishonest" },
-  { fr: "Égoïste", en: "selfish" }, { fr: "Impatient", en: "impatient" }, { fr: "Désordonné", en: "messy", alt: ["untidy"] },
-  { fr: "Lunatique", en: "moody" }, { fr: "Jaloux", en: "jealous" }, { fr: "Têtu", en: "stubborn" },
+  { fr: "Impoli", ff: "Impolie", en: "rude", alt: ["impolite"] }, { fr: "Paresseux", ff: "Paresseuse", en: "lazy" }, { fr: "Malhonnête", en: "dishonest" },
+  { fr: "Égoïste", en: "selfish" }, { fr: "Impatient", ff: "Impatiente", en: "impatient" }, { fr: "Désordonné", ff: "Désordonnée", en: "messy", alt: ["untidy"] },
+  { fr: "Lunatique", en: "moody" }, { fr: "Jaloux", ff: "Jalouse", en: "jealous" }, { fr: "Têtu", ff: "Têtue", en: "stubborn" },
   { fr: "Irresponsable", en: "irresponsible" }
 ];
 const F_M = ["Lucas", "Hugo", "Louis", "Nathan", "Arthur", "Léo", "Gabriel", "Jules", "Tom", "Théo"];
@@ -802,11 +802,13 @@ const NUMW = ["zero", "one", "two", "three", "four", "five", "six", "seven", "ei
 
 /* liste de référence */
 (function () {
-  const chips = (id, l) => { const el = document.getElementById(id); if (el) el.innerHTML = l.map(w => `<span class="verb-chip">${esc(w.fr)}<span>${esc(w.en)}</span></span>`).join(""); };
+  const chips = (id, l) => { const el = document.getElementById(id); if (el) el.innerHTML = l.map(w => `<span class="verb-chip">${esc(w.ref || (w.ff ? w.fr + " / " + w.ff.toLowerCase() : w.fr))}<span>${esc(w.en)}</span></span>`).join(""); };
   chips("refHobbies", HOBBIES); chips("refQualities", QUALITIES); chips("refFlaws", FLAWS);
 })();
 
 function ri(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+/* adjectifs accordés au féminin sur la fiche d'une fille */
+const frG = (w, p) => p.m ? w.fr : (w.ff || w.fr);
 function makePerson() {
   const m = Math.random() < 0.5, age = ri(15, 20);
   const sib = n => Array.from({ length: n }, () => ri(Math.max(1, age - 8), age + 8)).sort((a, b) => a - b);
@@ -826,7 +828,7 @@ function famFr(p) {
 function idCard(p, compact) {
   const rows = [["Nom", p.last], ["Prénom", p.first], ["Genre", p.m ? "Masculin" : "Féminin"], ["Âge", p.age + " ans"], ["Ville", p.city],
     ["Nationalité", "Française"], ["Études", "2e année CAPa SAPVER, lycée Robert Schuman"], ["Famille", famFr(p)],
-    ["Loisirs", p.hob.map(h => h.fr).join(", ")], ["Qualités", p.qua.map(q => q.fr).join(", ")], ["Défauts", p.fla.map(f => f.fr).join(", ")]];
+    ["Loisirs", p.hob.map(h => h.fr).join(", ")], ["Qualités", p.qua.map(q => frG(q, p)).join(", ")], ["Défauts", p.fla.map(f => frG(f, p)).join(", ")]];
   return `<div class="idcard"><div class="idt">🪪 Fiche d'identité</div>${(compact ? rows.filter(r => compact.includes(r[0])) : rows).map(r => `<div><b>${r[0]} :</b> ${esc(r[1])}</div>`).join("")}</div>`;
 }
 function presentation(p) {

@@ -778,7 +778,7 @@ const HOBBIES = [
   { fr: "Nager", en: "swim", alt: ["swimming"] },
   { fr: "Jouer aux jeux vidéo", en: "play video games", alt: ["video games", "playing video games"] },
   { fr: "Faire la fête", en: "party", alt: ["partying"] },
-  { fr: "Jouer au bowling", en: "play bowling", alt: ["go bowling", "bowling"] },
+  { fr: "Jouer au bowling", en: "go bowling", alt: ["play bowling", "going bowling", "bowling"] },
   { fr: "Dormir", en: "sleep", alt: ["sleeping"] },
   { fr: "Faire de la gymnastique", en: "do gymnastics", alt: ["gymnastics", "doing gymnastics"] },
   { fr: "Aller au cinéma", en: "go to the cinema", alt: ["going to the cinema"] },
@@ -801,20 +801,20 @@ const HOBBIES = [
   { fr: "Jouer au basket", en: "play basketball", alt: ["playing basketball"] }
 ];
 const QUALITIES = [
-  { fr: "Gentil", en: "nice" }, { fr: "Sérieux", en: "serious" },
-  { fr: "Patient", en: "patient" }, { fr: "Joyeux", en: "happy" }, { fr: "Attentionné", en: "caring" },
-  { fr: "Arrangeant", en: "flexible" }, { fr: "Responsable", en: "responsible" }, { fr: "Honnête", en: "honest" },
-  { fr: "Ordonné", en: "tidy" }, { fr: "Sociable", en: "outgoing" }, { fr: "Travailleur", en: "hardworking", alt: ["hard-working"] },
-  { fr: "Poli", en: "polite" }, { fr: "À l'écoute", en: "a good listener", alt: ["good listener"] },
-  { fr: "Optimiste", en: "optimistic" }, { fr: "Sûr de soi", en: "confident" }, { fr: "Fiable", en: "reliable" }
+  { fr: "Gentil", ff: "Gentille", en: "nice" }, { fr: "Sérieux", ff: "Sérieuse", en: "serious" },
+  { fr: "Patient", ff: "Patiente", en: "patient" }, { fr: "Joyeux", ff: "Joyeuse", en: "happy" }, { fr: "Attentionné", ff: "Attentionnée", en: "caring" },
+  { fr: "Arrangeant", ff: "Arrangeante", en: "flexible" }, { fr: "Responsable", en: "responsible" }, { fr: "Honnête", en: "honest" },
+  { fr: "Ordonné", ff: "Ordonnée", en: "tidy" }, { fr: "Sociable", en: "outgoing" }, { fr: "Travailleur", ff: "Travailleuse", en: "hardworking", alt: ["hard-working"] },
+  { fr: "Poli", ff: "Polie", en: "polite" }, { fr: "À l'écoute", en: "a good listener", alt: ["good listener"] },
+  { fr: "Optimiste", en: "optimistic" }, { fr: "Sûr de lui", ff: "Sûre d'elle", ref: "Sûr(e) de soi", en: "confident" }, { fr: "Fiable", en: "reliable" }
 ];
 const FLAWS = [
-  { fr: "Méchant", en: "mean" }, { fr: "Impatient", en: "impatient" }, { fr: "Grincheux", en: "grumpy" },
-  { fr: "Égoïste", en: "selfish" }, { fr: "Têtu", en: "stubborn" }, { fr: "Irresponsable", en: "irresponsible" },
-  { fr: "Malhonnête", en: "dishonest" }, { fr: "Désordonné", en: "messy", alt: ["untidy"] }, { fr: "Timide", en: "shy" },
-  { fr: "Paresseux", en: "lazy" }, { fr: "Impoli", en: "rude", alt: ["impolite"] },
+  { fr: "Méchant", ff: "Méchante", en: "mean" }, { fr: "Impatient", ff: "Impatiente", en: "impatient" }, { fr: "Grincheux", ff: "Grincheuse", en: "grumpy" },
+  { fr: "Égoïste", en: "selfish" }, { fr: "Têtu", ff: "Têtue", en: "stubborn" }, { fr: "Irresponsable", en: "irresponsible" },
+  { fr: "Malhonnête", en: "dishonest" }, { fr: "Désordonné", ff: "Désordonnée", en: "messy", alt: ["untidy"] }, { fr: "Timide", en: "shy" },
+  { fr: "Paresseux", ff: "Paresseuse", en: "lazy" }, { fr: "Impoli", ff: "Impolie", en: "rude", alt: ["impolite"] },
   { fr: "Pas à l'écoute", en: "a bad listener", alt: ["bad listener"] },
-  { fr: "Pessimiste", en: "pessimistic" }, { fr: "Pas sûr de soi", en: "insecure" }, { fr: "Pas fiable", en: "unreliable" },
+  { fr: "Pessimiste", en: "pessimistic" }, { fr: "Pas sûr de lui", ff: "Pas sûre d'elle", ref: "Pas sûr(e) de soi", en: "insecure" }, { fr: "Pas fiable", en: "unreliable" },
   { fr: "Fait le clown", en: "silly" }
 ];
 /* « my family » devient his / her family quand on parle de quelqu'un */
@@ -829,13 +829,15 @@ const NUMW = ["zero", "one", "two", "three", "four", "five", "six", "seven", "ei
 
 /* liste de référence */
 (function () {
-  const chips = (id, l) => { const el = document.getElementById(id); if (el) el.innerHTML = l.map(w => `<span class="verb-chip">${esc(w.fr)}<span>${esc(w.en)}</span></span>`).join(""); };
+  const chips = (id, l) => { const el = document.getElementById(id); if (el) el.innerHTML = l.map(w => `<span class="verb-chip">${esc(w.ref || (w.ff ? w.fr + " / " + w.ff.toLowerCase() : w.fr))}<span>${esc(w.en)}</span></span>`).join(""); };
   chips("refHobbies", HOBBIES); chips("refQualities", QUALITIES); chips("refFlaws", FLAWS);
 })();
 
 function ri(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
 /* « a good / bad listener » en fin de liste : « kind and a good listener » */
 const aLast = l => l.slice().sort((x, y) => /^a /.test(x.en) - /^a /.test(y.en));
+/* adjectifs accordés au féminin sur la fiche d'une fille */
+const frG = (w, p) => p.m ? w.fr : (w.ff || w.fr);
 function makePerson() {
   const m = Math.random() < 0.5, age = ri(15, 20);
   const sib = n => Array.from({ length: n }, () => ri(Math.max(1, age - 8), age + 8)).sort((a, b) => a - b);
@@ -855,7 +857,7 @@ function famFr(p) {
 function idCard(p, compact) {
   const rows = [["Nom", p.last], ["Prénom", p.first], ["Genre", p.m ? "Masculin" : "Féminin"], ["Âge", p.age + " ans"], ["Ville", p.city],
     ["Nationalité", "Française"], ["Études", "2e année CAPa SAPVER, lycée Robert Schuman"], ["Famille", famFr(p)],
-    ["Loisirs", p.hob.map(h => hobFr(h, p)).join(", ")], ["Qualités", p.qua.map(q => q.fr).join(", ")], ["Défauts", p.fla.map(f => f.fr).join(", ")]];
+    ["Loisirs", p.hob.map(h => hobFr(h, p)).join(", ")], ["Qualités", p.qua.map(q => frG(q, p)).join(", ")], ["Défauts", p.fla.map(f => frG(f, p)).join(", ")]];
   return `<div class="idcard"><div class="idt">🪪 Fiche d'identité</div>${(compact ? rows.filter(r => compact.includes(r[0])) : rows).map(r => `<div><b>${r[0]} :</b> ${esc(r[1])}</div>`).join("")}</div>`;
 }
 function presentation(p) {
